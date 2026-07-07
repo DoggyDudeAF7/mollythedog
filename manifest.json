@@ -1,0 +1,15 @@
+{
+  "name": "Molly",
+  "short_name": "Molly",
+  "start_url": "html/molly/",
+  "display": "standalone",
+  "background_color": "#07070c",
+  "theme_color": "#000000",
+  "icons": [
+    {
+      "src": "assets/icon-192-small.png",
+      "sizes": "192x188",
+      "type": "image/png"
+    }
+  ]
+}
