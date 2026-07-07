@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shaina</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+<link rel="manifest" href="../../manifest.json">
+<meta name="theme-color" content="#000000">
+<link rel="icon" href="../../assets/icon-192.png">
+<link rel="stylesheet" href="../../css/style.css">
+</head>
+
+<body>
+<div class="bg"></div>
+
+<nav>
+  <div class="nav-inner">
+    <button id="navToggle" aria-label="Toggle menu" aria-expanded="false">☰</button>
+    <div class="nav-links" id="navLinks">
+      <a href="../shaina-home/" title="Home"><span>🏠</span></a>
+      <a href="../shaina-traits/" title="Traits"><span>✨</span></a>
+      <a href="../shaina-habits/" title="Habits"><span>🛏️</span></a>
+      <a href="../shaina-mind/" title="Mind"><span>🧠</span></a>
+      <a href="../shaina-gallery/" title="Gallery"><span>🖼️</span></a>
+      <a href="../shaina-faq/" title="FAQ"><span>❓</span></a>
+      <a href="../molly/" title="Molly"><span>🐾</span></a>
+    </div>
+    <button id="searchBtn">🔍</button>
+  </div>
+</nav>
+
+<div id="searchBox" class="hidden">
+  <input id="searchInput" placeholder="Search..." />
+  <div id="results"></div>
+</div>
+
+<section class="section hero">
+  <h1>Shaina</h1>
+  <p>Alert. Fast. Snack driven. The whole site is hers now.</p>
+  <img src="../../images/shaina/shaina.png" class="hero-img">
+</section>
+
+<section class="section">
+  <div class="card reveal left">
+    <div class="split left">
+      <div class="emoji">🏁</div>
+      <div>
+        <h2>Shaina Home Base</h2>
+        <p>
+          This is Shaina's version of the Molly site: her home page, her traits, her habits,
+          her thoughts, her gallery, and her FAQ.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="card reveal right">
+    <div class="split right">
+      <div class="emoji">👂</div>
+      <div>
+        <h2>Always On Alert</h2>
+        <p>
+          Shaina notices the small things first: footsteps, wrappers, doors, weather changes,
+          and any suspicious movement that might involve snacks.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="card reveal left">
+    <div class="split left">
+      <div class="emoji">🐾</div>
+      <div>
+        <h2>Molly Summary</h2>
+        <p>
+          Molly is still the original sleepy window-watcher: skittish, loyal, snack-aware,
+          and powered mostly by naps. This Shaina site gives her a respectful one-page nod.
+        </p>
+        <p>
+          <a class="feature-link" href="../molly/">Back to Molly's original site</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div>
+    <div class="carousel"><div class="track" id="track"></div></div>
+    <div class="dots" id="dots"></div>
+  </div>
+</section>
+
+<footer>
+  <strong>Shaina</strong><br>
+  Home • Traits • Habits • Mind • Gallery • FAQ<br>
+  © 2026
+</footer>
+
+<script src="../../js/animations.js"></script>
+<script src="../../js/search.js"></script>
+<script src="../../js/carousel.js"></script>
+</body>
+</html>

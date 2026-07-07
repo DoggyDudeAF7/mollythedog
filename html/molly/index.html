@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Molly</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+<link rel="manifest" href="../../manifest.json">
+<meta name="theme-color" content="#000000">
+<link rel="icon" href="../../assets/icon-192.png">
+
+<link rel="stylesheet" href="../../css/style.css">
+</head>
+
+<body>
+<div class="bg"></div>
+
+<nav>
+  <div class="nav-inner">
+
+    <button id="navToggle" aria-label="Toggle menu" aria-expanded="false">☰</button>
+    <div class="nav-links" id="navLinks">
+
+      <a href="./" title="Home"><span>🏠</span></a>
+      <a href="../molly-traits/" title="Traits"><span>✨</span></a>
+      <a href="../molly-habits/" title="Habits"><span>🛏️</span></a>
+      <a href="../molly-mind/" title="Mind"><span>🧠</span></a>
+      <a href="../molly-gallery/" title="Gallery"><span>🖼️</span></a>
+      <a href="../molly-faq/" title="FAQ"><span>❓</span></a>
+      <a href="../shaina/" title="Shaina"><span>🐶</span></a>
+
+    </div>
+
+    <button id="searchBtn">🔍</button>
+
+  </div>
+</nav>
+
+<!-- SEARCH BOX MUST BE OUTSIDE NAV -->
+<div id="searchBox" class="hidden">
+  <input id="searchInput" placeholder="Search..." />
+  <div id="results"></div>
+</div>
+
+<section class="section hero">
+  <h1>Molly</h1>
+  <p>Skittish. Sleepy. Helicopter tail. Powered by naps and paranoia.</p>
+  <img src="../../images/molly/molly.jpg" class="hero-img">
+</section>
+
+<section class="section">
+  <div class="card reveal left">
+    <div class="split left">
+      <div class="emoji">🪟</div>
+      <div>
+        <h2>Window Watcher</h2>
+        <p>
+          Constant surveillance of birds, leaves, and suspicious outdoor movement.
+          Nothing escapes unnoticed.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="card reveal right">
+    <div class="split right">
+      <div class="emoji">🛏️</div>
+      <div>
+        <h2>Architect of Blankets</h2>
+        <p>
+          Every blanket must be rearranged into the optimal comfort structure.
+          Geometry is optional, coziness is mandatory.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="card reveal left">
+    <div class="split left">
+      <div class="emoji">🌙</div>
+      <div>
+        <h2>Midnight Sprint Ritual</h2>
+        <p>
+          Sudden bursts of hallway speed at 3AM for unknown reasons.
+          Possibly training for invisible battles.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="card reveal right">
+    <div class="split right">
+      <div class="emoji">🍪</div>
+      <div>
+        <h2>Snack Detection System</h2>
+        <p>
+          Detects food-related activity instantly.
+          Packaging sounds are interpreted as emergency alerts.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="section">
+  <div class="card reveal left">
+    <div class="split left">
+      <div class="emoji">👀</div>
+      <div>
+        <h2>Hyper Awareness Mode</h2>
+        <p>
+          Molly notices everything — especially things that are not supposed to move.
+          Even silence feels suspicious.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="card reveal right">
+    <div class="split right">
+      <div class="emoji">🚪</div>
+      <div>
+        <h2>Doorway Philosophy</h2>
+        <p>
+          Doorways are strategic zones that must be monitored at all times.
+          Standing in them is a full-time responsibility.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="card reveal left">
+    <div class="split left">
+      <div class="emoji">😴</div>
+      <div>
+        <h2>Professional Sleeper</h2>
+        <p>
+          Can fall asleep anywhere, anytime, under any emotional condition.
+          Resting is considered a core life skill.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="card reveal right">
+    <div class="split right">
+      <div class="emoji">🌧️</div>
+      <div>
+        <h2>Weather Disapproval Unit</h2>
+        <p>
+          Rain is treated as a personal inconvenience.
+          Wind is considered emotional betrayal.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="card reveal left">
+    <div class="split left">
+      <div class="emoji">🧠</div>
+      <div>
+        <h2>Overthinking Engine</h2>
+        <p>
+          Small noises are processed into large theories.
+          Every event has at least three possible explanations.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="section">
+  <div>
+    <div class="carousel"><div class="track" id="track"></div></div>
+    <div class="dots" id="dots"></div>
+  </div>
+</section>
+
+<footer>
+  <strong>Molly™</strong><br>
+  Skittish • Helicopter Tail • Sleep Queen<br>
+  © 2026
+</footer>
+
+<script src="../../js/animations.js"></script>
+<script src="../../js/search.js"></script>
+<script src="../../js/carousel.js"></script>
+</body>
+</html>

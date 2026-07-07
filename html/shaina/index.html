@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shaina</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+<link rel="manifest" href="../../manifest.json">
+<meta name="theme-color" content="#000000">
+<link rel="icon" href="../../assets/icon-192.png">
+
+<link rel="stylesheet" href="../../css/style.css">
+</head>
+
+<body>
+<div class="bg"></div>
+
+<nav>
+  <div class="nav-inner">
+
+    <button id="navToggle" aria-label="Toggle menu" aria-expanded="false">☰</button>
+    <div class="nav-links" id="navLinks">
+
+      <a href="../molly/" title="Home"><span>🏠</span></a>
+      <a href="../molly-traits/" title="Traits"><span>✨</span></a>
+      <a href="../molly-habits/" title="Habits"><span>🛏️</span></a>
+      <a href="../molly-mind/" title="Mind"><span>🧠</span></a>
+      <a href="../molly-gallery/" title="Gallery"><span>🖼️</span></a>
+      <a href="../molly-faq/" title="FAQ"><span>❓</span></a>
+      <a href="../shaina/" title="Shaina"><span>🐶</span></a>
+
+    </div>
+
+    <button id="searchBtn">🔍</button>
+
+  </div>
+</nav>
+
+<!-- SEARCH BOX MUST BE OUTSIDE NAV -->
+<div id="searchBox" class="hidden">
+  <input id="searchInput" placeholder="Search..." />
+  <div id="results"></div>
+</div>
+
+<section class="section hero">
+  <h1>Shaina</h1>
+  <p>Alert. Snack driven. Molly's best friend.</p>
+  <img src="../../images/shaina/shaina.png" class="hero-img">
+</section>
+
+<section class="section">
+  <div class="card reveal left">
+    <div class="split left">
+      <div class="emoji">🧠</div>
+      <div>
+        <h2>Pattern Thinker</h2>
+        <p>
+          Notices repetition in movement and behavior, especially people and animals.
+          Learns routines quickly and adapts faster than expected.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="card reveal right">
+    <div class="split right">
+      <div class="emoji">🏁</div>
+      <div>
+        <h2>Racing Dog</h2>
+        <p>
+          Energy comes in waves — silent focus for hours, then sudden bursts of speed.
+          Every open space becomes a track waiting to be run.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="card reveal left">
+    <div class="split left">
+      <div class="emoji">🦴</div>
+      <div>
+        <h2>Reward Driven</h2>
+        <p>
+          Motivation appears instantly when treats, praise, or attention are involved.
+          Everything else is negotiable.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="card reveal right">
+    <div class="split right">
+      <div class="emoji">👂</div>
+      <div>
+        <h2>Sound Tracker</h2>
+        <p>
+          Reacts to even the smallest environmental noise.
+          Can identify footsteps, bags, or doors before anyone else notices.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="card reveal left">
+    <div class="split left">
+      <div class="emoji">🌿</div>
+      <div>
+        <h2>Outdoor Explorer</h2>
+        <p>
+          The outside world is treated like a constantly updating map.
+          Every walk is a mission with new routes to investigate.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="card reveal right">
+    <div class="split right">
+      <div class="emoji">🛡️</div>
+      <div>
+        <h2>Guard Instinct</h2>
+        <p>
+          Watches over familiar spaces with quiet awareness.
+          Always positioned where everything can be seen at once.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="card reveal left">
+    <div class="split left">
+      <div class="emoji">😴</div>
+      <div>
+        <h2>Energy Recovery Mode</h2>
+        <p>
+          Rest is taken seriously and fully committed to.
+          Sleep resets everything — ready to go again immediately after.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="card reveal right">
+    <div class="split right">
+      <div class="emoji">🌤️</div>
+      <div>
+        <h2>Weather Sensitive</h2>
+        <p>
+          Prefers calm conditions and reacts strongly to changes in weather.
+          Wind and rain shift the entire mood instantly.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="card reveal left">
+    <div class="split left">
+      <div class="emoji">🧭</div>
+      <div>
+        <h2>Always Orienting</h2>
+        <p>
+          Constantly checking surroundings and adjusting position for best awareness.
+          Never fully relaxed, always slightly aware of everything.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="section">
+  <div>
+    <div class="carousel"><div class="track" id="track"></div></div>
+    <div class="dots" id="dots"></div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="card reveal right">
+    <div class="split right">
+      <div class="emoji">⭐</div>
+      <div>
+        <h2>Shaina's Website</h2>
+        <p>
+          A full Shaina version of the Molly site: home, traits, habits, mind, gallery, and FAQ pages, all with Shaina's perspective and personality.
+        </p>
+        <p>
+          <a class="feature-link" href="../shaina-home/">Open Shaina's site</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <strong>Molly™</strong><br>
+  Alert • Snack Driven • Best Friend<br>
+  © 2026
+</footer>
+
+<script src="../../js/animations.js"></script>
+<script src="../../js/search.js"></script>
+<script src="../../js/carousel.js"></script>
+</body>
+</html>
