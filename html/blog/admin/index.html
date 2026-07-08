@@ -17,15 +17,29 @@
 <main class="blog-page admin-page">
   <section class="blog-hero reveal left">
     <p class="blog-kicker">Private Writer Area</p>
-    <h1>Blog Editor</h1>
-    <p>Draft a post here, preview it, then copy the generated JSON into <strong>html/blog/posts.json</strong> to publish.</p>
+    <h1>Blog CMS</h1>
+    <p>Write, edit, save, and delete posts here. Saved posts publish straight to the blog.</p>
     <div class="blog-actions">
       <a href="../">Back To Blog</a>
     </div>
   </section>
 
   <section class="admin-grid">
-    <form class="admin-form reveal left" id="postForm">
+    <aside class="admin-post-list reveal left">
+      <div class="admin-list-header">
+        <div>
+          <p class="blog-kicker">Posts</p>
+          <h2>Manage Posts</h2>
+        </div>
+        <button type="button" id="newPost">New</button>
+      </div>
+      <div class="admin-status" id="adminStatus">Loading posts...</div>
+      <div class="post-list" id="postList"></div>
+    </aside>
+
+    <form class="admin-form reveal right" id="postForm">
+      <input id="postId" name="id" type="hidden">
+
       <label>
         Date
         <input id="postDate" name="date" type="text" value="July 8, 2026">
@@ -56,16 +70,15 @@
         <input id="postLinkUrl" name="linkUrl" type="text" placeholder="../molly/">
       </label>
 
-      <button type="button" id="copyPost">Copy Post JSON</button>
+      <div class="admin-buttons">
+        <button type="submit" id="savePost">Save Post</button>
+        <button type="button" id="deletePost">Delete</button>
+      </div>
     </form>
 
-    <section class="admin-preview reveal right">
+    <section class="admin-preview reveal left">
       <p class="blog-kicker">Preview</p>
       <article class="blog-post" id="postPreview"></article>
-      <label>
-        Generated JSON
-        <textarea id="postOutput" rows="10" readonly></textarea>
-      </label>
     </section>
   </section>
 </main>

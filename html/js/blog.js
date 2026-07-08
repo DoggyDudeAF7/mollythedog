@@ -41,12 +41,20 @@ function renderPosts(posts) {
   }).join("");
 }
 
-fetch("posts.json")
+fetch("/api/posts")
   .then((response) => {
     if (!response.ok) throw new Error("Posts could not be loaded.");
     return response.json();
   })
   .then(renderPosts)
-  .catch(() => {
-    renderPosts([]);
+  .catch(() => fetch("posts.json")
+    .then((response) => {
+      if (!response.ok) throw new Error("Fallback posts could not be loaded.");
+      return response.json();
+    })
+    .then(renderPosts)
+    .catch(() => {
+      renderPosts([]);
+    })
+  );
   });

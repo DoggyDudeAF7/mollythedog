@@ -22,5 +22,13 @@
     "body": "Quiz results, favourite breeds, and Molly-coded or Shaina-coded discoveries can become short blog posts here.",
     "linkText": "Take The Quiz",
     "linkUrl": "../breed-quiz/"
+  },
+  {
+  "date": "July 8, 2026",
+  "title": "Molly site launch!",
+  "tag": "Release 1.0",
+  "body": "On the 8th of July 2026, the official Molly and Shaina site was released to the public!",
+  "linkText": "Visit the home page!",
+  "linkUrl": "../molly/"
   }
 ]
