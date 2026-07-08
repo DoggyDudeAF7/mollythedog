@@ -673,32 +673,6 @@ footer{
   font-size: 0.82rem;
 }
 
-.breed-top {
-  position: fixed;
-  right: 22px;
-  bottom: 22px;
-  width: 52px;
-  height: 52px;
-  border: 0;
-  border-radius: 50%;
-  color: #07070c;
-  background: white;
-  font-size: 1.35rem;
-  font-weight: 800;
-  cursor: pointer;
-  opacity: 0;
-  pointer-events: none;
-  transform: translateY(10px);
-  transition: 0.18s ease;
-  z-index: 1000;
-}
-
-.breed-top.visible {
-  opacity: 1;
-  pointer-events: auto;
-  transform: translateY(0);
-}
-
 /* =========================
    MOBILE / RESPONSIVE FIXES
    ========================= */
