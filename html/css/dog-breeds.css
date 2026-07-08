@@ -56,9 +56,17 @@
 }
 
 .breed-counter {
-  margin: 12px 0;
+  margin: 0;
   color: rgba(255,255,255,0.55);
   font-size: 0.86rem;
+}
+
+.breed-controls {
+  margin: 12px 0 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
 }
 
 .breed-menu {
@@ -87,9 +95,9 @@
 }
 
 .breed-action {
-  width: 100%;
-  margin: 12px 0 16px;
-  padding: 12px 14px;
+  width: auto;
+  margin: 0;
+  padding: 10px 12px;
   border: 0;
   border-radius: 12px;
   color: #08080d;
@@ -97,6 +105,7 @@
   font: inherit;
   font-weight: 800;
   cursor: pointer;
+  white-space: nowrap;
 }
 
 .breed-results {
@@ -235,6 +244,15 @@
 
   .breed-menu {
     max-height: 260px;
+  }
+
+  .breed-controls {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .breed-action {
+    width: 100%;
   }
 
   .breed-card {
