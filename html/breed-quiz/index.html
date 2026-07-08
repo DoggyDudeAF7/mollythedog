@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-FG9NLMSQLX"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-FG9NLMSQLX');
+</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Which Breed Suits You?</title>
+<link rel="icon" href="../favicon.ico" sizes="48x48">
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="../apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="192x192" href="../icon-192.png">
+<link rel="icon" type="image/png" sizes="512x512" href="../icon-512.png">
+<link rel="manifest" href="../site.webmanifest">
+<meta name="theme-color" content="#000000">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../css/breed-quiz.css">
+</head>
+
+<body>
+<div class="bg"></div>
+
+<nav>
+  <div class="nav-inner">
+    <button id="navToggle" aria-label="Toggle menu" aria-expanded="false">☰</button>
+    <div class="nav-links" id="navLinks">
+      <a href="../molly/" title="Home"><span>🏠</span></a>
+      <a href="../molly-traits/" title="Traits"><span>✨</span></a>
+      <a href="../molly-habits/" title="Habits"><span>🛏️</span></a>
+      <a href="../molly-mind/" title="Mind"><span>🧠</span></a>
+      <a href="../molly-gallery/" title="Gallery"><span>🖼️</span></a>
+      <a href="../molly-faq/" title="FAQ"><span>❓</span></a>
+      <a href="../molly-dog-breeds/" title="Breeds"><span>🐕</span></a>
+      <a href="../shaina/" title="Shaina"><span>🐶</span></a>
+    </div>
+    <button id="searchBtn">🔍</button>
+  </div>
+</nav>
+
+<div id="searchBox" class="hidden">
+  <input id="searchInput" placeholder="Search..." />
+  <div id="results"></div>
+</div>
+
+<main class="quiz-page">
+  <section class="quiz-hero reveal left">
+    <p class="quiz-kicker">Breed Match</p>
+    <h1>Which Breed Suits You?</h1>
+    <p>Answer a few questions and get matched with the dog breed that fits your energy, space, grooming patience, and general chaos tolerance.</p>
+  </section>
+
+  <section class="quiz-shell reveal right" aria-label="Dog breed quiz">
+    <div class="quiz-status">
+      <span id="quizProgress">0 of 0 answered</span>
+      <span id="quizSavedResult"></span>
+    </div>
+    <div id="quizQuestions" class="quiz-questions"></div>
+    <div class="quiz-actions">
+      <button id="quizSubmit" type="button">Show My Breed</button>
+      <button id="quizRestart" type="button">Restart</button>
+    </div>
+    <div id="quizResult" class="quiz-result" aria-live="polite"></div>
+  </section>
+</main>
+
+<footer>
+  <strong>Breed Quiz</strong><br>
+  Match • Compare • Favourite<br>
+  © 2026
+</footer>
+
+<script src="../js/animations.js"></script>
+<script src="../js/search.js"></script>
+<script src="../js/breed-quiz.js"></script>
+</body>
+</html>
