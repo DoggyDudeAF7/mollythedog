@@ -5,10 +5,34 @@ document.addEventListener("DOMContentLoaded", () => {
   if (!track || !dotsWrap) return;
 
   const pageTitle = document.querySelector("h1")?.textContent?.toLowerCase() || "";
-  const image = pageTitle.includes("shaina")
-    ? "../images/shaina/shaina.png"
-    : "../images/molly/molly.jpg";
-  const images = [image, image, image, image, image];
+  const isShaina = pageTitle.includes("shaina");
+  const images = isShaina
+    ? [
+        ["../images/shaina/shaina0.png", "../images/shaina/shaina.png"],
+        ["../images/shaina/shaina1.png", "../images/shaina/shaina1.jpg"],
+        ["../images/shaina/shaina2.png", "../images/shaina/shaina2.jpg"],
+        ["../images/shaina/shaina3.png", "../images/shaina/shaina3.jpg"],
+        ["../images/shaina/shaina4.png", "../images/shaina/shaina4.jpg"],
+      ]
+    : [
+        ["../images/molly/molly0.png", "../images/molly/molly.jpg"],
+        ["../images/molly/molly1.png", "../images/molly/molly1.jpg"],
+        ["../images/molly/molly2.png", "../images/molly/molly2.jpg"],
+        ["../images/molly/molly3.png", "../images/molly/molly3.jpg"],
+        ["../images/molly/molly4.png", "../images/molly/molly4.jpg"],
+        ["../images/molly/molly5.png", "../images/molly/molly0.jpg"],
+      ];
+
+  function attachFallbacks(img, candidates) {
+    let current = 0;
+    img.src = candidates[current];
+    img.onerror = () => {
+      current += 1;
+      if (current < candidates.length) {
+        img.src = candidates[current];
+      }
+    };
+  }
 
   let slides = [];
   let index = 0;
@@ -16,10 +40,13 @@ document.addEventListener("DOMContentLoaded", () => {
   const interval = 3000;
 
   for (let r = 0; r < 20; r++) {
-    images.forEach(src => {
+    images.forEach(candidates => {
       const div = document.createElement("div");
       div.className = "slide";
-      div.innerHTML = `<img src="${src}" alt="">`;
+      const img = document.createElement("img");
+      img.alt = "";
+      attachFallbacks(img, candidates);
+      div.appendChild(img);
       track.appendChild(div);
       slides.push(div);
     });
