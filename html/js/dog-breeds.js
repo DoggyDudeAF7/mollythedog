@@ -111,7 +111,14 @@ document.addEventListener("DOMContentLoaded", () => {
   if (!results || !menu || !search || !counter || !favoriteToggle) return;
 
   const storageKey = "favoriteBreeds";
-  let favorites = new Set(JSON.parse(localStorage.getItem(storageKey) || "[]"));
+  let storedFavorites = [];
+  try {
+    storedFavorites = JSON.parse(localStorage.getItem(storageKey) || "[]");
+    if (!Array.isArray(storedFavorites)) storedFavorites = [];
+  } catch {
+    storedFavorites = [];
+  }
+  let favorites = new Set(storedFavorites);
   let favoritesOnly = false;
 
   const titleOverrides = {
@@ -149,7 +156,8 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function groupFor(id) {
-    return breedGroups.find(item => item.names.some(name => id.includes(name)))?.group || "Companion";
+    const match = breedGroups.find(item => item.names.some(name => id.includes(name)));
+    return match ? match.group : "Companion";
   }
 
   function sizeFor(id) {
@@ -201,7 +209,9 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   function saveFavorites() {
-    localStorage.setItem(storageKey, JSON.stringify([...favorites]));
+    try {
+      localStorage.setItem(storageKey, JSON.stringify([...favorites]));
+    } catch {}
   }
 
   function cardTemplate(breed) {
@@ -257,7 +267,8 @@ document.addEventListener("DOMContentLoaded", () => {
       link.dataset.target = breed.id;
       link.addEventListener("click", event => {
         event.preventDefault();
-        document.getElementById(breed.id)?.scrollIntoView({ behavior: "smooth", block: "start" });
+        const target = document.getElementById(breed.id);
+        if (target) target.scrollIntoView({ behavior: "smooth", block: "start" });
       });
       menu.appendChild(link);
     });
@@ -289,6 +300,11 @@ document.addEventListener("DOMContentLoaded", () => {
     favoriteToggle.textContent = favoritesOnly ? "← Show All Breeds" : "⭐ Show Favorites";
     applyFilters();
   });
+
+  if (!("IntersectionObserver" in window)) {
+    document.querySelectorAll(".breed-card").forEach(card => card.classList.add("visible"));
+    return;
+  }
 
   const observer = new IntersectionObserver(entries => {
     entries.forEach(entry => {
