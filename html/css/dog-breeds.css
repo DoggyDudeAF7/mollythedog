@@ -148,11 +148,21 @@
   border: 1px solid rgba(255,255,255,0.16);
   box-shadow: 0 20px 60px rgba(0,0,0,0.35);
   scroll-margin-top: 126px;
+  cursor: pointer;
 }
 
 .breed-card.reveal {
   opacity: 1;
   transform: none;
+}
+
+.breed-card:focus-visible {
+  outline: 3px solid rgba(255, 215, 112, 0.75);
+  outline-offset: 4px;
+}
+
+.breed-card-copy {
+  min-width: 0;
 }
 
 .breed-card[hidden] {
@@ -222,6 +232,36 @@
 
 .breed-card p {
   max-width: 620px;
+}
+
+.breed-dropdown-hint {
+  margin-top: 14px;
+  color: rgba(255,255,255,0.52);
+  font-size: 0.82rem;
+  font-weight: 800;
+}
+
+.breed-dropdown-hint::after {
+  content: " +";
+}
+
+.breed-card.expanded .breed-dropdown-hint::after {
+  content: " -";
+}
+
+.breed-details {
+  max-height: 0;
+  overflow: hidden;
+  margin-top: 0;
+  opacity: 0;
+  color: rgba(255,255,255,0.76);
+  transition: max-height 0.28s ease, margin-top 0.28s ease, opacity 0.2s ease;
+}
+
+.breed-card.expanded .breed-details {
+  max-height: 180px;
+  margin-top: 12px;
+  opacity: 1;
 }
 
 .breed-meter {
