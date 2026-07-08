@@ -222,6 +222,7 @@ p{color:#cfcfcf;line-height:1.8}
   height:100%;
   object-fit:cover;
   border-radius:14px;
+  cursor:pointer;
 }
 .slide.active{
   opacity:1;
@@ -1043,6 +1044,7 @@ p{color:#cfcfcf;line-height:1.8}
   height:100%;
   object-fit:cover;
   border-radius:14px;
+  cursor:pointer;
 }
 .slide.active{
   opacity:1;
@@ -2876,6 +2878,30 @@ footer{
   max-width:90%;
   max-height:90%;
   border-radius:12px;
+}
+
+#lightboxClose{
+  position:absolute;
+  top:22px;
+  right:22px;
+  z-index:1;
+  width:46px;
+  height:46px;
+  border:1px solid rgba(255,255,255,0.22);
+  border-radius:50%;
+  background:rgba(0,0,0,0.58);
+  color:white;
+  font:inherit;
+  font-size:1.3rem;
+  font-weight:800;
+  cursor:pointer;
+  line-height:1;
+  backdrop-filter:blur(10px);
+}
+
+#lightboxClose:hover{
+  background:rgba(255,255,255,0.16);
+  transform:scale(1.05);
 }
 
 /* =========================
