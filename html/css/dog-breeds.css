@@ -37,6 +37,28 @@
   margin-bottom: 18px;
 }
 
+.breed-quiz-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  margin-bottom: 18px;
+  padding: 12px 14px;
+  border-radius: 14px;
+  color: white;
+  text-decoration: none;
+  font-weight: 800;
+  background: linear-gradient(135deg, rgba(255, 183, 165, 0.28), rgba(191, 168, 255, 0.24));
+  border: 1px solid rgba(255,255,255,0.16);
+  box-shadow: 0 12px 32px rgba(0,0,0,0.22);
+  transition: 0.18s ease;
+}
+
+.breed-quiz-link:hover {
+  transform: translateY(-2px);
+  background: linear-gradient(135deg, rgba(255, 183, 165, 0.38), rgba(191, 168, 255, 0.34));
+}
+
 .breed-search-label {
   display: block;
   margin-bottom: 8px;
