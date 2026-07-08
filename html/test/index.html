@@ -1,52 +1,79 @@
 <!DOCTYPE html>
-<!-- testy -->
-<html lang="en">
+<html>
 <head>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-FG9NLMSQLX"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-FG9NLMSQLX');
-</script>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Test Page</title>
-<link rel="icon" href="../favicon.ico" sizes="48x48">
-<link rel="icon" href="../favicon.svg" type="image/svg+xml">
-<link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
-<link rel="apple-touch-icon" sizes="180x180" href="../apple-touch-icon.png">
-<link rel="icon" type="image/png" sizes="192x192" href="../icon-192.png">
-<link rel="icon" type="image/png" sizes="512x512" href="../icon-512.png">
-<link rel="manifest" href="../site.webmanifest">
-<meta name="theme-color" content="#000000">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <style>
-  body {
-    min-height: 100vh;
-    margin: 0;
-    display: grid;
-    place-items: center;
-    font-family: Arial, sans-serif;
-    color: white;
-    background: linear-gradient(135deg, #161616, #3a6b5f);
-  }
+.collapsible {
+  background-color: #777;
+  color: white;
+  cursor: pointer;
+  padding: 18px;
+  width: 50%;
+  border: none;
+  text-align: left;
+  outline: none;
+  font-size: 15px;
+  border-radius: 30px;
+  transition: transform .2s;
+  text-align: center;
+  kahfiwgfkshriwhrwhkr  
+}
 
-  main {
-    padding: 32px;
-    border-radius: 16px;
-    background: rgba(255, 255, 255, 0.12);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    text-align: center;
-  }
+.active, .collapsible:hover {
+  background-color: #555;
+  transform: scale(1.03);
+}
+
+.content {
+  padding: 0 18px;
+  display: none;
+  overflow: hidden;
+  background-color: #f1f1f1;
+}
 </style>
 </head>
 <body>
-<main>
-  <h1>Test Page</h1>
-  <p>This HTML file is working.</p>
-</main>
+
+<h2>Collapsibles</h2>
+
+<p>Cavoodle</p>
+<button type="button" class="collapsible">Cavoodle
+
+</button>
+<div class="content">
+  <p>cavoodle: A friendly and intelligent dog breed.</p>
+</div>
+
+<p>Collapsible Set:</p>
+<button type="button" class="collapsible">Open Section 1</button>
+<div class="content">
+  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+</div>
+<button type="button" class="collapsible">Open Section 2</button>
+<div class="content">
+  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+</div>
+<button type="button" class="collapsible">Open Section 3</button>
+<div class="content">
+  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+</div>
+
+<script>
+var coll = document.getElementsByClassName("collapsible");
+var i;
+
+for (i = 0; i < coll.length; i++) {
+  coll[i].addEventListener("click", function() {
+    this.classList.toggle("active");
+    var content = this.nextElementSibling;
+    if (content.style.display === "block") {
+      content.style.display = "none";
+    } else {
+      content.style.display = "block";
+    }
+  });
+}
+</script>
+
 </body>
 </html>
