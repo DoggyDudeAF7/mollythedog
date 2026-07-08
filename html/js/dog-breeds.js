@@ -9,15 +9,22 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const cards = Array.from(results.querySelectorAll(".breed-card"));
   const links = Array.from(menu.querySelectorAll("a"));
-  const storageKey = "favoriteBreeds";
+  const storageKey = "mollyDogBreedFavorites";
+  const legacyStorageKey = "favoriteBreeds";
   let favoritesOnly = false;
-  let storedFavorites = [];
 
-  try {
-    storedFavorites = JSON.parse(localStorage.getItem(storageKey) || "[]");
-    if (!Array.isArray(storedFavorites)) storedFavorites = [];
-  } catch (error) {
-    storedFavorites = [];
+  function readStoredFavorites(key) {
+    try {
+      const value = JSON.parse(localStorage.getItem(key) || "[]");
+      return Array.isArray(value) ? value : [];
+    } catch (error) {
+      return [];
+    }
+  }
+
+  let storedFavorites = readStoredFavorites(storageKey);
+  if (!storedFavorites.length) {
+    storedFavorites = readStoredFavorites(legacyStorageKey);
   }
 
   const favorites = new Set(storedFavorites);
@@ -31,7 +38,13 @@ document.addEventListener("DOMContentLoaded", () => {
   function syncFavoriteButtons() {
     cards.forEach(card => {
       const button = card.querySelector(".breed-favorite");
-      if (button) button.classList.toggle("active", favorites.has(card.id));
+      if (!button) return;
+      const active = favorites.has(card.id);
+      const name = card.querySelector("h2")?.textContent || "breed";
+      button.classList.toggle("active", active);
+      button.setAttribute("aria-pressed", String(active));
+      button.setAttribute("aria-label", `${active ? "Remove" : "Favorite"} ${name}`);
+      button.title = active ? "Saved favourite" : "Save favourite";
     });
     links.forEach(link => {
       const label = link.dataset.label || link.textContent.replace(/^⭐\s*/, "");
@@ -60,7 +73,8 @@ document.addEventListener("DOMContentLoaded", () => {
       link.hidden = !card || card.hidden;
     });
 
-    counter.textContent = `Showing ${visibleCount} of ${cards.length} breeds`;
+    const savedCount = favorites.size;
+    counter.textContent = `Showing ${visibleCount} of ${cards.length} breeds • ${savedCount} saved`;
   }
 
   results.addEventListener("click", event => {

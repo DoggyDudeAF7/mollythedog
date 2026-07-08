@@ -156,7 +156,8 @@
 .breed-favorite:hover {
   opacity: 1;
   transform: scale(1.08);
-  background: rgba(255,255,255,0.18);
+  background: rgba(255, 215, 112, 0.22);
+  box-shadow: 0 0 20px rgba(255, 215, 112, 0.24);
 }
 
 .breed-portrait {
