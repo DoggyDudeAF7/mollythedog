@@ -151,11 +151,15 @@ function requireBlogAuth(request, env) {
     }
   }
 
+  const realm = `Molly & Shaina Blog ${Date.now()}-${Math.random().toString(36).slice(2)}`;
+
   return new Response("Authentication required.", {
     status: 401,
     headers: {
-      "WWW-Authenticate": 'Basic realm="Molly & Shaina Blog"',
+      "WWW-Authenticate": `Basic realm="${realm}"`,
       "content-type": "text/plain;charset=UTF-8",
+      "cache-control": "no-store, no-cache, must-revalidate, max-age=0",
+      pragma: "no-cache",
     },
   });
 }
