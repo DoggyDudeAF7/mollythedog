@@ -13,6 +13,7 @@ document.addEventListener("DOMContentLoaded", () => {
         ["../images/shaina/shaina2.png", "../images/shaina/shaina2.jpg"],
         ["../images/shaina/shaina3.png", "../images/shaina/shaina3.jpg"],
         ["../images/shaina/shaina4.png", "../images/shaina/shaina4.jpg"],
+        ["../images/shaina/shaina5.png", "../images/shaina/shaina5.jpg", "../images/shaina/shaina.png"],
       ]
     : [
         ["../images/molly/molly0.png", "../images/molly/molly.jpg"],
@@ -20,7 +21,7 @@ document.addEventListener("DOMContentLoaded", () => {
         ["../images/molly/molly2.png", "../images/molly/molly2.jpg"],
         ["../images/molly/molly3.png", "../images/molly/molly3.jpg"],
         ["../images/molly/molly4.png", "../images/molly/molly4.jpg"],
-        ["../images/molly/molly5.png", "../images/molly/molly0.jpg"],
+        ["../images/molly/molly5.png", "../images/molly/molly5.jpg", "../images/molly/molly.jpg"],
       ];
 
   function attachFallbacks(img, candidates) {
@@ -34,18 +35,53 @@ document.addEventListener("DOMContentLoaded", () => {
     };
   }
 
+  function openLightbox(src) {
+    let lightbox = document.getElementById("lightbox");
+    let lightboxImg = document.getElementById("lightboxImg");
+    let closeButton = document.getElementById("lightboxClose");
+
+    if (!lightbox) {
+      lightbox = document.createElement("div");
+      lightbox.id = "lightbox";
+      document.body.appendChild(lightbox);
+    }
+
+    if (!lightboxImg) {
+      lightboxImg = document.createElement("img");
+      lightboxImg.id = "lightboxImg";
+      lightbox.appendChild(lightboxImg);
+    }
+
+    if (!closeButton) {
+      closeButton = document.createElement("button");
+      closeButton.id = "lightboxClose";
+      closeButton.type = "button";
+      closeButton.setAttribute("aria-label", "Close image");
+      closeButton.textContent = "X";
+      lightbox.appendChild(closeButton);
+    }
+
+    lightboxImg.src = src;
+    lightbox.style.display = "flex";
+  }
+
   let slides = [];
   let index = 0;
   let timer;
   const interval = 3000;
+  const repeatCount = 20;
+  const middleIndex = Math.floor(repeatCount / 2) * images.length;
 
-  for (let r = 0; r < 20; r++) {
+  for (let r = 0; r < repeatCount; r++) {
     images.forEach(candidates => {
       const div = document.createElement("div");
       div.className = "slide";
       const img = document.createElement("img");
       img.alt = "";
       attachFallbacks(img, candidates);
+      img.addEventListener("click", () => {
+        openLightbox(img.currentSrc || img.src);
+      });
       div.appendChild(img);
       track.appendChild(div);
       slides.push(div);
@@ -63,7 +99,7 @@ document.addEventListener("DOMContentLoaded", () => {
     dots.push(d);
   });
 
-  index = Math.floor(slides.length / 2);
+  index = middleIndex;
 
   function getSlideStep() {
     const slide = slides[0];
@@ -73,8 +109,10 @@ document.addEventListener("DOMContentLoaded", () => {
     return slide.offsetWidth + marginLeft + marginRight;
   }
 
-  function update() {
+  function moveTrack(animate = true) {
     if (!slides[index]) return;
+
+    track.style.transition = animate ? "" : "none";
 
     slides.forEach(s => s.classList.remove("active"));
     dots.forEach(d => {
@@ -101,6 +139,23 @@ document.addEventListener("DOMContentLoaded", () => {
     const slideStep = getSlideStep();
     const center = window.innerWidth / 2 - slides[index].offsetWidth / 2;
     track.style.transform = `translateX(${center - index * slideStep}px)`;
+
+    if (!animate) {
+      track.offsetHeight;
+      track.style.transition = "";
+    }
+  }
+
+  function normalizeIndex() {
+    const real = ((index % images.length) + images.length) % images.length;
+    if (index < images.length * 2 || index > slides.length - images.length * 2) {
+      index = middleIndex + real;
+      moveTrack(false);
+    }
+  }
+
+  function update() {
+    moveTrack(true);
   }
 
   function next() {
@@ -109,12 +164,13 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function goTo(i) {
-    index = Math.floor(index / images.length) * images.length + i;
+    index = middleIndex + i;
     update();
   }
 
   update();
   timer = setInterval(next, interval);
+  track.addEventListener("transitionend", normalizeIndex);
 
   window.addEventListener("resize", update);
   window.addEventListener("orientationchange", () => {
