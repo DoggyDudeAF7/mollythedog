@@ -6,23 +6,27 @@ document.addEventListener("DOMContentLoaded", () => {
 
   if (!searchBtn || !searchBox || !searchInput || !results) return;
 
-  const shainaSite = location.pathname.includes("shaina-");
+  const shainaSite = location.pathname.includes("shaina-") || location.pathname.includes("/shaina/");
   const commands = shainaSite ? [
-    { key: "home", action: () => location.href = "/html/shaina-home/" },
-    { key: "traits", action: () => location.href = "/html/shaina-traits/" },
-    { key: "habits", action: () => location.href = "/html/shaina-habits/" },
-    { key: "mind", action: () => location.href = "/html/shaina-mind/" },
-    { key: "gallery", action: () => location.href = "/html/shaina-gallery/" },
-    { key: "faq", action: () => location.href = "/html/shaina-faq/" },
-    { key: "molly", action: () => location.href = "/html/molly/" }
+    { key: "home", action: () => location.href = "../shaina-home/" },
+    { key: "traits", action: () => location.href = "../shaina-traits/" },
+    { key: "habits", action: () => location.href = "../shaina-habits/" },
+    { key: "mind", action: () => location.href = "../shaina-mind/" },
+    { key: "gallery", action: () => location.href = "../shaina-gallery/" },
+    { key: "faq", action: () => location.href = "../shaina-faq/" },
+    { key: "breeds", action: () => location.href = "../molly-dog-breeds/" },
+    { key: "dogs", action: () => location.href = "../molly-dog-breeds/" },
+    { key: "molly", action: () => location.href = "../molly/" }
   ] : [
-    { key: "home", action: () => location.href = "/html/molly/" },
-    { key: "traits", action: () => location.href = "/html/molly-traits/" },
-    { key: "habits", action: () => location.href = "/html/molly-habits/" },
-    { key: "mind", action: () => location.href = "/html/molly-mind/" },
-    { key: "gallery", action: () => location.href = "/html/molly-gallery/" },
-    { key: "faq", action: () => location.href = "/html/molly-faq/" },
-    { key: "shaina", action: () => location.href = "/html/shaina/" }
+    { key: "home", action: () => location.href = "../molly/" },
+    { key: "traits", action: () => location.href = "../molly-traits/" },
+    { key: "habits", action: () => location.href = "../molly-habits/" },
+    { key: "mind", action: () => location.href = "../molly-mind/" },
+    { key: "gallery", action: () => location.href = "../molly-gallery/" },
+    { key: "faq", action: () => location.href = "../molly-faq/" },
+    { key: "breeds", action: () => location.href = "../molly-dog-breeds/" },
+    { key: "dogs", action: () => location.href = "../molly-dog-breeds/" },
+    { key: "shaina", action: () => location.href = "../shaina/" }
   ];
 
   let selectedIndex = 0;

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-FG9NLMSQLX"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-FG9NLMSQLX');
+</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dog Breeds</title>
+<link rel="icon" href="../favicon.ico" sizes="48x48">
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="../apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="192x192" href="../icon-192.png">
+<link rel="icon" type="image/png" sizes="512x512" href="../icon-512.png">
+<link rel="manifest" href="../site.webmanifest">
+<meta name="theme-color" content="#000000">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body>
+<div class="bg"></div>
+
+<nav>
+  <div class="nav-inner">
+
+    <button id="navToggle" aria-label="Toggle menu" aria-expanded="false">☰</button>
+    <div class="nav-links" id="navLinks">
+
+      <a href="../molly/" title="Home"><span>🏠</span></a>
+      <a href="../molly-traits/" title="Traits"><span>✨</span></a>
+      <a href="../molly-habits/" title="Habits"><span>🛏️</span></a>
+      <a href="../molly-mind/" title="Mind"><span>🧠</span></a>
+      <a href="../molly-gallery/" title="Gallery"><span>🖼️</span></a>
+      <a href="../molly-faq/" title="FAQ"><span>❓</span></a>
+      <a href="../molly-dog-breeds/" title="Breeds"><span>🐕</span></a>
+      <a href="../shaina/" title="Shaina"><span>🐶</span></a>
+
+    </div>
+
+    <button id="searchBtn">🔍</button>
+
+  </div>
+</nav>
+
+<div id="searchBox" class="hidden">
+  <input id="searchInput" placeholder="Search..." />
+  <div id="results"></div>
+</div>
+
+<main class="breed-page">
+  <aside class="breed-sidebar">
+    <div class="breed-sidebar-inner">
+      <h1>Dog Breeds</h1>
+      <p>Search, compare, and favorite the breeds that feel most Molly, most Shaina, or beautifully chaotic.</p>
+      <label class="breed-search-label" for="breedSearch">Breed search</label>
+      <input id="breedSearch" class="breed-search" placeholder="Search breeds..." autocomplete="off">
+      <div id="breedCounter" class="breed-counter"></div>
+      <div id="breedMenu" class="breed-menu"></div>
+      <button id="favoriteToggle" class="breed-action" type="button">⭐ Show Favorites</button>
+    </div>
+  </aside>
+
+  <section class="breed-results" id="breedResults" aria-label="Dog breed cards"></section>
+</main>
+
+<button id="breedTop" class="breed-top" type="button" aria-label="Back to top">↑</button>
+
+<footer>
+  <strong>Dog Breeds</strong><br>
+  Search • Favorite • Compare<br>
+  © 2026
+</footer>
+
+<script src="../js/animations.js"></script>
+<script src="../js/search.js"></script>
+<script src="../js/dog-breeds.js"></script>
+</body>
+</html>
