@@ -90,7 +90,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   favoriteToggle.addEventListener("click", () => {
     favoritesOnly = !favoritesOnly;
-    favoriteToggle.textContent = favoritesOnly ? "← Show All Breeds" : "⭐ Show Favorites";
+    favoriteToggle.textContent = favoritesOnly ? "← Show All Breeds" : "⭐ Show Favourites";
     applyFilters();
   });
 
