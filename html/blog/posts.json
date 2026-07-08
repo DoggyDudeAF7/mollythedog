@@ -1,0 +1,26 @@
+[
+  {
+    "date": "July 8, 2026",
+    "title": "Welcome To The Blog",
+    "tag": "Update",
+    "body": "This is the new home for updates, small stories, photo notes, breed thoughts, and important reports from Molly and Shaina headquarters.",
+    "linkText": "Visit Molly",
+    "linkUrl": "../molly/"
+  },
+  {
+    "date": "Coming Soon",
+    "title": "Window Watch Reports",
+    "tag": "Field Notes",
+    "body": "Future posts can live here as separate cards, or become their own full pages when a story needs more room.",
+    "linkText": "Open Gallery",
+    "linkUrl": "../molly-gallery/"
+  },
+  {
+    "date": "Coming Soon",
+    "title": "Breed Match Notes",
+    "tag": "Breeds",
+    "body": "Quiz results, favourite breeds, and Molly-coded or Shaina-coded discoveries can become short blog posts here.",
+    "linkText": "Take The Quiz",
+    "linkUrl": "../breed-quiz/"
+  }
+]

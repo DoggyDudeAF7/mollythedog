@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex,nofollow">
+<title>Blog Writer</title>
+<link rel="icon" href="../../favicon.ico" sizes="48x48">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../css/style.css">
+<link rel="stylesheet" href="../../css/blog.css">
+</head>
+<body>
+<div class="bg"></div>
+
+<main class="blog-page admin-page">
+  <section class="blog-hero reveal left">
+    <p class="blog-kicker">Private Writer Area</p>
+    <h1>Blog Editor</h1>
+    <p>Draft a post here, preview it, then copy the generated JSON into <strong>html/blog/posts.json</strong> to publish.</p>
+    <div class="blog-actions">
+      <a href="../">Back To Blog</a>
+    </div>
+  </section>
+
+  <section class="admin-grid">
+    <form class="admin-form reveal left" id="postForm">
+      <label>
+        Date
+        <input id="postDate" name="date" type="text" value="July 8, 2026">
+      </label>
+
+      <label>
+        Title
+        <input id="postTitle" name="title" type="text" placeholder="Post title">
+      </label>
+
+      <label>
+        Tag
+        <input id="postTag" name="tag" type="text" placeholder="Update">
+      </label>
+
+      <label>
+        Body
+        <textarea id="postBody" name="body" rows="8" placeholder="Write the post..."></textarea>
+      </label>
+
+      <label>
+        Button Text
+        <input id="postLinkText" name="linkText" type="text" placeholder="Optional">
+      </label>
+
+      <label>
+        Button URL
+        <input id="postLinkUrl" name="linkUrl" type="text" placeholder="../molly/">
+      </label>
+
+      <button type="button" id="copyPost">Copy Post JSON</button>
+    </form>
+
+    <section class="admin-preview reveal right">
+      <p class="blog-kicker">Preview</p>
+      <article class="blog-post" id="postPreview"></article>
+      <label>
+        Generated JSON
+        <textarea id="postOutput" rows="10" readonly></textarea>
+      </label>
+    </section>
+  </section>
+</main>
+
+<script src="../../js/animations.js"></script>
+<script src="../../js/blog-admin.js"></script>
+</body>
+</html>
