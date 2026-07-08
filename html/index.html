@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Molly and Shaina</title>
+  <link rel="icon" href="favicon.ico" sizes="48x48">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+  <link rel="manifest" href="site.webmanifest">
+  <meta name="theme-color" content="#090910">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      min-height: 100vh;
+      font-family: Inter, system-ui, sans-serif;
+      color: #fff;
+      background:
+        radial-gradient(circle at 18% 18%, rgba(255, 180, 160, 0.24), transparent 32%),
+        radial-gradient(circle at 82% 78%, rgba(160, 135, 255, 0.26), transparent 34%),
+        linear-gradient(135deg, #130907, #090914 48%, #17103a);
+      display: grid;
+      place-items: center;
+      padding: 28px;
+    }
+
+    main {
+      width: min(980px, 100%);
+      display: grid;
+      gap: 26px;
+    }
+
+    .hero {
+      text-align: center;
+    }
+
+    .eyebrow {
+      color: rgba(255,255,255,0.62);
+      font-size: 0.82rem;
+      font-weight: 900;
+      letter-spacing: 0;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+
+    h1 {
+      font-size: clamp(2.5rem, 8vw, 6.6rem);
+      line-height: 0.92;
+      margin-bottom: 16px;
+    }
+
+    .hero p:last-child {
+      max-width: 650px;
+      margin: 0 auto;
+      color: rgba(255,255,255,0.72);
+      font-size: clamp(1rem, 2vw, 1.25rem);
+      line-height: 1.6;
+    }
+
+    .choices {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .choice {
+      min-height: 260px;
+      padding: 28px;
+      border: 1px solid rgba(255,255,255,0.14);
+      border-radius: 8px;
+      color: #fff;
+      text-decoration: none;
+      background: linear-gradient(135deg, rgba(255,255,255,0.14), rgba(255,255,255,0.05));
+      box-shadow: 0 24px 80px rgba(0,0,0,0.34);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: transform 180ms ease, border-color 180ms ease, background 180ms ease;
+    }
+
+    .choice:hover,
+    .choice:focus-visible {
+      transform: translateY(-4px);
+      border-color: rgba(255,255,255,0.32);
+      background: linear-gradient(135deg, rgba(255,255,255,0.2), rgba(255,255,255,0.08));
+      outline: none;
+    }
+
+    .icon {
+      width: 66px;
+      height: 66px;
+      border-radius: 8px;
+      background: rgba(255,255,255,0.1);
+      display: grid;
+      place-items: center;
+      font-size: 2rem;
+      margin-bottom: 32px;
+    }
+
+    .choice h2 {
+      font-size: clamp(2rem, 5vw, 3.4rem);
+      line-height: 1;
+      margin-bottom: 12px;
+    }
+
+    .choice p {
+      color: rgba(255,255,255,0.7);
+      font-size: 1rem;
+      line-height: 1.5;
+    }
+
+    .arrow {
+      margin-top: 24px;
+      font-weight: 900;
+      color: #ffb7a5;
+    }
+
+    footer {
+      text-align: center;
+      color: rgba(255,255,255,0.5);
+      font-weight: 700;
+    }
+
+    @media (max-width: 700px) {
+      body {
+        place-items: start center;
+      }
+
+      .choices {
+        grid-template-columns: 1fr;
+      }
+
+      .choice {
+        min-height: 220px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <section class="hero">
+      <p class="eyebrow">mollyandshaina.com</p>
+      <h1>Choose Your Destination</h1>
+      <p>Head into the main Molly and Shaina site, or jump straight to the blog for updates, notes, and dog logic.</p>
+    </section>
+
+    <section class="choices" aria-label="Site choices">
+      <a class="choice" href="molly/">
+        <div>
+          <div class="icon">🐶</div>
+          <h2>Main Site</h2>
+          <p>Photos, traits, habits, galleries, FAQs, breed pages, and the full Molly and Shaina experience.</p>
+        </div>
+        <span class="arrow">Open Molly and Shaina</span>
+      </a>
+
+      <a class="choice" href="blog/">
+        <div>
+          <div class="icon">📖</div>
+          <h2>Blog</h2>
+          <p>Small stories, update posts, window reports, quiz notes, and whatever important thoughts need a home.</p>
+        </div>
+        <span class="arrow">Open Blog</span>
+      </a>
+    </section>
+
+    <footer>© 2026 Molly & Shaina</footer>
+  </main>
+</body>
+</html>
