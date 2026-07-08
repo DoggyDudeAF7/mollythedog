@@ -18,6 +18,7 @@ document.addEventListener("DOMContentLoaded", () => {
     { key: "dogs", action: () => location.href = "../molly-dog-breeds/" },
     { key: "quiz", action: () => location.href = "../breed-quiz/" },
     { key: "breed quiz", action: () => location.href = "../breed-quiz/" },
+    { key: "blog", action: () => location.href = "../blog/" },
     { key: "molly", action: () => location.href = "../molly/" }
   ] : [
     { key: "home", action: () => location.href = "../molly/" },
@@ -30,6 +31,7 @@ document.addEventListener("DOMContentLoaded", () => {
     { key: "dogs", action: () => location.href = "../molly-dog-breeds/" },
     { key: "quiz", action: () => location.href = "../breed-quiz/" },
     { key: "breed quiz", action: () => location.href = "../breed-quiz/" },
+    { key: "blog", action: () => location.href = "../blog/" },
     { key: "shaina", action: () => location.href = "../shaina/" }
   ];
 

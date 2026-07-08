@@ -1,2 +1,3 @@
+https://blog.mollyandshaina.com/*    /blog/:splat    200!
 /    /molly/    301
 /dog-breeds/    /molly-dog-breeds/    301
