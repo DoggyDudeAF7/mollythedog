@@ -2,6 +2,10 @@ export default {
   async fetch(request, env) {
     const url = new URL(request.url);
 
+    if (url.pathname === "/api/posts") {
+      return handlePostsApi(request, env);
+    }
+
     if (url.hostname === "blog.mollyandshaina.com") {
       const assetUrl = new URL(request.url);
 
@@ -36,6 +40,93 @@ export default {
     return env.ASSETS.fetch(request);
   },
 };
+
+async function handlePostsApi(request, env) {
+  if (request.method === "GET") {
+    return jsonResponse(await loadPosts(request, env));
+  }
+
+  if (request.method !== "PUT") {
+    return new Response("Method not allowed.", {
+      status: 405,
+      headers: { allow: "GET, PUT" },
+    });
+  }
+
+  const authResponse = requireBlogAuth(request, env);
+  if (authResponse) return authResponse;
+
+  if (!env.BLOG_POSTS) {
+    return jsonResponse({ error: "BLOG_POSTS KV binding is not configured." }, 503);
+  }
+
+  let posts;
+
+  try {
+    posts = await request.json();
+  } catch {
+    return jsonResponse({ error: "Posts must be valid JSON." }, 400);
+  }
+
+  if (!Array.isArray(posts)) {
+    return jsonResponse({ error: "Posts must be an array." }, 400);
+  }
+
+  const cleanPosts = posts.map(cleanPost).filter((post) => post.title && post.body);
+
+  await env.BLOG_POSTS.put("posts", JSON.stringify(cleanPosts));
+
+  return jsonResponse(cleanPosts);
+}
+
+async function loadPosts(request, env) {
+  if (env.BLOG_POSTS) {
+    const storedPosts = await env.BLOG_POSTS.get("posts", "json");
+    if (Array.isArray(storedPosts)) return storedPosts.map(cleanPost);
+  }
+
+  const fallbackUrl = new URL("/blog/posts.json", request.url);
+  const fallbackResponse = await env.ASSETS.fetch(new Request(fallbackUrl, request));
+
+  if (!fallbackResponse.ok) return [];
+
+  try {
+    const fallbackPosts = await fallbackResponse.json();
+    return Array.isArray(fallbackPosts) ? fallbackPosts.map(cleanPost) : [];
+  } catch {
+    return [];
+  }
+}
+
+function cleanPost(post) {
+  return {
+    id: String(post.id || slugify(post.title || `post-${Date.now()}`)),
+    date: String(post.date || ""),
+    title: String(post.title || ""),
+    tag: String(post.tag || "Post"),
+    body: String(post.body || ""),
+    linkText: String(post.linkText || ""),
+    linkUrl: String(post.linkUrl || ""),
+  };
+}
+
+function slugify(value) {
+  return String(value)
+    .toLowerCase()
+    .trim()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "") || `post-${Date.now()}`;
+}
+
+function jsonResponse(body, status = 200) {
+  return new Response(JSON.stringify(body), {
+    status,
+    headers: {
+      "content-type": "application/json;charset=UTF-8",
+      "cache-control": "no-store",
+    },
+  });
+}
 
 function requireBlogAuth(request, env) {
   const password = env.BLOG_ADMIN_PASSWORD;
