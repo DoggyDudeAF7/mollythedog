@@ -4,6 +4,14 @@ document.addEventListener("DOMContentLoaded", () => {
   const search = document.getElementById("breedSearch");
   const counter = document.getElementById("breedCounter");
   const favoriteToggle = document.getElementById("favoriteToggle");
+  const breedOfDay = document.getElementById("breedOfDay");
+  const breedOfDayImage = document.getElementById("breedOfDayImage");
+  const breedOfDayName = document.getElementById("breedOfDayName");
+  const breedOfDayText = document.getElementById("breedOfDayText");
+  const breedOfDayMeter = document.getElementById("breedOfDayMeter");
+  const breedOfDayMatch = document.getElementById("breedOfDayMatch");
+  const breedOfDayEnergy = document.getElementById("breedOfDayEnergy");
+  const breedOfDayJump = document.getElementById("breedOfDayJump");
 
   if (!results || !menu || !search || !counter || !favoriteToggle) return;
 
@@ -28,6 +36,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   const favorites = new Set(storedFavorites);
+  let dailyBreedCard = null;
 
   function saveFavorites() {
     try {
@@ -77,6 +86,33 @@ document.addEventListener("DOMContentLoaded", () => {
     counter.textContent = `Showing ${visibleCount} of ${cards.length} breeds • ${savedCount} saved`;
   }
 
+  function getDailyBreedIndex() {
+    const today = new Date();
+    const dayNumber = Math.floor(Date.UTC(today.getFullYear(), today.getMonth(), today.getDate()) / 86400000);
+    return dayNumber % cards.length;
+  }
+
+  function renderBreedOfDay() {
+    if (!breedOfDay || !cards.length) return;
+
+    dailyBreedCard = cards[getDailyBreedIndex()];
+    const image = dailyBreedCard.querySelector(".breed-portrait img");
+    const name = dailyBreedCard.querySelector("h2")?.textContent || "Mystery Breed";
+    const text = dailyBreedCard.querySelector(".breed-card-copy > p:not(.breed-kicker)")?.textContent || "Today's excellent dog breed.";
+    const match = dailyBreedCard.dataset.match || "Daily pick";
+    const meter = dailyBreedCard.querySelector(".breed-meter span")?.style.width || "50%";
+
+    breedOfDayImage.innerHTML = image
+      ? `<img src="${image.getAttribute("src")}" alt="${image.getAttribute("alt") || name}">`
+      : "";
+    breedOfDayName.textContent = name;
+    breedOfDayText.textContent = text;
+    breedOfDayMeter.style.width = meter;
+    breedOfDayMatch.textContent = match;
+    breedOfDayEnergy.textContent = `${meter.replace("%", "")}% energy`;
+    breedOfDay.dataset.target = dailyBreedCard.id;
+  }
+
   results.addEventListener("click", event => {
     const favorite = event.target.closest(".breed-favorite");
     if (!favorite) return;
@@ -108,6 +144,12 @@ document.addEventListener("DOMContentLoaded", () => {
     applyFilters();
   });
 
+  breedOfDayJump?.addEventListener("click", () => {
+    if (!dailyBreedCard) return;
+    dailyBreedCard.scrollIntoView({ behavior: "smooth", block: "start" });
+  });
+
+  renderBreedOfDay();
   syncFavoriteButtons();
   applyFilters();
 
@@ -128,5 +170,4 @@ document.addEventListener("DOMContentLoaded", () => {
 
   cards.forEach(card => observer.observe(card));
 });
-
 
