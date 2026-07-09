@@ -1,9 +1,9 @@
 const defaults = {
   certTitle: "Certificate of Excellence",
-  certName: "Molly",
-  certText: "For outstanding achievement in comfort, cuteness, dramatic sighing, and excellent couch presence.",
-  certDate: "July 9, 2026",
-  certSigned: "Molly & Shaina HQ",
+  certName: "Name",
+  certText: "Description",
+  certDate: "Date",
+  certSigned: "Name",
   certBadge: "Official"
 };
 
