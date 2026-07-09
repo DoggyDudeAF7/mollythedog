@@ -25,12 +25,16 @@ function renderPosts(posts) {
   }
 
   postsContainer.innerHTML = posts.map((post, index) => {
+    const image = post.image
+      ? `<img class="blog-post-image" src="${post.image}" alt="${escapeHtml(post.imageAlt || post.title)}">`
+      : "";
     const link = post.linkUrl && post.linkText
       ? `<a href="${escapeHtml(post.linkUrl)}">${escapeHtml(post.linkText)}</a>`
       : "";
 
     return `
       <article class="blog-post">
+        ${image}
         <p class="blog-date">${escapeHtml(post.date)}</p>
         <span class="blog-tag">${escapeHtml(post.tag || "Post")}</span>
         <h2>${escapeHtml(post.title)}</h2>
