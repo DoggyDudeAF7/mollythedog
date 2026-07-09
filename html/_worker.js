@@ -6,6 +6,10 @@ export default {
       return handlePostsApi(request, env);
     }
 
+    if (url.pathname.startsWith("/api/images/")) {
+      return handleImageApi(request, env);
+    }
+
     if (url.pathname === "/api/login") {
       return handleLoginApi(request, env);
     }
@@ -90,11 +94,66 @@ async function handlePostsApi(request, env) {
     return jsonResponse({ error: "Posts must be an array." }, 400);
   }
 
-  const cleanPosts = posts.map(cleanPost).filter((post) => post.title && post.body);
+  const cleanPosts = [];
+
+  for (const post of posts) {
+    const clean = cleanPost(post);
+    if (!clean.title || !clean.body) continue;
+
+    if (clean.image.startsWith("data:image/")) {
+      await env.BLOG_POSTS.put(`image:${clean.id}`, clean.image);
+      clean.image = `/api/images/${encodeURIComponent(clean.id)}`;
+    } else if (!clean.image) {
+      await env.BLOG_POSTS.delete(`image:${clean.id}`);
+    }
+
+    cleanPosts.push(clean);
+  }
 
   await env.BLOG_POSTS.put("posts", JSON.stringify(cleanPosts));
 
   return jsonResponse(cleanPosts);
+}
+
+async function handleImageApi(request, env) {
+  if (request.method !== "GET" && request.method !== "HEAD") {
+    return new Response("Method not allowed.", {
+      status: 405,
+      headers: { allow: "GET, HEAD" },
+    });
+  }
+
+  if (!env.BLOG_POSTS) {
+    return new Response("Image storage is not configured.", { status: 503 });
+  }
+
+  const url = new URL(request.url);
+  const id = decodeURIComponent(url.pathname.replace("/api/images/", ""));
+  const image = await env.BLOG_POSTS.get(`image:${id}`);
+
+  if (!image || !image.startsWith("data:image/")) {
+    return new Response("Image not found.", { status: 404 });
+  }
+
+  const match = image.match(/^data:([^;]+);base64,(.+)$/);
+  if (!match) {
+    return new Response("Invalid image.", { status: 415 });
+  }
+
+  const [, contentType, base64] = match;
+  const binary = atob(base64);
+  const bytes = new Uint8Array(binary.length);
+
+  for (let i = 0; i < binary.length; i += 1) {
+    bytes[i] = binary.charCodeAt(i);
+  }
+
+  return new Response(request.method === "HEAD" ? null : bytes, {
+    headers: {
+      "content-type": contentType,
+      "cache-control": "public, max-age=31536000, immutable",
+    },
+  });
 }
 
 async function handleLoginApi(request, env) {
