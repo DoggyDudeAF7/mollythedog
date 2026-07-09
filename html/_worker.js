@@ -37,6 +37,16 @@ export default {
 };
 
 async function handlePostsApi(request, env) {
+  if (request.method === "HEAD") {
+    return new Response(null, {
+      status: 200,
+      headers: {
+        "content-type": "application/json;charset=UTF-8",
+        "cache-control": "no-store",
+      },
+    });
+  }
+
   if (request.method === "GET") {
     return jsonResponse(await loadPosts(request, env));
   }
@@ -44,7 +54,7 @@ async function handlePostsApi(request, env) {
   if (request.method !== "PUT") {
     return new Response("Method not allowed.", {
       status: 405,
-      headers: { allow: "GET, PUT" },
+      headers: { allow: "GET, HEAD, PUT" },
     });
   }
 
