@@ -398,6 +398,30 @@
     width: 100%;
   }
 
+  .breed-of-day {
+    min-height: auto;
+    grid-template-columns: 1fr;
+    padding: 28px 22px;
+    text-align: center;
+  }
+
+  .breed-of-day::before {
+    top: 14px;
+    right: 14px;
+  }
+
+  .breed-of-day-image {
+    width: min(220px, 72vw);
+  }
+
+  .breed-of-day p:not(.breed-kicker) {
+    margin-inline: auto;
+  }
+
+  .breed-of-day h2 {
+    font-size: clamp(2.2rem, 11vw, 3.8rem);
+  }
+
   .breed-card {
     min-height: 0;
     grid-template-columns: 1fr;
