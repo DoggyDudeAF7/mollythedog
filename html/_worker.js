@@ -27,11 +27,6 @@ export default {
       if (authResponse) return authResponse;
     }
 
-    if (url.pathname === "/") {
-      url.pathname = "/molly/";
-      return Response.redirect(url.toString(), 301);
-    }
-
     if (url.pathname === "/dog-breeds/") {
       url.pathname = "/molly-dog-breeds/";
       return Response.redirect(url.toString(), 301);
