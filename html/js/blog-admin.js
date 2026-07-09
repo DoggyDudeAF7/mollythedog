@@ -124,7 +124,7 @@ function loadImage(file) {
 
 async function compressImage(file) {
   const image = await loadImage(file);
-  const maxWidth = 1400;
+  const maxWidth = 900;
   const scale = Math.min(1, maxWidth / image.naturalWidth);
   const width = Math.round(image.naturalWidth * scale);
   const height = Math.round(image.naturalHeight * scale);
@@ -135,7 +135,19 @@ async function compressImage(file) {
   canvas.height = height;
   context.drawImage(image, 0, 0, width, height);
 
-  return canvas.toDataURL("image/jpeg", 0.82);
+  let quality = 0.78;
+  let dataUrl = canvas.toDataURL("image/jpeg", quality);
+
+  while (dataUrl.length > 900000 && quality > 0.42) {
+    quality -= 0.08;
+    dataUrl = canvas.toDataURL("image/jpeg", quality);
+  }
+
+  if (dataUrl.length > 900000) {
+    throw new Error("Image is still too large after compression.");
+  }
+
+  return dataUrl;
 }
 
 async function loadPosts() {
@@ -213,9 +225,9 @@ fields.imageFile.addEventListener("change", async () => {
     }
     updatePreview();
     setStatus("Image attached. Save the post to publish it.");
-  } catch {
+  } catch (error) {
     fields.imageFile.value = "";
-    setStatus("Could not attach that image.", true);
+    setStatus(error.message || "Could not attach that image.", true);
   }
 });
 
