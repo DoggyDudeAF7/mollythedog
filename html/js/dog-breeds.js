@@ -146,6 +146,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
   breedOfDayJump?.addEventListener("click", () => {
     if (!dailyBreedCard) return;
+    search.value = "";
+    favoritesOnly = false;
+    favoriteToggle.textContent = "⭐ Show Favourites";
+    applyFilters();
     dailyBreedCard.scrollIntoView({ behavior: "smooth", block: "start" });
   });
 
@@ -170,4 +174,3 @@ document.addEventListener("DOMContentLoaded", () => {
 
   cards.forEach(card => observer.observe(card));
 });
-
