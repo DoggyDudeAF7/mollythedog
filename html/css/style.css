@@ -156,12 +156,13 @@ p{color:#cfcfcf;line-height:1.8}
 
 .scroll-down-prompt {
   display: block;
-  width: fit-content;
+  width: 100%;
   margin: 0 auto;
   color: rgba(255,255,255,0.78);
   font-weight: 700;
   letter-spacing: 0.04em;
   text-align: center;
+  align-self: center;
   animation:
     scrollPromptAppear 0.9s ease-out 0.45s both,
     scrollPromptFloat 2.2s ease-in-out 1.35s infinite;
