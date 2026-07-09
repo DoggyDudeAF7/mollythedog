@@ -121,7 +121,7 @@ button:last-child {
   width: 100%;
   height: 100%;
   border: 6px double #9b6d4a;
-  padding: clamp(22px, 4vw, 48px);
+  padding: clamp(30px, 4.4vw, 58px);
   display: grid;
   align-content: center;
   justify-items: center;
@@ -132,10 +132,11 @@ button:last-child {
   display: inline-flex;
   min-width: 110px;
   justify-content: center;
-  margin-bottom: 20px;
-  padding: 8px 14px;
+  margin-bottom: clamp(18px, 3vw, 34px);
+  padding: 9px 18px;
   border: 1px solid #9b6d4a;
   border-radius: 999px;
+  box-shadow: inset 0 0 0 2px rgba(155, 109, 74, 0.12);
   color: #7a4d2f;
   font-size: clamp(0.78rem, 1.6vw, 1rem);
   font-weight: 900;
@@ -144,9 +145,9 @@ button:last-child {
 
 .certificate h2 {
   max-width: 850px;
-  font-family: "Playfair Display", Georgia, serif;
-  font-size: clamp(2.3rem, 6.2vw, 5.8rem);
-  line-height: 0.95;
+  font-family: "Cinzel Decorative", "Playfair Display", Georgia, serif;
+  font-size: clamp(2rem, 5.4vw, 5.2rem);
+  line-height: 1.04;
   color: #3b2518;
 }
 
