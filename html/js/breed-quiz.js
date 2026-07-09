@@ -126,7 +126,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     result.innerHTML = `
       <div class="quiz-result-card">
-        <img src="../images/breeds/${breed.slug}.png" alt="${breed.name}">
+        <img src="../images/breeds/${breed.slug}.webp" alt="${breed.name}">
         <div>
           <p class="quiz-kicker">Your Match</p>
           <h2>${breed.name}</h2>

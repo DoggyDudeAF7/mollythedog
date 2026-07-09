@@ -8,20 +8,20 @@ document.addEventListener("DOMContentLoaded", () => {
   const isShaina = pageTitle.includes("shaina");
   const images = isShaina
     ? [
-        ["../images/shaina/shaina0.png", "../images/shaina/shaina.png"],
-        ["../images/shaina/shaina1.png", "../images/shaina/shaina1.jpg"],
-        ["../images/shaina/shaina2.png", "../images/shaina/shaina2.jpg"],
-        ["../images/shaina/shaina3.png", "../images/shaina/shaina3.jpg"],
-        ["../images/shaina/shaina4.png", "../images/shaina/shaina4.jpg"],
-        ["../images/shaina/shaina5.png", "../images/shaina/shaina5.jpg", "../images/shaina/shaina.png"],
+        ["../images/shaina/shaina0.png", "../images/shaina/sh.webp"],
+        ["../images/shaina/sha.webp", "../images/shaina/sha.webp"],
+        ["../images/shaina/sha.webp", "../images/shaina/sha.webp"],
+        ["../images/shaina/sha.webp", "../images/shaina/sha.webp"],
+        ["../images/shaina/sha.webp", "../images/shaina/sha.webp"],
+        ["../images/shaina/shaina5.png", "../images/shaina/shaina5.jpg", "../images/shaina/sh.webp"],
       ]
     : [
-        ["../images/molly/molly0.png", "../images/molly/molly.jpg"],
-        ["../images/molly/molly1.png", "../images/molly/molly1.jpg"],
-        ["../images/molly/molly2.png", "../images/molly/molly2.jpg"],
-        ["../images/molly/molly3.png", "../images/molly/molly3.jpg"],
-        ["../images/molly/molly4.png", "../images/molly/molly4.jpg"],
-        ["../images/molly/molly5.png", "../images/molly/molly5.jpg", "../images/molly/molly.jpg"],
+        ["../images/molly/mo.webp", "../images/molly/m.webp"],
+        ["../images/molly/mo.webp", "../images/molly/mo.webp"],
+        ["../images/molly/mo.webp", "../images/molly/mo.webp"],
+        ["../images/molly/mo.webp", "../images/molly/mo.webp"],
+        ["../images/molly/mo.webp", "../images/molly/mo.webp"],
+        ["../images/molly/molly5.png", "../images/molly/molly5.jpg", "../images/molly/m.webp"],
       ];
 
   function attachFallbacks(img, candidates) {
