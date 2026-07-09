@@ -8,20 +8,20 @@ document.addEventListener("DOMContentLoaded", () => {
   const isShaina = pageTitle.includes("shaina");
   const images = isShaina
     ? [
-        ["../images/shaina/shaina0.png", "../images/shaina/sh.webp"],
-        ["../images/shaina/sha.webp", "../images/shaina/sha.webp"],
-        ["../images/shaina/sha.webp", "../images/shaina/sha.webp"],
-        ["../images/shaina/sha.webp", "../images/shaina/sha.webp"],
-        ["../images/shaina/sha.webp", "../images/shaina/sha.webp"],
-        ["../images/shaina/shaina5.png", "../images/shaina/shaina5.jpg", "../images/shaina/sh.webp"],
+        ["../images/shaina/shaina.webp"],
+        ["../images/shaina/shaina1.webp"],
+        ["../images/shaina/shaina2.webp"],
+        ["../images/shaina/shaina3.webp"],
+        ["../images/shaina/shaina4.webp"],
+        ["../images/shaina/shaina.webp"],
       ]
     : [
-        ["../images/molly/mo.webp", "../images/molly/m.webp"],
-        ["../images/molly/mo.webp", "../images/molly/mo.webp"],
-        ["../images/molly/mo.webp", "../images/molly/mo.webp"],
-        ["../images/molly/mo.webp", "../images/molly/mo.webp"],
-        ["../images/molly/mo.webp", "../images/molly/mo.webp"],
-        ["../images/molly/molly5.png", "../images/molly/molly5.jpg", "../images/molly/m.webp"],
+        ["../images/molly/molly0.webp"],
+        ["../images/molly/molly1.webp"],
+        ["../images/molly/molly2.webp"],
+        ["../images/molly/molly3.webp"],
+        ["../images/molly/molly4.webp"],
+        ["../images/molly/molly.webp"],
       ];
 
   function attachFallbacks(img, candidates) {
