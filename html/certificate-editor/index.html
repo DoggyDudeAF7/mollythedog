@@ -1,82 +1,103 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-<!-- Certificate Editor -->
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="robots" content="noindex,nofollow">
-<title>Certificate Editor</title>
-<link rel="icon" href="../favicon.ico" sizes="48x48">
-<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Inter:wght@400;600;800;900&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../css/certificate-editor.css">
-</head>
-<body>
-<main class="certificate-app">
-  <section class="editor-panel" aria-label="Certificate editor">
-    <p class="eyebrow">Printable</p>
-    <h1>Certificate Editor</h1>
-
-    <label>
-      Certificate Title
-      <input id="certTitle" type="text" value="Certificate of Excellence">
-    </label>
-
-    <label>
-      Awarded To
-      <input id="certName" type="text" value="Name">
-    </label>
-
-    <label>
-      Certificate Text
-      <textarea id="certText" rows="5">Description</textarea>
-    </label>
-
-    <div class="field-grid">
-      <label>
-        Date
-        <input id="certDate" type="text" value="Date">
-      </label>
-
-      <label>
-        Signed By
-        <input id="certSigned" type="text" value="Name">
-      </label>
-    </div>
-
-    <label>
-      Badge Text
-      <input id="certBadge" type="text" value="Official">
-    </label>
-
-    <div class="button-row">
-      <button type="button" id="printCertificate">Print</button>
-      <button type="button" id="resetCertificate">Reset</button>
-    </div>
-  </section>
-
-  <section class="paper-wrap" aria-label="Certificate preview">
-    <article class="certificate" id="certificate">
-      <div class="certificate-border">
-        <p class="certificate-kicker" id="previewBadge">Official</p>
-        <h2 id="previewTitle">Certificate of Excellence</h2>
-        <p class="awarded">Awarded To</p>
-        <h3 id="previewName">Name</h3>
-        <p class="certificate-text" id="previewText">Description</p>
-        <div class="certificate-footer">
-          <div>
-            <span id="previewDate">Date</span>
-            <strong>Date</strong>
-          </div>
-          <div>
-            <span id="previewSigned">Name</span>
-            <strong>Signed By</strong>
-          </div>
+  <head>
+    <!-- Certificate Editor -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex,nofollow">
+    <title>
+      Certificate Editor
+    </title>
+    <link rel="icon" href="../favicon.ico" sizes="48x48">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Inter:wght@400;600;800;900&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/certificate-editor.css">
+  </head>
+  <body>
+    <main class="certificate-app">
+      <section class="editor-panel" aria-label="Certificate editor">
+        <p class="eyebrow">
+          Printable
+        </p>
+        <h1>
+          Certificate Editor
+        </h1>
+        <label>
+          Certificate Title
+          <input id="certTitle" type="text" value="Certificate of Excellence">
+        </label>
+        <label>
+          Awarded To
+          <input id="certName" type="text" value="Name">
+        </label>
+        <label>
+          Certificate Text
+          <textarea id="certText" rows="5">
+            Description
+          </textarea>
+        </label>
+        <div class="field-grid">
+          <label>
+            Date
+            <input id="certDate" type="text" value="Date">
+          </label>
+          <label>
+            Signed By
+            <input id="certSigned" type="text" value="Name">
+          </label>
         </div>
-      </div>
-    </article>
-  </section>
-</main>
-
-<script src="../js/certificate-editor.js"></script>
-</body>
+        <label>
+          Badge Text
+          <input id="certBadge" type="text" value="Official">
+        </label>
+        <div class="button-row">
+          <button type="button" id="printCertificate">
+            Print
+          </button>
+          <button type="button" id="resetCertificate">
+            Reset
+          </button>
+        </div>
+      </section>
+      <section class="paper-wrap" aria-label="Certificate preview">
+        <article class="certificate" id="certificate">
+          <div class="certificate-border">
+            <p class="certificate-kicker" id="previewBadge">
+              Official
+            </p>
+            <h2 id="previewTitle">
+              Certificate of Excellence
+            </h2>
+            <p class="awarded">
+              Awarded To
+            </p>
+            <h3 id="previewName">
+              Name
+            </h3>
+            <p class="certificate-text" id="previewText">
+              Description
+            </p>
+            <div class="certificate-footer">
+              <div>
+                <span id="previewDate">
+                  Date
+                </span>
+                <strong>
+                  Date
+                </strong>
+              </div>
+              <div>
+                <span id="previewSigned">
+                  Name
+                </span>
+                <strong>
+                  Signed By
+                </strong>
+              </div>
+            </div>
+          </div>
+        </article>
+      </section>
+    </main>
+    <script src="../js/certificate-editor.js"></script>
+  </body>
 </html>

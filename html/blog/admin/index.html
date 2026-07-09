@@ -1,104 +1,120 @@
 <!DOCTYPE html>
 <html lang="en">
-<!-- comment -->
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="robots" content="noindex,nofollow">
-<title>Blog Writer</title>
-<link rel="icon" href="../../favicon.ico" sizes="48x48">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../../css/style.css">
-<link rel="stylesheet" href="../../css/blog.css">
-</head>
-<body>
-<div class="bg"></div>
-
-<main class="blog-page admin-page">
-  <section class="blog-hero reveal left">
-    <p class="blog-kicker">Private Writer Area</p>
-    <h1>Blog CMS</h1>
-    <p>Write, edit, save, and delete posts here. Saved posts publish straight to the blog.</p>
-    <div class="blog-actions">
-      <a href="../">Back To Blog</a>
-      <button type="button" id="logoutButton">Log Out</button>
+  <!-- comment -->
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex,nofollow">
+    <title>
+      Blog Writer
+    </title>
+    <link rel="icon" href="../../favicon.ico" sizes="48x48">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="../../css/blog.css">
+  </head>
+  <body>
+    <div class="bg">
     </div>
-  </section>
-
-  <section class="admin-grid">
-    <aside class="admin-post-list reveal left">
-      <div class="admin-list-header">
-        <div>
-          <p class="blog-kicker">Posts</p>
-          <h2>Manage Posts</h2>
+    <main class="blog-page admin-page">
+      <section class="blog-hero reveal left">
+        <p class="blog-kicker">
+          Private Writer Area
+        </p>
+        <h1>
+          Blog CMS
+        </h1>
+        <p>
+          Write, edit, save, and delete posts here. Saved posts publish straight to the blog.
+        </p>
+        <div class="blog-actions">
+          <a href="../">
+            Back To Blog
+          </a>
+          <button type="button" id="logoutButton">
+            Log Out
+          </button>
         </div>
-        <button type="button" id="newPost">New</button>
-      </div>
-      <div class="admin-status" id="adminStatus">Loading posts...</div>
-      <div class="post-list" id="postList"></div>
-    </aside>
-
-    <form class="admin-form reveal right" id="postForm">
-      <input id="postId" name="id" type="hidden">
-
-      <label>
-        Date
-        <input id="postDate" name="date" type="text" value="July 8, 2026">
-      </label>
-
-      <label>
-        Title
-        <input id="postTitle" name="title" type="text" placeholder="Post title">
-      </label>
-
-      <label>
-        Tag
-        <input id="postTag" name="tag" type="text" placeholder="Update">
-      </label>
-
-      <label>
-        Body
-        <textarea id="postBody" name="body" rows="8" placeholder="Write the post..."></textarea>
-      </label>
-
-      <label>
-        Post Image
-        <input id="postImageFile" name="imageFile" type="file" accept="image/*">
-      </label>
-
-      <input id="postImage" name="image" type="hidden">
-
-      <label>
-        Image Description
-        <input id="postImageAlt" name="imageAlt" type="text" placeholder="Describe the image">
-      </label>
-
-      <button type="button" class="secondary-admin-button" id="removeImage">Remove Image</button>
-
-      <label>
-        Button Text
-        <input id="postLinkText" name="linkText" type="text" placeholder="Optional">
-      </label>
-
-      <label>
-        Button URL
-        <input id="postLinkUrl" name="linkUrl" type="text" placeholder="../molly/">
-      </label>
-
-      <div class="admin-buttons">
-        <button type="submit" id="savePost">Save Post</button>
-        <button type="button" id="deletePost">Delete</button>
-      </div>
-    </form>
-
-    <section class="admin-preview reveal left">
-      <p class="blog-kicker">Preview</p>
-      <article class="blog-post" id="postPreview"></article>
-    </section>
-  </section>
-</main>
-
-<script src="../../js/animations.js"></script>
-<script src="../../js/blog-admin.js"></script>
-</body>
+      </section>
+      <section class="admin-grid">
+        <aside class="admin-post-list reveal left">
+          <div class="admin-list-header">
+            <div>
+              <p class="blog-kicker">
+                Posts
+              </p>
+              <h2>
+                Manage Posts
+              </h2>
+            </div>
+            <button type="button" id="newPost">
+              New
+            </button>
+          </div>
+          <div class="admin-status" id="adminStatus">
+            Loading posts...
+          </div>
+          <div class="post-list" id="postList">
+          </div>
+        </aside>
+        <form class="admin-form reveal right" id="postForm">
+          <input id="postId" name="id" type="hidden">
+          <label>
+            Date
+            <input id="postDate" name="date" type="text" value="July 8, 2026">
+          </label>
+          <label>
+            Title
+            <input id="postTitle" name="title" type="text" placeholder="Post title">
+          </label>
+          <label>
+            Tag
+            <input id="postTag" name="tag" type="text" placeholder="Update">
+          </label>
+          <label>
+            Body
+            <textarea id="postBody" name="body" rows="8" placeholder="Write the post...">
+            </textarea>
+          </label>
+          <label>
+            Post Image
+            <input id="postImageFile" name="imageFile" type="file" accept="image/*">
+          </label>
+          <input id="postImage" name="image" type="hidden">
+          <label>
+            Image Description
+            <input id="postImageAlt" name="imageAlt" type="text" placeholder="Describe the image">
+          </label>
+          <button type="button" class="secondary-admin-button" id="removeImage">
+            Remove Image
+          </button>
+          <label>
+            Button Text
+            <input id="postLinkText" name="linkText" type="text" placeholder="Optional">
+          </label>
+          <label>
+            Button URL
+            <input id="postLinkUrl" name="linkUrl" type="text" placeholder="../molly/">
+          </label>
+          <div class="admin-buttons">
+            <button type="submit" id="savePost">
+              Save Post
+            </button>
+            <button type="button" id="deletePost">
+              Delete
+            </button>
+          </div>
+        </form>
+        <section class="admin-preview reveal left">
+          <p class="blog-kicker">
+            Preview
+          </p>
+          <article class="blog-post" id="postPreview">
+          </article>
+        </section>
+      </section>
+    </main>
+    <script src="../../js/animations.js"></script>
+    <script src="../../js/blog-admin.js"></script>
+  </body>
 </html>

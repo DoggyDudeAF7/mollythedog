@@ -1,90 +1,140 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-FG9NLMSQLX"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-FG9NLMSQLX');
-</script>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Molly Gallery</title>
-<link rel="icon" href="../favicon.ico" sizes="48x48">
-<link rel="icon" href="../favicon.svg" type="image/svg+xml">
-<link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
-<link rel="apple-touch-icon" sizes="180x180" href="../apple-touch-icon.png">
-<link rel="icon" type="image/png" sizes="192x192" href="../icon-192.png">
-<link rel="icon" type="image/png" sizes="512x512" href="../icon-512.png">
-<link rel="manifest" href="../site.webmanifest">
-<meta name="theme-color" content="#000000">
-
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
-
-<link rel="stylesheet" href="../css/style.css">
-</head>
-
-<body>
-<div class="bg"></div>
-
-<nav>
-  <button id="navToggle" aria-label="Toggle menu" aria-expanded="false">☰</button>
-    <div class="nav-links" id="navLinks">
-    <a href="../molly/" title="Home"><span>🏠</span></a>
-    <a href="../molly-traits/" title="Traits"><span>✨</span></a>
-    <a href="../molly-habits/" title="Habits"><span>🛏️</span></a>
-    <a href="../molly-mind/" title="Mind"><span>🧠</span></a>
-    <a href="../molly-gallery/" title="Gallery"><span>🖼️</span></a>
-    <a href="../molly-faq/" title="FAQ"><span>❓</span></a><a href="../molly-dog-breeds/" title="Breeds"><span>🐕</span></a>
-    <a href="../shaina/" title="Shaina"><span>🐶</span></a>
-  </div>
-
-  <button id="searchBtn">🔍</button>
-</nav>
-
-<div id="searchBox" class="hidden">
-  <input id="searchInput" placeholder="Search..." />
-  <div id="results"></div>
-</div>
-
-<!-- HERO -->
-<section class="section hero">
-  <h1 class="reveal left">Molly Gallery</h1>
-  <p class="reveal right">Quiet chaos, sleepy guardian energy, and couch domination.</p>
-  <br><br><br><br><p class="scroll-down-prompt">↓Scroll Down↓</p>
-</section>
-
-<!-- MOLLY -->
-<section class="section">
-  <div class="card reveal left">
-    <h2>🐶 Molly</h2>
-    <p>Quiet chaos, sleepy guardian energy, and couch domination.</p>
-    <div class="grid">
-      <img src="../images/molly/molly1.webp" loading="lazy" decoding="async">
-      <img src="../images/molly/molly2.webp" loading="lazy" decoding="async">
-      <img src="../images/molly/molly3.webp" loading="lazy" decoding="async">
-      <img src="../images/molly/molly4.webp" loading="lazy" decoding="async">
+  <head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-FG9NLMSQLX"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    
+    gtag('config', 'G-FG9NLMSQLX');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+      Molly Gallery
+    </title>
+    <link rel="icon" href="../favicon.ico" sizes="48x48">
+    <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+    <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="../apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="../icon-192.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="../icon-512.png">
+    <link rel="manifest" href="../site.webmanifest">
+    <meta name="theme-color" content="#000000">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/style.css">
+  </head>
+  <body>
+    <div class="bg">
     </div>
-  </div>
-</section>
-
-<footer>
-  <strong>Molly Gallery</strong><br>
-  Molly • Quiet Chaos • Couch Energy<br>
-  © 2026
-</footer>
-
-<!-- LIGHTBOX -->
-<div id="lightbox">
-  <img id="lightboxImg">
-  <button id="lightboxClose" type="button" aria-label="Close image">X</button>
-</div>
-
-<script src="../js/animations.js"></script>
-<script src="../js/search.js"></script>
-</body>
+    <nav>
+      <button id="navToggle" aria-label="Toggle menu" aria-expanded="false">
+        ☰
+      </button>
+      <div class="nav-links" id="navLinks">
+        <a href="../molly/" title="Home">
+          <span>
+            🏠
+          </span>
+        </a>
+        <a href="../molly-traits/" title="Traits">
+          <span>
+            ✨
+          </span>
+        </a>
+        <a href="../molly-habits/" title="Habits">
+          <span>
+            🛏️
+          </span>
+        </a>
+        <a href="../molly-mind/" title="Mind">
+          <span>
+            🧠
+          </span>
+        </a>
+        <a href="../molly-gallery/" title="Gallery">
+          <span>
+            🖼️
+          </span>
+        </a>
+        <a href="../molly-faq/" title="FAQ">
+          <span>
+            ❓
+          </span>
+        </a>
+        <a href="../molly-dog-breeds/" title="Breeds">
+          <span>
+            🐕
+          </span>
+        </a>
+        <a href="../shaina/" title="Shaina">
+          <span>
+            🐶
+          </span>
+        </a>
+      </div>
+      <button id="searchBtn">
+        🔍
+      </button>
+    </nav>
+    <div id="searchBox" class="hidden">
+      <input id="searchInput" placeholder="Search..." />
+      <div id="results">
+      </div>
+    </div>
+    <!-- HERO -->
+    <section class="section hero">
+      <h1 class="reveal left">
+        Molly Gallery
+      </h1>
+      <p class="reveal right">
+        Quiet chaos, sleepy guardian energy, and couch domination.
+      </p>
+      <br>
+      <br>
+      <br>
+      <br>
+      <p class="scroll-down-prompt">
+        ↓Scroll Down↓
+      </p>
+    </section>
+    <!-- MOLLY -->
+    <section class="section">
+      <div class="card reveal left">
+        <h2>
+          🐶 Molly
+        </h2>
+        <p>
+          Quiet chaos, sleepy guardian energy, and couch domination.
+        </p>
+        <div class="grid">
+          <img src="../images/molly/molly1.webp" loading="lazy" decoding="async">
+          <img src="../images/molly/molly2.webp" loading="lazy" decoding="async">
+          <img src="../images/molly/molly3.webp" loading="lazy" decoding="async">
+          <img src="../images/molly/molly4.webp" loading="lazy" decoding="async">
+        </div>
+      </div>
+    </section>
+    <footer>
+      <strong>
+        Molly Gallery
+      </strong>
+      <br>
+      Molly • Quiet Chaos • Couch Energy
+      <br>
+      © 2026
+    </footer>
+    <!-- LIGHTBOX -->
+    <div id="lightbox">
+      <img id="lightboxImg">
+      <button id="lightboxClose" type="button" aria-label="Close image">
+        X
+      </button>
+    </div>
+    <script src="../js/animations.js"></script>
+    <script src="../js/search.js"></script>
+  </body>
 </html>
