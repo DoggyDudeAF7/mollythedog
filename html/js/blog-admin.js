@@ -273,7 +273,7 @@ form.addEventListener("submit", async (event) => {
 
   try {
     await savePosts(nextPosts);
-    fillForm(post);
+    fillForm(posts.find((item) => item.id === post.id) || post);
     renderPostList();
     setStatus("Saved and published.");
   } catch (error) {
