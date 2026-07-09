@@ -70,16 +70,23 @@ document.addEventListener("DOMContentLoaded", () => {
   function buildBreedDetails(card) {
     const name = card.querySelector("h2")?.textContent || "This breed";
     const group = card.dataset.group || "companion";
-    const match = card.dataset.match || "personality";
-    const kicker = card.querySelector(".breed-kicker")?.textContent.toLowerCase() || "dog breed";
-    const energy = card.querySelector(".breed-meta span:last-child")?.textContent || "a flexible energy level";
-    const tone = match.includes("molly")
-      ? "It has a soft Molly-coded side: people-aware, comfort-loving, and very tuned in to the room."
+    const match = card.dataset.match || "distinctive personality";
+    const tags = (card.querySelector(".breed-kicker")?.textContent || "Companion • Medium • Medium")
+      .split("•")
+      .map(tag => tag.trim().toLowerCase())
+      .filter(Boolean);
+    const groupLabel = tags[0] || group;
+    const size = tags[1] || "medium";
+    const coat = tags[2] || "medium";
+    const energy = card.querySelector(".breed-meta span:last-child")?.textContent || "balanced energy";
+    const cardSummary = card.querySelector(".breed-card-copy > p:not(.breed-kicker)")?.textContent || "";
+    const personality = match.includes("molly")
+      ? "Known for a softer, people-focused temperament, this breed suits homes that appreciate loyalty, routine, and close companionship."
       : match.includes("shaina")
-        ? "It leans Shaina-coded: alert, quick to react, and happiest when there is something interesting to track."
-        : `It brings a ${match} style, which makes it feel distinctive without being predictable.`;
+        ? "Known for alertness and quick reactions, this breed suits active homes that enjoy a dog with curiosity, drive, and opinions."
+        : `Known here for its ${match} personality, this breed stands out as a dog with presence, focus, and a memorable way of moving through the day.`;
 
-    return `${name} is a ${kicker} from the ${group} world with ${energy.toLowerCase()}. ${tone} If this breed fits you, expect a dog with a clear personality, specific routines, and strong opinions about how the day should go.`;
+    return `The ${name} is a ${size} ${groupLabel} breed with a ${coat} coat and ${energy.toLowerCase()}. ${cardSummary} ${personality} A good match for the right person, the ${name} is the kind of dog that rewards attention, structure, and a household ready for a clear canine character.`;
   }
 
   function setupCardDropdowns() {
