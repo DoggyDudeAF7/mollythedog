@@ -67,6 +67,48 @@ document.addEventListener("DOMContentLoaded", () => {
     return !query || haystack.includes(query);
   }
 
+  function buildBreedDetails(card) {
+    const name = card.querySelector("h2")?.textContent || "This breed";
+    const group = card.dataset.group || "companion";
+    const match = card.dataset.match || "personality";
+    const kicker = card.querySelector(".breed-kicker")?.textContent.toLowerCase() || "dog breed";
+    const energy = card.querySelector(".breed-meta span:last-child")?.textContent || "a flexible energy level";
+    const tone = match.includes("molly")
+      ? "It has a soft Molly-coded side: people-aware, comfort-loving, and very tuned in to the room."
+      : match.includes("shaina")
+        ? "It leans Shaina-coded: alert, quick to react, and happiest when there is something interesting to track."
+        : `It brings a ${match} style, which makes it feel distinctive without being predictable.`;
+
+    return `${name} is a ${kicker} from the ${group} world with ${energy.toLowerCase()}. ${tone} If this breed fits you, expect a dog with a clear personality, specific routines, and strong opinions about how the day should go.`;
+  }
+
+  function setupCardDropdowns() {
+    cards.forEach(card => {
+      const copy = card.querySelector(".breed-card-copy");
+      if (!copy || copy.querySelector(".breed-details")) return;
+
+      card.setAttribute("tabindex", "0");
+      card.setAttribute("role", "button");
+      card.setAttribute("aria-expanded", "false");
+
+      const hint = document.createElement("p");
+      hint.className = "breed-dropdown-hint";
+      hint.textContent = "Click for breed notes";
+
+      const details = document.createElement("p");
+      details.className = "breed-details";
+      details.textContent = buildBreedDetails(card);
+
+      copy.appendChild(hint);
+      copy.appendChild(details);
+    });
+  }
+
+  function toggleCard(card) {
+    const expanded = card.classList.toggle("expanded");
+    card.setAttribute("aria-expanded", String(expanded));
+  }
+
   function applyFilters() {
     const query = search.value.trim().toLowerCase();
     let visibleCount = 0;
@@ -115,16 +157,30 @@ document.addEventListener("DOMContentLoaded", () => {
 
   results.addEventListener("click", event => {
     const favorite = event.target.closest(".breed-favorite");
-    if (!favorite) return;
-    const id = favorite.dataset.id;
-    if (favorites.has(id)) {
-      favorites.delete(id);
-    } else {
-      favorites.add(id);
+    if (favorite) {
+      const id = favorite.dataset.id;
+      if (favorites.has(id)) {
+        favorites.delete(id);
+      } else {
+        favorites.add(id);
+      }
+      saveFavorites();
+      syncFavoriteButtons();
+      applyFilters();
+      return;
     }
-    saveFavorites();
-    syncFavoriteButtons();
-    applyFilters();
+
+    const card = event.target.closest(".breed-card");
+    if (card) toggleCard(card);
+  });
+
+  results.addEventListener("keydown", event => {
+    if (event.key !== "Enter" && event.key !== " ") return;
+    if (event.target.closest(".breed-favorite")) return;
+    const card = event.target.closest(".breed-card");
+    if (!card) return;
+    event.preventDefault();
+    toggleCard(card);
   });
 
   links.forEach(link => {
@@ -154,6 +210,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   renderBreedOfDay();
+  setupCardDropdowns();
   syncFavoriteButtons();
   applyFilters();
 
