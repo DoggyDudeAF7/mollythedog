@@ -4,6 +4,9 @@ const fields = {
   title: document.getElementById("postTitle"),
   tag: document.getElementById("postTag"),
   body: document.getElementById("postBody"),
+  image: document.getElementById("postImage"),
+  imageFile: document.getElementById("postImageFile"),
+  imageAlt: document.getElementById("postImageAlt"),
   linkText: document.getElementById("postLinkText"),
   linkUrl: document.getElementById("postLinkUrl")
 };
@@ -15,6 +18,7 @@ const statusBox = document.getElementById("adminStatus");
 const newButton = document.getElementById("newPost");
 const deleteButton = document.getElementById("deletePost");
 const logoutButton = document.getElementById("logoutButton");
+const removeImageButton = document.getElementById("removeImage");
 
 let posts = [];
 
@@ -50,6 +54,8 @@ function getPost() {
     title,
     tag: fields.tag.value.trim() || "Post",
     body: fields.body.value.trim() || "Write something here.",
+    image: fields.image.value,
+    imageAlt: fields.imageAlt.value.trim(),
     linkText: fields.linkText.value.trim(),
     linkUrl: fields.linkUrl.value.trim()
   };
@@ -61,6 +67,9 @@ function fillForm(post = {}) {
   fields.title.value = post.title || "";
   fields.tag.value = post.tag || "";
   fields.body.value = post.body || "";
+  fields.image.value = post.image || "";
+  fields.imageFile.value = "";
+  fields.imageAlt.value = post.imageAlt || "";
   fields.linkText.value = post.linkText || "";
   fields.linkUrl.value = post.linkUrl || "";
   updatePreview();
@@ -68,11 +77,15 @@ function fillForm(post = {}) {
 
 function updatePreview() {
   const post = getPost();
+  const image = post.image
+    ? `<img class="blog-post-image" src="${post.image}" alt="${escapeHtml(post.imageAlt || post.title)}">`
+    : "";
   const link = post.linkText && post.linkUrl
     ? `<a href="${escapeHtml(post.linkUrl)}">${escapeHtml(post.linkText)}</a>`
     : "";
 
   preview.innerHTML = `
+    ${image}
     <p class="blog-date">${escapeHtml(post.date || "Draft")}</p>
     <span class="blog-tag">${escapeHtml(post.tag)}</span>
     <h2>${escapeHtml(post.title)}</h2>
@@ -93,6 +106,36 @@ function renderPostList() {
       <span>${escapeHtml(post.date || "Draft")} • ${escapeHtml(post.tag || "Post")}</span>
     </button>
   `).join("");
+}
+
+function loadImage(file) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = () => {
+      const image = new Image();
+      image.onload = () => resolve(image);
+      image.onerror = reject;
+      image.src = reader.result;
+    };
+    reader.onerror = reject;
+    reader.readAsDataURL(file);
+  });
+}
+
+async function compressImage(file) {
+  const image = await loadImage(file);
+  const maxWidth = 1400;
+  const scale = Math.min(1, maxWidth / image.naturalWidth);
+  const width = Math.round(image.naturalWidth * scale);
+  const height = Math.round(image.naturalHeight * scale);
+  const canvas = document.createElement("canvas");
+  const context = canvas.getContext("2d");
+
+  canvas.width = width;
+  canvas.height = height;
+  context.drawImage(image, 0, 0, width, height);
+
+  return canvas.toDataURL("image/jpeg", 0.82);
 }
 
 async function loadPosts() {
@@ -146,7 +189,42 @@ async function savePosts(nextPosts) {
 }
 
 Object.values(fields).forEach((field) => {
-  field.addEventListener("input", updatePreview);
+  if (field !== fields.imageFile) {
+    field.addEventListener("input", updatePreview);
+  }
+});
+
+fields.imageFile.addEventListener("change", async () => {
+  const file = fields.imageFile.files[0];
+  if (!file) return;
+
+  if (!file.type.startsWith("image/")) {
+    setStatus("Please choose an image file.", true);
+    fields.imageFile.value = "";
+    return;
+  }
+
+  setStatus("Preparing image...");
+
+  try {
+    fields.image.value = await compressImage(file);
+    if (!fields.imageAlt.value.trim()) {
+      fields.imageAlt.value = fields.title.value.trim() || file.name.replace(/\.[^.]+$/, "");
+    }
+    updatePreview();
+    setStatus("Image attached. Save the post to publish it.");
+  } catch {
+    fields.imageFile.value = "";
+    setStatus("Could not attach that image.", true);
+  }
+});
+
+removeImageButton.addEventListener("click", () => {
+  fields.image.value = "";
+  fields.imageFile.value = "";
+  fields.imageAlt.value = "";
+  updatePreview();
+  setStatus("Image removed. Save the post to publish this change.");
 });
 
 postList.addEventListener("click", (event) => {
