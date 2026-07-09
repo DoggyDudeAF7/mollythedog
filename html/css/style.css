@@ -154,6 +154,47 @@ nav .nav-links a:hover::after {
 h1{font-size:4.5rem}
 p{color:#cfcfcf;line-height:1.8}
 
+.scroll-down-prompt {
+  display: block;
+  width: fit-content;
+  margin: 0 auto;
+  color: rgba(255,255,255,0.78);
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-align: center;
+  animation:
+    scrollPromptAppear 0.9s ease-out 0.45s both,
+    scrollPromptFloat 2.2s ease-in-out 1.35s infinite;
+}
+
+@keyframes scrollPromptAppear {
+  from {
+    opacity: 0;
+    transform: translateY(28px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scrollPromptFloat {
+  0%, 100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-12px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scroll-down-prompt {
+    animation: none;
+  }
+}
+
 /* CARD */
 .card{
   background:linear-gradient(135deg, rgba(255,255,255,0.12), rgba(255,255,255,0.03));
