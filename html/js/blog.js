@@ -15,7 +15,7 @@ function renderPosts(posts) {
 
   if (!Array.isArray(posts) || posts.length === 0) {
     postsContainer.innerHTML = `
-      <article class="blog-post reveal right">
+      <article class="blog-post">
         <p class="blog-date">No posts yet</p>
         <h2>Check Back Soon</h2>
         <p>New posts will show up here once they are published.</p>
@@ -30,7 +30,7 @@ function renderPosts(posts) {
       : "";
 
     return `
-      <article class="blog-post reveal ${index % 2 === 0 ? "right" : "left"}">
+      <article class="blog-post">
         <p class="blog-date">${escapeHtml(post.date)}</p>
         <span class="blog-tag">${escapeHtml(post.tag || "Post")}</span>
         <h2>${escapeHtml(post.title)}</h2>
