@@ -1,39 +1,49 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="robots" content="noindex,nofollow">
-<title>Blog Login</title>
-<link rel="icon" href="../../../favicon.ico" sizes="48x48">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../../../css/style.css">
-<link rel="stylesheet" href="../../../css/blog.css">
-</head>
-<body>
-<div class="bg"></div>
-
-<main class="blog-page login-page">
-  <section class="blog-hero login-panel">
-    <p class="blog-kicker">Private Writer Area</p>
-    <h1>Blog Login</h1>
-    <p>Enter the admin password to unlock the Molly & Shaina Blog CMS.</p>
-
-    <form class="login-form" id="loginForm">
-      <label>
-        Password
-        <input id="passwordInput" name="password" type="password" autocomplete="current-password" required>
-      </label>
-      <button type="submit">Log In</button>
-      <p class="admin-status" id="loginStatus" hidden></p>
-    </form>
-
-    <div class="blog-actions">
-      <a href="html/blog/index.html">Back To Blog</a>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex,nofollow">
+    <title>
+      Blog Login
+    </title>
+    <link rel="icon" href="../../../favicon.ico" sizes="48x48">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/style.css">
+    <link rel="stylesheet" href="../../../css/blog.css">
+  </head>
+  <body>
+    <div class="bg">
     </div>
-  </section>
-</main>
-
-<script src="../../../js/blog-login.js"></script>
-</body>
+    <main class="blog-page login-page">
+      <section class="blog-hero login-panel">
+        <p class="blog-kicker">
+          Private Writer Area
+        </p>
+        <h1>
+          Blog Login
+        </h1>
+        <p>
+          Enter the admin password to unlock the Molly & Shaina Blog CMS.
+        </p>
+        <form class="login-form" id="loginForm">
+          <label>
+            Password
+            <input id="passwordInput" name="password" type="password" autocomplete="current-password" required>
+          </label>
+          <button type="submit">
+            Log In
+          </button>
+          <p class="admin-status" id="loginStatus" hidden>
+          </p>
+        </form>
+        <div class="blog-actions">
+          <a href="html/blog/index.html">
+            Back To Blog
+          </a>
+        </div>
+      </section>
+    </main>
+    <script src="../../../js/blog-login.js"></script>
+  </body>
 </html>

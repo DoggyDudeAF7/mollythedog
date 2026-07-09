@@ -1,118 +1,378 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-FG9NLMSQLX"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-FG9NLMSQLX');
-</script>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Molly – Habits</title>
-<link rel="icon" href="../favicon.ico" sizes="48x48">
-<link rel="icon" href="../favicon.svg" type="image/svg+xml">
-<link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
-<link rel="apple-touch-icon" sizes="180x180" href="../apple-touch-icon.png">
-<link rel="icon" type="image/png" sizes="192x192" href="../icon-192.png">
-<link rel="icon" type="image/png" sizes="512x512" href="../icon-512.png">
-<link rel="manifest" href="../site.webmanifest">
-<meta name="theme-color" content="#000000">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
-
-<link rel="stylesheet" href="../css/style.css">
-</head>
-
-<body>
-<div class="bg"></div>
-
-<nav>
-  <div class="nav-inner">
-
-    <button id="navToggle" aria-label="Toggle menu" aria-expanded="false">☰</button>
-    <div class="nav-links" id="navLinks">
-
-      <a href="../molly/" title="Home"><span>🏠</span></a>
-      <a href="../molly-traits/" title="Traits"><span>✨</span></a>
-      <a href="../molly-habits/" title="Habits"><span>🛏️</span></a>
-      <a href="../molly-mind/" title="Mind"><span>🧠</span></a>
-      <a href="../molly-gallery/" title="Gallery"><span>🖼️</span></a>
-      <a href="../molly-faq/" title="FAQ"><span>❓</span></a><a href="../molly-dog-breeds/" title="Breeds"><span>🐕</span></a>
-      <a href="../shaina/" title="Shaina"><span>🐶</span></a>
-
+  <head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-FG9NLMSQLX"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    
+    gtag('config', 'G-FG9NLMSQLX');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+      Molly – Habits
+    </title>
+    <link rel="icon" href="../favicon.ico" sizes="48x48">
+    <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+    <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="../apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="../icon-192.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="../icon-512.png">
+    <link rel="manifest" href="../site.webmanifest">
+    <meta name="theme-color" content="#000000">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/style.css">
+  </head>
+  <body>
+    <div class="bg">
     </div>
-
-    <button id="searchBtn">🔍</button>
-
-  </div>
-</nav>
-
-<!-- SEARCH BOX MUST BE OUTSIDE NAV -->
-<div id="searchBox" class="hidden">
-  <input id="searchInput" placeholder="Search..." />
-  <div id="results"></div>
-</div>
-
-<section class="section hero">
-  <h1 class="reveal left">Molly's Habits</h1>
-  <p class="reveal right">Her daily routines and peculiar behaviors make her a joy to observe.</p>
-  <br><br><br><br><p class="scroll-down-prompt">↓Scroll Down↓</p>
-</section>
-
-<section class="section">
-<div class="card reveal"><div class="split"><div class="emoji">🪟</div><div><h2>Window Patrol</h2><p>Molly monitors leaves, birds, and clouds for suspicious activity.</p></div></div></div>
-</section>
-<section class="section">
-<div class="card reveal"><div class="split"><div class="emoji">🛏️</div><div><h2>Blanket Engineering</h2><p>Every blanket must be reshaped into a structurally sound nest.</p></div></div></div>
-</section>
-<section class="section">
-<div class="card reveal"><div class="split"><div class="emoji">🔊</div><div><h2>Noise Investigation</h2><p>Unknown sounds are audited for snack potential.</p></div></div></div>
-</section>
-<section class="section">
-<div class="card reveal"><div class="split"><div class="emoji">🚪</div><div><h2>Doorway Logic</h2><p>Doors are only acceptable when Molly is on the correct side.</p></div></div></div>
-</section>
-
-<section class="section">
-<div class="card reveal">
-<h2>📊 Live Habit Counter</h2>
-
-<div class="habit">💤 Naps: <span id="naps">0</span><div class="bar-small"><div id="bar-naps" class="fill-small"></div></div></div>
-<div class="habit">🪟 Window stares: <span id="windows">0</span><div class="bar-small"><div id="bar-windows" class="fill-small"></div></div></div>
-<div class="habit">🛏️ Blanket nests: <span id="blankets">0</span><div class="bar-small"><div id="bar-blankets" class="fill-small"></div></div></div>
-<div class="habit">🐾 Patrols: <span id="patrols">0</span><div class="bar-small"><div id="bar-patrols" class="fill-small"></div></div></div>
-<div class="habit">😤 Sighs: <span id="sighs">0</span><div class="bar-small"><div id="bar-sighs" class="fill-small"></div></div></div>
-
-<div class="status" id="status">Molly is thinking.</div>
-<div class="time" id="time">Last updated: --</div>
-</div>
-</section>
-
-<section class="section">
-<div class="card reveal">
-<h2>📅 Molly’s Weekly Habits</h2>
-
-<div class="habit-chart">
-  <div class="day"><span>Mon</span><div class="bars"><div class="vbar pace"></div><div class="vbar sigh"></div><div class="vbar stare"></div><div class="vbar snack"></div></div><div class="icons">🐾 😮‍💨 👀 🍪</div></div>
-  <div class="day"><span>Tue</span><div class="bars"><div class="vbar pace"></div><div class="vbar sigh"></div><div class="vbar stare"></div><div class="vbar snack"></div></div><div class="icons">🐾 😮‍💨 👀 🍪</div></div>
-  <div class="day"><span>Wed</span><div class="bars"><div class="vbar pace"></div><div class="vbar sigh"></div><div class="vbar stare"></div><div class="vbar snack"></div></div><div class="icons">🐾 😮‍💨 👀 🍪</div></div>
-  <div class="day"><span>Thu</span><div class="bars"><div class="vbar pace"></div><div class="vbar sigh"></div><div class="vbar stare"></div><div class="vbar snack"></div></div><div class="icons">🐾 😮‍💨 👀 🍪</div></div>
-  <div class="day"><span>Fri</span><div class="bars"><div class="vbar pace"></div><div class="vbar sigh"></div><div class="vbar stare"></div><div class="vbar snack"></div></div><div class="icons">🐾 😮‍💨 👀 🍪</div></div>
-  <div class="day"><span>Sat</span><div class="bars"><div class="vbar pace"></div><div class="vbar sigh"></div><div class="vbar stare"></div><div class="vbar snack"></div></div><div class="icons">🐾 😮‍💨 👀 🍪</div></div>
-  <div class="day"><span>Sun</span><div class="bars"><div class="vbar pace"></div><div class="vbar sigh"></div><div class="vbar stare"></div><div class="vbar snack"></div></div><div class="icons">🐾 😮‍💨 👀 🍪</div></div>
-</div>
-
-<div class="legend">
-🐾 = hallway patrols &nbsp;&nbsp; 😮‍💨 = sighs &nbsp;&nbsp; 👀 = window stares &nbsp;&nbsp; 🍪 = snack checks
-</div>
-
-</div>
-</section>
-
-<script src="../js/animations.js"></script>
-<script src="../js/search.js"></script>
-</body>
+    <nav>
+      <div class="nav-inner">
+        <button id="navToggle" aria-label="Toggle menu" aria-expanded="false">
+          ☰
+        </button>
+        <div class="nav-links" id="navLinks">
+          <a href="../molly/" title="Home">
+            <span>
+              🏠
+            </span>
+          </a>
+          <a href="../molly-traits/" title="Traits">
+            <span>
+              ✨
+            </span>
+          </a>
+          <a href="../molly-habits/" title="Habits">
+            <span>
+              🛏️
+            </span>
+          </a>
+          <a href="../molly-mind/" title="Mind">
+            <span>
+              🧠
+            </span>
+          </a>
+          <a href="../molly-gallery/" title="Gallery">
+            <span>
+              🖼️
+            </span>
+          </a>
+          <a href="../molly-faq/" title="FAQ">
+            <span>
+              ❓
+            </span>
+          </a>
+          <a href="../molly-dog-breeds/" title="Breeds">
+            <span>
+              🐕
+            </span>
+          </a>
+          <a href="../shaina/" title="Shaina">
+            <span>
+              🐶
+            </span>
+          </a>
+        </div>
+        <button id="searchBtn">
+          🔍
+        </button>
+      </div>
+    </nav>
+    <!-- SEARCH BOX MUST BE OUTSIDE NAV -->
+    <div id="searchBox" class="hidden">
+      <input id="searchInput" placeholder="Search..." />
+      <div id="results">
+      </div>
+    </div>
+    <section class="section hero">
+      <h1 class="reveal left">
+        Molly's Habits
+      </h1>
+      <p class="reveal right">
+        Her daily routines and peculiar behaviors make her a joy to observe.
+      </p>
+      <br>
+      <br>
+      <br>
+      <br>
+      <p class="scroll-down-prompt">
+        ↓Scroll Down↓
+      </p>
+    </section>
+    <section class="section">
+      <div class="card reveal">
+        <div class="split">
+          <div class="emoji">
+            🪟
+          </div>
+          <div>
+            <h2>
+              Window Patrol
+            </h2>
+            <p>
+              Molly monitors leaves, birds, and clouds for suspicious activity.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="section">
+      <div class="card reveal">
+        <div class="split">
+          <div class="emoji">
+            🛏️
+          </div>
+          <div>
+            <h2>
+              Blanket Engineering
+            </h2>
+            <p>
+              Every blanket must be reshaped into a structurally sound nest.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="section">
+      <div class="card reveal">
+        <div class="split">
+          <div class="emoji">
+            🔊
+          </div>
+          <div>
+            <h2>
+              Noise Investigation
+            </h2>
+            <p>
+              Unknown sounds are audited for snack potential.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="section">
+      <div class="card reveal">
+        <div class="split">
+          <div class="emoji">
+            🚪
+          </div>
+          <div>
+            <h2>
+              Doorway Logic
+            </h2>
+            <p>
+              Doors are only acceptable when Molly is on the correct side.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="section">
+      <div class="card reveal">
+        <h2>
+          📊 Live Habit Counter
+        </h2>
+        <div class="habit">
+          💤 Naps:
+          <span id="naps">
+            0
+          </span>
+          <div class="bar-small">
+            <div id="bar-naps" class="fill-small">
+            </div>
+          </div>
+        </div>
+        <div class="habit">
+          🪟 Window stares:
+          <span id="windows">
+            0
+          </span>
+          <div class="bar-small">
+            <div id="bar-windows" class="fill-small">
+            </div>
+          </div>
+        </div>
+        <div class="habit">
+          🛏️ Blanket nests:
+          <span id="blankets">
+            0
+          </span>
+          <div class="bar-small">
+            <div id="bar-blankets" class="fill-small">
+            </div>
+          </div>
+        </div>
+        <div class="habit">
+          🐾 Patrols:
+          <span id="patrols">
+            0
+          </span>
+          <div class="bar-small">
+            <div id="bar-patrols" class="fill-small">
+            </div>
+          </div>
+        </div>
+        <div class="habit">
+          😤 Sighs:
+          <span id="sighs">
+            0
+          </span>
+          <div class="bar-small">
+            <div id="bar-sighs" class="fill-small">
+            </div>
+          </div>
+        </div>
+        <div class="status" id="status">
+          Molly is thinking.
+        </div>
+        <div class="time" id="time">
+          Last updated: --
+        </div>
+      </div>
+    </section>
+    <section class="section">
+      <div class="card reveal">
+        <h2>
+          📅 Molly’s Weekly Habits
+        </h2>
+        <div class="habit-chart">
+          <div class="day">
+            <span>
+              Mon
+            </span>
+            <div class="bars">
+              <div class="vbar pace">
+              </div>
+              <div class="vbar sigh">
+              </div>
+              <div class="vbar stare">
+              </div>
+              <div class="vbar snack">
+              </div>
+            </div>
+            <div class="icons">
+              🐾 😮‍💨 👀 🍪
+            </div>
+          </div>
+          <div class="day">
+            <span>
+              Tue
+            </span>
+            <div class="bars">
+              <div class="vbar pace">
+              </div>
+              <div class="vbar sigh">
+              </div>
+              <div class="vbar stare">
+              </div>
+              <div class="vbar snack">
+              </div>
+            </div>
+            <div class="icons">
+              🐾 😮‍💨 👀 🍪
+            </div>
+          </div>
+          <div class="day">
+            <span>
+              Wed
+            </span>
+            <div class="bars">
+              <div class="vbar pace">
+              </div>
+              <div class="vbar sigh">
+              </div>
+              <div class="vbar stare">
+              </div>
+              <div class="vbar snack">
+              </div>
+            </div>
+            <div class="icons">
+              🐾 😮‍💨 👀 🍪
+            </div>
+          </div>
+          <div class="day">
+            <span>
+              Thu
+            </span>
+            <div class="bars">
+              <div class="vbar pace">
+              </div>
+              <div class="vbar sigh">
+              </div>
+              <div class="vbar stare">
+              </div>
+              <div class="vbar snack">
+              </div>
+            </div>
+            <div class="icons">
+              🐾 😮‍💨 👀 🍪
+            </div>
+          </div>
+          <div class="day">
+            <span>
+              Fri
+            </span>
+            <div class="bars">
+              <div class="vbar pace">
+              </div>
+              <div class="vbar sigh">
+              </div>
+              <div class="vbar stare">
+              </div>
+              <div class="vbar snack">
+              </div>
+            </div>
+            <div class="icons">
+              🐾 😮‍💨 👀 🍪
+            </div>
+          </div>
+          <div class="day">
+            <span>
+              Sat
+            </span>
+            <div class="bars">
+              <div class="vbar pace">
+              </div>
+              <div class="vbar sigh">
+              </div>
+              <div class="vbar stare">
+              </div>
+              <div class="vbar snack">
+              </div>
+            </div>
+            <div class="icons">
+              🐾 😮‍💨 👀 🍪
+            </div>
+          </div>
+          <div class="day">
+            <span>
+              Sun
+            </span>
+            <div class="bars">
+              <div class="vbar pace">
+              </div>
+              <div class="vbar sigh">
+              </div>
+              <div class="vbar stare">
+              </div>
+              <div class="vbar snack">
+              </div>
+            </div>
+            <div class="icons">
+              🐾 😮‍💨 👀 🍪
+            </div>
+          </div>
+        </div>
+        <div class="legend">
+          🐾 = hallway patrols &nbsp;&nbsp; 😮‍💨 = sighs &nbsp;&nbsp; 👀 = window stares &nbsp;&nbsp; 🍪 = snack checks
+        </div>
+      </div>
+    </section>
+    <script src="../js/animations.js"></script>
+    <script src="../js/search.js"></script>
+  </body>
 </html>

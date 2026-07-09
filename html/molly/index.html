@@ -1,221 +1,289 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-FG9NLMSQLX"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-FG9NLMSQLX');
-</script>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Molly</title>
-<link rel="icon" href="../favicon.ico" sizes="48x48">
-<link rel="icon" href="../favicon.svg" type="image/svg+xml">
-<link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
-<link rel="apple-touch-icon" sizes="180x180" href="../apple-touch-icon.png">
-<link rel="icon" type="image/png" sizes="192x192" href="../icon-192.png">
-<link rel="icon" type="image/png" sizes="512x512" href="../icon-512.png">
-<link rel="manifest" href="../site.webmanifest">
-<meta name="theme-color" content="#000000">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
-
-<link rel="stylesheet" href="../css/style.css">
-</head>
-
-<body>
-<div class="bg"></div>
-
-<nav>
-  <div class="nav-inner">
-
-    <button id="navToggle" aria-label="Toggle menu" aria-expanded="false">☰</button>
-    <div class="nav-links" id="navLinks">
-
-      <a href="./" title="Home"><span>🏠</span></a>
-      <a href="../molly-traits/" title="Traits"><span>✨</span></a>
-      <a href="../molly-habits/" title="Habits"><span>🛏️</span></a>
-      <a href="../molly-mind/" title="Mind"><span>🧠</span></a>
-      <a href="../molly-gallery/" title="Gallery"><span>🖼️</span></a>
-      <a href="../molly-faq/" title="FAQ"><span>❓</span></a><a href="../molly-dog-breeds/" title="Breeds"><span>🐕</span></a>
-      <a href="../shaina/" title="Shaina"><span>🐶</span></a>
-
+  <head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-FG9NLMSQLX"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    
+    gtag('config', 'G-FG9NLMSQLX');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+      Molly
+    </title>
+    <link rel="icon" href="../favicon.ico" sizes="48x48">
+    <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+    <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="../apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="../icon-192.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="../icon-512.png">
+    <link rel="manifest" href="../site.webmanifest">
+    <meta name="theme-color" content="#000000">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/style.css">
+  </head>
+  <body>
+    <div class="bg">
     </div>
-
-    <button id="searchBtn">🔍</button>
-
-  </div>
-</nav>
-
-<!-- SEARCH BOX MUST BE OUTSIDE NAV -->
-<div id="searchBox" class="hidden">
-  <input id="searchInput" placeholder="Search..." />
-  <div id="results"></div>
-</div>
-
-<section class="section hero">
-  <h1>Molly</h1>
-  <p>Skittish. Sleepy. Helicopter tail. Powered by naps and paranoia.</p>
-  <img src="../images/molly/molly.webp" class="hero-img">
-  <br><br><br><br><p class="scroll-down-prompt">↓Scroll Down↓</p>
-</section>
-
-<section class="section">
-  <div class="card reveal left">
-    <div class="split left">
-      <div class="emoji">🪟</div>
-      <div>
-        <h2>Window Watcher</h2>
-        <p>
-          Constant surveillance of birds, leaves, and suspicious outdoor movement.
-          Nothing escapes unnoticed.
-        </p>
+    <nav>
+      <div class="nav-inner">
+        <button id="navToggle" aria-label="Toggle menu" aria-expanded="false">
+          ☰
+        </button>
+        <div class="nav-links" id="navLinks">
+          <a href="./" title="Home">
+            <span>
+              🏠
+            </span>
+          </a>
+          <a href="../molly-traits/" title="Traits">
+            <span>
+              ✨
+            </span>
+          </a>
+          <a href="../molly-habits/" title="Habits">
+            <span>
+              🛏️
+            </span>
+          </a>
+          <a href="../molly-mind/" title="Mind">
+            <span>
+              🧠
+            </span>
+          </a>
+          <a href="../molly-gallery/" title="Gallery">
+            <span>
+              🖼️
+            </span>
+          </a>
+          <a href="../molly-faq/" title="FAQ">
+            <span>
+              ❓
+            </span>
+          </a>
+          <a href="../molly-dog-breeds/" title="Breeds">
+            <span>
+              🐕
+            </span>
+          </a>
+          <a href="../shaina/" title="Shaina">
+            <span>
+              🐶
+            </span>
+          </a>
+        </div>
+        <button id="searchBtn">
+          🔍
+        </button>
+      </div>
+    </nav>
+    <!-- SEARCH BOX MUST BE OUTSIDE NAV -->
+    <div id="searchBox" class="hidden">
+      <input id="searchInput" placeholder="Search..." />
+      <div id="results">
       </div>
     </div>
-  </div>
-</section>
-
-<section class="section">
-  <div class="card reveal right">
-    <div class="split right">
-      <div class="emoji">🛏️</div>
-      <div>
-        <h2>Architect of Blankets</h2>
-        <p>
-          Every blanket must be rearranged into the optimal comfort structure.
-          Geometry is optional, coziness is mandatory.
-        </p>
+    <section class="section hero">
+      <h1>
+        Molly
+      </h1>
+      <p>
+        Skittish. Sleepy. Helicopter tail. Powered by naps and paranoia.
+      </p>
+      <img src="../images/molly/molly.webp" class="hero-img">
+      <br>
+      <br>
+      <br>
+      <br>
+      <p class="scroll-down-prompt">
+        ↓Scroll Down↓
+      </p>
+    </section>
+    <section class="section">
+      <div class="card reveal left">
+        <div class="split left">
+          <div class="emoji">
+            🪟
+          </div>
+          <div>
+            <h2>
+              Window Watcher
+            </h2>
+            <p>
+              Constant surveillance of birds, leaves, and suspicious outdoor movement. Nothing escapes unnoticed.
+            </p>
+          </div>
+        </div>
       </div>
-    </div>
-  </div>
-</section>
-
-<section class="section">
-  <div class="card reveal left">
-    <div class="split left">
-      <div class="emoji">🌙</div>
-      <div>
-        <h2>Midnight Sprint Ritual</h2>
-        <p>
-          Sudden bursts of hallway speed at 3AM for unknown reasons.
-          Possibly training for invisible battles.
-        </p>
+    </section>
+    <section class="section">
+      <div class="card reveal right">
+        <div class="split right">
+          <div class="emoji">
+            🛏️
+          </div>
+          <div>
+            <h2>
+              Architect of Blankets
+            </h2>
+            <p>
+              Every blanket must be rearranged into the optimal comfort structure. Geometry is optional, coziness is mandatory.
+            </p>
+          </div>
+        </div>
       </div>
-    </div>
-  </div>
-</section>
-
-<section class="section">
-  <div class="card reveal right">
-    <div class="split right">
-      <div class="emoji">🍪</div>
-      <div>
-        <h2>Snack Detection System</h2>
-        <p>
-          Detects food-related activity instantly.
-          Packaging sounds are interpreted as emergency alerts.
-        </p>
+    </section>
+    <section class="section">
+      <div class="card reveal left">
+        <div class="split left">
+          <div class="emoji">
+            🌙
+          </div>
+          <div>
+            <h2>
+              Midnight Sprint Ritual
+            </h2>
+            <p>
+              Sudden bursts of hallway speed at 3AM for unknown reasons. Possibly training for invisible battles.
+            </p>
+          </div>
+        </div>
       </div>
-    </div>
-  </div>
-</section>
-<section class="section">
-  <div class="card reveal left">
-    <div class="split left">
-      <div class="emoji">👀</div>
-      <div>
-        <h2>Hyper Awareness Mode</h2>
-        <p>
-          Molly notices everything — especially things that are not supposed to move.
-          Even silence feels suspicious.
-        </p>
+    </section>
+    <section class="section">
+      <div class="card reveal right">
+        <div class="split right">
+          <div class="emoji">
+            🍪
+          </div>
+          <div>
+            <h2>
+              Snack Detection System
+            </h2>
+            <p>
+              Detects food-related activity instantly. Packaging sounds are interpreted as emergency alerts.
+            </p>
+          </div>
+        </div>
       </div>
-    </div>
-  </div>
-</section>
-
-<section class="section">
-  <div class="card reveal right">
-    <div class="split right">
-      <div class="emoji">🚪</div>
-      <div>
-        <h2>Doorway Philosophy</h2>
-        <p>
-          Doorways are strategic zones that must be monitored at all times.
-          Standing in them is a full-time responsibility.
-        </p>
+    </section>
+    <section class="section">
+      <div class="card reveal left">
+        <div class="split left">
+          <div class="emoji">
+            👀
+          </div>
+          <div>
+            <h2>
+              Hyper Awareness Mode
+            </h2>
+            <p>
+              Molly notices everything — especially things that are not supposed to move. Even silence feels suspicious.
+            </p>
+          </div>
+        </div>
       </div>
-    </div>
-  </div>
-</section>
-
-<section class="section">
-  <div class="card reveal left">
-    <div class="split left">
-      <div class="emoji">😴</div>
-      <div>
-        <h2>Professional Sleeper</h2>
-        <p>
-          Can fall asleep anywhere, anytime, under any emotional condition.
-          Resting is considered a core life skill.
-        </p>
+    </section>
+    <section class="section">
+      <div class="card reveal right">
+        <div class="split right">
+          <div class="emoji">
+            🚪
+          </div>
+          <div>
+            <h2>
+              Doorway Philosophy
+            </h2>
+            <p>
+              Doorways are strategic zones that must be monitored at all times. Standing in them is a full-time responsibility.
+            </p>
+          </div>
+        </div>
       </div>
-    </div>
-  </div>
-</section>
-
-<section class="section">
-  <div class="card reveal right">
-    <div class="split right">
-      <div class="emoji">🌧️</div>
-      <div>
-        <h2>Weather Disapproval Unit</h2>
-        <p>
-          Rain is treated as a personal inconvenience.
-          Wind is considered emotional betrayal.
-        </p>
+    </section>
+    <section class="section">
+      <div class="card reveal left">
+        <div class="split left">
+          <div class="emoji">
+            😴
+          </div>
+          <div>
+            <h2>
+              Professional Sleeper
+            </h2>
+            <p>
+              Can fall asleep anywhere, anytime, under any emotional condition. Resting is considered a core life skill.
+            </p>
+          </div>
+        </div>
       </div>
-    </div>
-  </div>
-</section>
-
-<section class="section">
-  <div class="card reveal left">
-    <div class="split left">
-      <div class="emoji">🧠</div>
-      <div>
-        <h2>Overthinking Engine</h2>
-        <p>
-          Small noises are processed into large theories.
-          Every event has at least three possible explanations.
-        </p>
+    </section>
+    <section class="section">
+      <div class="card reveal right">
+        <div class="split right">
+          <div class="emoji">
+            🌧️
+          </div>
+          <div>
+            <h2>
+              Weather Disapproval Unit
+            </h2>
+            <p>
+              Rain is treated as a personal inconvenience. Wind is considered emotional betrayal.
+            </p>
+          </div>
+        </div>
       </div>
+    </section>
+    <section class="section">
+      <div class="card reveal left">
+        <div class="split left">
+          <div class="emoji">
+            🧠
+          </div>
+          <div>
+            <h2>
+              Overthinking Engine
+            </h2>
+            <p>
+              Small noises are processed into large theories. Every event has at least three possible explanations.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="section">
+      <div>
+        <div class="carousel">
+          <div class="track" id="track">
+          </div>
+        </div>
+        <div class="dots" id="dots">
+        </div>
+      </div>
+    </section>
+    <footer>
+      <strong>
+        Molly™
+      </strong>
+      <br>
+      Skittish • Helicopter Tail • Sleep Queen
+      <br>
+      © 2026
+    </footer>
+    <div id="lightbox">
+      <img id="lightboxImg">
+      <button id="lightboxClose" type="button" aria-label="Close image">
+        X
+      </button>
     </div>
-  </div>
-</section>
-<section class="section">
-  <div>
-    <div class="carousel"><div class="track" id="track"></div></div>
-    <div class="dots" id="dots"></div>
-  </div>
-</section>
-<footer>
-  <strong>Molly™</strong><br>
-  Skittish • Helicopter Tail • Sleep Queen<br>
-  © 2026
-</footer>
-
-<div id="lightbox">
-  <img id="lightboxImg">
-  <button id="lightboxClose" type="button" aria-label="Close image">X</button>
-</div>
-
-<script src="../js/animations.js"></script>
-<script src="../js/search.js"></script>
-<script src="../js/carousel.js"></script>
-</body>
+    <script src="../js/animations.js"></script>
+    <script src="../js/search.js"></script>
+    <script src="../js/carousel.js"></script>
+  </body>
 </html>
