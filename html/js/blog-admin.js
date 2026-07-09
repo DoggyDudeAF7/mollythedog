@@ -78,7 +78,7 @@ function fillForm(post = {}) {
 function updatePreview() {
   const post = getPost();
   const image = post.image
-    ? `<img class="blog-post-image" src="${post.image}" alt="${escapeHtml(post.imageAlt || post.title)}">`
+    ? `<img class="blog-post-image" src="${escapeHtml(post.image)}" alt="${escapeHtml(post.imageAlt || post.title)}">`
     : "";
   const link = post.linkText && post.linkUrl
     ? `<a href="${escapeHtml(post.linkUrl)}">${escapeHtml(post.linkText)}</a>`
