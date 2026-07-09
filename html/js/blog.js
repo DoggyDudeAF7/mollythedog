@@ -57,4 +57,3 @@ fetch("/api/posts")
       renderPosts([]);
     })
   );
-  });
