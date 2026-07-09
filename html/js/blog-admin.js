@@ -14,6 +14,7 @@ const postList = document.getElementById("postList");
 const statusBox = document.getElementById("adminStatus");
 const newButton = document.getElementById("newPost");
 const deleteButton = document.getElementById("deletePost");
+const logoutButton = document.getElementById("logoutButton");
 
 let posts = [];
 
@@ -131,6 +132,11 @@ async function savePosts(nextPosts) {
     body: JSON.stringify(nextPosts)
   });
 
+  if (response.status === 401) {
+    location.href = location.pathname.includes("/blog/admin/") ? "login/" : "/admin/login/";
+    throw new Error("Login required.");
+  }
+
   if (!response.ok) {
     const message = await response.text();
     throw new Error(message || "Save failed.");
@@ -206,6 +212,19 @@ deleteButton.addEventListener("click", async () => {
     setStatus("Deleted.");
   } catch (error) {
     setStatus(error.message, true);
+  }
+});
+
+logoutButton.addEventListener("click", async () => {
+  setStatus("Logging out...");
+
+  try {
+    await fetch("/api/logout", {
+      method: "POST",
+      credentials: "same-origin"
+    });
+  } finally {
+    location.href = location.pathname.includes("/blog/admin/") ? "login/" : "/admin/login/";
   }
 });
 
