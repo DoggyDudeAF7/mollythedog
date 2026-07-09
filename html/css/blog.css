@@ -49,6 +49,7 @@
 }
 
 .blog-actions a,
+.blog-actions button,
 .admin-form button {
   display: inline-flex;
   align-items: center;
@@ -65,7 +66,8 @@
   cursor: pointer;
 }
 
-.blog-actions a:last-child {
+.blog-actions a:last-child,
+.blog-actions button {
   color: #fff;
   background: rgba(255,255,255,0.12);
   border: 1px solid rgba(255,255,255,0.16);
@@ -252,7 +254,8 @@
 
 .admin-form input,
 .admin-form textarea,
-.admin-preview textarea {
+.admin-preview textarea,
+.login-form input {
   width: 100%;
   border: 1px solid rgba(255,255,255,0.14);
   border-radius: 8px;
@@ -261,6 +264,43 @@
   background: rgba(0,0,0,0.24);
   font: inherit;
   resize: vertical;
+}
+
+.login-page {
+  min-height: 100vh;
+  align-content: center;
+  padding-top: 90px;
+}
+
+.login-panel {
+  width: min(620px, 100%);
+  margin: 0 auto;
+}
+
+.login-form {
+  width: min(420px, 100%);
+  margin: 28px auto 0;
+  display: grid;
+  gap: 14px;
+  text-align: left;
+}
+
+.login-form label {
+  display: grid;
+  gap: 8px;
+  color: rgba(255,255,255,0.76);
+  font-weight: 800;
+}
+
+.login-form button {
+  min-height: 48px;
+  border: 0;
+  border-radius: 8px;
+  color: #08080d;
+  background: white;
+  font: inherit;
+  font-weight: 800;
+  cursor: pointer;
 }
 
 .admin-preview {
