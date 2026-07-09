@@ -175,6 +175,23 @@
   </aside>
 
   <section class="breed-results" id="breedResults" aria-label="Dog breed cards">
+    <article class="breed-of-day" id="breedOfDay" aria-label="Breed of the day">
+      <div class="breed-of-day-image" id="breedOfDayImage"></div>
+      <div class="breed-of-day-copy">
+        <p class="breed-kicker">Breed Of The Day</p>
+        <h2 id="breedOfDayName">Loading...</h2>
+        <p id="breedOfDayText">Finding today's breed.</p>
+        <div class="breed-meter" aria-label="Breed of the day energy">
+          <span id="breedOfDayMeter"></span>
+        </div>
+        <div class="breed-meta">
+          <span id="breedOfDayMatch">Daily pick</span>
+          <span id="breedOfDayEnergy">Energy</span>
+        </div>
+        <button class="breed-daily-jump" id="breedOfDayJump" type="button">View Breed</button>
+      </div>
+    </article>
+
     <article class="breed-card reveal left" id="affenpinscher" data-name="affenpinscher" data-group="toy" data-match="couch expert">
       <button class="breed-favorite" type="button" aria-label="Favorite Affenpinscher" data-id="affenpinscher">⭐</button>
       <div class="breed-portrait"><img src="../images/breeds/affenpinscher.png" alt="Affenpinscher"></div>
