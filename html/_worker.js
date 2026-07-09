@@ -158,6 +158,8 @@ function cleanPost(post) {
     title: String(post.title || ""),
     tag: String(post.tag || "Post"),
     body: String(post.body || ""),
+    image: String(post.image || ""),
+    imageAlt: String(post.imageAlt || ""),
     linkText: String(post.linkText || ""),
     linkUrl: String(post.linkUrl || ""),
   };
