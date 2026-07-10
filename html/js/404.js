@@ -15,8 +15,8 @@ canvas.height = size * cell;
 const mollyImg = new Image();
 const shainaImg = new Image();
 
-mollyImg.src = "../images/molly/molly.webp";
-shainaImg.src = "../images/shaina/shaina.webp";
+mollyImg.src = "/images/molly/molly.webp";
+shainaImg.src = "/images/shaina/shaina.webp";
 
 mollyImg.addEventListener("load", draw);
 shainaImg.addEventListener("load", draw);
