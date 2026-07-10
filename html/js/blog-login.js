@@ -25,7 +25,7 @@ loginForm.addEventListener("submit", async (event) => {
       throw new Error(result.error || "Login failed.");
     }
 
-    location.href = location.pathname.includes("/blog/admin/login") ? "../" : "/admin/";
+    location.href = location.pathname.includes("/blog/admin/login") ? "/blog/admin/" : "/admin/";
   } catch (error) {
     setLoginStatus(error.message, true);
   }
