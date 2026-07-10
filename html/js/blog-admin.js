@@ -188,7 +188,7 @@ async function savePosts(nextPosts) {
   });
 
   if (response.status === 401) {
-    location.href = location.pathname.includes("/blog/admin/") ? "login/" : "/admin/login/";
+    location.href = location.pathname.includes("/blog/admin/") ? "/blog/admin/login/" : "/admin/login/";
     throw new Error("Login required.");
   }
 
@@ -314,7 +314,7 @@ logoutButton.addEventListener("click", async () => {
       credentials: "same-origin"
     });
   } finally {
-    location.href = location.pathname.includes("/blog/admin/") ? "login/" : "/admin/login/";
+    location.href = location.pathname.includes("/blog/admin/") ? "/blog/admin/login/" : "/admin/login/";
   }
 });
 
