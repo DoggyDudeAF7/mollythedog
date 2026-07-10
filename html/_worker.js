@@ -54,6 +54,11 @@ export default {
       return Response.redirect(url.toString(), 301);
     }
 
+    if (url.pathname === "/html" || url.pathname.startsWith("/html/")) {
+      url.pathname = url.pathname.replace(/^\/html\/?/, "/");
+      return Response.redirect(url.toString(), 301);
+    }
+
     if (shouldServeNotFound(url.pathname)) {
       return fetchNotFoundPage(request, env);
     }
