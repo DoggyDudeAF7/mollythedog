@@ -75,6 +75,7 @@ const pagePaths = new Set([
   "/blog/admin/login/",
   "/breed-quiz/",
   "/certificate-editor/",
+  "/comics/",
   "/dog-breeds/",
   "/html/",
   "/kitchen-game/",
