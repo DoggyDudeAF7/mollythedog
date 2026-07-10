@@ -201,11 +201,27 @@ if(player.x===size-2 && player.y===size-2){
 document.getElementById("win").classList.add("show");
 
 setTimeout(()=>{
-location.href="/html/molly/";
+location.href=getReturnPage();
 },2000);
 
 }
 
+}
+
+function getReturnPage() {
+  try {
+    const savedPage = localStorage.getItem("lastMollyShainaPage");
+    if (savedPage && !savedPage.startsWith("/404/")) return savedPage;
+  } catch {}
+
+  try {
+    const referrer = new URL(document.referrer);
+    if (referrer.origin === location.origin && !referrer.pathname.startsWith("/404/")) {
+      return referrer.pathname + referrer.search + referrer.hash;
+    }
+  } catch {}
+
+  return "/";
 }
 
 /* =========================
