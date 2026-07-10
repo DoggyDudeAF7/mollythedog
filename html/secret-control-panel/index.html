@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex,nofollow">
+    <title>Secret Control Panel</title>
+    <link rel="icon" href="../favicon.ico" sizes="48x48">
+    <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+    <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="../apple-touch-icon.png">
+    <link rel="manifest" href="../site.webmanifest">
+    <meta name="theme-color" content="#080810">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/secret-control-panel.css">
+  </head>
+  <body>
+    <main class="control-panel">
+      <section class="panel-hero">
+        <p class="eyebrow">Hidden Tools</p>
+        <h1>Secret Control Panel</h1>
+        <p>Private shortcuts, tiny generators, and site-control buttons for Molly and Shaina operations.</p>
+      </section>
+
+      <section class="quick-grid" aria-label="Secret shortcuts">
+        <a class="quick-card" href="../certificate-editor/">
+          <span>🏅</span>
+          <strong>Certificate Editor</strong>
+          <small>Print official nonsense awards.</small>
+        </a>
+        <a class="quick-card" href="../blog/admin/login/">
+          <span>✍️</span>
+          <strong>Blog Admin</strong>
+          <small>Write and edit blog posts.</small>
+        </a>
+        <a class="quick-card" href="../molly-dog-breeds/">
+          <span>🐕</span>
+          <strong>Dog Breeds</strong>
+          <small>Breed cards, favourites, and daily picks.</small>
+        </a>
+        <a class="quick-card" href="../breed-quiz/">
+          <span>🧪</span>
+          <strong>Breed Quiz</strong>
+          <small>Find the dog breed match.</small>
+        </a>
+      </section>
+
+      <section class="tool-grid" aria-label="Generators">
+        <article class="tool-card">
+          <div>
+            <p class="eyebrow">Generator</p>
+            <h2>Dog Title</h2>
+          </div>
+          <output id="dogTitleOutput">Press the button.</output>
+          <button type="button" data-generator="title">Generate Title</button>
+        </article>
+
+        <article class="tool-card">
+          <div>
+            <p class="eyebrow">Generator</p>
+            <h2>Caption</h2>
+          </div>
+          <output id="captionOutput">Ready for a caption.</output>
+          <button type="button" data-generator="caption">Generate Caption</button>
+        </article>
+
+        <article class="tool-card">
+          <div>
+            <p class="eyebrow">Generator</p>
+            <h2>Daily Mission</h2>
+          </div>
+          <output id="missionOutput">Awaiting orders.</output>
+          <button type="button" data-generator="mission">Generate Mission</button>
+        </article>
+
+        <article class="tool-card">
+          <div>
+            <p class="eyebrow">Generator</p>
+            <h2>Certificate Idea</h2>
+          </div>
+          <output id="certificateOutput">Award pending.</output>
+          <button type="button" data-generator="certificate">Generate Award</button>
+        </article>
+      </section>
+    </main>
+
+    <script src="../js/secret-control-panel.js"></script>
+  </body>
+</html>
