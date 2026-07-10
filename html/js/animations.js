@@ -1,4 +1,10 @@
 document.addEventListener("DOMContentLoaded", () => {
+  try {
+    if (!location.pathname.startsWith("/404/")) {
+      localStorage.setItem("lastMollyShainaPage", location.pathname + location.search + location.hash);
+    }
+  } catch {}
+
   const revealEls = document.querySelectorAll(".reveal");
   if (revealEls.length) {
     const observer = new IntersectionObserver(entries => {
