@@ -12,6 +12,15 @@ const ctx = canvas.getContext("2d");
 canvas.width = size * cell;
 canvas.height = size * cell;
 
+const mollyImg = new Image();
+const shainaImg = new Image();
+
+mollyImg.src = "../images/molly/molly.webp";
+shainaImg.src = "../images/shaina/shaina.webp";
+
+mollyImg.addEventListener("load", draw);
+shainaImg.addEventListener("load", draw);
+
 /* =========================
 TIMER
 ========================= */
@@ -105,21 +114,11 @@ ctx.fillRect(x*cell,y*cell,cell,cell);
 
 /* exit */
 
-ctx.fillStyle="#3cff84";
-ctx.fillRect((size-2)*cell,(size-2)*cell,cell,cell);
+drawDogMarker(shainaImg, size - 2, size - 2, "#3cff84");
 
 /* player */
 
-ctx.fillStyle="#ffb7a5";
-ctx.beginPath();
-ctx.arc(
-player.x*cell+cell/2,
-player.y*cell+cell/2,
-cell/3,
-0,
-Math.PI*2
-);
-ctx.fill();
+drawDogMarker(mollyImg, player.x, player.y, "#ffb7a5");
 
 /* fog of war */
 
@@ -143,6 +142,35 @@ ctx.fillRect(x*cell,y*cell,cell,cell);
 }
 
 draw();
+
+function drawDogMarker(image, x, y, fallbackColor) {
+  const cx = x * cell + cell / 2;
+  const cy = y * cell + cell / 2;
+  const radius = cell * 0.43;
+
+  ctx.save();
+  ctx.beginPath();
+  ctx.arc(cx, cy, radius, 0, Math.PI * 2);
+  ctx.clip();
+
+  if (image.complete && image.naturalWidth) {
+    const scale = Math.max((radius * 2) / image.naturalWidth, (radius * 2) / image.naturalHeight);
+    const width = image.naturalWidth * scale;
+    const height = image.naturalHeight * scale;
+    ctx.drawImage(image, cx - width / 2, cy - height / 2, width, height);
+  } else {
+    ctx.fillStyle = fallbackColor;
+    ctx.fillRect(cx - radius, cy - radius, radius * 2, radius * 2);
+  }
+
+  ctx.restore();
+
+  ctx.strokeStyle = "rgba(255,255,255,0.85)";
+  ctx.lineWidth = 2;
+  ctx.beginPath();
+  ctx.arc(cx, cy, radius, 0, Math.PI * 2);
+  ctx.stroke();
+}
 
 /* =========================
 MOVE
