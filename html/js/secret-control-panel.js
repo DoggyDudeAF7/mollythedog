@@ -50,3 +50,96 @@ document.addEventListener("click", event => {
 });
 
 Object.keys(options).forEach(generate);
+
+const openPageFile = document.getElementById("openPageFile");
+const savePageFile = document.getElementById("savePageFile");
+const downloadPageFile = document.getElementById("downloadPageFile");
+const refreshPagePreview = document.getElementById("refreshPagePreview");
+const pageEditor = document.getElementById("pageEditor");
+const pagePreview = document.getElementById("pagePreview");
+const pageEditorStatus = document.getElementById("pageEditorStatus");
+
+let pageFileHandle = null;
+let pageFileName = "edited-page.html";
+
+function setEditorStatus(message) {
+  if (pageEditorStatus) pageEditorStatus.textContent = message;
+}
+
+function updatePreview() {
+  if (!pagePreview || !pageEditor) return;
+  pagePreview.srcdoc = pageEditor.value;
+}
+
+function enableEditorActions() {
+  if (downloadPageFile) downloadPageFile.disabled = !pageEditor.value;
+  if (refreshPagePreview) refreshPagePreview.disabled = !pageEditor.value;
+  if (savePageFile) {
+    savePageFile.disabled = !pageEditor.value || !pageFileHandle;
+  }
+}
+
+async function openPageForEditing() {
+  if (!window.showOpenFilePicker) {
+    setEditorStatus("This browser cannot save files directly. Use Chrome or Edge for direct editing, or paste HTML and download a copy.");
+    return;
+  }
+
+  try {
+    const [handle] = await window.showOpenFilePicker({
+      types: [
+        {
+          description: "HTML pages",
+          accept: { "text/html": [".html", ".htm"] }
+        }
+      ],
+      excludeAcceptAllOption: false,
+      multiple: false
+    });
+
+    const file = await handle.getFile();
+    pageFileHandle = handle;
+    pageFileName = file.name || pageFileName;
+    pageEditor.value = await file.text();
+    setEditorStatus(`Editing ${pageFileName}. Save writes back to the selected file.`);
+    updatePreview();
+    enableEditorActions();
+  } catch (error) {
+    if (error.name !== "AbortError") {
+      setEditorStatus("Could not open that file.");
+    }
+  }
+}
+
+async function savePage() {
+  if (!pageFileHandle || !pageEditor) return;
+
+  try {
+    const writable = await pageFileHandle.createWritable();
+    await writable.write(pageEditor.value);
+    await writable.close();
+    setEditorStatus(`Saved ${pageFileName}.`);
+  } catch (error) {
+    setEditorStatus("Could not save the file. Try Download Copy instead.");
+  }
+}
+
+function downloadPageCopy() {
+  if (!pageEditor?.value) return;
+
+  const blob = new Blob([pageEditor.value], { type: "text/html" });
+  const link = document.createElement("a");
+  link.href = URL.createObjectURL(blob);
+  link.download = pageFileName;
+  link.click();
+  URL.revokeObjectURL(link.href);
+  setEditorStatus(`Downloaded a copy of ${pageFileName}.`);
+}
+
+openPageFile?.addEventListener("click", openPageForEditing);
+savePageFile?.addEventListener("click", savePage);
+downloadPageFile?.addEventListener("click", downloadPageCopy);
+refreshPagePreview?.addEventListener("click", updatePreview);
+pageEditor?.addEventListener("input", () => {
+  enableEditorActions();
+});

@@ -83,6 +83,37 @@
           <button type="button" data-generator="certificate">Generate Award</button>
         </article>
       </section>
+
+      <section class="page-editor" aria-label="Page editor">
+        <div class="editor-header">
+          <div>
+            <p class="eyebrow">Local Page Editor</p>
+            <h2>Edit HTML Pages</h2>
+            <p>Open a page from this website folder, edit the HTML, save it back, then let the watcher push it.</p>
+          </div>
+          <div class="editor-actions">
+            <button type="button" id="openPageFile">Open HTML File</button>
+            <button type="button" id="savePageFile" disabled>Save File</button>
+            <button type="button" id="downloadPageFile" disabled>Download Copy</button>
+          </div>
+        </div>
+
+        <div class="editor-status" id="pageEditorStatus">No page opened yet.</div>
+
+        <div class="editor-layout">
+          <label class="editor-pane">
+            HTML
+            <textarea id="pageEditor" spellcheck="false" placeholder="Open an HTML file to edit it here."></textarea>
+          </label>
+          <section class="preview-pane" aria-label="Page preview">
+            <div class="preview-title">
+              <span>Preview</span>
+              <button type="button" id="refreshPagePreview" disabled>Refresh</button>
+            </div>
+            <iframe id="pagePreview" title="Page preview"></iframe>
+          </section>
+        </div>
+      </section>
     </main>
 
     <script src="../js/secret-control-panel.js"></script>
