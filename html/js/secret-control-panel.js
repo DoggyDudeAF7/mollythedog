@@ -61,9 +61,14 @@ const pageEditorStatus = document.getElementById("pageEditorStatus");
 
 let pageFileHandle = null;
 let pageFileName = "edited-page.html";
+let pageIsDirty = false;
 
 function setEditorStatus(message) {
   if (pageEditorStatus) pageEditorStatus.textContent = message;
+}
+
+function getTimeStamp() {
+  return new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit", second: "2-digit" });
 }
 
 function updatePreview() {
@@ -76,7 +81,16 @@ function enableEditorActions() {
   if (refreshPagePreview) refreshPagePreview.disabled = !pageEditor.value;
   if (savePageFile) {
     savePageFile.disabled = !pageEditor.value || !pageFileHandle;
+    savePageFile.textContent = pageIsDirty ? "Save Changes" : "Save File";
   }
+}
+
+async function hasWritePermission(handle) {
+  if (!handle?.queryPermission || !handle?.requestPermission) return true;
+
+  const options = { mode: "readwrite" };
+  if (await handle.queryPermission(options) === "granted") return true;
+  return await handle.requestPermission(options) === "granted";
 }
 
 async function openPageForEditing() {
@@ -101,6 +115,7 @@ async function openPageForEditing() {
     pageFileHandle = handle;
     pageFileName = file.name || pageFileName;
     pageEditor.value = await file.text();
+    pageIsDirty = false;
     setEditorStatus(`Editing ${pageFileName}. Save writes back to the selected file.`);
     updatePreview();
     enableEditorActions();
@@ -112,15 +127,40 @@ async function openPageForEditing() {
 }
 
 async function savePage() {
-  if (!pageFileHandle || !pageEditor) return;
+  if (!pageFileHandle || !pageEditor) {
+    setEditorStatus("Open an HTML file first, then Save will write back to that exact file.");
+    return;
+  }
 
   try {
+    savePageFile.disabled = true;
+    savePageFile.textContent = "Saving...";
+
+    const allowed = await hasWritePermission(pageFileHandle);
+    if (!allowed) {
+      setEditorStatus("Save permission was not granted by the browser.");
+      enableEditorActions();
+      return;
+    }
+
     const writable = await pageFileHandle.createWritable();
     await writable.write(pageEditor.value);
     await writable.close();
-    setEditorStatus(`Saved ${pageFileName}.`);
+
+    const savedFile = await pageFileHandle.getFile();
+    const savedText = await savedFile.text();
+    if (savedText !== pageEditor.value) {
+      setEditorStatus("The browser finished saving, but the saved file did not match the editor text.");
+      enableEditorActions();
+      return;
+    }
+
+    pageIsDirty = false;
+    setEditorStatus(`Saved ${pageFileName} at ${getTimeStamp()}. Your watcher should notice the file change.`);
   } catch (error) {
-    setEditorStatus("Could not save the file. Try Download Copy instead.");
+    setEditorStatus(`Could not save the file: ${error.message || "unknown browser error"}. Try Download Copy instead.`);
+  } finally {
+    enableEditorActions();
   }
 }
 
@@ -141,5 +181,7 @@ savePageFile?.addEventListener("click", savePage);
 downloadPageFile?.addEventListener("click", downloadPageCopy);
 refreshPagePreview?.addEventListener("click", updatePreview);
 pageEditor?.addEventListener("input", () => {
+  pageIsDirty = true;
+  updatePreview();
   enableEditorActions();
 });
