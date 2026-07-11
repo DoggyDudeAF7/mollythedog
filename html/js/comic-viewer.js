@@ -84,8 +84,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const summary = document.getElementById("viewerSummary");
   const panelGroup = document.getElementById("panelGroup");
   const count = document.getElementById("panelCount");
-  const strip = document.getElementById("panelStrip");
-  const picker = document.getElementById("comicPicker");
   const prev = document.getElementById("prevPanel");
   const next = document.getElementById("nextPanel");
 
@@ -93,27 +91,6 @@ document.addEventListener("DOMContentLoaded", () => {
   issue.textContent = comic.issue;
   title.textContent = comic.title;
   summary.textContent = comic.summary;
-
-  Object.entries(comics).forEach(([key, item]) => {
-    const link = document.createElement("a");
-    link.href = `../comic-viewer/?q=${key}`;
-    link.textContent = item.title.replace("The Great ", "");
-    if (key === slug) link.classList.add("active");
-    picker.appendChild(link);
-  });
-
-  comic.captions.forEach((_, index) => {
-    const button = document.createElement("button");
-    button.type = "button";
-    const groupStart = Math.floor(index / 4) * 4;
-    button.setAttribute("aria-label", `Open panels ${groupStart + 1} to ${Math.min(groupStart + 4, comic.captions.length)}`);
-    const thumb = document.createElement("img");
-    thumb.src = `../images/comics/${comic.prefix}-${String(index + 1).padStart(2, "0")}.webp`;
-    thumb.alt = "";
-    button.appendChild(thumb);
-    button.addEventListener("click", () => showPanel(groupStart));
-    strip.appendChild(button);
-  });
 
   function showPanel(index) {
     const groupCount = Math.ceil(comic.captions.length / 4);
@@ -135,9 +112,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     count.textContent = `Panels ${current + 1}-${end} of ${comic.captions.length}`;
-    [...strip.children].forEach((button, buttonIndex) => {
-      button.classList.toggle("active", buttonIndex >= current && buttonIndex < end);
-    });
   }
 
   prev.addEventListener("click", () => showPanel(current - 4));

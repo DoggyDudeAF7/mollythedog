@@ -73,10 +73,7 @@
 
 .viewer-controls {
   display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-between;
-  gap: 14px;
+  justify-content: center;
   margin: 0 auto 18px;
   max-width: 900px;
 }
@@ -84,55 +81,6 @@
 .viewer-count {
   color: rgba(255, 255, 255, 0.7);
   font-weight: 900;
-}
-
-.viewer-picker {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-}
-
-.viewer-picker a,
-.viewer-strip button {
-  border: 1px solid rgba(255, 255, 255, 0.16);
-  border-radius: 8px;
-  color: #fff;
-  background: rgba(255, 255, 255, 0.08);
-  font-weight: 900;
-  text-decoration: none;
-  cursor: pointer;
-}
-
-.viewer-picker a {
-  padding: 10px 12px;
-}
-
-.viewer-picker a.active {
-  border-color: rgba(255, 183, 165, 0.7);
-  background: rgba(255, 183, 165, 0.16);
-}
-
-.viewer-strip {
-  display: grid;
-  grid-template-columns: repeat(8, minmax(0, 1fr));
-  gap: 10px;
-}
-
-.viewer-strip button {
-  overflow: hidden;
-  padding: 0;
-}
-
-.viewer-strip button.active {
-  border-color: rgba(255, 183, 165, 0.8);
-  box-shadow: 0 0 0 2px rgba(255, 183, 165, 0.22);
-}
-
-.viewer-strip img {
-  display: block;
-  width: 100%;
-  aspect-ratio: 1 / 1;
-  object-fit: cover;
 }
 
 @media (max-width: 760px) {
@@ -159,7 +107,4 @@
     grid-row: 2;
   }
 
-  .viewer-strip {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-  }
 }
