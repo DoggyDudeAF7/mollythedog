@@ -70,6 +70,30 @@ const comics = {
       "The chefs receive towels, bowls, and no consequences.",
       "Molly and Shaina dress for their next shift."
     ]
+  },
+  laundry: {
+    issue: "Comic 4",
+    title: "The Great Laundry Crisis",
+    summary: "Clean laundry enters the room, socks lose all structure, and Molly and Shaina are somehow nearby the entire time.",
+    prefix: "laundry-crisis",
+    captions: [
+      "Molly and Shaina discover a basket of laundry with suspiciously loose supervision.",
+      "Shaina tests the towel softness from inside the basket.",
+      "Molly selects one sock for immediate relocation.",
+      "The sock situation expands across the entire floor.",
+      "Shaina drags a towel with the seriousness of a working dog.",
+      "Molly disappears into the laundry and calls it strategy.",
+      "The clean pile becomes a mountain with no clear building permit.",
+      "Both dogs emerge from the fabric zone looking completely necessary.",
+      "The owner arrives and finds laundry across several jurisdictions.",
+      "Molly and Shaina stand among the socks with legal confidence.",
+      "One sock is inspected for clues and possibly bite marks.",
+      "The basket becomes a temporary witness protection program.",
+      "The owner restores order, one folded towel at a time.",
+      "Molly and Shaina pose beside the rebuilt laundry system.",
+      "Molly quietly restarts the sock relocation project.",
+      "They finish exactly where they began and learn absolutely nothing."
+    ]
   }
 };
 
