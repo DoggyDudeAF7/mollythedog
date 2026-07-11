@@ -67,10 +67,14 @@
   line-height: 0.95;
 }
 
-.comic-story-heading p:last-child {
+.comic-story-heading > p:not(.comic-eyebrow) {
   color: rgba(255, 255, 255, 0.7);
   font-size: 1.05rem;
   line-height: 1.55;
+}
+
+.comic-story-heading > p:has(.comic-reader-link) {
+  margin-top: 14px;
 }
 
 .comic-eyebrow {
