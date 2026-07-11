@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-FG9NLMSQLX"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-FG9NLMSQLX');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Molly and Shaina - Comic Viewer</title>
+    <link rel="icon" href="../favicon.ico" sizes="48x48">
+    <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+    <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="../apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="../icon-192.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="../icon-512.png">
+    <link rel="manifest" href="../site.webmanifest">
+    <meta name="theme-color" content="#090910">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/comics.css">
+    <link rel="stylesheet" href="../css/comic-viewer.css">
+  </head>
+  <body>
+    <div class="bg"></div>
+    <nav>
+      <div class="nav-inner">
+        <button id="navToggle" aria-label="Toggle menu" aria-expanded="false">☰</button>
+        <div class="nav-links" id="navLinks">
+          <a href="../molly/" title="Molly">
+            <span>🏠</span>
+          </a>
+          <a href="../molly-gallery/" title="Molly Gallery">
+            <span>🖼️</span>
+          </a>
+          <a href="../molly-dog-breeds/" title="Breeds">
+            <span>🐕</span>
+          </a>
+          <a href="../comics/" title="Comics">
+            <span>📚</span>
+          </a>
+          <a href="../shaina/" title="Shaina">
+            <span>🐶</span>
+          </a>
+        </div>
+        <button id="searchBtn">🔍</button>
+      </div>
+    </nav>
+    <div id="searchBox" class="hidden">
+      <input id="searchInput" placeholder="Search..." />
+      <div id="results"></div>
+    </div>
+    <main class="viewer-page">
+      <section class="viewer-header">
+        <a class="comic-reader-link" href="../comics/">All Comics</a>
+        <p class="comic-eyebrow" id="viewerIssue">Molly and Shaina Comics</p>
+        <h1 id="viewerTitle">Comic Viewer</h1>
+        <p id="viewerSummary"></p>
+      </section>
+      <section class="viewer-stage" aria-live="polite">
+        <button class="viewer-arrow" id="prevPanel" type="button" aria-label="Previous panel">‹</button>
+        <figure class="viewer-panel">
+          <img id="panelImage" src="" alt="">
+          <figcaption id="panelCaption"></figcaption>
+        </figure>
+        <button class="viewer-arrow" id="nextPanel" type="button" aria-label="Next panel">›</button>
+      </section>
+      <section class="viewer-controls" aria-label="Comic controls">
+        <div class="viewer-count" id="panelCount"></div>
+        <div class="viewer-picker" id="comicPicker"></div>
+      </section>
+      <section class="viewer-strip" id="panelStrip" aria-label="Comic panels"></section>
+    </main>
+    <footer>
+      <strong>Comic Viewer</strong>
+      <br>
+      Molly • Shaina • Comics
+      <br>
+      © 2026
+    </footer>
+    <script src="../js/animations.js"></script>
+    <script src="../js/search.js"></script>
+    <script src="../js/comic-viewer.js"></script>
+  </body>
+</html>
