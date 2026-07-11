@@ -1,26 +1,26 @@
 const comics = {
-  snack: {
+  kibble: {
     issue: "Comic 1",
-    title: "The Great Snack Mystery",
-    summary: "A careful investigation into crumbs, cabinets, and the sudden disappearance of evidence.",
-    prefix: "snack-mystery",
+    title: "The Great Kibble Incident",
+    summary: "One open bag of kibble becomes a feast, a regret, a vet trip, and a very supervised recovery.",
+    prefix: "kibble-incident",
     captions: [
-      "Molly notices a crumb and immediately forms a committee.",
-      "The trail is suspiciously snack-shaped.",
-      "Shaina confirms the crumb is extremely real.",
-      "They decide this mystery requires bravery and probably tasting.",
-      "The clues point directly toward the most interesting room.",
-      "An open cabinet is basically an invitation, legally speaking.",
-      "Shaina performs a careful cabinet investigation.",
-      "The mystery becomes much more delicious.",
-      "Suddenly there are treats everywhere, which is very concerning.",
-      "A noise from the hallway changes the mood instantly.",
-      "Molly relocates one clue for science.",
-      "Both suspects practice looking uninvolved.",
-      "One crumb remains, threatening to tell the whole story.",
-      "Shaina proposes the obvious solution without saying a word.",
-      "The final clues are handled internally.",
-      "The case is closed due to lack of evidence."
+      "Molly and Shaina discover the bag has made a terrible security mistake.",
+      "They begin cleanup immediately, using their faces.",
+      "The kibble field is large, but morale is high.",
+      "Both investigators agree the evidence was delicious.",
+      "The victory nap arrives sooner than expected.",
+      "The feast submits a formal complaint.",
+      "They retreat under blankets to consider their choices.",
+      "Window time is prescribed by the patients themselves.",
+      "A car ride confirms this has become official business.",
+      "The vet listens to Molly, who has many opinions.",
+      "Shaina waits politely while everyone discusses the kibble situation.",
+      "The hallway feels long, especially after bad decisions.",
+      "Back home, the recovery team chooses maximum softness.",
+      "Medicine appears, disguised badly as a tiny peace offering.",
+      "Dinner returns in reasonable, supervised portions.",
+      "Molly and Shaina recover fully and learn absolutely nothing."
     ]
   },
   paint: {
@@ -75,7 +75,7 @@ const comics = {
 
 document.addEventListener("DOMContentLoaded", () => {
   const params = new URLSearchParams(location.search);
-  const slug = comics[params.get("q")] ? params.get("q") : "snack";
+  const slug = comics[params.get("q")] ? params.get("q") : "kibble";
   const comic = comics[slug];
   let current = 0;
 
