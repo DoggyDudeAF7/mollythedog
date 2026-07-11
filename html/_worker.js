@@ -70,6 +70,7 @@ export default {
 const pagePaths = new Set([
   "/",
   "/404/",
+  "/about-me/",
   "/blog/",
   "/blog/admin/",
   "/blog/admin/login/",
