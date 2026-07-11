@@ -82,8 +82,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const issue = document.getElementById("viewerIssue");
   const title = document.getElementById("viewerTitle");
   const summary = document.getElementById("viewerSummary");
-  const image = document.getElementById("panelImage");
-  const caption = document.getElementById("panelCaption");
+  const panelGroup = document.getElementById("panelGroup");
   const count = document.getElementById("panelCount");
   const strip = document.getElementById("panelStrip");
   const picker = document.getElementById("comicPicker");
@@ -106,31 +105,46 @@ document.addEventListener("DOMContentLoaded", () => {
   comic.captions.forEach((_, index) => {
     const button = document.createElement("button");
     button.type = "button";
-    button.setAttribute("aria-label", `Open panel ${index + 1}`);
+    const groupStart = Math.floor(index / 4) * 4;
+    button.setAttribute("aria-label", `Open panels ${groupStart + 1} to ${Math.min(groupStart + 4, comic.captions.length)}`);
     const thumb = document.createElement("img");
     thumb.src = `../images/comics/${comic.prefix}-${String(index + 1).padStart(2, "0")}.webp`;
     thumb.alt = "";
     button.appendChild(thumb);
-    button.addEventListener("click", () => showPanel(index));
+    button.addEventListener("click", () => showPanel(groupStart));
     strip.appendChild(button);
   });
 
   function showPanel(index) {
-    current = (index + comic.captions.length) % comic.captions.length;
-    image.src = `../images/comics/${comic.prefix}-${String(current + 1).padStart(2, "0")}.webp`;
-    image.alt = `${comic.title}, panel ${current + 1}`;
-    caption.textContent = `${current + 1}. ${comic.captions[current]}`;
-    count.textContent = `Panel ${current + 1} of ${comic.captions.length}`;
+    const groupCount = Math.ceil(comic.captions.length / 4);
+    const groupIndex = ((Math.floor(index / 4) % groupCount) + groupCount) % groupCount;
+    current = groupIndex * 4;
+    const end = Math.min(current + 4, comic.captions.length);
+    panelGroup.innerHTML = "";
+
+    for (let panelIndex = current; panelIndex < end; panelIndex++) {
+      const figure = document.createElement("figure");
+      figure.className = "viewer-panel";
+      const panelImage = document.createElement("img");
+      panelImage.src = `../images/comics/${comic.prefix}-${String(panelIndex + 1).padStart(2, "0")}.webp`;
+      panelImage.alt = `${comic.title}, panel ${panelIndex + 1}`;
+      const panelCaption = document.createElement("figcaption");
+      panelCaption.textContent = `${panelIndex + 1}. ${comic.captions[panelIndex]}`;
+      figure.append(panelImage, panelCaption);
+      panelGroup.appendChild(figure);
+    }
+
+    count.textContent = `Panels ${current + 1}-${end} of ${comic.captions.length}`;
     [...strip.children].forEach((button, buttonIndex) => {
-      button.classList.toggle("active", buttonIndex === current);
+      button.classList.toggle("active", buttonIndex >= current && buttonIndex < end);
     });
   }
 
-  prev.addEventListener("click", () => showPanel(current - 1));
-  next.addEventListener("click", () => showPanel(current + 1));
+  prev.addEventListener("click", () => showPanel(current - 4));
+  next.addEventListener("click", () => showPanel(current + 4));
   document.addEventListener("keydown", event => {
-    if (event.key === "ArrowLeft") showPanel(current - 1);
-    if (event.key === "ArrowRight") showPanel(current + 1);
+    if (event.key === "ArrowLeft") showPanel(current - 4);
+    if (event.key === "ArrowRight") showPanel(current + 4);
   });
 
   showPanel(0);
