@@ -94,6 +94,30 @@ const comics = {
       "Molly quietly restarts the sock relocation project.",
       "They finish exactly where they began and learn absolutely nothing."
     ]
+  },
+  garden: {
+    issue: "Comic 5",
+    title: "The Great Garden Adventure",
+    summary: "A peaceful garden visit becomes digging, muddy evidence, bath time, and a suspiciously calm return to the doorway.",
+    prefix: "garden-adventure",
+    captions: [
+      "Molly and Shaina spot the garden and decide nature has requested their help.",
+      "They step outside looking innocent, which is usually when the trouble begins.",
+      "Shaina inspects the flowers while Molly pretends this is all very educational.",
+      "Molly begins digging with the confidence of someone who has no cleanup plan.",
+      "Shaina discovers the soil is extremely interesting and unfortunately portable.",
+      "Molly confirms the dirt situation with her whole face.",
+      "The garden now contains several new design features nobody asked for.",
+      "Both dogs pose beside the evidence and somehow look proud.",
+      "The mud trail follows them inside like a very honest confession.",
+      "The owner finds the footprints and begins connecting several obvious dots.",
+      "Molly and Shaina wait by the door, technically available for questioning.",
+      "The owner surveys the garden and silently rethinks the meaning of supervision.",
+      "Bath time arrives with soap, water, and no respect for artistic mud choices.",
+      "The suspects emerge cleaner, wetter, and still emotionally complicated.",
+      "Towels are issued, dignity is restored, and nobody admits anything.",
+      "Molly and Shaina return to the door, already considering tomorrow's expedition."
+    ]
   }
 };
 
