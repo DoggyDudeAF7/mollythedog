@@ -118,6 +118,30 @@ const comics = {
       "Towels are issued, dignity is restored, and nobody admits anything.",
       "Molly and Shaina return to the door, already considering tomorrow's expedition."
     ]
+  },
+  blanket: {
+    issue: "Comic 6",
+    title: "The Great Blanket Fortress",
+    summary: "A normal couch becomes a layered blanket stronghold, briefly inspected by the owner and immediately reclaimed by the architects.",
+    prefix: "blanket-fortress",
+    captions: [
+      "Molly and Shaina discover loose blankets and recognize a rare construction opportunity.",
+      "Molly begins moving materials while Shaina supervises from a legally safe distance.",
+      "Shaina tests the first tunnel and confirms the fortress has emotional potential.",
+      "Molly adds a pillow, which makes the project feel official.",
+      "The blanket stack grows taller than expected and nobody files a permit.",
+      "Something inside the fortress blinks, proving the structure is occupied.",
+      "Molly guards the entrance like this was always the plan.",
+      "Shaina chooses a hidden observation post with excellent warmth.",
+      "The owner arrives and finds two architects inside a couch-based landmark.",
+      "Molly and Shaina exit just enough to look innocent.",
+      "The owner inspects the fortress gently, which the builders consider approval.",
+      "Both dogs pose under the roof with serious real-estate confidence.",
+      "The owner rebuilds the pile into something suspiciously neat.",
+      "Molly and Shaina sit on top like official ribbon-cutting guests.",
+      "The fortress collapses slightly, creating new creative possibilities.",
+      "They return to the tunnel and immediately begin phase two."
+    ]
   }
 };
 
