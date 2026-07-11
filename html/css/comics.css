@@ -8,6 +8,27 @@
   max-width: 840px;
 }
 
+.comic-story {
+  margin: 56px 0 22px;
+}
+
+.comic-story-heading {
+  max-width: 820px;
+}
+
+.comic-story-heading h2 {
+  margin: 8px 0 12px;
+  color: #ffb7a5;
+  font-size: clamp(2rem, 5vw, 4.2rem);
+  line-height: 0.95;
+}
+
+.comic-story-heading p:last-child {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 1.05rem;
+  line-height: 1.55;
+}
+
 .comic-eyebrow {
   color: #ffb7a5;
   font-size: 0.82rem;
