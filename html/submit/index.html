@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-FG9NLMSQLX"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-FG9NLMSQLX');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Molly and Shaina - Submit</title>
+    <link rel="icon" href="../favicon.ico" sizes="48x48">
+    <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+    <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="../apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="../icon-192.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="../icon-512.png">
+    <link rel="manifest" href="../site.webmanifest">
+    <meta name="theme-color" content="#090910">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/submit.css">
+  </head>
+  <body>
+    <div class="bg"></div>
+    <nav>
+      <div class="nav-inner">
+        <button id="navToggle" aria-label="Toggle menu" aria-expanded="false">☰</button>
+        <div class="nav-links" id="navLinks">
+          <a href="../molly/" title="Home">
+            <span>🏠</span>
+          </a>
+          <a href="../molly-traits/" title="Traits">
+            <span>✨</span>
+          </a>
+          <a href="../molly-habits/" title="Habits">
+            <span>🛏️</span>
+          </a>
+          <a href="../molly-mind/" title="Mind">
+            <span>🧠</span>
+          </a>
+          <a href="../molly-gallery/" title="Gallery">
+            <span>🖼️</span>
+          </a>
+          <a href="../molly-faq/" title="FAQ">
+            <span>❓</span>
+          </a>
+          <a href="../molly-dog-breeds/" title="Breeds">
+            <span>🐕</span>
+          </a>
+          <a href="../comics/" title="Comics">
+            <span>📚</span>
+          </a>
+          <a href="../about-me/" title="About Me">
+            <span>👤</span>
+          </a>
+          <a href="../shaina/" title="Shaina">
+            <span>🐶</span>
+          </a>
+        </div>
+        <button id="searchBtn">🔍</button>
+      </div>
+    </nav>
+    <div id="searchBox" class="hidden">
+      <input id="searchInput" placeholder="Search..." />
+      <div id="results"></div>
+    </div>
+    <main class="submit-page">
+      <section class="submit-hero reveal left">
+        <p class="submit-eyebrow">Fan Ideas And Art</p>
+        <h1>Bark At Molly And Shaina</h1>
+        <p>Pitch a comic idea, describe fan art, or send a general message to the tiny creative department. The form makes a preview on this page so the idea is easy to copy or save.</p>
+      </section>
+      <section class="submit-layout">
+        <form class="submit-card reveal left" id="submissionForm">
+          <div class="form-group">
+            <label for="submitName">Your Name</label>
+            <input id="submitName" name="name" type="text" placeholder="Leonardo da Vinci" required>
+          </div>
+          <div class="form-group">
+            <label for="submitEmail">Your Email</label>
+            <input id="submitEmail" name="email" type="email" placeholder="for a reply, if needed" required>
+          </div>
+          <div class="form-group">
+            <label for="submissionType">Reason For Barking</label>
+            <select id="submissionType" name="submissionType">
+              <option value="Comic idea">Comic idea</option>
+              <option value="Fan art">Fan art</option>
+              <option value="General message">General message</option>
+            </select>
+          </div>
+          <div class="form-group hidden" id="uploadGroup">
+            <label for="fanartFile">Fan Art Image</label>
+            <input id="fanartFile" name="fanartFile" type="file" accept="image/*">
+            <small>Upload a drawing, edit, or photo. It previews here, but it is not sent to a server yet.</small>
+          </div>
+          <div class="form-group">
+            <label for="submissionMessage" id="messageLabel">The Details</label>
+            <textarea id="submissionMessage" name="message" placeholder="Describe the comic idea..." required></textarea>
+          </div>
+          <label class="consent-row">
+            <input id="submissionConsent" type="checkbox" required>
+            <span>Molly and Shaina can use this idea or art as comic inspiration.</span>
+          </label>
+          <button type="submit">Make Submission Preview</button>
+          <p class="submit-note">This page does not publicly post anything by itself. It prepares the idea so it can be copied, saved, or sent later.</p>
+        </form>
+        <aside class="preview-card reveal right" aria-live="polite">
+          <p class="submit-eyebrow">Preview</p>
+          <div id="imagePreview" class="image-preview hidden"></div>
+          <h2 id="previewTitle">Nothing submitted yet</h2>
+          <p id="previewMeta">Fill out the form and press the button.</p>
+          <p id="previewMessage">Your idea will appear here in a clean little draft.</p>
+          <button type="button" id="copySubmission" disabled>Copy Preview</button>
+        </aside>
+      </section>
+    </main>
+    <footer>
+      <strong>Submit Ideas And Art</strong>
+      <br>
+      Comics • Fan Art • Molly • Shaina
+      <br>
+      © 2026
+    </footer>
+    <script src="../js/animations.js"></script>
+    <script src="../js/search.js"></script>
+    <script src="../js/submit.js"></script>
+  </body>
+</html>
