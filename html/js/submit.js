@@ -53,7 +53,6 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function updatePreview() {
-    event.preventDefault();
     const name = document.getElementById("submitName").value.trim();
     const email = document.getElementById("submitEmail").value.trim();
     const file = fileInput.files && fileInput.files[0];
