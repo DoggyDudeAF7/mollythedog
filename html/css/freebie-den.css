@@ -1,0 +1,130 @@
+.freebie-page {
+  width: min(1180px, calc(100% - 28px));
+  margin: 132px auto 72px;
+}
+
+.freebie-hero {
+  display: grid;
+  grid-template-columns: minmax(0, 0.95fr) minmax(300px, 1.05fr);
+  gap: 24px;
+  align-items: center;
+  margin-bottom: 34px;
+}
+
+.freebie-copy,
+.freebie-preview,
+.download-card {
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 8px;
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.04)),
+    rgba(8, 8, 16, 0.74);
+  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.28);
+  backdrop-filter: blur(18px);
+}
+
+.freebie-copy {
+  padding: clamp(26px, 5vw, 54px);
+}
+
+.freebie-eyebrow {
+  color: #ffb7a5;
+  font-size: 0.82rem;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  margin: 0 0 12px;
+  text-transform: uppercase;
+}
+
+.freebie-copy h1 {
+  font-size: clamp(3.2rem, 8vw, 6.6rem);
+  line-height: 0.9;
+  margin: 0 0 18px;
+}
+
+.freebie-copy p:last-child,
+.download-card p {
+  color: rgba(255, 255, 255, 0.72);
+  font-size: clamp(1rem, 2vw, 1.18rem);
+  line-height: 1.65;
+}
+
+.freebie-preview {
+  padding: 14px;
+}
+
+.freebie-preview img,
+.download-card img {
+  display: block;
+  width: 100%;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.freebie-preview img {
+  aspect-ratio: 16 / 9;
+}
+
+.download-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 20px;
+}
+
+.download-card {
+  padding: 14px;
+}
+
+.download-card img {
+  aspect-ratio: 16 / 9;
+  margin-bottom: 18px;
+}
+
+.download-card h2 {
+  color: #ffb7a5;
+  font-size: clamp(1.6rem, 3vw, 2.4rem);
+  line-height: 1;
+  margin: 0 0 10px;
+}
+
+.download-actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-top: 18px;
+}
+
+.download-actions a {
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+  font-weight: 900;
+  padding: 12px 14px;
+  text-align: center;
+  text-decoration: none;
+  transition: transform 0.18s ease, background 0.18s ease;
+}
+
+.download-actions a:hover {
+  background: rgba(255, 255, 255, 0.18);
+  transform: translateY(-2px);
+}
+
+@media (max-width: 920px) {
+  .freebie-hero,
+  .download-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 520px) {
+  .freebie-page {
+    width: min(100% - 20px, 1180px);
+    margin-top: 116px;
+  }
+
+  .download-actions {
+    grid-template-columns: 1fr;
+  }
+}
