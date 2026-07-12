@@ -166,6 +166,30 @@ const comics = {
       "The mystery opens to reveal something soft, small, and deeply interesting.",
       "Molly and Shaina pose with the package like they personally saved the house."
     ]
+  },
+  zoom: {
+    issue: "Comic 8",
+    title: "The Great Zoom Meeting",
+    summary: "A laptop call becomes dog-hosted chaos after Molly and Shaina discover the webcam.",
+    prefix: "zoom-meeting",
+    captions: [
+      "Molly and Shaina relax near a laptop that is already making suspicious human noises.",
+      "Molly moves closer to inspect the tiny people on the screen.",
+      "Shaina joins the meeting from the table edge with serious focus.",
+      "Molly discovers that keyboards respond to paws.",
+      "The call reacts with widespread professional concern.",
+      "Shaina's face becomes the entire agenda.",
+      "Molly sits beside the laptop like a scheduled presenter.",
+      "Shaina continues technical support with both paws.",
+      "The dogs become the main speakers, which improves the meeting immediately.",
+      "The owner enters and realizes the call has changed leadership.",
+      "Molly and Shaina sit politely, as if this was always approved.",
+      "The owner attempts to regain control of the meeting.",
+      "Molly returns to the keyboard for one last contribution.",
+      "The call freezes on a very concerned audience and two extremely calm hosts.",
+      "The owner gives up and joins the new management team.",
+      "Molly and Shaina finish the meeting with complete confidence."
+    ]
   }
 };
 
