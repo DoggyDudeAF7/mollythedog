@@ -50,14 +50,72 @@
           Badge Text
           <input id="certBadge" type="text" value="Official">
         </label>
+        <label>
+          Logo Upload
+          <input id="certLogo" type="file" accept="image/*">
+        </label>
+        <div class="field-grid">
+          <label>
+            Theme
+            <select id="certTheme">
+              <option value="gold">Gold</option>
+              <option value="silver">Silver</option>
+              <option value="blue">Blue</option>
+              <option value="funny">Funny</option>
+              <option value="christmas">Christmas</option>
+            </select>
+          </label>
+          <label>
+            Border
+            <select id="certBorder">
+              <option value="double">Double</option>
+              <option value="classic">Classic</option>
+              <option value="bold">Bold</option>
+              <option value="dotted">Dotted</option>
+            </select>
+          </label>
+        </div>
+        <div class="field-grid">
+          <label>
+            Seal Style
+            <select id="certSeal">
+              <option value="pill">Pill</option>
+              <option value="ribbon">Ribbon</option>
+              <option value="medal">Medal</option>
+              <option value="stamp">Stamp</option>
+            </select>
+          </label>
+          <label>
+            Layout
+            <select id="certOrientation">
+              <option value="landscape">Landscape</option>
+              <option value="portrait">Portrait</option>
+            </select>
+          </label>
+        </div>
+        <div class="field-grid">
+          <label>
+            Paper Size
+            <select id="certPaper">
+              <option value="letter">Letter</option>
+              <option value="a4">A4</option>
+            </select>
+          </label>
+          <label class="checkbox-label">
+            <input id="showSignature" type="checkbox">
+            Draggable signature
+          </label>
+        </div>
         <div class="button-row">
           <button type="button" id="printCertificate">Print</button>
+          <button type="button" id="downloadCertificate">Download PDF</button>
           <button type="button" id="resetCertificate">Reset</button>
         </div>
       </section>
       <section class="paper-wrap" aria-label="Certificate preview">
-        <article class="certificate" id="certificate">
+        <article class="certificate theme-gold border-double seal-pill landscape paper-letter" id="certificate">
           <div class="certificate-border">
+            <img class="certificate-logo" id="previewLogo" alt="">
             <p class="certificate-kicker" id="previewBadge">Official</p>
             <h2 id="previewTitle">Certificate of Excellence</h2>
             <p class="awarded">Awarded To</p>
@@ -73,6 +131,7 @@
                 <strong>Signed By</strong>
               </div>
             </div>
+            <span class="signature-stamp" id="signatureStamp">Name</span>
           </div>
         </article>
       </section>
