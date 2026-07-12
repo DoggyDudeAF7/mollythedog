@@ -142,6 +142,30 @@ const comics = {
       "The fortress collapses slightly, creating new creative possibilities.",
       "They return to the tunnel and immediately begin phase two."
     ]
+  },
+  package: {
+    issue: "Comic 7",
+    title: "The Great Package Emergency",
+    summary: "A mysterious delivery appears at the door and Molly and Shaina treat it like full security business.",
+    prefix: "package-emergency",
+    captions: [
+      "Molly and Shaina begin the morning peacefully, which never lasts long.",
+      "A suspicious sound shifts the room into alert mode.",
+      "Molly launches toward the front door with urgent purpose.",
+      "Shaina checks the glass like a professional lookout.",
+      "Both dogs assemble at the entry for a serious investigation.",
+      "Molly announces that something is definitely happening.",
+      "Shaina inspects the curtain zone for additional evidence.",
+      "The package waits outside, looking far too calm.",
+      "The owner opens the door while the security team supervises.",
+      "Molly and Shaina perform the first official sniff test.",
+      "Molly studies the box like it might confess.",
+      "Shaina guards the delivery with extremely polite suspicion.",
+      "The owner brings the package inside under close management.",
+      "Both dogs sit beside the box and accept responsibility for perimeter safety.",
+      "The mystery opens to reveal something soft, small, and deeply interesting.",
+      "Molly and Shaina pose with the package like they personally saved the house."
+    ]
   }
 };
 
