@@ -56,6 +56,16 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://mollyandshaina.com/about-molly/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://mollyandshaina.com/about-shaina/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://blog.mollyandshaina.com/</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
