@@ -71,6 +71,8 @@ const pagePaths = new Set([
   "/",
   "/404/",
   "/about-me/",
+  "/about-molly/",
+  "/about-shaina/",
   "/blog/",
   "/blog/admin/",
   "/blog/admin/login/",
