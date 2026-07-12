@@ -18,6 +18,10 @@ export default {
       return handleLogoutApi();
     }
 
+    if (url.pathname === "/api/submit") {
+      return handleSubmissionEmail(request, env);
+    }
+
     if (url.hostname === "blog.mollyandshaina.com") {
       const assetUrl = new URL(request.url);
 
@@ -269,6 +273,117 @@ function handleLogoutApi() {
   });
 }
 
+async function handleSubmissionEmail(request, env) {
+  if (request.method !== "POST") {
+    return jsonResponse({ error: "Method not allowed." }, 405);
+  }
+
+  if (!env.EMAIL) {
+    return jsonResponse({ error: "Email binding is not configured. Add an EMAIL binding in Cloudflare." }, 503);
+  }
+
+  const toEmail = String(env.SUBMISSION_TO_EMAIL || "").trim();
+  const fromEmail = String(env.SUBMISSION_FROM_EMAIL || "submissions@mollyandshaina.com").trim();
+
+  if (!toEmail) {
+    return jsonResponse({ error: "SUBMISSION_TO_EMAIL is not configured in Cloudflare." }, 503);
+  }
+
+  let formData;
+
+  try {
+    formData = await request.formData();
+  } catch {
+    return jsonResponse({ error: "Submission must be form data." }, 400);
+  }
+
+  const name = cleanText(formData.get("name"), 80);
+  const email = cleanText(formData.get("email"), 120);
+  const submissionType = cleanText(formData.get("submissionType"), 40);
+  const message = cleanText(formData.get("message"), 5000);
+  const consent = formData.get("consent") === "on" || formData.get("consent") === "true";
+  const fanartFile = formData.get("fanartFile");
+
+  if (!name || !email || !submissionType || !message) {
+    return jsonResponse({ error: "Please fill out every required field." }, 400);
+  }
+
+  if (!consent) {
+    return jsonResponse({ error: "Please check the permission box before sending." }, 400);
+  }
+
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    return jsonResponse({ error: "Please enter a real email address." }, 400);
+  }
+
+  const attachments = [];
+
+  if (fanartFile && typeof fanartFile === "object" && fanartFile.size > 0) {
+    if (!fanartFile.type.startsWith("image/")) {
+      return jsonResponse({ error: "Fan art must be an image file." }, 400);
+    }
+
+    if (fanartFile.size > 4 * 1024 * 1024) {
+      return jsonResponse({ error: "Fan art must be smaller than 4 MB." }, 400);
+    }
+
+    attachments.push({
+      content: await fanartFile.arrayBuffer(),
+      filename: cleanFilename(fanartFile.name || "fan-art"),
+      type: fanartFile.type,
+      disposition: "attachment",
+    });
+  }
+
+  const subject = `Molly and Shaina ${submissionType} from ${name}`;
+  const text = [
+    "New Molly and Shaina submission",
+    "",
+    `Type: ${submissionType}`,
+    `Name: ${name}`,
+    `Email: ${email}`,
+    attachments.length ? `Attachment: ${attachments[0].filename}` : "Attachment: none",
+    "",
+    "Message:",
+    message,
+  ].join("\n");
+
+  const html = `
+    <h1>New Molly and Shaina submission</h1>
+    <p><strong>Type:</strong> ${escapeHtml(submissionType)}</p>
+    <p><strong>Name:</strong> ${escapeHtml(name)}</p>
+    <p><strong>Email:</strong> ${escapeHtml(email)}</p>
+    <p><strong>Attachment:</strong> ${attachments.length ? escapeHtml(attachments[0].filename) : "none"}</p>
+    <h2>Message</h2>
+    <p>${escapeHtml(message).replace(/\n/g, "<br>")}</p>
+  `;
+
+  try {
+    const result = await env.EMAIL.send({
+      to: toEmail,
+      from: {
+        email: fromEmail,
+        name: "Molly and Shaina",
+      },
+      replyTo: {
+        email,
+        name,
+      },
+      subject,
+      text,
+      html,
+      attachments,
+    });
+
+    return jsonResponse({ ok: true, messageId: result.messageId });
+  } catch (error) {
+    return jsonResponse({
+      error: "The email could not be sent.",
+      details: error && error.message ? error.message : "Unknown email error.",
+    }, 502);
+  }
+}
+
 async function loadPosts(request, env) {
   if (env.BLOG_POSTS) {
     const storedPosts = await env.BLOG_POSTS.get("posts", "json");
@@ -286,6 +401,27 @@ async function loadPosts(request, env) {
   } catch {
     return [];
   }
+}
+
+function cleanText(value, maxLength) {
+  return String(value || "").trim().replace(/\s+\n/g, "\n").slice(0, maxLength);
+}
+
+function cleanFilename(value) {
+  return String(value || "attachment")
+    .replace(/[/\\?%*:|"<>]/g, "-")
+    .replace(/\s+/g, " ")
+    .trim()
+    .slice(0, 120) || "attachment";
+}
+
+function escapeHtml(value) {
+  return String(value)
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
 }
 
 function cleanPost(post) {

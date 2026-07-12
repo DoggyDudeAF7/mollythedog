@@ -74,10 +74,10 @@
       <section class="submit-hero reveal left">
         <p class="submit-eyebrow">Fan Ideas And Art</p>
         <h1>Bark At Molly And Shaina</h1>
-        <p>Pitch a comic idea, describe fan art, or send a general message to the tiny creative department. The form makes a preview on this page so the idea is easy to copy or save.</p>
+        <p>Pitch a comic idea, describe fan art, or send a general message to the tiny creative department. The form sends an email through Cloudflare and also leaves a preview on the page.</p>
       </section>
       <section class="submit-layout">
-        <form class="submit-card reveal left" id="submissionForm">
+        <form class="submit-card reveal left" id="submissionForm" action="/api/submit" method="POST" enctype="multipart/form-data">
           <div class="form-group">
             <label for="submitName">Your Name</label>
             <input id="submitName" name="name" type="text" placeholder="Leonardo da Vinci" required>
@@ -97,18 +97,18 @@
           <div class="form-group hidden" id="uploadGroup">
             <label for="fanartFile">Fan Art Image</label>
             <input id="fanartFile" name="fanartFile" type="file" accept="image/*">
-            <small>Upload a drawing, edit, or photo. It previews here, but it is not sent to a server yet.</small>
+            <small>Upload a drawing, edit, or photo. Keep it under 4 MB.</small>
           </div>
           <div class="form-group">
             <label for="submissionMessage" id="messageLabel">The Details</label>
             <textarea id="submissionMessage" name="message" placeholder="Describe the comic idea..." required></textarea>
           </div>
           <label class="consent-row">
-            <input id="submissionConsent" type="checkbox" required>
+            <input id="submissionConsent" name="consent" type="checkbox" required>
             <span>Molly and Shaina can use this idea or art as comic inspiration.</span>
           </label>
-          <button type="submit">Make Submission Preview</button>
-          <p class="submit-note">This page does not publicly post anything by itself. It prepares the idea so it can be copied, saved, or sent later.</p>
+          <button type="submit" id="sendSubmission">Send Submission</button>
+          <p class="submit-note" id="submissionStatus">This sends an email through Cloudflare once the EMAIL binding is connected.</p>
         </form>
         <aside class="preview-card reveal right" aria-live="polite">
           <p class="submit-eyebrow">Preview</p>

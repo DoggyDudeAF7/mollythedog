@@ -10,6 +10,8 @@ document.addEventListener("DOMContentLoaded", () => {
   const previewMessage = document.getElementById("previewMessage");
   const imagePreview = document.getElementById("imagePreview");
   const copyButton = document.getElementById("copySubmission");
+  const sendButton = document.getElementById("sendSubmission");
+  const status = document.getElementById("submissionStatus");
 
   if (!form || !type || !uploadGroup || !fileInput || !messageLabel || !message) return;
 
@@ -50,9 +52,8 @@ document.addEventListener("DOMContentLoaded", () => {
     reader.readAsDataURL(file);
   }
 
-  form.addEventListener("submit", event => {
+  function updatePreview() {
     event.preventDefault();
-
     const name = document.getElementById("submitName").value.trim();
     const email = document.getElementById("submitEmail").value.trim();
     const file = fileInput.files && fileInput.files[0];
@@ -63,6 +64,39 @@ document.addEventListener("DOMContentLoaded", () => {
     previewMessage.textContent = message.value.trim();
     previewText = `Molly and Shaina Submission\n\nType: ${type.value}\nName: ${name}\nEmail: ${email}${fileLine}\n\nMessage:\n${message.value.trim()}`;
     copyButton.disabled = false;
+  }
+
+  form.addEventListener("submit", async event => {
+    event.preventDefault();
+    updatePreview();
+
+    if (!form.reportValidity()) return;
+
+    sendButton.disabled = true;
+    sendButton.textContent = "Sending...";
+    status.textContent = "Sending your submission...";
+
+    try {
+      const response = await fetch(form.action, {
+        method: "POST",
+        body: new FormData(form),
+      });
+      const result = await response.json();
+
+      if (!response.ok || !result.ok) {
+        throw new Error(result.error || "Submission failed.");
+      }
+
+      status.textContent = "Sent. Molly and Shaina have been notified.";
+      sendButton.textContent = "Sent";
+      form.reset();
+      updateTypeFields();
+      fileInput.value = "";
+    } catch (error) {
+      status.textContent = error.message || "The submission could not be sent.";
+      sendButton.disabled = false;
+      sendButton.textContent = "Send Submission";
+    }
   });
 
   copyButton.addEventListener("click", async () => {
