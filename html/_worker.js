@@ -98,6 +98,7 @@ const pagePaths = new Set([
   "/shaina-home/",
   "/shaina-mind/",
   "/shaina-traits/",
+  "/submit/",
   "/test/",
 ]);
 
