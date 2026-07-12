@@ -278,8 +278,10 @@ async function handleSubmissionEmail(request, env) {
     return jsonResponse({ error: "Method not allowed." }, 405);
   }
 
-  if (!env.EMAIL) {
-    return jsonResponse({ error: "Email binding is not configured. Add an EMAIL binding in Cloudflare." }, 503);
+  const resendApiKey = String(env.RESEND_API_KEY || "").trim();
+
+  if (!resendApiKey) {
+    return jsonResponse({ error: "RESEND_API_KEY is not configured in Cloudflare." }, 503);
   }
 
   const toEmail = String(env.SUBMISSION_TO_EMAIL || "").trim();
@@ -328,10 +330,8 @@ async function handleSubmissionEmail(request, env) {
     }
 
     attachments.push({
-      content: await fanartFile.arrayBuffer(),
+      content: arrayBufferToBase64(await fanartFile.arrayBuffer()),
       filename: cleanFilename(fanartFile.name || "fan-art"),
-      type: fanartFile.type,
-      disposition: "attachment",
     });
   }
 
@@ -359,29 +359,48 @@ async function handleSubmissionEmail(request, env) {
   `;
 
   try {
-    const result = await env.EMAIL.send({
-      to: toEmail,
-      from: {
-        email: fromEmail,
-        name: "Molly and Shaina",
+    const response = await fetch("https://api.resend.com/emails", {
+      method: "POST",
+      headers: {
+        "authorization": `Bearer ${resendApiKey}`,
+        "content-type": "application/json",
       },
-      replyTo: {
-        email,
-        name,
-      },
-      subject,
-      text,
-      html,
-      attachments,
+      body: JSON.stringify({
+        to: [toEmail],
+        from: `Molly and Shaina <${fromEmail}>`,
+        reply_to: email,
+        subject,
+        text,
+        html,
+        attachments,
+      }),
     });
 
-    return jsonResponse({ ok: true, messageId: result.messageId });
+    const result = await response.json().catch(() => ({}));
+
+    if (!response.ok) {
+      throw new Error(result.message || result.error || "Resend rejected the email.");
+    }
+
+    return jsonResponse({ ok: true, messageId: result.id || "" });
   } catch (error) {
     return jsonResponse({
-      error: "The email could not be sent.",
-      details: error && error.message ? error.message : "Unknown email error.",
+      error: "The email could not be sent through Resend.",
+      details: error && error.message ? error.message : "Unknown Resend error.",
     }, 502);
   }
+}
+
+function arrayBufferToBase64(buffer) {
+  let binary = "";
+  const bytes = new Uint8Array(buffer);
+  const chunkSize = 0x8000;
+
+  for (let i = 0; i < bytes.length; i += chunkSize) {
+    binary += String.fromCharCode(...bytes.subarray(i, i + chunkSize));
+  }
+
+  return btoa(binary);
 }
 
 async function loadPosts(request, env) {
