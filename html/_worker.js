@@ -85,6 +85,7 @@ const pagePaths = new Set([
   "/comic-viewer/",
   "/comics/",
   "/dog-breeds/",
+  "/freebie-den/",
   "/html/",
   "/kitchen-game/",
   "/molly/",
