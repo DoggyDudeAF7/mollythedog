@@ -1,4 +1,174 @@
+(function () {
+  var scriptElement = document.currentScript;
+  var scriptElements;
+  var scriptIndex;
+
+  if (!scriptElement) {
+    scriptElements = document.getElementsByTagName("script");
+    for (scriptIndex = scriptElements.length - 1; scriptIndex >= 0; scriptIndex -= 1) {
+      if (/\/js\/animations\.js(?:[?#].*)?$/.test(scriptElements[scriptIndex].src)) {
+        scriptElement = scriptElements[scriptIndex];
+        break;
+      }
+    }
+  }
+
+  var siteRoot = scriptElement && scriptElement.src
+    ? scriptElement.src.replace(/js\/animations\.js(?:[?#].*)?$/, "")
+    : "/";
+  var emojiRoot = siteRoot + "images/emoji/";
+
+  var dogEmojiData = {
+    molly: { alt: "Molly", file: "molly-emoji" },
+    poppy: { alt: "Poppy", file: "poppy-emoji" },
+    shaina: { alt: "Shaina", file: "shaina-emoji" },
+    breeds: { alt: "Dog Breeds", file: "breeds-emoji" },
+    comics: { alt: "Comics", file: "comics-emoji" },
+    blog: { alt: "Blog", file: "blog-emoji" },
+    home: { alt: "Home", file: "home-emoji" },
+    traits: { alt: "Traits", file: "traits-emoji" },
+    habits: { alt: "Habits", file: "habits-emoji" },
+    mind: { alt: "Mind", file: "mind-emoji" },
+    gallery: { alt: "Gallery", file: "gallery-emoji" },
+    faq: { alt: "FAQ", file: "faq-emoji" },
+    about: { alt: "About", file: "about-emoji" },
+    search: { alt: "Search", file: "search-emoji" }
+  };
+  var dogTextPattern = /:(molly|poppy|shaina|breeds|comics|blog|home|traits|habits|mind|gallery|faq|about|search):|(🐶|🐕|🐩|📚)/gi;
+  var excludedTags = {
+    CODE: true,
+    PRE: true,
+    SCRIPT: true,
+    STYLE: true,
+    INPUT: true,
+    TEXTAREA: true,
+    SELECT: true,
+    OPTION: true,
+    HEAD: true,
+    TITLE: true,
+    NOSCRIPT: true,
+    TEMPLATE: true
+  };
+
+  function isExcluded(node, boundary) {
+    var parent = node.parentNode;
+    while (parent) {
+      if (parent.nodeType === 1 && (excludedTags[parent.tagName] || parent.isContentEditable)) {
+        return true;
+      }
+      if (parent === boundary) break;
+      parent = parent.parentNode;
+    }
+    return false;
+  }
+
+  function createDogEmoji(name) {
+    var data = dogEmojiData[name];
+    var picture = document.createElement("picture");
+    var source = document.createElement("source");
+    var image = document.createElement("img");
+
+    picture.className = "dog-emoji-picture";
+    source.type = "image/webp";
+    source.srcset = emojiRoot + data.file + ".webp";
+    image.className = "dog-emoji";
+    image.src = emojiRoot + data.file + ".png";
+    image.alt = data.alt;
+    image.width = 256;
+    image.height = 256;
+    image.decoding = "async";
+
+    picture.appendChild(source);
+    picture.appendChild(image);
+    return picture;
+  }
+
+  function nameFromContext(node, symbol) {
+    var text = node.nodeValue || "";
+    var named = text.match(/\b(molly|poppy|shaina)\b/i);
+    var parent = node.parentNode;
+    var context = "";
+
+    if (symbol === "🐕") return "breeds";
+    if (symbol === "📚") return "comics";
+    if (named) return named[1].toLowerCase();
+
+    while (parent && parent.nodeType === 1) {
+      context += " " + (parent.getAttribute("title") || "");
+      context += " " + (parent.getAttribute("aria-label") || "");
+      context += " " + (parent.getAttribute("href") || "");
+      if (parent.tagName === "A") break;
+      parent = parent.parentNode;
+    }
+
+    if (/poppy/i.test(context)) return "poppy";
+    if (/shaina/i.test(context)) return "shaina";
+    if (/molly/i.test(context)) return "molly";
+    if (symbol === "🐩") return "poppy";
+
+    if (/\/poppy(?:-|\/)/i.test(location.pathname)) return "poppy";
+    if (/\/shaina(?:-|\/)/i.test(location.pathname)) return "shaina";
+    return "molly";
+  }
+
+  function replaceShortcodesInTextNode(node) {
+    var text = node.nodeValue;
+    var match;
+    var lastIndex = 0;
+    var fragment = document.createDocumentFragment();
+
+    dogTextPattern.lastIndex = 0;
+    while ((match = dogTextPattern.exec(text)) !== null) {
+      if (match.index > lastIndex) fragment.appendChild(document.createTextNode(text.slice(lastIndex, match.index)));
+      var name = (match[1] || "").toLowerCase();
+      fragment.appendChild(createDogEmoji(name || nameFromContext(node, match[2])));
+      lastIndex = dogTextPattern.lastIndex;
+    }
+
+    if (lastIndex === 0) return;
+    if (lastIndex < text.length) fragment.appendChild(document.createTextNode(text.slice(lastIndex)));
+    node.parentNode.replaceChild(fragment, node);
+  }
+
+  function renderDogEmojis(root) {
+    root = root || document;
+    var nodes = [];
+    var i;
+
+    if (root.nodeType === 3) {
+      dogTextPattern.lastIndex = 0;
+      if (!isExcluded(root, root) && dogTextPattern.test(root.nodeValue)) nodes.push(root);
+    } else {
+      var walker = document.createTreeWalker(root, 4, null, false);
+      var current;
+      while ((current = walker.nextNode())) {
+        dogTextPattern.lastIndex = 0;
+        if (!isExcluded(current, root) && dogTextPattern.test(current.nodeValue)) nodes.push(current);
+      }
+    }
+
+    for (i = 0; i < nodes.length; i += 1) replaceShortcodesInTextNode(nodes[i]);
+  }
+
+  window.renderDogEmojis = renderDogEmojis;
+}());
+
 document.addEventListener("DOMContentLoaded", () => {
+  window.renderDogEmojis(document);
+  if (window.MutationObserver && document.body) {
+    const dogEmojiObserver = new MutationObserver(records => {
+      records.forEach(record => {
+        if (record.type === "characterData") {
+          window.renderDogEmojis(record.target);
+        } else {
+          Array.prototype.forEach.call(record.addedNodes, node => {
+            window.renderDogEmojis(node);
+          });
+        }
+      });
+    });
+    dogEmojiObserver.observe(document.body, { childList: true, characterData: true, subtree: true });
+  }
   try {
     if (!location.pathname.startsWith("/404/")) {
       localStorage.setItem("lastMollyShainaPage", location.pathname + location.search + location.hash);
@@ -98,8 +268,10 @@ document.addEventListener("DOMContentLoaded", () => {
   if (habitIds.every(id => document.getElementById(id))) {
     let data = { naps: 3, windows: 4, blankets: 2, patrols: 2, sighs: 3 };
 
+    const habitStorageKey = location.pathname.includes("poppy") ? "poppyHabits" : "mollyHabits";
+
     try {
-      data = JSON.parse(localStorage.getItem("mollyHabits")) || data;
+      data = JSON.parse(localStorage.getItem(habitStorageKey)) || data;
     } catch {}
 
     function setBar(id, val) {
@@ -117,7 +289,7 @@ document.addEventListener("DOMContentLoaded", () => {
       if (time) time.textContent = "Last updated: " + new Date().toLocaleTimeString();
 
       try {
-        localStorage.setItem("mollyHabits", JSON.stringify(data));
+        localStorage.setItem(habitStorageKey, JSON.stringify(data));
       } catch {}
     }
 
@@ -148,8 +320,11 @@ document.addEventListener("DOMContentLoaded", () => {
     const isShainaAI =
       document.title.toLowerCase().includes("shaina") ||
       askBtn.textContent.toLowerCase().includes("shaina");
-    const dogName = isShainaAI ? "Shaina" : "Molly";
-    const dogIcon = isShainaAI ? "🐕" : "🐕";
+    const isPoppyAI =
+      document.title.toLowerCase().includes("poppy") ||
+      askBtn.textContent.toLowerCase().includes("poppy");
+    const dogName = isPoppyAI ? "Poppy" : isShainaAI ? "Shaina" : "Molly";
+    const dogIcon = isPoppyAI ? "🐩" : "🐕";
 
     function includesAny(text, words) {
       return words.some(word => text.includes(word));
@@ -210,6 +385,26 @@ document.addEventListener("DOMContentLoaded", () => {
           "That question has movement energy. I approve."
         ];
         return shainaResponses[Math.floor(Math.random() * shainaResponses.length)];
+      }
+
+      if (isPoppyAI) {
+        if (includesAny(compact, ["who are you", "your name", "what are you"])) return "I am Poppy, a four-year-old chocolate brown toy poodle living in Melbourne.";
+        if (includesAny(compact, ["breed", "poodle", "toy poodle"])) return "I am a toy poodle. The name describes my size variety; the attention, intelligence, and curly coat are thoroughly poodle.";
+        if (includesAny(compact, ["coat", "fur", "hair", "groom"])) return "My coat is dense, curly, and continuously growing. It needs regular brushing and trimming, especially where the longer curls gather across my head.";
+        if (includesAny(compact, ["walk", "outside", "park", "run"])) return "I prefer to understand a route as I move through it. Distance matters less than having time to notice what has changed.";
+        if (includesAny(compact, ["sleep", "nap", "rest", "bed"])) return "Rest is part of the structure of the day. The best place is comfortable, quiet, and positioned where I can still see the room.";
+        if (includesAny(compact, ["smart", "clever", "intelligent", "mind"])) return "I remember routes and routines, notice small changes, and read more from tone and posture than people sometimes realise.";
+        if (includesAny(compact, ["home", "melbourne", "live"])) return "I live in Melbourne. Home is a collection of known rooms, familiar people, and reliable sequences.";
+        if (includesAny(compact, ["hello", "hi", "hey"])) return "Hello. I’m listening.";
+
+        const poppyResponses = [
+          "I would take a moment to observe before deciding.",
+          "The answer may be in the pattern rather than the single event.",
+          "I have noticed the change. I am still deciding whether it matters.",
+          "A clear view of the room usually improves the situation.",
+          "That deserves careful attention, followed by an unhurried response."
+        ];
+        return poppyResponses[Math.floor(Math.random() * poppyResponses.length)];
       }
 
       if (includesAny(compact, ["favourite food", "favorite food", "best food", "fav food"])) {

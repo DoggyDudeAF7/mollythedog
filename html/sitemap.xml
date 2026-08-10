@@ -120,4 +120,18 @@
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
+  <url>
+    <loc>https://mollyandshaina.com/poppy/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url><loc>https://mollyandshaina.com/poppy-traits/</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://mollyandshaina.com/poppy-habits/</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://mollyandshaina.com/poppy-mind/</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://mollyandshaina.com/poppy-gallery/</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://mollyandshaina.com/poppy-faq/</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://mollyandshaina.com/poppy-dog-breeds/</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://mollyandshaina.com/poppy-stories/</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://mollyandshaina.com/about-poppy/</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://mollyandshaina.com/poppy-blog/</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
 </urlset>

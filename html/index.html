@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Molly and Shaina - Home</title>
+    <title>Molly, Poppy and Shaina - Home</title>
     <link rel="icon" href="favicon.ico" sizes="48x48">
     <link rel="icon" href="favicon.svg" type="image/svg+xml">
     <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
@@ -34,6 +34,20 @@
     padding: 28px;
     }
     
+    /* Inline custom dog emoji */
+    .dog-emoji-picture {
+      display: inline;
+    }
+
+    .dog-emoji {
+      display: inline-block;
+      width: 1.25em;
+      height: 1.25em;
+      max-width: none;
+      object-fit: contain;
+      vertical-align: -0.2em;
+    }
+
     main {
     width: min(980px, 100%);
     display: grid;
@@ -69,7 +83,7 @@
     
     .choices {
     display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 18px;
     }
     
@@ -156,7 +170,7 @@
       <section class="choices" aria-label="Site choices">
         <a class="choice" href="molly/">
           <div>
-            <div class="icon">🐶</div>
+            <div class="icon" id="rendered" data-dog-emojis>:molly:</div>
             <h2>Main Site</h2>
             <p>Photos, traits, habits, galleries, FAQs, breed pages, and the full Molly and Shaina experience.</p>
           </div>
@@ -164,7 +178,7 @@
         </a>
         <a class="choice" href="blog/">
           <div>
-            <div class="icon">📖</div>
+            <div class="icon">:blog:</div>
             <h2>Blog</h2>
             <p>Small stories, update posts, window reports, quiz notes, and whatever important thoughts need a home.</p>
           </div>
@@ -178,10 +192,19 @@
           </div>
           <span class="arrow">Open Comics</span>
         </a>
+        <a class="choice" href="poppy/">
+          <div>
+            <div class="icon">:poppy:</div>
+            <h2>Poppy</h2>
+            <p>Meet Poppy through her traits, habits, mind, gallery, stories, breed profile, and journal.</p>
+          </div>
+          <span class="arrow">Open Poppy</span>
+        </a>
       </section>
       <footer>
         © 2026 Molly & Shaina
       </footer>
     </main>
+    <script src="js/animations.js"></script>
   </body>
 </html>

@@ -6,6 +6,20 @@ body{
   overflow-x:hidden;
 }
 
+/* Inline custom dog emoji */
+.dog-emoji-picture {
+  display: inline;
+}
+
+.dog-emoji {
+  display: inline-block;
+  width: 1.25em;
+  height: 1.25em;
+  max-width: none;
+  object-fit: contain;
+  vertical-align: -0.2em;
+}
+
 /* BACKGROUND */
 .bg{
   position:fixed;
