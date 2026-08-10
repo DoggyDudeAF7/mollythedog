@@ -15,8 +15,9 @@ canvas.height = size * cell;
 const mollyImg = new Image();
 const shainaImg = new Image();
 
-mollyImg.src = "/images/molly/molly.webp";
-shainaImg.src = "/images/shaina/shaina.webp";
+const gameScriptUrl = document.currentScript ? document.currentScript.src : location.href;
+mollyImg.src = new URL("../images/molly/molly.webp", gameScriptUrl).href;
+shainaImg.src = new URL("../images/shaina/shaina.webp", gameScriptUrl).href;
 
 mollyImg.addEventListener("load", draw);
 shainaImg.addEventListener("load", draw);

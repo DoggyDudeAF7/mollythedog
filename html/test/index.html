@@ -11,6 +11,7 @@
     <link rel="icon" type="image/png" sizes="192x192" href="../icon-192.png">
     <link rel="icon" type="image/png" sizes="512x512" href="../icon-512.png">
     <link rel="manifest" href="../site.webmanifest">
+    <link rel="stylesheet" href="../css/style.css">
     <style>
     * {
     box-sizing: border-box;
@@ -18,8 +19,8 @@
     
     .zoom {
     padding: 50px;
-    background-color: green;
-    transition: transform 10s;
+    background-color: orange;
+    transition: transform 0.2s;
     width: 200px;
     height: 100px;
     margin: 0 auto;
@@ -28,7 +29,11 @@
     .zoom:hover {
     -ms-transform: scale(1.5); /* IE 9 */
     -webkit-transform: scale(1.5); /* Safari 3-8 */
-    transform: scale(2.5);
+    transform: scale(5.5);
+    }
+
+    body {
+      background-color: #000001;
     }
     </style>
   </head>
@@ -36,5 +41,7 @@
     <h1>Zoom on Hover</h1>
     <p>Hover over the div element.</p>
     <div class="zoom"></div>
+    <p style="font-size: 11px;" id="rendered">:molly:</p>
+    <script src="../js/animations.js"></script>
   </body>
 </html>

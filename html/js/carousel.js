@@ -6,7 +6,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const pageTitle = document.querySelector("h1")?.textContent?.toLowerCase() || "";
   const isShaina = pageTitle.includes("shaina");
-  const images = isShaina
+  const isPoppy = pageTitle.includes("poppy");
+  const images = isPoppy
+    ? [
+        ["../images/poppy/poppy-meadow-v2.png"],
+        ["../images/poppy/poppy-home-v3.png"],
+        ["../images/poppy/poppy-home-v2.png"],
+      ]
+    : isShaina
     ? [
         ["../images/shaina/shaina.webp"],
         ["../images/shaina/shaina1.webp"],

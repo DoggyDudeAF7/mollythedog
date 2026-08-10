@@ -7,7 +7,22 @@ document.addEventListener("DOMContentLoaded", () => {
   if (!searchBtn || !searchBox || !searchInput || !results) return;
 
   const shainaSite = location.pathname.includes("shaina-") || location.pathname.includes("/shaina/");
-  const commands = shainaSite ? [
+  const poppySite = location.pathname.includes("poppy-") || location.pathname.includes("/poppy/") || location.pathname.includes("/about-poppy/");
+  const poppyCommands = [
+    { key: "home", action: () => location.href = "../poppy/" },
+    { key: "traits", action: () => location.href = "../poppy-traits/" },
+    { key: "habits", action: () => location.href = "../poppy-habits/" },
+    { key: "mind", action: () => location.href = "../poppy-mind/" },
+    { key: "gallery", action: () => location.href = "../poppy-gallery/" },
+    { key: "faq", action: () => location.href = "../poppy-faq/" },
+    { key: "breed", action: () => location.href = "../poppy-dog-breeds/" },
+    { key: "toy poodle", action: () => location.href = "../poppy-dog-breeds/" },
+    { key: "stories", action: () => location.href = "../poppy-stories/" },
+    { key: "about", action: () => location.href = "../about-me/" },
+    { key: "blog", action: () => location.href = "../poppy-blog/" },
+    { key: "molly and shaina", action: () => location.href = "../molly/" }
+  ];
+  const commands = poppySite ? poppyCommands : shainaSite ? [
     { key: "home", action: () => location.href = "../shaina-home/" },
     { key: "traits", action: () => location.href = "../shaina-traits/" },
     { key: "habits", action: () => location.href = "../shaina-habits/" },
@@ -46,7 +61,15 @@ document.addEventListener("DOMContentLoaded", () => {
     { key: "quiz", action: () => location.href = "../breed-quiz/" },
     { key: "breed quiz", action: () => location.href = "../breed-quiz/" },
     { key: "blog", action: () => location.href = "../blog/" },
-    { key: "molly", action: () => location.href = "../molly/" }
+    { key: "molly", action: () => location.href = "../molly/" },
+    { key: "poppy", action: () => location.href = "../poppy/" },
+    { key: "poppy traits", action: () => location.href = "../poppy-traits/" },
+    { key: "poppy habits", action: () => location.href = "../poppy-habits/" },
+    { key: "poppy mind", action: () => location.href = "../poppy-mind/" },
+    { key: "poppy gallery", action: () => location.href = "../poppy-gallery/" },
+    { key: "poppy faq", action: () => location.href = "../poppy-faq/" },
+    { key: "poppy stories", action: () => location.href = "../poppy-stories/" },
+    { key: "about poppy", action: () => location.href = "../about-poppy/" }
   ] : [
     { key: "home", action: () => location.href = "../molly/" },
     { key: "traits", action: () => location.href = "../molly-traits/" },
@@ -86,7 +109,15 @@ document.addEventListener("DOMContentLoaded", () => {
     { key: "quiz", action: () => location.href = "../breed-quiz/" },
     { key: "breed quiz", action: () => location.href = "../breed-quiz/" },
     { key: "blog", action: () => location.href = "../blog/" },
-    { key: "shaina", action: () => location.href = "../shaina/" }
+    { key: "shaina", action: () => location.href = "../shaina/" },
+    { key: "poppy", action: () => location.href = "../poppy/" },
+    { key: "poppy traits", action: () => location.href = "../poppy-traits/" },
+    { key: "poppy habits", action: () => location.href = "../poppy-habits/" },
+    { key: "poppy mind", action: () => location.href = "../poppy-mind/" },
+    { key: "poppy gallery", action: () => location.href = "../poppy-gallery/" },
+    { key: "poppy faq", action: () => location.href = "../poppy-faq/" },
+    { key: "poppy stories", action: () => location.href = "../poppy-stories/" },
+    { key: "about poppy", action: () => location.href = "../about-poppy/" }
   ];
 
   let selectedIndex = 0;
