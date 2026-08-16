@@ -379,7 +379,7 @@ async function handleSubmissionEmail(request, env) {
                   <tr>
                     <td valign="middle" style="padding-right:16px;">
                       <img
-                        src="https://mollyandshaina.com/images/emoji/molly-emoji.webp"
+                        src="https://mollyandshaina.com/images/emoji/molly-emoji.png"
                         width="78"
                         height="78"
                         alt="Molly"
