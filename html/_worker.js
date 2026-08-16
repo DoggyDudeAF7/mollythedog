@@ -501,7 +501,7 @@ async function handleSubmissionEmail(request, env) {
                         href="mailto:${escapeHtml(email)}?subject=${encodeURIComponent(`Re: Molly and Shaina ${submissionType}`)}"
                         style="display:inline-block;padding:14px 28px;font-size:16px;font-weight:700;color:#ffffff;text-decoration:none;border-radius:12px;"
                       >
-                        ↩ Reply to ${escapeHtml(name)}
+                        Reply to ${escapeHtml(name)}
                       </a>
                     </td>
                   </tr>
