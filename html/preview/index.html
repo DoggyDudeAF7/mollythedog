@@ -25,6 +25,11 @@
         min-height: 100vh;
       }
 
+      .preview-page main *,
+      .preview-page nav * {
+        min-width: 0;
+      }
+
       .preview-page nav {
         width: min(620px, calc(100vw - 24px));
       }
@@ -125,6 +130,7 @@
       }
 
       .preview-hero > p {
+        width: min(650px, 100%);
         max-width: 650px;
         margin-top: 22px;
         color: rgba(255, 255, 255, 0.7);
@@ -206,6 +212,7 @@
       }
 
       .meet-card p {
+        width: 100%;
         max-width: 650px;
         font-size: 1.05rem;
       }
@@ -355,10 +362,12 @@
       }
 
       @media (max-width: 520px) {
+        .preview-page nav .nav-links .nav-icon {
+          display: none;
+        }
+
         .preview-page nav .nav-links a {
-          flex-direction: column;
-          gap: 1px;
-          height: 54px;
+          height: 48px;
           padding: 5px 3px;
         }
 
@@ -367,7 +376,20 @@
         }
 
         .preview-page nav .nav-links .nav-text {
-          font-size: 0.72rem;
+          font-size: 0.76rem;
+        }
+
+        .preview-hero h1 {
+          font-size: clamp(2.25rem, 12vw, 3.4rem);
+          line-height: 0.98;
+        }
+
+        .preview-hero h1 span {
+          display: block;
+        }
+
+        .meet-card h2 {
+          overflow-wrap: anywhere;
         }
 
         .hero-dog {
@@ -419,7 +441,7 @@
     <main class="preview-shell">
       <header class="preview-hero">
         <span class="preview-badge">WEBSITE PREVIEW</span>
-        <h1>Molly &amp; Shaina</h1>
+        <h1>Molly <span>&amp; Shaina</span></h1>
         <p>A playful little corner of the web devoted to two dogs, their habits, their adventures, and their very important opinions.</p>
         <div class="hero-dogs" aria-label="Molly and Shaina">
         </div>
