@@ -145,7 +145,7 @@ function addAppToDock(app) {
 
   link.href = app.url;
   icon.className = "app-icon";
-  icon.alt = "";
+  icon.alt = `${app.name} app icon`;
   label.textContent = app.name;
   link.append(icon, label);
   elements.bottomApps.insertBefore(link, elements.addAppButton);

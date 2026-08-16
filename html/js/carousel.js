@@ -9,26 +9,26 @@ document.addEventListener("DOMContentLoaded", () => {
   const isPoppy = pageTitle.includes("poppy");
   const images = isPoppy
     ? [
-        ["../images/poppy/poppy-meadow-v2.png"],
-        ["../images/poppy/poppy-home-v3.png"],
-        ["../images/poppy/poppy-home-v2.png"],
+        { candidates: ["../images/poppy/poppy-meadow-v2.png"], alt: "Poppy outdoors in an open meadow" },
+        { candidates: ["../images/poppy/poppy-home-v3.png"], alt: "Poppy resting on a charcoal sofa" },
+        { candidates: ["../images/poppy/poppy-home-v2.png"], alt: "Poppy relaxing at home with her natural curly coat" },
       ]
     : isShaina
     ? [
-        ["../images/shaina/shaina.webp"],
-        ["../images/shaina/shaina1.webp"],
-        ["../images/shaina/shaina2.webp"],
-        ["../images/shaina/shaina3.webp"],
-        ["../images/shaina/shaina4.webp"],
-        ["../images/shaina/shaina.webp"],
+        { candidates: ["../images/shaina/shaina.webp"], alt: "Portrait of Shaina" },
+        { candidates: ["../images/shaina/shaina1.webp"], alt: "Shaina lying on a patterned rug with a tennis ball" },
+        { candidates: ["../images/shaina/shaina2.webp"], alt: "Shaina relaxing in a patch of sunlight by the back door" },
+        { candidates: ["../images/shaina/shaina3.webp"], alt: "Shaina peeking out from beneath an orange towel" },
+        { candidates: ["../images/shaina/shaina4.webp"], alt: "Shaina carrying a plush toy across the rug" },
+        { candidates: ["../images/shaina/shaina.webp"], alt: "Portrait of Shaina" },
       ]
     : [
-        ["../images/molly/molly0.webp"],
-        ["../images/molly/molly1.webp"],
-        ["../images/molly/molly2.webp"],
-        ["../images/molly/molly3.webp"],
-        ["../images/molly/molly4.webp"],
-        ["../images/molly/molly.webp"],
+        { candidates: ["../images/molly/molly0.webp"], alt: "Molly looking toward the camera" },
+        { candidates: ["../images/molly/molly1.webp"], alt: "Close-up of Molly's face and black nose" },
+        { candidates: ["../images/molly/molly2.webp"], alt: "Molly curled up on a stack of folded towels on the couch" },
+        { candidates: ["../images/molly/molly3.webp"], alt: "Molly resting on her side on a patterned rug" },
+        { candidates: ["../images/molly/molly4.webp"], alt: "Molly sitting beside a phone showing another dog" },
+        { candidates: ["../images/molly/molly.webp"], alt: "Portrait of Molly" },
       ];
 
   function attachFallbacks(img, candidates) {
@@ -42,7 +42,7 @@ document.addEventListener("DOMContentLoaded", () => {
     };
   }
 
-  function openLightbox(src) {
+  function openLightbox(src, alt) {
     let lightbox = document.getElementById("lightbox");
     let lightboxImg = document.getElementById("lightboxImg");
     let closeButton = document.getElementById("lightboxClose");
@@ -56,6 +56,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (!lightboxImg) {
       lightboxImg = document.createElement("img");
       lightboxImg.id = "lightboxImg";
+      lightboxImg.alt = "Enlarged carousel photo";
       lightbox.appendChild(lightboxImg);
     }
 
@@ -69,6 +70,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     lightboxImg.src = src;
+    lightboxImg.alt = `Enlarged view: ${alt}`;
     lightbox.style.display = "flex";
   }
 
@@ -80,14 +82,14 @@ document.addEventListener("DOMContentLoaded", () => {
   const middleIndex = Math.floor(repeatCount / 2) * images.length;
 
   for (let r = 0; r < repeatCount; r++) {
-    images.forEach(candidates => {
+    images.forEach(({ candidates, alt }) => {
       const div = document.createElement("div");
       div.className = "slide";
       const img = document.createElement("img");
-      img.alt = "";
+      img.alt = alt;
       attachFallbacks(img, candidates);
       img.addEventListener("click", () => {
-        openLightbox(img.currentSrc || img.src);
+        openLightbox(img.currentSrc || img.src, img.alt);
       });
       div.appendChild(img);
       track.appendChild(div);
