@@ -228,6 +228,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (!lightboxImg) {
       lightboxImg = document.createElement("img");
       lightboxImg.id = "lightboxImg";
+      lightboxImg.alt = "Enlarged gallery image";
       lightbox.appendChild(lightboxImg);
     }
 
@@ -250,6 +251,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const img = event.target.closest(".grid img, .slide img");
       if (!img) return;
       lightboxImg.src = img.currentSrc || img.src;
+      lightboxImg.alt = img.alt ? `Enlarged view: ${img.alt}` : "Enlarged gallery image";
       lightbox.style.display = "flex";
     });
 
