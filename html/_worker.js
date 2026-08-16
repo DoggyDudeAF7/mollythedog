@@ -399,7 +399,7 @@ async function handleSubmissionEmail(request, env) {
 
                     <td valign="middle" style="padding-left:16px;">
                       <img
-                        src="https://mollyandshaina.com/images/emoji/shaina-emoji.webp"
+                        src="https://mollyandshaina.com/images/emoji/shaina-emoji.png"
                         width="78"
                         height="78"
                         alt="Shaina"
@@ -519,7 +519,7 @@ async function handleSubmissionEmail(request, env) {
 
                     <td valign="middle" style="width:58px;padding-right:14px;">
                       <img
-                        src="https://mollyandshaina.com/images/emoji/molly-emoji.webp"
+                        src="https://mollyandshaina.com/images/emoji/molly-emoji.png"
                         width="48"
                         height="48"
                         alt="Molly"
@@ -543,7 +543,7 @@ async function handleSubmissionEmail(request, env) {
 
                     <td align="right" valign="middle" style="width:58px;">
                       <img
-                        src="https://mollyandshaina.com/images/emoji/shaina-emoji.webp"
+                        src="https://mollyandshaina.com/images/emoji/shaina-emoji.png"
                         width="48"
                         height="48"
                         alt="Shaina"
