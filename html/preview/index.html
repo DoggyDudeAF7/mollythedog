@@ -25,69 +25,8 @@
         min-height: 100vh;
       }
 
-      .preview-page main *,
-      .preview-page nav * {
+      .preview-page main * {
         min-width: 0;
-      }
-
-      .preview-page nav {
-        width: min(310px, calc(100vw - 24px));
-      }
-
-      .preview-page nav .nav-inner {
-        width: 100%;
-      }
-
-      .preview-page #navToggle {
-        display: none;
-      }
-
-      .preview-page nav .nav-links {
-        width: auto;
-        justify-content: center;
-      }
-
-      .preview-page nav .nav-links a {
-        width: 60px;
-        min-width: 60px;
-        height: 60px;
-        padding: 0;
-        border-radius: 18px;
-      }
-
-      .preview-page nav .nav-links a::after {
-        display: none;
-      }
-
-      .preview-page nav .nav-links a:hover,
-      .preview-page nav .nav-links a:focus-visible {
-        transform: scale(1.35);
-        background: rgba(255, 255, 255, 0.14);
-        outline: none;
-      }
-
-      .preview-page nav .nav-icon {
-        display: grid;
-        place-items: center;
-        font-size: 28px;
-      }
-
-      .preview-page nav .nav-text {
-        position: absolute;
-        bottom: -22px;
-        color: rgba(255, 255, 255, 0.8);
-        font-size: 12px;
-        font-weight: 600;
-        opacity: 0;
-        pointer-events: none;
-        transform: translateY(5px);
-        transition: opacity 0.15s ease, transform 0.15s ease;
-      }
-
-      .preview-page nav .nav-links a:hover .nav-text,
-      .preview-page nav .nav-links a:focus-visible .nav-text {
-        opacity: 1;
-        transform: translateY(0);
       }
 
       .preview-shell {
@@ -301,45 +240,6 @@
           scroll-padding-top: 92px;
         }
 
-        .preview-page nav {
-          width: min(250px, calc(100vw - 16px));
-        }
-
-        .preview-page #navToggle {
-          display: none;
-        }
-
-        .preview-page nav .nav-links,
-        .preview-page nav .nav-links.open {
-          position: static;
-          width: auto;
-          max-height: none;
-          flex-direction: row;
-          align-items: center;
-          gap: 6px;
-          padding: 0;
-          border: 0;
-          border-radius: 0;
-          opacity: 1;
-          background: transparent;
-          box-shadow: none;
-          pointer-events: auto;
-        }
-
-        .preview-page nav .nav-links a {
-          width: 56px;
-          min-width: 56px;
-          height: 56px;
-          flex: 0 0 56px;
-          justify-content: center;
-          padding: 0;
-        }
-
-        .preview-page nav .nav-links .nav-icon {
-          display: grid;
-          font-size: 24px;
-        }
-
         .preview-shell {
           width: min(100% - 20px, 720px);
           padding-top: 92px;
@@ -371,19 +271,6 @@
       }
 
       @media (max-width: 520px) {
-        .preview-page nav .nav-links a {
-          height: 54px;
-          padding: 0;
-        }
-
-        .preview-page nav .nav-links .nav-icon {
-          line-height: 1;
-        }
-
-        .preview-page nav .nav-links .nav-text {
-          font-size: 11px;
-        }
-
         .preview-hero h1 {
           font-size: clamp(2.25rem, 12vw, 3.4rem);
           line-height: 0.98;
@@ -428,16 +315,13 @@
         <button id="navToggle" type="button" aria-label="Toggle menu" aria-expanded="false">☰</button>
         <div class="nav-links" id="navLinks">
           <a href="#molly" title="Molly">
-            <span class="nav-icon">:molly:</span>
-            <span class="nav-text">Molly</span>
+            <span>:molly:</span>
           </a>
           <a href="#shaina" title="Shaina">
-            <span class="nav-icon">:shaina:</span>
-            <span class="nav-text">Shaina</span>
+            <span>:shaina:</span>
           </a>
           <a href="#features" title="Features">
-            <span class="nav-icon" aria-hidden="true">✦</span>
-            <span class="nav-text">Features</span>
+            <span>:traits:</span>
           </a>
         </div>
       </div>
