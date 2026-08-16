@@ -637,12 +637,27 @@ async function handleSubmissionEmail(request, env) {
                     >
                       <div
                         style="
-                          font-size:30px;
-                          color:#bc8cff;
-                          line-height:1;
+                          width:42px;
+                          height:32px;
+                          border:3px solid #bc8cff;
+                          border-radius:9px;
+                          position:relative;
+                          box-sizing:border-box;
                         "
                       >
-                        ◰
+                        <div
+                          style="
+                            position:absolute;
+                            left:7px;
+                            bottom:-9px;
+                            width:12px;
+                            height:12px;
+                            border-left:3px solid #bc8cff;
+                            border-bottom:3px solid #bc8cff;
+                            transform:skewY(-35deg);
+                            background:#14121f;
+                          "
+                        ></div>
                       </div>
                     </td>
 
