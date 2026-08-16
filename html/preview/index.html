@@ -13,7 +13,7 @@
     <link rel="icon" type="image/png" sizes="512x512" href="../icon-512.png">
     <link rel="manifest" href="../site.webmanifest">
     <meta name="theme-color" content="#07070c">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800;900&amp;display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../css/style.css">
     <style>
       html {
@@ -443,7 +443,7 @@
         <span class="preview-badge">WEBSITE PREVIEW</span>
         <h1>Molly <span>&amp; Shaina</span></h1>
         <p>A playful little corner of the web devoted to two dogs, their habits, their adventures, and their very important opinions.</p>
-        <div class="hero-dogs" aria-label="Molly and Shaina">
+        <div class="hero-dogs" role="group" aria-label="Molly and Shaina">
           <span class="hero-dog">
             <img class="dog-emoji" src="../images/emoji/molly-emoji.webp" alt="Molly">
           </span>
@@ -456,7 +456,7 @@
       <section class="section" id="molly" aria-labelledby="molly-title">
         <article class="card meet-card reveal left">
           <div class="split left">
-            <div style="font-size: 6rem;">:molly:</div>
+            <div class="meet-portrait">:molly:</div>
             <div>
               <p class="eyebrow">Meet Molly</p>
               <h2 id="molly-title">Sleepy Strategist</h2>
@@ -469,7 +469,7 @@
       <section class="section" id="shaina" aria-labelledby="shaina-title">
         <article class="card meet-card reveal right">
           <div class="split right">
-            <div style="font-size: 6rem;">:shaina:</div>
+            <div class="meet-portrait">:shaina:</div>
             <div>
               <p class="eyebrow">Meet Shaina</p>
               <h2 id="shaina-title">Chief Investigator</h2>
@@ -514,7 +514,7 @@
       </section>
 
       <section class="preview-final" aria-labelledby="final-title">
-        <div class="final-dogs" aria-label="Molly and Shaina">
+        <div class="final-dogs" role="group" aria-label="Molly and Shaina">
           <span class="final-dog">:molly:</span>
           <span class="final-dog">:shaina:</span>
         </div>
