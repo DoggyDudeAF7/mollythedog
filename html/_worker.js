@@ -362,144 +362,405 @@ async function handleSubmissionEmail(request, env) {
   const html = `
 <!doctype html>
 <html>
-  <body style="margin:0;padding:0;background:#f7f4f1;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif;color:#2d241f;">
+  <body style="
+    margin:0;
+    padding:0;
+    background:#f3f3f3;
+    font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif;
+  ">
 
-    <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" style="background:#f7f4f1;padding:30px 12px;">
+    <table
+      role="presentation"
+      width="100%"
+      cellspacing="0"
+      cellpadding="0"
+      border="0"
+      style="width:100%;background:#f3f3f3;padding:30px 12px;"
+    >
       <tr>
         <td align="center">
 
-          <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0"
-            style="max-width:640px;background:#ffffff;border-radius:22px;overflow:hidden;border:1px solid #eadfd9;">
+          <!-- MAIN EMAIL CARD -->
+          <table
+            role="presentation"
+            width="100%"
+            cellspacing="0"
+            cellpadding="0"
+            border="0"
+            style="
+              width:100%;
+              max-width:700px;
+              background:
+                linear-gradient(
+                  135deg,
+                  #1a1017 0%,
+                  #090910 45%,
+                  #0b0b15 72%,
+                  #372254 100%
+                );
+              border-radius:20px;
+              overflow:hidden;
+              border:1px solid #282431;
+              box-shadow:0 12px 40px rgba(0,0,0,0.18);
+            "
+          >
 
             <!-- HEADER -->
             <tr>
-              <td align="center" style="padding:30px 24px 22px;background:#fff8f5;">
+              <td
+                align="center"
+                style="
+                  padding:28px 30px 20px;
+                  background:
+                    linear-gradient(
+                      110deg,
+                      rgba(255,154,126,0.48) 0%,
+                      rgba(35,20,25,0.2) 28%,
+                      rgba(0,0,10,0) 65%
+                    );
+                "
+              >
 
-                <table role="presentation" cellspacing="0" cellpadding="0" border="0">
-                  <tr>
-                    <td valign="middle" style="padding-right:16px;">
-                      <img
-                        src="https://mollyandshaina.com/images/emoji/molly-emoji.png"
-                        width="78"
-                        height="78"
-                        alt="Molly"
-                        style="display:block;width:78px;height:78px;object-fit:contain;"
-                      >
-                    </td>
-
-                    <td align="center" valign="middle">
-                      <div style="font-size:30px;font-weight:800;line-height:1.1;color:#3c2a20;">
-                        Molly &amp; Shaina
-                      </div>
-
-                      <div style="margin-top:7px;font-size:13px;font-weight:700;letter-spacing:1.5px;color:#e36f83;text-transform:uppercase;">
-                        New website submission
-                      </div>
-                    </td>
-
-                    <td valign="middle" style="padding-left:16px;">
-                      <img
-                        src="https://mollyandshaina.com/images/emoji/shaina-emoji.png"
-                        width="78"
-                        height="78"
-                        alt="Shaina"
-                        style="display:block;width:78px;height:78px;object-fit:contain;"
-                      >
-                    </td>
-                  </tr>
-                </table>
-
-              </td>
-            </tr>
-
-            <!-- PINK DIVIDER -->
-            <tr>
-              <td style="height:4px;background:#ef8fa1;font-size:0;line-height:0;">
-                &nbsp;
-              </td>
-            </tr>
-
-            <!-- MAIN CONTENT -->
-            <tr>
-              <td style="padding:34px 34px 10px;">
-
-                <h1 style="margin:0;text-align:center;font-size:27px;line-height:1.25;color:#30231e;">
-                  New Molly and Shaina submission
-                </h1>
-
-                <p style="margin:10px 0 28px;text-align:center;font-size:15px;color:#756963;">
-                  Someone sent something through mollyandshaina.com 🐾
-                </p>
-
-                <!-- DETAILS CARD -->
-                <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0"
-                  style="background:#faf8f7;border:1px solid #eee5e1;border-radius:16px;">
-
-                  <tr>
-                    <td style="padding:19px 22px;border-bottom:1px solid #ebe3df;width:115px;font-weight:700;color:#df687c;">
-                      Type
-                    </td>
-                    <td style="padding:19px 22px;border-bottom:1px solid #ebe3df;color:#2d241f;">
-                      ${escapeHtml(submissionType)}
-                    </td>
-                  </tr>
-
-                  <tr>
-                    <td style="padding:19px 22px;border-bottom:1px solid #ebe3df;font-weight:700;color:#df687c;">
-                      Name
-                    </td>
-                    <td style="padding:19px 22px;border-bottom:1px solid #ebe3df;color:#2d241f;">
-                      ${escapeHtml(name)}
-                    </td>
-                  </tr>
-
-                  <tr>
-                    <td style="padding:19px 22px;border-bottom:1px solid #ebe3df;font-weight:700;color:#df687c;">
-                      Email
-                    </td>
-                    <td style="padding:19px 22px;border-bottom:1px solid #ebe3df;">
-                      <a href="mailto:${escapeHtml(email)}"
-                        style="color:#2671c8;text-decoration:underline;">
-                        ${escapeHtml(email)}
-                      </a>
-                    </td>
-                  </tr>
-
-                  <tr>
-                    <td style="padding:19px 22px;font-weight:700;color:#df687c;">
-                      Attachment
-                    </td>
-                    <td style="padding:19px 22px;color:#2d241f;">
-                      ${
-                        attachments.length
-                          ? escapeHtml(attachments[0].filename)
-                          : "None"
-                      }
-                    </td>
-                  </tr>
-
-                </table>
-
-                <!-- MESSAGE -->
-                <div style="margin-top:24px;background:#fff5f6;border:1px solid #f3d8dd;border-radius:16px;padding:22px;">
-
-                  <div style="font-size:18px;font-weight:800;color:#d95f75;margin-bottom:12px;">
-                    Message
-                  </div>
-
-                  <div style="font-size:16px;line-height:1.65;color:#302824;">
-                    ${escapeHtml(message).replace(/\n/g, "<br>")}
-                  </div>
-
+                <div
+                  style="
+                    font-size:13px;
+                    font-weight:800;
+                    letter-spacing:2px;
+                    color:#ff9f87;
+                    text-transform:uppercase;
+                    margin-bottom:18px;
+                  "
+                >
+                  MOLLYANDSHAINA.COM
                 </div>
 
-                <!-- REPLY BUTTON -->
-                <table role="presentation" cellspacing="0" cellpadding="0" border="0" align="center" style="margin:28px auto 20px;">
+                <table
+                  role="presentation"
+                  cellspacing="0"
+                  cellpadding="0"
+                  border="0"
+                  style="margin:auto;"
+                >
                   <tr>
-                    <td align="center" bgcolor="#e86f86" style="border-radius:12px;">
+
+                    <!-- MOLLY -->
+                    <td
+                      valign="middle"
+                      align="center"
+                      style="padding-right:24px;"
+                    >
+                      <img
+                        src="https://mollyandshaina.com/images/emoji/molly-emoji.webp"
+                        width="110"
+                        alt="Molly"
+                        style="
+                          display:block;
+                          width:110px;
+                          max-width:110px;
+                          height:auto;
+                        "
+                      >
+                    </td>
+
+                    <!-- TITLE -->
+                    <td
+                      valign="middle"
+                      align="center"
+                      style="padding:0 8px;"
+                    >
+                      <div
+                        style="
+                          font-size:44px;
+                          line-height:1.05;
+                          font-weight:900;
+                          color:#ffffff;
+                          letter-spacing:-1px;
+                        "
+                      >
+                        A New Bark<br>
+                        Just Landed
+                      </div>
+                    </td>
+
+                    <!-- SHAINA -->
+                    <td
+                      valign="middle"
+                      align="center"
+                      style="padding-left:24px;"
+                    >
+                      <img
+                        src="https://mollyandshaina.com/images/emoji/shaina-emoji.webp"
+                        width="110"
+                        alt="Shaina"
+                        style="
+                          display:block;
+                          width:110px;
+                          max-width:110px;
+                          height:auto;
+                        "
+                      >
+                    </td>
+
+                  </tr>
+                </table>
+
+              </td>
+            </tr>
+
+            <!-- CONTENT -->
+            <tr>
+              <td style="padding:12px 28px 10px;">
+
+                <!-- TYPE + SENDER CARD -->
+                <table
+                  role="presentation"
+                  width="100%"
+                  cellspacing="0"
+                  cellpadding="0"
+                  border="0"
+                  style="
+                    width:100%;
+                    background:rgba(255,255,255,0.055);
+                    border:1px solid rgba(255,255,255,0.16);
+                    border-radius:14px;
+                    overflow:hidden;
+                  "
+                >
+                  <tr>
+
+                    <!-- TYPE ICON -->
+                    <td
+                      valign="middle"
+                      style="
+                        width:58px;
+                        padding:18px 0 18px 18px;
+                      "
+                    >
+                      <div
+                        style="
+                          width:46px;
+                          height:46px;
+                          line-height:46px;
+                          text-align:center;
+                          border:2px solid #ff9f87;
+                          border-radius:10px;
+                          font-size:23px;
+                          color:#ff9f87;
+                        "
+                      >
+                        ✦
+                      </div>
+                    </td>
+
+                    <!-- TYPE -->
+                    <td
+                      valign="middle"
+                      style="
+                        width:130px;
+                        padding:18px 18px;
+                        border-right:1px solid rgba(255,255,255,0.15);
+                      "
+                    >
+                      <div
+                        style="
+                          font-size:14px;
+                          font-weight:800;
+                          color:#ff9f87;
+                          text-transform:uppercase;
+                          letter-spacing:1px;
+                        "
+                      >
+                        ${escapeHtml(submissionType)}
+                      </div>
+                    </td>
+
+                    <!-- SENDER -->
+                    <td
+                      valign="middle"
+                      style="padding:18px 22px;"
+                    >
+                      <div
+                        style="
+                          font-size:17px;
+                          font-weight:750;
+                          color:#ffffff;
+                          margin-bottom:4px;
+                        "
+                      >
+                        From ${escapeHtml(name)}
+                      </div>
+
+                      <div
+                        style="
+                          font-size:15px;
+                          color:#c9c6ce;
+                        "
+                      >
+                        <a
+                          href="mailto:${escapeHtml(email)}"
+                          style="
+                            color:#c9c6ce;
+                            text-decoration:none;
+                          "
+                        >
+                          ${escapeHtml(email)}
+                        </a>
+                      </div>
+                    </td>
+
+                  </tr>
+                </table>
+
+                <!-- MESSAGE CARD -->
+                <table
+                  role="presentation"
+                  width="100%"
+                  cellspacing="0"
+                  cellpadding="0"
+                  border="0"
+                  style="
+                    width:100%;
+                    margin-top:12px;
+                    background:rgba(255,255,255,0.055);
+                    border:1px solid rgba(255,255,255,0.16);
+                    border-radius:14px;
+                  "
+                >
+                  <tr>
+
+                    <td
+                      valign="top"
+                      style="
+                        width:60px;
+                        padding:20px 0 20px 20px;
+                      "
+                    >
+                      <div
+                        style="
+                          font-size:30px;
+                          color:#bc8cff;
+                          line-height:1;
+                        "
+                      >
+                        ◰
+                      </div>
+                    </td>
+
+                    <td
+                      style="
+                        padding:20px 22px 20px 12px;
+                        font-size:16px;
+                        line-height:1.6;
+                        color:#f4f2f6;
+                      "
+                    >
+                      ${escapeHtml(message).replace(/\n/g, "<br>")}
+                    </td>
+
+                  </tr>
+                </table>
+
+                ${
+                  attachments.length
+                    ? `
+                <!-- ATTACHMENT CARD -->
+                <table
+                  role="presentation"
+                  width="100%"
+                  cellspacing="0"
+                  cellpadding="0"
+                  border="0"
+                  style="
+                    width:100%;
+                    margin-top:12px;
+                    background:rgba(255,255,255,0.055);
+                    border:1px solid rgba(255,255,255,0.16);
+                    border-radius:14px;
+                  "
+                >
+                  <tr>
+
+                    <td
+                      valign="middle"
+                      style="
+                        width:58px;
+                        padding:17px 0 17px 20px;
+                        font-size:30px;
+                        color:#bc8cff;
+                      "
+                    >
+                      📎
+                    </td>
+
+                    <td
+                      valign="middle"
+                      style="
+                        padding:17px 10px;
+                        font-size:15px;
+                        color:#d5c4ff;
+                      "
+                    >
+                      1 attachment
+                    </td>
+
+                    <td
+                      valign="middle"
+                      style="
+                        padding:12px 18px 12px 10px;
+                      "
+                    >
+                      <div
+                        style="
+                          padding:12px 16px;
+                          border:1px solid rgba(255,255,255,0.25);
+                          border-radius:10px;
+                          color:#ffffff;
+                          font-size:15px;
+                          background:rgba(0,0,0,0.10);
+                        "
+                      >
+                        📄 ${escapeHtml(attachments[0].filename)}
+                      </div>
+                    </td>
+
+                  </tr>
+                </table>
+                `
+                    : ""
+                }
+
+                <!-- REPLY BUTTON -->
+                <table
+                  role="presentation"
+                  width="100%"
+                  cellspacing="0"
+                  cellpadding="0"
+                  border="0"
+                  style="margin-top:14px;"
+                >
+                  <tr>
+                    <td
+                      align="center"
+                      bgcolor="#ff9f87"
+                      style="
+                        border-radius:12px;
+                        background:#ff9f87;
+                      "
+                    >
                       <a
-                        href="mailto:${escapeHtml(email)}?subject=${encodeURIComponent(`Re: Molly and Shaina ${submissionType}`)}"
-                        style="display:inline-block;padding:14px 28px;font-size:16px;font-weight:700;color:#ffffff;text-decoration:none;border-radius:12px;"
+                        href="mailto:${escapeHtml(email)}?subject=${encodeURIComponent(
+                          `Re: Molly and Shaina ${submissionType}`
+                        )}"
+                        style="
+                          display:block;
+                          padding:17px 22px;
+                          font-size:18px;
+                          line-height:1;
+                          font-weight:800;
+                          color:#181014;
+                          text-decoration:none;
+                          border-radius:12px;
+                        "
                       >
                         Reply to ${escapeHtml(name)}
                       </a>
@@ -512,56 +773,56 @@ async function handleSubmissionEmail(request, env) {
 
             <!-- FOOTER -->
             <tr>
-              <td style="padding:25px 30px;background:#fff8f5;border-top:1px solid #eee2dd;">
+              <td
+                align="center"
+                style="
+                  padding:24px 24px 28px;
+                  color:#ffffff;
+                "
+              >
 
-                <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0">
-                  <tr>
+                <div
+                  style="
+                    font-size:18px;
+                    font-weight:800;
+                    color:#ffffff;
+                    margin-bottom:8px;
+                  "
+                >
+                  🐾 Molly &amp; Shaina
+                </div>
 
-                    <td valign="middle" style="width:58px;padding-right:14px;">
-                      <img
-                        src="https://mollyandshaina.com/images/emoji/molly-emoji.png"
-                        width="48"
-                        height="48"
-                        alt="Molly"
-                        style="display:block;width:48px;height:48px;object-fit:contain;"
-                      >
-                    </td>
+                <div
+                  style="
+                    font-size:13px;
+                    color:#b8b3bd;
+                  "
+                >
+                  Sent from the tiny creative department.
+                </div>
 
-                    <td valign="middle">
-                      <div style="font-size:16px;font-weight:800;color:#3a2a22;">
-                        Molly &amp; Shaina 🐾
-                      </div>
-
-                      <div style="margin-top:4px;font-size:13px;color:#8a7a73;">
-                        Sent through
-                        <a href="https://mollyandshaina.com"
-                          style="color:#df687c;text-decoration:none;">
-                          mollyandshaina.com
-                        </a>
-                      </div>
-                    </td>
-
-                    <td align="right" valign="middle" style="width:58px;">
-                      <img
-                        src="https://mollyandshaina.com/images/emoji/shaina-emoji.png"
-                        width="48"
-                        height="48"
-                        alt="Shaina"
-                        style="display:block;width:48px;height:48px;object-fit:contain;"
-                      >
-                    </td>
-
-                  </tr>
-                </table>
+                <div
+                  style="
+                    margin-top:8px;
+                    font-size:12px;
+                    color:#837d89;
+                  "
+                >
+                  <a
+                    href="https://mollyandshaina.com"
+                    style="
+                      color:#ff9f87;
+                      text-decoration:none;
+                    "
+                  >
+                    mollyandshaina.com
+                  </a>
+                </div>
 
               </td>
             </tr>
 
           </table>
-
-          <div style="max-width:640px;margin:15px auto 0;text-align:center;font-size:12px;line-height:1.5;color:#958983;">
-            This is an automatic notification from the Molly &amp; Shaina website.
-          </div>
 
         </td>
       </tr>
