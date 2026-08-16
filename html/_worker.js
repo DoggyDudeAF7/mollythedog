@@ -484,7 +484,7 @@ async function handleSubmissionEmail(request, env) {
                 <div style="margin-top:24px;background:#fff5f6;border:1px solid #f3d8dd;border-radius:16px;padding:22px;">
 
                   <div style="font-size:18px;font-weight:800;color:#d95f75;margin-bottom:12px;">
-                    💬 Message
+                    Message
                   </div>
 
                   <div style="font-size:16px;line-height:1.65;color:#302824;">
