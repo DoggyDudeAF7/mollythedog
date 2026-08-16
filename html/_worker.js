@@ -105,6 +105,7 @@ const pagePaths = new Set([
   "/poppy-mind/",
   "/poppy-stories/",
   "/poppy-traits/",
+  "/preview/",
   "/secret-control-panel/",
   "/shaina/",
   "/shaina-faq/",
