@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Molly &amp; Shaina - Website Preview</title>
+    <link rel="icon" href="../favicon.ico" sizes="48x48">
+    <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+    <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="../apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="../icon-192.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="../icon-512.png">
+    <link rel="manifest" href="../site.webmanifest">
+    <meta name="theme-color" content="#07070c">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+      html {
+        scroll-behavior: smooth;
+        scroll-padding-top: 112px;
+      }
+
+      .preview-page {
+        min-height: 100vh;
+      }
+
+      .preview-page nav {
+        width: min(620px, calc(100vw - 24px));
+      }
+
+      .preview-page nav .nav-inner {
+        width: 100%;
+      }
+
+      .preview-page #navToggle {
+        display: none;
+      }
+
+      .preview-page nav .nav-links {
+        width: 100%;
+        justify-content: center;
+      }
+
+      .preview-page nav .nav-links a {
+        width: auto;
+        min-width: 142px;
+        height: 52px;
+        gap: 9px;
+        padding: 0 18px;
+        border-radius: 14px;
+      }
+
+      .preview-page nav .nav-links a::after {
+        display: none;
+      }
+
+      .preview-page nav .nav-links a:hover,
+      .preview-page nav .nav-links a:focus-visible {
+        transform: translateY(-2px);
+        background: rgba(255, 255, 255, 0.14);
+        outline: none;
+      }
+
+      .preview-page nav .nav-icon {
+        display: grid;
+        place-items: center;
+        font-size: 1.2rem;
+      }
+
+      .preview-page nav .nav-text {
+        font-size: 0.9rem;
+        font-weight: 800;
+      }
+
+      .preview-shell {
+        width: min(1050px, calc(100% - 32px));
+        margin: 0 auto;
+        padding: 118px 0 54px;
+      }
+
+      .preview-page .section {
+        min-height: 0;
+        padding: 44px 0;
+      }
+
+      .preview-hero {
+        position: relative;
+        display: grid;
+        justify-items: center;
+        overflow: hidden;
+        padding: 72px 30px 64px;
+        text-align: center;
+      }
+
+      .preview-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        margin-bottom: 18px;
+        padding: 8px 12px;
+        border: 1px solid rgba(255, 183, 165, 0.3);
+        border-radius: 999px;
+        background: rgba(255, 183, 165, 0.09);
+        color: #ffb7a5;
+        font-size: 0.78rem;
+        font-weight: 900;
+        letter-spacing: 0.12em;
+      }
+
+      .preview-badge::before {
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        background: #ffb7a5;
+        box-shadow: 0 0 16px rgba(255, 183, 165, 0.8);
+        content: "";
+      }
+
+      .preview-hero h1 {
+        margin: 0;
+        font-size: clamp(3.4rem, 10vw, 7rem);
+        line-height: 0.92;
+        letter-spacing: -0.065em;
+      }
+
+      .preview-hero > p {
+        max-width: 650px;
+        margin-top: 22px;
+        color: rgba(255, 255, 255, 0.7);
+        font-size: clamp(1rem, 2vw, 1.18rem);
+      }
+
+      .hero-dogs,
+      .final-dogs {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 18px;
+      }
+
+      .hero-dogs {
+        margin-top: 30px;
+      }
+
+      .hero-dog,
+      .meet-portrait,
+      .final-dog {
+        display: grid;
+        place-items: center;
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        background: linear-gradient(135deg, rgba(255, 255, 255, 0.13), rgba(255, 255, 255, 0.04));
+        box-shadow: 0 18px 46px rgba(0, 0, 0, 0.32);
+      }
+
+      .hero-dog {
+        width: 118px;
+        height: 118px;
+        border-radius: 28px;
+        font-size: 5.2rem;
+      }
+
+      .hero-dog .dog-emoji,
+      .meet-portrait .dog-emoji,
+      .final-dog .dog-emoji {
+        width: 1em;
+        height: 1em;
+      }
+
+      .preview-page .card {
+        width: 100%;
+        max-width: none;
+        border-radius: 22px;
+      }
+
+      .meet-card {
+        padding: 40px 44px;
+      }
+
+      .meet-card .split {
+        gap: 38px;
+      }
+
+      .meet-portrait {
+        flex: 0 0 auto;
+        width: 132px;
+        height: 132px;
+        border-radius: 28px;
+        font-size: 6rem;
+      }
+
+      .meet-card .eyebrow,
+      .features-card .eyebrow {
+        margin-bottom: 10px;
+        color: #ffb7a5;
+        font-size: 0.78rem;
+        font-weight: 900;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+      }
+
+      .meet-card h2,
+      .features-card h2 {
+        margin-bottom: 12px;
+        font-size: clamp(2rem, 5vw, 3.5rem);
+      }
+
+      .meet-card p {
+        max-width: 650px;
+        font-size: 1.05rem;
+      }
+
+      .features-card {
+        padding: 42px;
+      }
+
+      .feature-grid {
+        display: grid;
+        grid-template-columns: repeat(5, minmax(0, 1fr));
+        gap: 12px;
+        margin-top: 26px;
+      }
+
+      .feature-item {
+        min-height: 156px;
+        padding: 20px;
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        border-radius: 16px;
+        background: rgba(255, 255, 255, 0.055);
+      }
+
+      .feature-icon {
+        display: block;
+        margin-bottom: 18px;
+        font-size: 1.8rem;
+      }
+
+      .feature-item h3 {
+        margin-bottom: 8px;
+        font-size: 1rem;
+      }
+
+      .feature-item p {
+        color: rgba(255, 255, 255, 0.62);
+        font-size: 0.84rem;
+        line-height: 1.5;
+      }
+
+      .preview-final {
+        display: grid;
+        justify-items: center;
+        padding: 54px 24px 20px;
+        text-align: center;
+      }
+
+      .final-dog {
+        width: 78px;
+        height: 78px;
+        border-radius: 22px;
+        font-size: 3.3rem;
+      }
+
+      .preview-final h2 {
+        margin-top: 24px;
+        font-size: clamp(2.2rem, 6vw, 4.4rem);
+      }
+
+      .preview-final p {
+        margin-top: 10px;
+        color: rgba(255, 255, 255, 0.64);
+      }
+
+      .preview-page footer {
+        margin-top: 32px;
+        padding: 30px 20px;
+        border-top: 1px solid rgba(255, 255, 255, 0.08);
+        background: transparent;
+      }
+
+      @media (max-width: 820px) {
+        html {
+          scroll-padding-top: 92px;
+        }
+
+        .preview-page nav {
+          width: calc(100vw - 16px);
+        }
+
+        .preview-page #navToggle {
+          display: none;
+        }
+
+        .preview-page nav .nav-links,
+        .preview-page nav .nav-links.open {
+          position: static;
+          width: 100%;
+          max-height: none;
+          flex-direction: row;
+          align-items: center;
+          gap: 6px;
+          padding: 0;
+          border: 0;
+          border-radius: 0;
+          opacity: 1;
+          background: transparent;
+          box-shadow: none;
+          pointer-events: auto;
+        }
+
+        .preview-page nav .nav-links a {
+          min-width: 0;
+          height: 48px;
+          flex: 1;
+          justify-content: center;
+          padding: 0 10px;
+          gap: 7px;
+        }
+
+        .preview-page nav .nav-links a span {
+          font-size: 0.95rem;
+        }
+
+        .preview-page nav .nav-links .nav-icon {
+          font-size: 1rem;
+        }
+
+        .preview-shell {
+          width: min(100% - 20px, 720px);
+          padding-top: 92px;
+        }
+
+        .preview-page .section {
+          padding: 24px 0;
+        }
+
+        .preview-hero {
+          padding: 54px 18px 48px;
+        }
+
+        .meet-card,
+        .features-card {
+          padding: 30px 24px;
+        }
+
+        .meet-card .split,
+        .meet-card .split.right {
+          flex-direction: column;
+          gap: 24px;
+          text-align: center;
+        }
+
+        .feature-grid {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+      }
+
+      @media (max-width: 520px) {
+        .preview-page nav .nav-links a {
+          flex-direction: column;
+          gap: 1px;
+          height: 54px;
+          padding: 5px 3px;
+        }
+
+        .preview-page nav .nav-links .nav-icon {
+          line-height: 1;
+        }
+
+        .preview-page nav .nav-links .nav-text {
+          font-size: 0.72rem;
+        }
+
+        .hero-dog {
+          width: 92px;
+          height: 92px;
+          border-radius: 22px;
+          font-size: 4rem;
+        }
+
+        .feature-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .feature-item {
+          min-height: 0;
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        html {
+          scroll-behavior: auto;
+        }
+      }
+    </style>
+  </head>
+  <body class="preview-page">
+    <div class="bg"></div>
+
+    <nav aria-label="Preview sections">
+      <div class="nav-inner">
+        <button id="navToggle" type="button" aria-label="Toggle menu" aria-expanded="false">☰</button>
+        <div class="nav-links" id="navLinks">
+          <a href="#molly" title="Molly">
+            <span class="nav-icon">:molly:</span>
+            <span class="nav-text">Molly</span>
+          </a>
+          <a href="#shaina" title="Shaina">
+            <span class="nav-icon">:shaina:</span>
+            <span class="nav-text">Shaina</span>
+          </a>
+          <a href="#features" title="Features">
+            <span class="nav-icon" aria-hidden="true">✦</span>
+            <span class="nav-text">Features</span>
+          </a>
+        </div>
+      </div>
+    </nav>
+
+    <main class="preview-shell">
+      <header class="preview-hero">
+        <span class="preview-badge">WEBSITE PREVIEW</span>
+        <h1>Molly &amp; Shaina</h1>
+        <p>A playful little corner of the web devoted to two dogs, their habits, their adventures, and their very important opinions.</p>
+        <div class="hero-dogs" aria-label="Molly and Shaina">
+          <span class="hero-dog">:molly:</span>
+          <span class="hero-dog">:shaina:</span>
+        </div>
+      </header>
+
+      <section class="section" id="molly" aria-labelledby="molly-title">
+        <article class="card meet-card reveal left">
+          <div class="split left">
+            <div class="meet-portrait">:molly:</div>
+            <div>
+              <p class="eyebrow">Meet Molly</p>
+              <h2 id="molly-title">Sleepy Strategist</h2>
+              <p>Skittish. Sleepy. Helicopter tail. Powered by naps, snacks and an impressive level of suspicion.</p>
+            </div>
+          </div>
+        </article>
+      </section>
+
+      <section class="section" id="shaina" aria-labelledby="shaina-title">
+        <article class="card meet-card reveal right">
+          <div class="split right">
+            <div class="meet-portrait">:shaina:</div>
+            <div>
+              <p class="eyebrow">Meet Shaina</p>
+              <h2 id="shaina-title">Chief Investigator</h2>
+              <p>Alert. Fast. Snack driven. Always ready to investigate a mysterious noise, greet a visitor, or supervise Molly.</p>
+            </div>
+          </div>
+        </article>
+      </section>
+
+      <section class="section" id="features" aria-labelledby="features-title">
+        <article class="card features-card reveal left">
+          <p class="eyebrow">Around The Site</p>
+          <h2 id="features-title">Small Dogs. Big Features.</h2>
+          <div class="feature-grid">
+            <article class="feature-item">
+              <span class="feature-icon" aria-hidden="true">📷</span>
+              <h3>Photo Galleries</h3>
+              <p>Favourite portraits, sleepy moments, and evidence of daily chaos.</p>
+            </article>
+            <article class="feature-item">
+              <span class="feature-icon" aria-hidden="true">📚</span>
+              <h3>Comics</h3>
+              <p>Dog-sized mysteries told through short visual stories.</p>
+            </article>
+            <article class="feature-item">
+              <span class="feature-icon" aria-hidden="true">🔎</span>
+              <h3>Search</h3>
+              <p>A quick way to find favourite pages and dog facts.</p>
+            </article>
+            <article class="feature-item">
+              <span class="feature-icon" aria-hidden="true">✨</span>
+              <h3>Interactive Bits</h3>
+              <p>Quizzes, counters, editors, surprises, and things to try.</p>
+            </article>
+            <article class="feature-item">
+              <span class="feature-icon" aria-hidden="true">🎨</span>
+              <h3>Shared Style</h3>
+              <p>One dark, colourful design connecting the whole experience.</p>
+            </article>
+          </div>
+        </article>
+      </section>
+
+      <section class="preview-final" aria-labelledby="final-title">
+        <div class="final-dogs" aria-label="Molly and Shaina">
+          <span class="final-dog">:molly:</span>
+          <span class="final-dog">:shaina:</span>
+        </div>
+        <h2 id="final-title">That's the preview!</h2>
+        <p>The rest is still being worked on, one pawprint at a time.</p>
+      </section>
+    </main>
+
+    <footer>
+      <strong>Molly &amp; Shaina</strong>
+      <br>
+      Naps • Snacks • Dog Logic
+      <br>
+      © 2026
+    </footer>
+
+    <script src="../js/animations.js"></script>
+  </body>
+</html>
