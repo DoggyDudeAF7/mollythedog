@@ -1,137 +1,214 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+  <!-- Main -->
+  <url>
+    <loc>https://mollyandshaina.com/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+
+  <!-- Molly -->
   <url>
     <loc>https://mollyandshaina.com/molly/</loc>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
+
   <url>
     <loc>https://mollyandshaina.com/molly-traits/</loc>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
+
   <url>
     <loc>https://mollyandshaina.com/molly-habits/</loc>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
+
   <url>
     <loc>https://mollyandshaina.com/molly-mind/</loc>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
+
   <url>
     <loc>https://mollyandshaina.com/molly-gallery/</loc>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
+
   <url>
     <loc>https://mollyandshaina.com/molly-faq/</loc>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
+
   <url>
     <loc>https://mollyandshaina.com/molly-dog-breeds/</loc>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
-  <url>
-    <loc>https://mollyandshaina.com/breed-quiz/</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://mollyandshaina.com/comics/</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://mollyandshaina.com/submit/</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://mollyandshaina.com/freebie-den/</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://mollyandshaina.com/comic-viewer/</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://mollyandshaina.com/about-me/</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://mollyandshaina.com/about-molly/</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://mollyandshaina.com/about-shaina/</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://blog.mollyandshaina.com/</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
+
+  <!-- Shaina -->
   <url>
     <loc>https://mollyandshaina.com/shaina/</loc>
     <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
+    <priority>1.0</priority>
   </url>
+
   <url>
     <loc>https://mollyandshaina.com/shaina-home/</loc>
     <changefreq>weekly</changefreq>
-    <priority>1.0</priority>
+    <priority>0.9</priority>
   </url>
+
   <url>
     <loc>https://mollyandshaina.com/shaina-traits/</loc>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
+
   <url>
     <loc>https://mollyandshaina.com/shaina-habits/</loc>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
+
   <url>
     <loc>https://mollyandshaina.com/shaina-mind/</loc>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
+
   <url>
     <loc>https://mollyandshaina.com/shaina-gallery/</loc>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
+
   <url>
     <loc>https://mollyandshaina.com/shaina-faq/</loc>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
-  <url>
-    <loc>https://mollyandshaina.com/dog-breeds/</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
+
+  <!-- Poppy -->
   <url>
     <loc>https://mollyandshaina.com/poppy/</loc>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
-  <url><loc>https://mollyandshaina.com/poppy-traits/</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
-  <url><loc>https://mollyandshaina.com/poppy-habits/</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
-  <url><loc>https://mollyandshaina.com/poppy-mind/</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
-  <url><loc>https://mollyandshaina.com/poppy-gallery/</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
-  <url><loc>https://mollyandshaina.com/poppy-faq/</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
-  <url><loc>https://mollyandshaina.com/poppy-dog-breeds/</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://mollyandshaina.com/poppy-stories/</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://mollyandshaina.com/about-poppy/</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://mollyandshaina.com/poppy-blog/</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+
+  <url>
+    <loc>https://mollyandshaina.com/poppy-traits/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://mollyandshaina.com/poppy-habits/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://mollyandshaina.com/poppy-mind/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://mollyandshaina.com/poppy-gallery/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://mollyandshaina.com/poppy-faq/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://mollyandshaina.com/poppy-dog-breeds/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://mollyandshaina.com/poppy-stories/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://mollyandshaina.com/poppy-blog/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- About -->
+  <url>
+    <loc>https://mollyandshaina.com/about-me/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://mollyandshaina.com/about-molly/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://mollyandshaina.com/about-shaina/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://mollyandshaina.com/about-poppy/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Other pages -->
+  <url>
+    <loc>https://mollyandshaina.com/dog-breeds/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://mollyandshaina.com/breed-quiz/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://mollyandshaina.com/comics/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://mollyandshaina.com/comic-viewer/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://mollyandshaina.com/submit/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <url>
+    <loc>https://mollyandshaina.com/freebie-den/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
 </urlset>
