@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <title>Molly and Shaina paw print</title>
+  <g fill="#000">
+    <ellipse cx="105" cy="164" rx="52" ry="70" transform="rotate(-24 105 164)"/>
+    <ellipse cx="218" cy="112" rx="54" ry="73" transform="rotate(-7 218 112)"/>
+    <ellipse cx="334" cy="116" rx="54" ry="73" transform="rotate(8 334 116)"/>
+    <ellipse cx="423" cy="181" rx="52" ry="70" transform="rotate(25 423 181)"/>
+    <path d="M256 210c-54 0-88 42-119 88-29 43-55 75-38 111 17 37 63 33 105 15 22-10 36-14 52-14s30 4 52 14c42 18 88 22 105-15 17-36-9-68-38-111-31-46-65-88-119-88z"/>
+  </g>
+</svg>
