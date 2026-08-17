@@ -1,3 +1,4 @@
+```bash
 #!/usr/bin/env bash
 
 set -u
@@ -14,11 +15,17 @@ last_change_time=0
 announced_pending=false
 
 echo "Watching ${WATCH_PATH} for changes."
-echo "After ${QUIET_SECONDS}s with no new changes, I will commit and push."
+echo "After ${QUIET_SECONDS}s with no new changes, changes will be committed and pushed."
 echo "Press Ctrl+C to stop."
+echo
 
 snapshot() {
   git status --porcelain -- "${WATCH_PATH}"
+}
+
+show_changed_files() {
+  echo "Changed files:"
+  git status --short -- "${WATCH_PATH}" | sed 's/^/  • /'
 }
 
 while true; do
@@ -32,7 +39,10 @@ while true; do
   fi
 
   if [[ -n "${current_state}" && "${announced_pending}" == false ]]; then
-    echo "Detected changes. Waiting ${QUIET_SECONDS}s for saves to settle..."
+    echo "✓ Changes detected"
+    show_changed_files
+    echo
+    echo "Waiting ${QUIET_SECONDS}s for saves to settle..."
     announced_pending=true
   fi
 
@@ -40,30 +50,62 @@ while true; do
     branch="$(git branch --show-current)"
 
     if [[ -z "${branch}" ]]; then
-      echo "Could not find the current branch. Skipping this push."
+      echo "✗ Could not determine the current Git branch."
+      echo "Skipping this push."
+      echo
       last_change_time="${now}"
       sleep "${POLL_SECONDS}"
       continue
     fi
 
+    echo
+    echo "✓ Save period complete"
+    echo "Staging changes..."
+
     git add -- "${WATCH_PATH}"
 
     if git diff --cached --quiet; then
+      echo "No staged changes found."
+      echo
       last_state="$(snapshot)"
       last_change_time="${now}"
       sleep "${POLL_SECONDS}"
       continue
     fi
 
+    echo "✓ Changes staged"
+
+    echo
+    echo "Files being committed:"
+    git diff --cached --name-status | sed 's/^/  • /'
+
     commit_message="${COMMIT_PREFIX}: $(date '+%Y-%m-%d %H:%M:%S')"
 
-    echo "Committing changes..."
+    echo
+    echo "Committing..."
+    echo "Message: ${commit_message}"
+
     if git commit -m "${commit_message}"; then
+      echo "✓ Commit successful"
+
+      echo
       echo "Pushing to origin/${branch}..."
-      git push origin "${branch}"
+
+      if git push origin "${branch}"; then
+        echo "✓ Push successful"
+        echo "✓ Site update sent to GitHub"
+      else
+        echo "✗ Push failed"
+        echo "The commit still exists locally."
+      fi
     else
-      echo "Commit failed. I will keep watching."
+      echo "✗ Commit failed"
+      echo "I will keep watching for changes."
     fi
+
+    echo
+    echo "Watching for more changes..."
+    echo
 
     last_state="$(snapshot)"
     last_change_time="$(date +%s)"
@@ -72,3 +114,4 @@ while true; do
 
   sleep "${POLL_SECONDS}"
 done
+```
