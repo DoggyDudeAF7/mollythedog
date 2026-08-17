@@ -1,4 +1,3 @@
-```bash
 #!/usr/bin/env bash
 
 set -u
@@ -114,4 +113,4 @@ while true; do
 
   sleep "${POLL_SECONDS}"
 done
-```
+
