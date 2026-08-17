@@ -63,7 +63,12 @@ export default {
       return Response.redirect(url.toString(), 301);
     }
 
-    if (url.pathname === "/samuel-start" || url.pathname === "/samuel-start/") {
+    if (
+      url.pathname === "/samuel-start" ||
+      url.pathname === "/samuel-start/" ||
+      url.pathname === "/site-access" ||
+      url.pathname === "/site-access/"
+    ) {
       const response = await env.ASSETS.fetch(request);
       const headers = new Headers(response.headers);
       headers.set("x-robots-tag", "noindex, nofollow, noarchive");
@@ -120,6 +125,7 @@ const pagePaths = new Set([
   "/preview/",
   "/samuel-start/",
   "/secret-control-panel/",
+  "/site-access/",
   "/shaina/",
   "/shaina-faq/",
   "/shaina-gallery/",

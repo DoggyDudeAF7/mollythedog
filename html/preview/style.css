@@ -285,6 +285,24 @@ html {
         background: #050508;
       }
 
+      .secret-entry {
+        position: fixed;
+        right: 0;
+        bottom: 0;
+        z-index: 1100;
+        width: 28px;
+        height: 28px;
+        border-radius: 8px 0 0;
+        opacity: 0;
+      }
+
+      .secret-entry:focus-visible {
+        opacity: 1;
+        outline: 2px solid #ffb7a5;
+        outline-offset: -4px;
+        background: rgba(255, 183, 165, 0.18);
+      }
+
       @media (max-width: 820px) {
         html {
           scroll-padding-top: 92px;
