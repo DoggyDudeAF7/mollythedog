@@ -1,18 +1,19 @@
 {
   "name": "Molly and Shaina",
-  "short_name": "Molly",
-  "start_url": "/molly/",
+  "short_name": "M&S",
+  "start_url": "/",
+  "scope": "/",
   "display": "standalone",
   "background_color": "#07070c",
-  "theme_color": "#000000",
+  "theme_color": "#07070c",
   "icons": [
     {
-      "src": "icon-192.png",
+      "src": "/icon-192.png",
       "sizes": "192x192",
       "type": "image/png"
     },
     {
-      "src": "icon-512.png",
+      "src": "/icon-512.png",
       "sizes": "512x512",
       "type": "image/png"
     }
