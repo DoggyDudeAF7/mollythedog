@@ -72,7 +72,7 @@
     source.type = "image/webp";
     source.srcset = emojiRoot + data.file + ".webp";
     image.className = "dog-emoji";
-    image.src = emojiRoot + data.file + ".png";
+    image.src = emojiRoot + data.file + ".webp";
     image.alt = data.alt;
     image.width = 256;
     image.height = 256;
