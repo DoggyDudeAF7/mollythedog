@@ -63,6 +63,18 @@ export default {
       return Response.redirect(url.toString(), 301);
     }
 
+    if (url.pathname === "/samuel-start" || url.pathname === "/samuel-start/") {
+      const response = await env.ASSETS.fetch(request);
+      const headers = new Headers(response.headers);
+      headers.set("x-robots-tag", "noindex, nofollow, noarchive");
+
+      return new Response(response.body, {
+        status: response.status,
+        statusText: response.statusText,
+        headers,
+      });
+    }
+
     if (shouldServeNotFound(url.pathname)) {
       return fetchNotFoundPage(request, env);
     }
