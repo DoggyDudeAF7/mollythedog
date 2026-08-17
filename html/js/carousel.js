@@ -9,9 +9,9 @@ document.addEventListener("DOMContentLoaded", () => {
   const isPoppy = pageTitle.includes("poppy");
   const images = isPoppy
     ? [
-        { candidates: ["../images/poppy/poppy-meadow-v2.png"], alt: "Poppy outdoors in an open meadow" },
-        { candidates: ["../images/poppy/poppy-home-v3.png"], alt: "Poppy resting on a charcoal sofa" },
-        { candidates: ["../images/poppy/poppy-home-v2.png"], alt: "Poppy relaxing at home with her natural curly coat" },
+        { candidates: ["../images/poppy/poppy-meadow-v2.webp"], alt: "Poppy outdoors in an open meadow" },
+        { candidates: ["../images/poppy/poppy-home-v3.webp"], alt: "Poppy resting on a charcoal sofa" },
+        { candidates: ["../images/poppy/poppy-home-v2.webp"], alt: "Poppy relaxing at home with her natural curly coat" },
       ]
     : isShaina
     ? [
