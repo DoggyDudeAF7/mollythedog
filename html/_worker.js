@@ -106,6 +106,7 @@ const pagePaths = new Set([
   "/freebie-den/",
   "/favourites/",
   "/html/",
+  "/home/",
   "/kitchen-game/",
   "/molly/",
   "/molly-dog-breeds/",

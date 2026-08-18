@@ -26,7 +26,7 @@ siteAccessForm.addEventListener("submit", async (event) => {
     }
 
     try { localStorage.setItem("msFoundSecret", "1"); } catch {}
-    location.href = "/home.html";
+    location.href = "/home/";
   } catch (error) {
     setSiteAccessStatus(error.message, true);
     siteAccessPassword.select();

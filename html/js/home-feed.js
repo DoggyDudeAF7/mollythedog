@@ -12,7 +12,7 @@ const randomPhotoCaption = document.getElementById("randomPhotoCaption");
 const shufflePhoto = document.getElementById("shufflePhoto");
 
 const photos = [
-  { src: "images/molly/molly0.webp", alt: "Molly looking toward the camera", href: "molly-gallery/" },
+  { src: "/images/molly/molly0.webp", alt: "Molly looking toward the camera", href: "/molly-gallery/" },
   { src: "images/molly/molly1.webp", alt: "Close-up portrait of Molly", href: "molly-gallery/" },
   { src: "images/molly/molly2.webp", alt: "Molly curled up on folded towels", href: "molly-gallery/" },
   { src: "images/molly/molly3.webp", alt: "Molly resting on a patterned rug", href: "molly-gallery/" },
