@@ -134,7 +134,13 @@
     button.type = "button";
     button.textContent = "⌕";
     button.setAttribute("aria-label", "Open site search");
-    document.body.appendChild(button);
+    const homeNav = document.querySelector(".feed-header nav");
+    if (homeNav) {
+      button.classList.add("ms-header-search");
+      homeNav.appendChild(button);
+    } else {
+      document.body.appendChild(button);
+    }
     return button;
   }
 

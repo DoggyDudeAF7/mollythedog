@@ -103,6 +103,16 @@
   backdrop-filter: blur(14px);
 }
 
+.ms-search-launch.ms-header-search {
+  position: static;
+  width: auto;
+  height: auto;
+  padding: 10px 13px;
+  border-radius: 12px;
+  background: rgba(255,255,255,.07);
+  font-size: .86rem;
+}
+
 #searchBox.ms-site-search {
   position: fixed;
   inset: 0;
