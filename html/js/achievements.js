@@ -42,11 +42,11 @@
 
   let state = readState();
 
-  function save() {
+  // Pure state backup wrapper
+  function saveStateToStorage() {
     try {
       localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
     } catch {}
-    window.dispatchEvent(new CustomEvent("ms:achievements-changed"));
   }
 
   function progressValue(definition) {
@@ -72,15 +72,22 @@
     if (state.unlocked[id]) return false;
     const definition = definitions.find((item) => item.id === id);
     if (!definition) return false;
+    
     state.unlocked[id] = new Date().toISOString();
-    save();
+    saveStateToStorage();
+    
+    // Announce changes downstream without looping back to validations
+    window.dispatchEvent(new CustomEvent("ms:achievements-changed"));
+    
     if (!quiet) showToast(definition);
     return true;
   }
 
   function check() {
     definitions.forEach((definition) => {
-      if (definition.target && progressValue(definition) >= definition.target) unlock(definition.id);
+      if (definition.target && progressValue(definition) >= definition.target) {
+        unlock(definition.id);
+      }
     });
   }
 
@@ -89,14 +96,14 @@
     if (!Array.isArray(state.progress[key])) state.progress[key] = [];
     if (!state.progress[key].includes(value)) {
       state.progress[key].push(value);
-      save();
+      saveStateToStorage();
       check();
     }
   }
 
   function increment(key, amount = 1) {
     state.progress[key] = Number(state.progress[key] || 0) + amount;
-    save();
+    saveStateToStorage();
     check();
   }
 
