@@ -13,21 +13,21 @@ const shufflePhoto = document.getElementById("shufflePhoto");
 
 const photos = [
   { src: "/images/molly/molly0.webp", alt: "Molly looking toward the camera", href: "/molly-gallery/" },
-  { src: "images/molly/molly1.webp", alt: "Close-up portrait of Molly", href: "molly-gallery/" },
-  { src: "images/molly/molly2.webp", alt: "Molly curled up on folded towels", href: "molly-gallery/" },
-  { src: "images/molly/molly3.webp", alt: "Molly resting on a patterned rug", href: "molly-gallery/" },
-  { src: "images/molly/molly4.webp", alt: "Molly sitting beside a phone", href: "molly-gallery/" },
-  { src: "images/molly/both1.webp", alt: "Molly and Shaina together", href: "molly-gallery/" },
-  { src: "images/molly/both2.webp", alt: "Molly and Shaina sharing a quiet moment", href: "molly-gallery/" },
-  { src: "images/molly/both3.webp", alt: "Molly and Shaina relaxing together", href: "molly-gallery/" },
-  { src: "images/molly/both4.webp", alt: "Molly and Shaina side by side", href: "molly-gallery/" },
-  { src: "images/molly/molly.webp", alt: "Portrait of Molly", href: "molly-gallery/" },
-  { src: "images/molly/molly-900.webp", alt: "Molly looking calmly toward the camera", href: "molly-gallery/" },
-  { src: "images/shaina/shaina.webp", alt: "Portrait of Shaina", href: "shaina-gallery/" },
-  { src: "images/shaina/shaina1.webp", alt: "Shaina lying on a patterned rug with a tennis ball", href: "shaina-gallery/" },
-  { src: "images/shaina/shaina2.webp", alt: "Shaina relaxing in sunlight by the back door", href: "shaina-gallery/" },
-  { src: "images/shaina/shaina3.webp", alt: "Shaina peeking from beneath an orange towel", href: "shaina-gallery/" },
-  { src: "images/shaina/shaina4.webp", alt: "Shaina carrying a plush toy", href: "shaina-gallery/" }
+  { src: "/images/molly/molly1.webp", alt: "Close-up portrait of Molly", href: "/molly-gallery/" },
+  { src: "/images/molly/molly2.webp", alt: "Molly curled up on folded towels", href: "/molly-gallery/" },
+  { src: "/images/molly/molly3.webp", alt: "Molly resting on a patterned rug", href: "/molly-gallery/" },
+  { src: "/images/molly/molly4.webp", alt: "Molly sitting beside a phone", href: "/molly-gallery/" },
+  { src: "/images/molly/both1.webp", alt: "Molly and Shaina together", href: "/molly-gallery/" },
+  { src: "/images/molly/both2.webp", alt: "Molly and Shaina sharing a quiet moment", href: "/molly-gallery/" },
+  { src: "/images/molly/both3.webp", alt: "Molly and Shaina relaxing together", href: "/molly-gallery/" },
+  { src: "/images/molly/both4.webp", alt: "Molly and Shaina side by side", href: "/molly-gallery/" },
+  { src: "/images/molly/molly.webp", alt: "Portrait of Molly", href: "/molly-gallery/" },
+  { src: "/images/molly/molly-900.webp", alt: "Molly looking calmly toward the camera", href: "/molly-gallery/" },
+  { src: "/images/shaina/shaina.webp", alt: "Portrait of Shaina", href: "/shaina-gallery/" },
+  { src: "/images/shaina/shaina1.webp", alt: "Shaina lying on a patterned rug with a tennis ball", href: "/shaina-gallery/" },
+  { src: "/images/shaina/shaina2.webp", alt: "Shaina relaxing in sunlight by the back door", href: "/shaina-gallery/" },
+  { src: "/images/shaina/shaina3.webp", alt: "Shaina peeking from beneath an orange towel", href: "/shaina-gallery/" },
+  { src: "/images/shaina/shaina4.webp", alt: "Shaina carrying a plush toy", href: "/shaina-gallery/" }
 ];
 
 function showBlogPost(post) {
