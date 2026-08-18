@@ -165,8 +165,16 @@ body {
 }
 
 .feed-card {
+  min-width: 0;
   min-height: 400px;
   padding: 30px;
+}
+
+.feed-card > *,
+.card-copy,
+.dog-copy,
+.card-topline > div {
+  min-width: 0;
 }
 
 .feed-card h2 {
@@ -368,7 +376,7 @@ footer {
   }
 
   .feed-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
   }
 
   .explore-strip {
