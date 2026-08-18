@@ -3,205 +3,110 @@
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Molly, Poppy and Shaina - Home</title>
+    <meta name="description" content="The latest Molly and Shaina comic, blog post, photos, and Dog of the Day.">
+    <title>Molly &amp; Shaina - Home Feed</title>
     <link rel="icon" href="/favicon.ico?v=20260817-2" type="image/x-icon" sizes="any">
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png?v=20260817-2">
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png?v=20260817-2">
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=20260817-2">
     <link rel="manifest" href="/site.webmanifest?v=20260817-2">
     <meta name="theme-color" content="#090910">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
-    <style>
-    * {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-    }
-    
-    body {
-    min-height: 100vh;
-    font-family: Inter, system-ui, sans-serif;
-    color: #fff;
-    background:
-    radial-gradient(circle at 18% 18%, rgba(255, 180, 160, 0.24), transparent 32%),
-    radial-gradient(circle at 82% 78%, rgba(160, 135, 255, 0.26), transparent 34%),
-    linear-gradient(135deg, #130907, #090914 48%, #17103a);
-    display: grid;
-    place-items: center;
-    padding: 28px;
-    }
-    
-    /* Inline custom dog emoji */
-    .dog-emoji-picture {
-      display: inline;
-    }
-
-    .dog-emoji {
-      display: inline-block;
-      width: 1.25em;
-      height: 1.25em;
-      max-width: none;
-      object-fit: contain;
-      vertical-align: -0.2em;
-    }
-
-    main {
-    width: min(980px, 100%);
-    display: grid;
-    gap: 26px;
-    }
-    
-    .hero {
-    text-align: center;
-    }
-    
-    .eyebrow {
-    color: rgba(255,255,255,0.62);
-    font-size: 0.82rem;
-    font-weight: 900;
-    letter-spacing: 0;
-    text-transform: uppercase;
-    margin-bottom: 12px;
-    }
-    
-    h1 {
-    font-size: clamp(2.5rem, 8vw, 6.6rem);
-    line-height: 0.92;
-    margin-bottom: 16px;
-    }
-    
-    .hero p:last-child {
-    max-width: 650px;
-    margin: 0 auto;
-    color: rgba(255,255,255,0.72);
-    font-size: clamp(1rem, 2vw, 1.25rem);
-    line-height: 1.6;
-    }
-    
-    .choices {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 18px;
-    }
-    
-    .choice {
-    min-height: 260px;
-    padding: 28px;
-    border: 1px solid rgba(255,255,255,0.14);
-    border-radius: 8px;
-    color: #fff;
-    text-decoration: none;
-    background: linear-gradient(135deg, rgba(255,255,255,0.14), rgba(255,255,255,0.05));
-    box-shadow: 0 24px 80px rgba(0,0,0,0.34);
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    transition: transform 180ms ease, border-color 180ms ease, background 180ms ease;
-    }
-    
-    .choice:hover,
-    .choice:focus-visible {
-    transform: translateY(-4px);
-    border-color: rgba(255,255,255,0.32);
-    background: linear-gradient(135deg, rgba(255,255,255,0.2), rgba(255,255,255,0.08));
-    outline: none;
-    }
-    
-    .icon {
-    width: 66px;
-    height: 66px;
-    border-radius: 8px;
-    background: rgba(255,255,255,0.1);
-    display: grid;
-    place-items: center;
-    font-size: 2rem;
-    margin-bottom: 32px;
-    }
-    
-    .choice h2 {
-    font-size: clamp(2rem, 5vw, 3.4rem);
-    line-height: 1;
-    margin-bottom: 12px;
-    }
-    
-    .choice p {
-    color: rgba(255,255,255,0.7);
-    font-size: 1rem;
-    line-height: 1.5;
-    }
-    
-    .arrow {
-    margin-top: 24px;
-    font-weight: 900;
-    color: #ffb7a5;
-    }
-    
-    footer {
-    text-align: center;
-    color: rgba(255,255,255,0.5);
-    font-weight: 700;
-    }
-    
-    @media (max-width: 700px) {
-    body {
-    place-items: start center;
-    }
-    
-    .choices {
-    grid-template-columns: 1fr;
-    }
-    
-    .choice {
-    min-height: 220px;
-    }
-    }
-    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800;900&amp;display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/home-feed.css">
   </head>
   <body>
-    <main>
-      <section class="hero">
-        <p class="eyebrow">mollyandshaina.com</p>
-        <h1>Choose Your Destination</h1>
-        <p>Head into the main Molly and Shaina site, or jump straight to the blog for updates, notes, and dog logic.</p>
+    <div class="feed-bg" aria-hidden="true"></div>
+
+    <header class="feed-header">
+      <a class="feed-brand" href="home.html" aria-label="Molly and Shaina home">
+        <span>:molly:</span>
+        <strong>Molly &amp; Shaina</strong>
+      </a>
+      <nav aria-label="Main destinations">
+        <a href="molly/">Main Site</a>
+        <a href="blog/">Blog</a>
+        <a href="comics/">Comics</a>
+        <a href="poppy/">Poppy</a>
+      </nav>
+    </header>
+
+    <main class="feed-shell">
+      <section class="feed-hero" aria-labelledby="homeTitle">
+        <p class="feed-eyebrow">Fresh from dog headquarters</p>
+        <h1 id="homeTitle">The Daily Dog Feed</h1>
+        <p>New stories, suspicious behaviour, and one excellent dog selected for official daily recognition.</p>
       </section>
-      <section class="choices" aria-label="Site choices">
-        <a class="choice" href="molly/">
-          <div>
-            <div class="icon" id="rendered" data-dog-emojis>:molly:</div>
-            <h2>Main Site</h2>
-            <p>Photos, traits, habits, galleries, FAQs, breed pages, and the full Molly and Shaina experience.</p>
+
+      <section class="feed-grid" aria-label="Latest from the site">
+        <article class="feed-card comic-card">
+          <div class="card-copy">
+            <p class="card-label">Latest Comic</p>
+            <h2 id="latestComicTitle">The Great Zoom Meeting</h2>
+            <p id="latestComicText">Molly and Shaina discover the webcam and immediately improve the meeting.</p>
+            <a class="card-action" id="latestComicLink" href="comic-viewer/?q=zoom">Read the comic</a>
           </div>
-          <span class="arrow">Open Molly and Shaina</span>
-        </a>
-        <a class="choice" href="blog/">
-          <div>
-            <div class="icon">:blog:</div>
-            <h2>Blog</h2>
-            <p>Small stories, update posts, window reports, quiz notes, and whatever important thoughts need a home.</p>
+          <img id="latestComicImage" src="images/comics/zoom-cover.webp" alt="Front cover for The Great Zoom Meeting">
+        </article>
+
+        <article class="feed-card blog-card">
+          <p class="card-label">Latest Blog Post</p>
+          <p class="post-meta">
+            <span id="latestPostTag">Update</span>
+            <span id="latestPostDate">Loading…</span>
+          </p>
+          <h2 id="latestPostTitle">Checking the blog</h2>
+          <p id="latestPostBody">The newest note from Molly and Shaina headquarters is loading.</p>
+          <a class="card-action" href="blog/">Read the blog</a>
+        </article>
+
+        <article class="feed-card photo-card">
+          <div class="card-topline">
+            <div>
+              <p class="card-label">Random Photo</p>
+              <h2>A different moment each visit</h2>
+            </div>
+            <button id="shufflePhoto" type="button">Shuffle</button>
           </div>
-          <span class="arrow">Open Blog</span>
-        </a>
-        <a class="choice" href="comics/">
-          <div>
-            <div class="icon">📚</div>
-            <h2>Comics</h2>
-            <p>Photo-style Molly and Shaina stories, starting with the extremely official snack mystery investigation.</p>
+          <a id="randomPhotoLink" href="molly-gallery/" aria-label="Open the gallery for this photo">
+            <img id="randomPhoto" src="images/molly/both1.webp" alt="Molly and Shaina together">
+          </a>
+          <p class="photo-caption" id="randomPhotoCaption">Molly and Shaina together.</p>
+        </article>
+
+        <article class="feed-card dog-card">
+          <div class="dog-copy">
+            <p class="card-label">Dog of the Day</p>
+            <p class="today" id="dogDate"></p>
+            <h2 id="dogName">Molly</h2>
+            <p id="dogTitle">Chief Blanket Architect</p>
+            <p id="dogDescription">An experienced nap planner with a strong commitment to snack detection.</p>
+            <a class="card-action" id="dogLink" href="molly/">Meet today’s dog</a>
           </div>
-          <span class="arrow">Open Comics</span>
-        </a>
-        <a class="choice" href="poppy/">
-          <div>
-            <div class="icon">:poppy:</div>
-            <h2>Poppy</h2>
-            <p>Meet Poppy through her traits, habits, mind, gallery, stories, breed profile, and journal.</p>
-          </div>
-          <span class="arrow">Open Poppy</span>
-        </a>
+          <img id="dogImage" src="images/emoji/molly-emoji.webp" alt="Molly">
+        </article>
       </section>
-      <footer>
-        © 2026 Molly & Shaina
-      </footer>
+
+      <section class="explore-strip" aria-labelledby="exploreTitle">
+        <div>
+          <p class="feed-eyebrow">Keep exploring</p>
+          <h2 id="exploreTitle">There is plenty more behind the feed.</h2>
+        </div>
+        <div class="explore-links">
+          <a href="molly-gallery/"><span>📷</span> Galleries</a>
+          <a href="molly-dog-breeds/"><span>:breeds:</span> Dog Breeds</a>
+          <a href="breed-quiz/"><span>🧩</span> Breed Quiz</a>
+          <a href="freebie-den/"><span>🎁</span> Freebies</a>
+        </div>
+      </section>
     </main>
+
+    <footer>
+      <strong>Molly &amp; Shaina</strong>
+      <span>Fresh dog business, whenever you visit.</span>
+      <span>© 2026</span>
+    </footer>
+
     <script src="js/animations.js"></script>
+    <script src="js/home-feed.js"></script>
   </body>
 </html>
