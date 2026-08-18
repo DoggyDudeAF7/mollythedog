@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Your Molly and Shaina exploration achievements.">
+    <title>Molly &amp; Shaina - Achievements</title>
+    <link rel="icon" href="/favicon.ico?v=20260817-2" type="image/x-icon" sizes="any">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png?v=20260817-2">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png?v=20260817-2">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=20260817-2">
+    <link rel="manifest" href="/site.webmanifest?v=20260817-2">
+    <meta name="theme-color" content="#090910">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&amp;display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/system-pages.css">
+  </head>
+  <body>
+    <div class="bg"></div>
+    <nav><div class="nav-inner"><button id="navToggle" aria-label="Toggle menu" aria-expanded="false">☰</button><div class="nav-links" id="navLinks"><a href="../home.html" title="Home"><span>:home:</span></a><a href="../molly/" title="Molly"><span>:molly:</span></a><a href="../shaina-home/" title="Shaina"><span>:shaina:</span></a><a href="../molly-dog-breeds/" title="Breeds"><span>:breeds:</span></a><a href="../comics/" title="Comics"><span>📚</span></a><a href="../favourites/" title="Favourites"><span>♥</span></a></div><button id="searchBtn">:search:</button></div></nav>
+    <div id="searchBox" class="hidden"><input id="searchInput" placeholder="Search..."><div id="results"></div></div>
+    <main class="system-page">
+      <section class="system-hero">
+        <p class="system-kicker">Quietly Keeping Score</p>
+        <h1>Achievements</h1>
+        <p>Explore, read, search, collect, and investigate. Some achievements reveal themselves only after you find them.</p>
+        <div class="system-summary"><span><strong id="achievementUnlocked">0</strong> unlocked</span><span><strong id="achievementTotal">0</strong> total</span><span><strong id="achievementPercent">0%</strong> complete</span></div>
+      </section>
+      <section class="achievement-progress" aria-label="Achievement completion"><div class="achievement-progress-track"><span id="achievementProgressBar"></span></div><p id="achievementProgressText"></p></section>
+      <section class="achievement-grid" id="achievementGrid"></section>
+    </main>
+    <footer><strong>Molly &amp; Shaina Achievements</strong><br>Explore • Discover • Investigate<br>© 2026</footer>
+    <script src="../js/animations.js"></script>
+    <script src="../js/achievements-page.js"></script>
+  </body>
+</html>
