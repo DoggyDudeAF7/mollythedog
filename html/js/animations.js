@@ -23,7 +23,10 @@
 
     function loadSystemScript(filename) {
       return new Promise(function (resolve) {
-        if (document.querySelector('script[data-ms-system="' + filename + '"]')) {
+        var alreadyLoaded = Array.prototype.some.call(document.scripts, function (item) {
+          return item.src && item.src.split(/[?#]/)[0].endsWith("/js/" + filename);
+        });
+        if (alreadyLoaded) {
           resolve();
           return;
         }
