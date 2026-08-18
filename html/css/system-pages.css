@@ -1,0 +1,73 @@
+.system-page {
+  width: min(1120px, calc(100% - 24px));
+  margin: 0 auto;
+  padding: 140px 0 80px;
+}
+
+.system-hero {
+  margin-bottom: 28px;
+  padding: clamp(28px, 5vw, 54px);
+  border: 1px solid rgba(255,255,255,.16);
+  border-radius: 28px;
+  background: linear-gradient(135deg, rgba(255,183,165,.16), rgba(191,168,255,.11));
+  box-shadow: 0 24px 75px rgba(0,0,0,.34);
+}
+
+.system-kicker { color: #ffb7a5; font-size: .78rem; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; }
+.system-hero h1 { margin: 9px 0 14px; font-size: clamp(2.8rem, 8vw, 6rem); line-height: .95; }
+.system-hero > p:last-of-type { max-width: 700px; color: rgba(255,255,255,.68); line-height: 1.65; }
+.system-summary { margin-top: 22px; display: flex; gap: 10px; flex-wrap: wrap; }
+.system-summary span { padding: 9px 12px; border-radius: 999px; background: rgba(255,255,255,.09); font-weight: 800; }
+.system-danger { margin-top: 18px; padding: 10px 13px; border: 1px solid rgba(255,160,150,.26); border-radius: 11px; color: #fff; background: rgba(255,120,110,.1); font: inherit; font-weight: 800; cursor: pointer; }
+
+.favourite-group { margin-top: 32px; }
+.favourite-group h2 { margin-bottom: 14px; font-size: clamp(1.7rem, 4vw, 2.5rem); }
+.favourite-grid,
+.achievement-grid { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 16px; }
+
+.favourite-item,
+.achievement-card {
+  min-width: 0;
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,.14);
+  border-radius: 20px;
+  background: linear-gradient(135deg, rgba(255,255,255,.11), rgba(255,255,255,.035));
+  box-shadow: 0 18px 50px rgba(0,0,0,.28);
+}
+
+.favourite-item img { width: 100%; aspect-ratio: 16/10; display: block; object-fit: cover; background: rgba(255,255,255,.05); }
+.favourite-item-copy { padding: 18px; }
+.favourite-type { color: #c9baff; font-size: .72rem; font-weight: 800; letter-spacing: .09em; text-transform: uppercase; }
+.favourite-item h3 { margin: 7px 0 10px; font-size: 1.22rem; }
+.favourite-item p { min-height: 2.8em; color: rgba(255,255,255,.6); font-size: .86rem; line-height: 1.5; }
+.favourite-actions { margin-top: 15px; display: flex; gap: 8px; }
+.favourite-actions a,
+.favourite-actions button { padding: 9px 11px; border: 1px solid rgba(255,255,255,.14); border-radius: 9px; color: #fff; background: rgba(255,255,255,.07); font: inherit; font-size: .82rem; font-weight: 800; text-decoration: none; cursor: pointer; }
+
+.system-empty { padding: 50px 24px; border: 1px dashed rgba(255,255,255,.2); border-radius: 22px; color: rgba(255,255,255,.62); text-align: center; }
+.system-empty strong { display: block; margin-bottom: 8px; color: #fff; font-size: 1.35rem; }
+
+.achievement-progress { margin: 22px 0 28px; }
+.achievement-progress-track { height: 14px; overflow: hidden; border-radius: 999px; background: rgba(255,255,255,.09); }
+.achievement-progress-track span { display: block; height: 100%; border-radius: inherit; background: linear-gradient(90deg,#ffb7a5,#bfa8ff); }
+.achievement-progress p { margin-top: 8px; color: rgba(255,255,255,.58); }
+.achievement-card { padding: 22px; }
+.achievement-card.is-locked { opacity: .62; }
+.achievement-icon { font-size: 2rem; }
+.achievement-card h2 { margin: 12px 0 8px; font-size: 1.3rem; }
+.achievement-card > p { color: rgba(255,255,255,.64); line-height: 1.5; }
+.achievement-date { display: block; margin-top: 13px; color: #ffb7a5; font-size: .78rem; font-weight: 800; }
+.achievement-mini-track { height: 7px; margin-top: 15px; overflow: hidden; border-radius: 99px; background: rgba(255,255,255,.09); }
+.achievement-mini-track span { display: block; height: 100%; background: linear-gradient(90deg,#ffb7a5,#bfa8ff); }
+.achievement-count { display: block; margin-top: 7px; color: rgba(255,255,255,.48); font-size: .76rem; }
+
+@media (max-width: 850px) {
+  .favourite-grid,
+  .achievement-grid { grid-template-columns: repeat(2, minmax(0,1fr)); }
+}
+
+@media (max-width: 560px) {
+  .system-page { padding-top: 112px; }
+  .favourite-grid,
+  .achievement-grid { grid-template-columns: 1fr; }
+}
