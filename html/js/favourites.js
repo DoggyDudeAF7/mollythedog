@@ -46,7 +46,9 @@
       });
     });
 
-    writeState(next, false);
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(next));
+    } catch {}
     return next;
   }
 
