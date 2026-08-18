@@ -149,7 +149,7 @@ async function loadBreedOfTheDay() {
 
 shufflePhoto.addEventListener("click", () => {
   choosePhoto(true);
-  window.MSAchievements?.record("shuffles", 1);
+  (window.MSSystemsReady || Promise.resolve()).then(() => window.MSAchievements?.record("shuffles", 1));
 });
 choosePhoto(true);
 loadBreedOfTheDay();

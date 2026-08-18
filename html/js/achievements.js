@@ -117,6 +117,9 @@
     if (/^\/poppy(?:\/|$)/.test(path)) addUnique("dogs", "poppy");
     if (path === "/molly-habits") unlock("blanket-inspector");
     if (["/site-access", "/secret-control-panel", "/samuel-start"].includes(path)) unlock("you-found-it");
+    try {
+      if (localStorage.getItem("msFoundSecret") === "1") unlock("you-found-it");
+    } catch {}
     if (new Date().getHours() < 5) unlock("night-watch");
   }
 
