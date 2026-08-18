@@ -176,7 +176,7 @@
       post.dataset.msFavouriteReady = "true";
       const image = post.querySelector("img");
       const item = {
-        id: `blog:${window.MSData?.slugify(title) || title.toLowerCase().replace(/\W+/g, "-")}`,
+        id: post.dataset.favouriteId || `blog:${window.MSData?.slugify(title) || title.toLowerCase().replace(/\W+/g, "-")}`,
         title,
         type: "Blog",
         url: "/blog/",

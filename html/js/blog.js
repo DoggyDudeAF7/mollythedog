@@ -25,6 +25,7 @@ function renderPosts(posts) {
   }
 
   postsContainer.innerHTML = posts.map((post, index) => {
+    const favouriteId = `blog:${escapeHtml(post.id || String(post.title || "post").toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, ""))}`;
     const image = post.image
       ? `<img class="blog-post-image" src="${escapeHtml(post.image)}" alt="${escapeHtml(post.imageAlt || post.title)}">`
       : "";
@@ -33,7 +34,7 @@ function renderPosts(posts) {
       : "";
 
     return `
-      <article class="blog-post">
+      <article class="blog-post" data-favourite-id="${favouriteId}">
         ${image}
         <p class="blog-date">${escapeHtml(post.date)}</p>
         <span class="blog-tag">${escapeHtml(post.tag || "Post")}</span>
