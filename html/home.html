@@ -73,16 +73,23 @@
           <p class="photo-caption" id="randomPhotoCaption">Molly and Shaina together.</p>
         </article>
 
-        <article class="feed-card dog-card">
-          <div class="dog-copy">
-            <p class="card-label">Breed of the Day</p>
-            <p class="today" id="dogDate"></p>
-            <h2 id="dogName">Finding today’s breed</h2>
-            <p id="dogTitle">Daily pick</p>
-            <p id="dogDescription">Connecting to the Molly dog breed guide.</p>
-            <a class="card-action" id="dogLink" href="molly-dog-breeds/">View today’s breed</a>
+        <article class="feed-card dog-card" aria-label="Breed of the day">
+          <div class="breed-of-day-image">
+            <img id="dogImage" src="images/emoji/breeds-emoji.webp" alt="Dog breeds">
           </div>
-          <img id="dogImage" src="images/emoji/breeds-emoji.webp" alt="Dog breeds">
+          <div class="breed-of-day-copy">
+            <p class="breed-kicker">Breed Of The Day</p>
+            <h2 id="dogName">Loading...</h2>
+            <p id="dogDescription">Finding today’s breed.</p>
+            <div class="breed-meter" aria-label="Breed of the day energy">
+              <span id="dogMeter"></span>
+            </div>
+            <div class="breed-meta">
+              <span id="dogMatch">Daily pick</span>
+              <span id="dogEnergy">Energy</span>
+            </div>
+            <a class="breed-daily-jump" id="dogLink" href="molly-dog-breeds/">View Breed</a>
+          </div>
         </article>
       </section>
 
