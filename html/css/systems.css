@@ -1,0 +1,177 @@
+.ms-global-tools {
+  position: fixed;
+  right: 14px;
+  bottom: 14px;
+  z-index: 1900;
+  display: flex;
+  gap: 8px;
+  font-family: Inter, system-ui, sans-serif;
+}
+
+.ms-global-tools a {
+  min-width: 46px;
+  height: 46px;
+  padding: 0 12px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  border: 1px solid rgba(255,255,255,.18);
+  border-radius: 15px;
+  color: #fff;
+  background: rgba(7,7,12,.78);
+  box-shadow: 0 12px 36px rgba(0,0,0,.38);
+  backdrop-filter: blur(16px);
+  text-decoration: none;
+  font-weight: 800;
+}
+
+.ms-favourite-button {
+  width: 42px;
+  height: 42px;
+  border: 1px solid rgba(255,255,255,.2);
+  border-radius: 50%;
+  color: #fff;
+  background: rgba(5,5,10,.76);
+  box-shadow: 0 9px 28px rgba(0,0,0,.34);
+  backdrop-filter: blur(12px);
+  font: 800 1.35rem/1 Inter, sans-serif;
+  cursor: pointer;
+  transition: transform .16s ease, background .16s ease;
+}
+
+.ms-favourite-button:hover,
+.ms-favourite-button:focus-visible { transform: scale(1.08); outline: none; }
+.ms-favourite-button.is-favourite { color: #ff9d91; background: rgba(55,20,30,.9); }
+
+.ms-favourite-wrap,
+.ms-photo-favourite-wrap { position: relative; min-width: 0; }
+.ms-favourite-wrap .comic-cover-card { height: 100%; }
+.ms-favourite-wrap > .ms-favourite-button,
+.ms-photo-favourite-wrap > .ms-favourite-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 4;
+}
+.ms-photo-favourite-wrap img { width: 100%; height: 100%; }
+
+.blog-post { position: relative; }
+.ms-blog-favourite { position: absolute; top: 18px; right: 18px; }
+.ms-viewer-favourite { margin-top: 18px; }
+
+.ms-achievement-toast {
+  position: fixed;
+  right: 18px;
+  bottom: 78px;
+  z-index: 100000;
+  width: min(390px, calc(100vw - 28px));
+  padding: 16px;
+  display: grid;
+  grid-template-columns: 48px 1fr;
+  gap: 13px;
+  border: 1px solid rgba(255,255,255,.2);
+  border-radius: 18px;
+  color: #fff;
+  background: linear-gradient(135deg, rgba(35,23,48,.96), rgba(11,11,18,.97));
+  box-shadow: 0 24px 70px rgba(0,0,0,.52);
+  font-family: Inter, system-ui, sans-serif;
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity .28s ease, transform .28s ease;
+  pointer-events: none;
+}
+.ms-achievement-toast.is-visible { opacity: 1; transform: none; }
+.ms-achievement-toast > span { font-size: 2rem; }
+.ms-achievement-toast small { display: block; color: #ffb7a5; font-weight: 800; text-transform: uppercase; letter-spacing: .08em; }
+.ms-achievement-toast strong { display: block; margin: 3px 0; font-size: 1.08rem; }
+.ms-achievement-toast p { margin: 0; color: rgba(255,255,255,.68); font-size: .88rem; line-height: 1.45; }
+
+.ms-search-launch {
+  position: fixed;
+  top: 14px;
+  right: 14px;
+  z-index: 1800;
+  width: 48px;
+  height: 48px;
+  border: 1px solid rgba(255,255,255,.18);
+  border-radius: 15px;
+  color: #fff;
+  background: rgba(7,7,12,.78);
+  font: 800 1.1rem Inter, sans-serif;
+  cursor: pointer;
+  backdrop-filter: blur(14px);
+}
+
+#searchBox.ms-site-search {
+  position: fixed;
+  inset: 0;
+  top: 0;
+  width: 100%;
+  max-width: none;
+  padding: clamp(72px, 10vh, 120px) 14px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 0;
+  border-radius: 0;
+  background: rgba(3,3,8,.78);
+  backdrop-filter: blur(20px);
+  transform: none;
+  z-index: 99990;
+}
+#searchBox.ms-site-search.hidden { display: none; }
+#searchBox.ms-site-search #searchInput,
+#searchBox.ms-site-search #results { width: min(720px, 100%); }
+#searchBox.ms-site-search #searchInput {
+  padding: 17px 19px;
+  border: 1px solid rgba(255,255,255,.18);
+  border-radius: 16px;
+  color: #fff;
+  background: rgba(255,255,255,.1);
+  font: 600 1.05rem Inter, sans-serif;
+}
+#searchBox.ms-site-search #results {
+  max-height: min(65vh, 650px);
+  margin-top: 10px;
+  overflow: auto;
+  border: 1px solid rgba(255,255,255,.13);
+  border-radius: 18px;
+  background: rgba(10,10,17,.94);
+  box-shadow: 0 25px 80px rgba(0,0,0,.5);
+}
+.ms-search-result {
+  padding: 14px 16px;
+  display: grid;
+  grid-template-columns: 38px minmax(0,1fr) auto;
+  gap: 12px;
+  align-items: center;
+  color: #fff;
+  text-decoration: none;
+  border-bottom: 1px solid rgba(255,255,255,.08);
+}
+.ms-search-result:last-child { border-bottom: 0; }
+.ms-search-result:hover,
+.ms-search-result.active { background: rgba(255,255,255,.1); }
+.ms-search-icon { font-size: 1.35rem; text-align: center; }
+.ms-search-copy { min-width: 0; }
+.ms-search-copy strong,
+.ms-search-copy span { display: block; }
+.ms-search-copy span { margin-top: 3px; overflow: hidden; color: rgba(255,255,255,.62); font-size: .83rem; text-overflow: ellipsis; white-space: nowrap; }
+.ms-search-type { padding: 6px 8px; border-radius: 999px; color: #d7cdff; background: rgba(191,168,255,.12); font-size: .72rem; font-weight: 800; }
+.ms-search-message { padding: 24px; color: rgba(255,255,255,.65); text-align: center; }
+.ms-search-hint { margin: 12px 0; color: rgba(255,255,255,.48); font: 600 .78rem Inter, sans-serif; }
+
+@media (max-width: 600px) {
+  .ms-global-tools { right: 9px; bottom: 9px; }
+  .ms-global-tools a { min-width: 42px; height: 42px; border-radius: 13px; }
+  .ms-search-result { grid-template-columns: 32px minmax(0,1fr); }
+  .ms-search-type { grid-column: 2; justify-self: start; }
+  .ms-achievement-toast { right: 10px; bottom: 62px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ms-achievement-toast,
+  .ms-favourite-button,
+  .ms-global-tools a { transition: none !important; }
+}
