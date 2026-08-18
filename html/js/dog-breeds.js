@@ -154,6 +154,12 @@ document.addEventListener("DOMContentLoaded", async () => {
     "yorkshire-terrier": "a tiny blue-and-tan terrier whose silky coat and portable size disguise an alert ratting-dog heritage"
   };
 
+  const energyOverrides = Object.fromEntries([
+    ...["basset-hound", "bulldog", "chow-chow", "french-bulldog", "great-dane", "greyhound", "mastiff", "newfoundland", "pekingese", "pug", "shih-tzu", "st-bernard"].map((slug) => [slug, 38]),
+    ...["airedale-terrier", "alaskan-malamute", "australian-cattle-dog", "australian-kelpie", "australian-shepherd", "border-collie", "boxer", "brittany-spaniel", "catahoula-leopard-dog", "dalmatian", "doberman-pinscher", "dutch-shepherd", "english-springer-spaniel", "flat-coated-retriever", "fox-terrier", "german-shepherd", "irish-setter", "jack-russell-terrier", "kelpie", "labrador-retriever", "pointer", "poodle", "siberian-husky", "vizsla", "weimaraner"].map((slug) => [slug, 86]),
+    ...["beagle", "chesapeake-bay-retriever", "curly-coated-retriever", "english-setter", "golden-retriever", "rhodesian-ridgeback", "samoyed", "soft-coated-wheaten-terrier", "staffordshire-bull-terrier", "whippet"].map((slug) => [slug, 76])
+  ]);
+
   function titleCase(value) {
     return String(value || "").replace(/\b\w/g, (letter) => letter.toUpperCase());
   }
@@ -179,7 +185,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     const group = (card.dataset.group || tags[0] || "companion").toLowerCase();
     const size = titleCase(tags[1] || "Medium");
     const coat = titleCase(tags[2] || "Medium");
-    const energyNumber = numberFromMeter(card);
+    const energyNumber = energyOverrides[slug] || numberFromMeter(card);
     const energy = levelFromNumber(energyNumber);
     const base = groupProfiles[group] || groupProfiles.companion;
     const grooming = coat === "Short" ? "Low" : coat === "Medium" || coat === "Wiry" ? "Medium" : "High";
