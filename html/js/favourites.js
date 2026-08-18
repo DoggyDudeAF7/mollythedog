@@ -44,6 +44,9 @@
           savedAt: new Date().toISOString()
         };
       });
+      if (ids.length) {
+        try { localStorage.removeItem(key); } catch {}
+      }
     });
 
     try {
