@@ -199,6 +199,10 @@ document.addEventListener("DOMContentLoaded", () => {
   const comic = comics[slug];
   let current = 0;
 
+  (window.MSSystemsReady || Promise.resolve()).then(() => {
+    window.MSAchievements?.record("comics", slug);
+  });
+
   const issue = document.getElementById("viewerIssue");
   const title = document.getElementById("viewerTitle");
   const summary = document.getElementById("viewerSummary");

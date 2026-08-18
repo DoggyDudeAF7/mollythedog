@@ -502,6 +502,8 @@ document.addEventListener("DOMContentLoaded", () => {
         return;
       }
 
+      window.MSAchievements?.unlock("very-suspicious");
+
       answer.textContent = `${dogIcon} ${dogName} is thinking...`;
       await new Promise(resolve => setTimeout(resolve, 900 + Math.random() * 1200));
       typeText(`${dogIcon} ${dogName} says: ` + getDogResponse(q));
