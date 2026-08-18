@@ -25,7 +25,7 @@ siteAccessForm.addEventListener("submit", async (event) => {
       throw new Error(result.error || "That password did not work.");
     }
 
-    location.href = "/molly/";
+    location.href = "/home.html";
   } catch (error) {
     setSiteAccessStatus(error.message, true);
     siteAccessPassword.select();
