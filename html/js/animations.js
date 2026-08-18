@@ -18,6 +18,42 @@
     : "/";
   var emojiRoot = siteRoot + "images/emoji/";
 
+  if (!window.MSSystemsReady) {
+    var systemsDisabled = /\/blog\/admin(?:\/|$)|\/preview(?:\/|$)|\/site-access(?:\/|$)/.test(location.pathname);
+
+    function loadSystemScript(filename) {
+      return new Promise(function (resolve) {
+        if (document.querySelector('script[data-ms-system="' + filename + '"]')) {
+          resolve();
+          return;
+        }
+        var script = document.createElement("script");
+        script.src = siteRoot + "js/" + filename;
+        script.dataset.msSystem = filename;
+        script.onload = resolve;
+        script.onerror = resolve;
+        document.head.appendChild(script);
+      });
+    }
+
+    if (!systemsDisabled) {
+      if (!document.querySelector('link[data-ms-system="styles"]')) {
+        var systemsStyles = document.createElement("link");
+        systemsStyles.rel = "stylesheet";
+        systemsStyles.href = siteRoot + "css/systems.css";
+        systemsStyles.dataset.msSystem = "styles";
+        document.head.appendChild(systemsStyles);
+      }
+
+      window.MSSystemsReady = loadSystemScript("site-data.js")
+        .then(function () { return loadSystemScript("favourites.js"); })
+        .then(function () { return loadSystemScript("achievements.js"); });
+      window.MSSystemsReady.then(function () { return loadSystemScript("search.js"); });
+    } else {
+      window.MSSystemsReady = Promise.resolve();
+    }
+  }
+
   var dogEmojiData = {
     molly: { alt: "Molly", file: "molly-emoji" },
     poppy: { alt: "Poppy", file: "poppy-emoji" },
