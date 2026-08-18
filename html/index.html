@@ -247,9 +247,11 @@
   </main>
 
   <script>
-    setTimeout(() => {
-      window.location.replace('/html/preview/index.html');
-    }, 3000);
-  </script>
+  const delay = 800 + Math.random() * 400;
+
+  setTimeout(() => {
+    window.location.href = "home.html";
+  }, delay);
+</script>
 </body>
 </html>
