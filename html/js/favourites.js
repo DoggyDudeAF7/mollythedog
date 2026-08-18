@@ -119,7 +119,8 @@
     button.setAttribute("aria-pressed", String(active));
     button.setAttribute("aria-label", `${active ? "Remove" : "Save"} ${button.dataset.favouriteTitle || "favourite"}`);
     button.title = active ? "Remove from favourites" : "Save to favourites";
-    button.textContent = active ? "♥" : "♡";
+    const symbol = active ? "♥" : "♡";
+    if (button.textContent !== symbol) button.textContent = symbol;
   }
 
   function makeButton(item, className = "") {
