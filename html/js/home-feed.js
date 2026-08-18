@@ -147,7 +147,10 @@ async function loadBreedOfTheDay() {
   }
 }
 
-shufflePhoto.addEventListener("click", () => choosePhoto(true));
+shufflePhoto.addEventListener("click", () => {
+  choosePhoto(true);
+  window.MSAchievements?.record("shuffles", 1);
+});
 choosePhoto(true);
 loadBreedOfTheDay();
 loadLatestPost();
