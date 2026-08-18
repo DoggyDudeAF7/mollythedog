@@ -348,13 +348,9 @@ body {
 }
 
 footer {
-  padding: 34px 20px;
-  display: flex;
-  justify-content: center;
-  gap: 12px 24px;
-  flex-wrap: wrap;
-  color: rgba(255, 255, 255, 0.48);
-  background: #050508;
+  padding: 60px;
+  color: #777;
+  background: #07070b;
   text-align: center;
 }
 

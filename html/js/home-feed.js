@@ -21,37 +21,13 @@ const photos = [
   { src: "images/molly/both2.webp", alt: "Molly and Shaina sharing a quiet moment", href: "molly-gallery/" },
   { src: "images/molly/both3.webp", alt: "Molly and Shaina relaxing together", href: "molly-gallery/" },
   { src: "images/molly/both4.webp", alt: "Molly and Shaina side by side", href: "molly-gallery/" },
+  { src: "images/molly/molly.webp", alt: "Portrait of Molly", href: "molly-gallery/" },
+  { src: "images/molly/molly-900.webp", alt: "Molly looking calmly toward the camera", href: "molly-gallery/" },
+  { src: "images/shaina/shaina.webp", alt: "Portrait of Shaina", href: "shaina-gallery/" },
   { src: "images/shaina/shaina1.webp", alt: "Shaina lying on a patterned rug with a tennis ball", href: "shaina-gallery/" },
   { src: "images/shaina/shaina2.webp", alt: "Shaina relaxing in sunlight by the back door", href: "shaina-gallery/" },
   { src: "images/shaina/shaina3.webp", alt: "Shaina peeking from beneath an orange towel", href: "shaina-gallery/" },
-  { src: "images/shaina/shaina4.webp", alt: "Shaina carrying a plush toy", href: "shaina-gallery/" },
-  { src: "images/poppy/poppy-meadow-v2.webp", alt: "Poppy outdoors in an open meadow", href: "poppy-gallery/" },
-  { src: "images/poppy/poppy-home-v2.webp", alt: "Poppy relaxing at home", href: "poppy-gallery/" },
-  { src: "images/poppy/poppy-home-v3.webp", alt: "Poppy resting on a charcoal sofa", href: "poppy-gallery/" }
-];
-
-const dogs = [
-  {
-    name: "Molly",
-    title: "Chief Blanket Architect",
-    description: "An experienced nap planner with a strong commitment to snack detection.",
-    image: "images/emoji/molly-emoji.webp",
-    href: "molly/"
-  },
-  {
-    name: "Shaina",
-    title: "Head of Investigations",
-    description: "Fast, alert, and ready to examine every noise that might involve food.",
-    image: "images/emoji/shaina-emoji.webp",
-    href: "shaina-home/"
-  },
-  {
-    name: "Poppy",
-    title: "Senior Room Observer",
-    description: "Independent, thoughtful, and always willing to assess a situation before joining it.",
-    image: "images/emoji/poppy-emoji.webp",
-    href: "poppy/"
-  }
+  { src: "images/shaina/shaina4.webp", alt: "Shaina carrying a plush toy", href: "shaina-gallery/" }
 ];
 
 function showBlogPost(post) {
@@ -62,13 +38,23 @@ function showBlogPost(post) {
 }
 
 async function loadLatestPost() {
+  let posts = null;
+
   try {
-    let response = await fetch("/api/posts");
-    if (!response.ok) response = await fetch("/blog/posts.json");
-    const posts = await response.json();
-    if (!Array.isArray(posts) || !posts.length) throw new Error("No posts");
+    const response = await fetch("/api/posts", { cache: "no-store" });
+    if (response.ok) posts = await response.json();
+  } catch {}
+
+  if (!Array.isArray(posts) || !posts.length) {
+    try {
+      const response = await fetch("/blog/posts.json", { cache: "no-store" });
+      if (response.ok) posts = await response.json();
+    } catch {}
+  }
+
+  if (Array.isArray(posts) && posts.length) {
     showBlogPost(posts[0]);
-  } catch {
+  } else {
     showBlogPost({
       tag: "Blog",
       date: "Latest notes",
@@ -80,7 +66,7 @@ async function loadLatestPost() {
 
 async function loadLatestComic() {
   try {
-    const response = await fetch("/comics/");
+    const response = await fetch("/comics/", { cache: "no-store" });
     if (!response.ok) throw new Error("Comic shelf unavailable");
     const documentText = await response.text();
     const comicDocument = new DOMParser().parseFromString(documentText, "text/html");
@@ -92,8 +78,9 @@ async function loadLatestComic() {
     const title = label.replace(/^Read\s+/i, "");
     latestComicTitle.textContent = title;
     latestComicText.textContent = image?.alt || "The latest Molly and Shaina adventure is ready to read.";
-    latestComicLink.href = new URL(newest.getAttribute("href"), new URL("/comics/", location.href)).href;
-    latestComicImage.src = new URL(image.getAttribute("src"), new URL("/comics/", location.href)).href;
+    const comicShelfUrl = new URL("/comics/", location.href);
+    latestComicLink.href = new URL(newest.getAttribute("href"), comicShelfUrl).href;
+    latestComicImage.src = new URL(image.getAttribute("src"), comicShelfUrl).href;
     latestComicImage.alt = image.alt || `Front cover for ${title}`;
   } catch {
     // The HTML already contains a complete current-comic fallback.
@@ -123,27 +110,53 @@ function choosePhoto(forceDifferent = true) {
   } catch {}
 }
 
-function showDogOfTheDay() {
+function showToday() {
   const now = new Date();
-  const localDay = new Date(now.getFullYear(), now.getMonth(), now.getDate());
-  const dayNumber = Math.floor(localDay.getTime() / 86400000);
-  const dog = dogs[((dayNumber % dogs.length) + dogs.length) % dogs.length];
-
   document.getElementById("dogDate").textContent = new Intl.DateTimeFormat(undefined, {
     weekday: "long",
     day: "numeric",
     month: "long"
   }).format(now);
-  document.getElementById("dogName").textContent = dog.name;
-  document.getElementById("dogTitle").textContent = dog.title;
-  document.getElementById("dogDescription").textContent = dog.description;
-  document.getElementById("dogImage").src = dog.image;
-  document.getElementById("dogImage").alt = dog.name;
-  document.getElementById("dogLink").href = dog.href;
+}
+
+async function loadBreedOfTheDay() {
+  showToday();
+
+  try {
+    const response = await fetch("/molly-dog-breeds/", { cache: "no-store" });
+    if (!response.ok) throw new Error("Breed guide unavailable");
+
+    const pageText = await response.text();
+    const breedDocument = new DOMParser().parseFromString(pageText, "text/html");
+    const breedCards = [...breedDocument.querySelectorAll(".breed-card")];
+    if (!breedCards.length) throw new Error("No breeds found");
+
+    // This is deliberately identical to getDailyBreedIndex() in dog-breeds.js.
+    const now = new Date();
+    const dayNumber = Math.floor(Date.UTC(now.getFullYear(), now.getMonth(), now.getDate()) / 86400000);
+    const breed = breedCards[dayNumber % breedCards.length];
+    const name = breed.querySelector("h2")?.textContent.trim() || "Today’s breed";
+    const description = breed.querySelector(".breed-card-copy > p:not(.breed-kicker)")?.textContent.trim() || "Today’s excellent dog breed.";
+    const match = breed.dataset.match || "Daily pick";
+    const image = breed.querySelector(".breed-portrait img");
+    const guideUrl = new URL("/molly-dog-breeds/", location.href);
+
+    document.getElementById("dogName").textContent = name;
+    document.getElementById("dogTitle").textContent = match;
+    document.getElementById("dogDescription").textContent = description;
+    document.getElementById("dogLink").href = new URL(`#${breed.id}`, guideUrl).href;
+
+    if (image) {
+      document.getElementById("dogImage").src = new URL(image.getAttribute("src"), guideUrl).href;
+      document.getElementById("dogImage").alt = image.alt || name;
+    }
+  } catch {
+    // The card keeps its useful link to the full breed guide if it cannot be loaded.
+  }
 }
 
 shufflePhoto.addEventListener("click", () => choosePhoto(true));
 choosePhoto(true);
-showDogOfTheDay();
+loadBreedOfTheDay();
 loadLatestPost();
 loadLatestComic();
