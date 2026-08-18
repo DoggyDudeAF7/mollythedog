@@ -10,7 +10,7 @@
   }
 
   const pages = [
-    ["page:home", "The Daily Dog Feed", "Latest comics, blog posts, photos, and the Breed of the Day.", "Page", ":home:", "/home.html", "homepage latest daily"],
+    ["page:home", "The Daily Dog Feed", "Latest comics, blog posts, photos, and the Breed of the Day.", "Page", ":home:", "/home/", "homepage latest daily"],
     ["molly:home", "Molly", "Skittish, sleepy, helicopter-tailed, and powered by naps and suspicion.", "Molly", ":molly:", "/molly/", "dog home"],
     ["molly:traits", "Molly's Traits", "Molly's personality, behaviour, confidence, and unmistakable habits.", "Traits", ":traits:", "/molly-traits/", "molly personality"],
     ["molly:habits", "Molly's Habits", "Blanket architecture, snack detection, sleeping, and daily Molly rituals.", "Habits", ":habits:", "/molly-habits/", "blanket inspector naps"],
