@@ -110,18 +110,7 @@ function choosePhoto(forceDifferent = true) {
   } catch {}
 }
 
-function showToday() {
-  const now = new Date();
-  document.getElementById("dogDate").textContent = new Intl.DateTimeFormat(undefined, {
-    weekday: "long",
-    day: "numeric",
-    month: "long"
-  }).format(now);
-}
-
 async function loadBreedOfTheDay() {
-  showToday();
-
   try {
     const response = await fetch("/molly-dog-breeds/", { cache: "no-store" });
     if (!response.ok) throw new Error("Breed guide unavailable");
@@ -138,12 +127,15 @@ async function loadBreedOfTheDay() {
     const name = breed.querySelector("h2")?.textContent.trim() || "Today’s breed";
     const description = breed.querySelector(".breed-card-copy > p:not(.breed-kicker)")?.textContent.trim() || "Today’s excellent dog breed.";
     const match = breed.dataset.match || "Daily pick";
+    const meter = breed.querySelector(".breed-meter span")?.style.width || "50%";
     const image = breed.querySelector(".breed-portrait img");
     const guideUrl = new URL("/molly-dog-breeds/", location.href);
 
     document.getElementById("dogName").textContent = name;
-    document.getElementById("dogTitle").textContent = match;
     document.getElementById("dogDescription").textContent = description;
+    document.getElementById("dogMeter").style.width = meter;
+    document.getElementById("dogMatch").textContent = match;
+    document.getElementById("dogEnergy").textContent = `${meter.replace("%", "")}% energy`;
     document.getElementById("dogLink").href = new URL(`#${breed.id}`, guideUrl).href;
 
     if (image) {
