@@ -1,6 +1,16 @@
+#chat-widget-mount {
+  position: relative;
+  min-height: 64px;
+  margin-top: 28px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 #chat-container {
-  right: 22px !important;
-  bottom: 76px !important;
+  position: relative !important;
+  right: auto !important;
+  bottom: auto !important;
 }
 
 #chat-bubble {
@@ -22,6 +32,12 @@
 }
 
 #chat-box {
+  right: auto !important;
+  left: 50% !important;
+  bottom: 76px !important;
+  width: min(360px, calc(100vw - 32px)) !important;
+  height: min(600px, 68vh) !important;
+  transform: translateX(-50%);
   border: 1px solid rgba(255, 255, 255, 0.24) !important;
   box-shadow: 0 28px 80px rgba(0, 0, 0, 0.58) !important;
 }
@@ -33,11 +49,6 @@
 }
 
 @media (max-width: 768px) {
-  #chat-container {
-    right: 14px !important;
-    bottom: 68px !important;
-  }
-
   #chat-bubble {
     width: 56px !important;
     height: 56px !important;
