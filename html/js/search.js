@@ -202,7 +202,7 @@
   }
 
   async function boot() {
-    if (/^\/404(?:\/|$)/.test(location.pathname)) return;
+    if (/^\/404(?:\/|$)/.test(location.pathname) || /^404\b/.test(document.title)) return;
     await (window.MSSystemsReady || Promise.resolve());
     if (!window.MSData) return;
     const searchBox = createOverlay();
