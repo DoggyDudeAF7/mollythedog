@@ -204,8 +204,9 @@
   }
 
   function updateNavCount() {
+    const value = String(count());
     document.querySelectorAll("[data-ms-favourite-count]").forEach((element) => {
-      element.textContent = String(count());
+      if (element.textContent !== value) element.textContent = value;
     });
   }
 
