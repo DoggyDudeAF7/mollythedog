@@ -234,8 +234,13 @@
   function init() {
     addGlobalLinks();
     enhance();
+    let enhancementFrame = 0;
     const observer = new MutationObserver((mutations) => {
-      if (mutations.some((mutation) => mutation.addedNodes.length)) enhance();
+      if (!mutations.some((mutation) => mutation.addedNodes.length) || enhancementFrame) return;
+      enhancementFrame = requestAnimationFrame(() => {
+        enhancementFrame = 0;
+        enhance();
+      });
     });
     observer.observe(document.body, { childList: true, subtree: true });
     window.addEventListener("ms:favourites-changed", () => enhance());

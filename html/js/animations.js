@@ -20,12 +20,9 @@
   var emojiRoot = siteRoot + "images/emoji/";
 
   if (!window.MSSystemsReady) {
-<<<<<<< HEAD
     var systemsDisabled =
-      /\/blog\/admin(?:\/|$)|\/preview(?:\/|$)|\/site-access(?:\/|$)/.test(location.pathname);
-=======
-    var systemsDisabled = /\/blog\/admin(?:\/|$)|\/preview(?:\/|$)|\/site-access(?:\/|$)|\/404(?:\/|$)/.test(location.pathname);
->>>>>>> eb82e50 (Update site: 2026-08-20 18:14:05)
+      /\/blog\/admin(?:\/|$)|\/preview(?:\/|$)|\/site-access(?:\/|$)|\/404(?:\/|$)/.test(location.pathname) ||
+      /^404\b/.test(document.title);
 
     function loadSystemScript(filename) {
       return new Promise(function (resolve) {
@@ -435,9 +432,6 @@
 function initMollyShainaAnimations() {
 
   window.renderDogEmojis(document);
-
-
-
   /* =========================================
      DOG EMOJI MUTATION WATCHER
      ========================================= */
@@ -448,36 +442,20 @@ function initMollyShainaAnimations() {
   ) {
     const dogEmojiObserver =
       new MutationObserver(records => {
-
         records.forEach(record => {
-
-          if (
-            record.type === "characterData"
-          ) {
-            window.renderDogEmojis(
-              record.target
-            );
-
-          } else {
-
-            Array.prototype.forEach.call(
-              record.addedNodes,
-              node => {
-                window.renderDogEmojis(node);
-              }
-            );
-
-          }
-
+          Array.prototype.forEach.call(
+            record.addedNodes,
+            node => {
+              window.renderDogEmojis(node);
+            }
+          );
         });
-
       });
 
     dogEmojiObserver.observe(
       document.body,
       {
         childList: true,
-        characterData: true,
         subtree: true
       }
     );
