@@ -184,7 +184,7 @@
       });
       results.appendChild(link);
     });
-    window.replaceDogShortcodes?.(results);
+    window.renderDogEmojis?.(results);
   }
 
   function readRecent() {
