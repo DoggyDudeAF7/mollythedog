@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex">
+    <meta name="description" content="Checkout preview for Molly and Shaina stickers.">
+    <title>Checkout Preview - Molly &amp; Shaina</title>
+    <link rel="icon" href="/favicon.ico?v=20260817-2" type="image/x-icon" sizes="any">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png?v=20260817-2">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png?v=20260817-2">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=20260817-2">
+    <link rel="manifest" href="/site.webmanifest?v=20260817-2">
+    <meta name="theme-color" content="#090910">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800;900&amp;display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="../../css/merch.css">
+  </head>
+  <body>
+    <div class="bg"></div>
+    <nav>
+      <div class="nav-inner">
+        <button id="navToggle" aria-label="Toggle menu" aria-expanded="false">☰</button>
+        <div class="nav-links" id="navLinks">
+          <a href="../../molly/" title="Home"><span>:home:</span></a>
+          <a href="../../molly-traits/" title="Traits"><span>:traits:</span></a>
+          <a href="../../molly-habits/" title="Habits"><span>:habits:</span></a>
+          <a href="../../molly-mind/" title="Mind"><span>:mind:</span></a>
+          <a href="../../molly-gallery/" title="Gallery"><span>:gallery:</span></a>
+          <a href="../../molly-faq/" title="FAQ"><span>:faq:</span></a>
+          <a href="../../molly-dog-breeds/" title="Breeds"><span>:breeds:</span></a>
+          <a href="../../comics/" title="Comics"><span>📚</span></a>
+          <a href="../../merch/" title="Merch" aria-current="page"><span>🏷️</span></a>
+          <a href="../../about-me/" title="About the Human"><span>:about:</span></a>
+          <a href="../../shaina/" title="Shaina"><span>🐶</span></a>
+          <a href="../../poppy/" title="Poppy"><span>🐩</span></a>
+        </div>
+        <button id="searchBtn" type="button" aria-label="Open site search">:search:</button>
+      </div>
+    </nav>
+    <div id="searchBox" class="hidden">
+      <input id="searchInput" placeholder="Search...">
+      <div id="results"></div>
+    </div>
+
+    <main class="checkout-shell">
+      <a class="checkout-back" href="../">← Back to all stickers</a>
+      <section class="checkout-card" aria-labelledby="checkoutProductName">
+        <div class="checkout-product-image">
+          <img id="checkoutProductImage" src="" alt="">
+        </div>
+        <div class="checkout-copy">
+          <p class="merch-eyebrow">Checkout preview</p>
+          <h1 id="checkoutProductName">Sticker</h1>
+          <p class="checkout-description" id="checkoutProductDescription"></p>
+          <div class="checkout-line">
+            <label for="checkoutQuantity"><strong>Quantity</strong><br>50¢ each</label>
+            <input id="checkoutQuantity" type="number" min="1" max="20" value="1" inputmode="numeric">
+          </div>
+          <div class="checkout-total"><span>Total</span><strong id="checkoutTotal">$0.50</strong></div>
+          <button class="checkout-disabled" type="button" disabled>Checkout unavailable</button>
+          <p class="checkout-notice">Orders and payments are not connected yet. This page is a preview only.</p>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <strong>Molly &amp; Shaina</strong>
+      <br>
+      mollyandshaina.com
+      <br>
+      © 2026
+    </footer>
+    <script src="../../js/animations.js"></script>
+    <script src="../../js/search.js"></script>
+    <script src="../../js/merch-data.js"></script>
+    <script src="../../js/merch-checkout.js"></script>
+  </body>
+</html>
