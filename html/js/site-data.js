@@ -39,7 +39,7 @@
     ["page:about-poppy", "About Poppy", "A closer look at Poppy and her story.", "Poppy", ":poppy:", "/about-poppy/", "story"],
     ["page:submit", "Submit an Idea", "Send a comic idea, fan art, feedback, or a general message.", "Page", "✉️", "/submit/", "contact message fan art"],
     ["page:freebies", "The Freebie Den", "Molly and Shaina downloads, wallpapers, and printable surprises.", "Page", "🎁", "/freebie-den/", "downloads wallpaper printable"],
-    ["page:merch", "Molly and Shaina Merch", "Homemade stickers and future Molly and Shaina merchandise.", "Page", "🏷️", "/merch/", "stickers shop shirts phone cases hoodies"],
+    ["page:merch", "Molly and Shaina Merch", "The current collection of handmade Molly and Shaina stickers.", "Page", "🏷️", "/merch/", "stickers shop handmade collection"],
     ["page:favourites", "Your Favourites", "All your saved breeds, comics, photos, and blog posts.", "Page", "♥", "/favourites/", "saved collection"],
     ["page:achievements", "Achievements", "Explore your unlocked and hidden Molly and Shaina achievements.", "Page", "🏆", "/achievements/", "progress trophies" ]
   ].map(([id, title, description, type, icon, url, keywords]) => ({ id, title, description, type, icon, url, keywords }));
