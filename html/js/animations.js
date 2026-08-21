@@ -20,8 +20,12 @@
   var emojiRoot = siteRoot + "images/emoji/";
 
   if (!window.MSSystemsReady) {
+<<<<<<< HEAD
     var systemsDisabled =
       /\/blog\/admin(?:\/|$)|\/preview(?:\/|$)|\/site-access(?:\/|$)/.test(location.pathname);
+=======
+    var systemsDisabled = /\/blog\/admin(?:\/|$)|\/preview(?:\/|$)|\/site-access(?:\/|$)|\/404(?:\/|$)/.test(location.pathname);
+>>>>>>> eb82e50 (Update site: 2026-08-20 18:14:05)
 
     function loadSystemScript(filename) {
       return new Promise(function (resolve) {

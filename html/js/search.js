@@ -128,19 +128,19 @@
   function createFallbackButton() {
     let button = document.getElementById("searchBtn");
     if (button) return button;
+    const nav = document.querySelector(".nav-inner, .feed-header nav");
+    if (!nav) return null;
     button = document.createElement("button");
     button.id = "searchBtn";
     button.className = "ms-search-launch";
     button.type = "button";
-    button.textContent = "⌕";
+    button.textContent = ":search:";
     button.setAttribute("aria-label", "Open site search");
-    const homeNav = document.querySelector(".feed-header nav");
-    if (homeNav) {
+    if (nav.matches(".feed-header nav")) {
       button.classList.add("ms-header-search");
-      homeNav.appendChild(button);
-    } else {
-      document.body.appendChild(button);
     }
+    nav.appendChild(button);
+    window.renderDogEmojis?.(button);
     return button;
   }
 
@@ -202,12 +202,14 @@
   }
 
   async function boot() {
+    if (/^\/404(?:\/|$)/.test(location.pathname)) return;
     await (window.MSSystemsReady || Promise.resolve());
     if (!window.MSData) return;
     const searchBox = createOverlay();
     const searchInput = searchBox.querySelector("#searchInput");
     const results = searchBox.querySelector("#results");
     const searchButton = createFallbackButton();
+    if (!searchButton) return;
     let allItems = [];
 
     async function openSearch() {
