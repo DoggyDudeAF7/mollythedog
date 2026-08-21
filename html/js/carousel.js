@@ -1,4 +1,4 @@
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", async () => {
   const track = document.getElementById("track");
   const dotsWrap = document.getElementById("dots");
 
@@ -7,13 +7,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const pageTitle = document.querySelector("h1")?.textContent?.toLowerCase() || "";
   const isShaina = pageTitle.includes("shaina");
   const isPoppy = pageTitle.includes("poppy");
-  const images = isPoppy
-    ? [
-        { candidates: ["../images/poppy/poppy-meadow-v2.webp"], alt: "Poppy outdoors in an open meadow" },
-        { candidates: ["../images/poppy/poppy-home-v3.webp"], alt: "Poppy resting on a charcoal sofa" },
-        { candidates: ["../images/poppy/poppy-home-v2.webp"], alt: "Poppy relaxing at home with her natural curly coat" },
-      ]
-    : isShaina
+  let images = isShaina
     ? [
         { candidates: ["../images/shaina/shaina.webp"], alt: "Portrait of Shaina" },
         { candidates: ["../images/shaina/shaina1.webp"], alt: "Shaina lying on a patterned rug with a tennis ball" },
@@ -30,6 +24,24 @@ document.addEventListener("DOMContentLoaded", () => {
         { candidates: ["../images/molly/molly4.webp"], alt: "Molly sitting beside a phone showing another dog" },
         { candidates: ["../images/molly/molly.webp"], alt: "Portrait of Molly" },
       ];
+
+  if (isPoppy) {
+    try {
+      const response = await fetch("/data/poppy-photos.json", { cache: "force-cache" });
+      const realPhotos = response.ok ? await response.json() : [];
+      images = Array.isArray(realPhotos) ? realPhotos
+        .filter((photo) => photo && photo.src && photo.alt)
+        .map((photo) => ({ candidates: [photo.src], alt: photo.alt })) : [];
+    } catch {
+      images = [];
+    }
+    if (!images.length) {
+      track.innerHTML = `<div class="poppy-photo-placeholder carousel-empty"><span>:poppy:</span><small>Real Poppy photos are coming soon.</small></div>`;
+      window.renderDogEmojis?.(track);
+      dotsWrap.hidden = true;
+      return;
+    }
+  }
 
   function attachFallbacks(img, candidates) {
     let current = 0;

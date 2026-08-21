@@ -108,3 +108,7 @@
   }
 
 }
+.viewer-progress-label { margin-top: 12px; color: rgba(255,255,255,.72); font-size: .82rem; font-weight: 800; }
+.viewer-progress-track { width: min(440px,100%); height: 8px; margin: 8px auto 12px; overflow: hidden; border-radius: 99px; background: rgba(255,255,255,.1); }
+.viewer-progress-track i { display: block; width: 0; height: 100%; border-radius: inherit; background: linear-gradient(90deg,#ffb7a5,#bfa8ff); transition: width .25s ease; }
+.viewer-reset-progress { padding: 8px 12px; border: 1px solid rgba(255,255,255,.12); border-radius: 9px; color: white; background: rgba(255,255,255,.07); font: 800 .8rem Inter,sans-serif; cursor: pointer; }

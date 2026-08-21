@@ -24,6 +24,9 @@ document.addEventListener("DOMContentLoaded", async () => {
   let dailyBreedCard = null;
   let activeFilters = new Set();
   let sortMode = "alphabetical";
+  const compared = new Set();
+  let compareTray;
+  let compareDialog;
 
   const groupProfiles = {
     companion: { temperament: "affectionate, adaptable, and people-focused", purpose: "close companionship", trainability: "Medium", friendliness: "High", barking: "Medium" },
@@ -284,6 +287,14 @@ document.addEventListener("DOMContentLoaded", async () => {
       card.setAttribute("role", "button");
       card.setAttribute("aria-expanded", "false");
 
+      const compareButton = document.createElement("button");
+      compareButton.type = "button";
+      compareButton.className = "breed-compare-toggle";
+      compareButton.dataset.compare = card.id;
+      compareButton.setAttribute("aria-pressed", "false");
+      compareButton.textContent = "+ Compare";
+      card.appendChild(compareButton);
+
       const hint = document.createElement("p");
       hint.className = "breed-dropdown-hint";
       hint.textContent = "Open full breed guide";
@@ -318,6 +329,76 @@ document.addEventListener("DOMContentLoaded", async () => {
         </section>
       `;
       copy.append(hint, details);
+    });
+  }
+
+  function yesNo(value) {
+    return value ? "Yes" : "No";
+  }
+
+  function updateCompareUI(message = "") {
+    cards.forEach((card) => {
+      const button = card.querySelector(".breed-compare-toggle");
+      if (!button) return;
+      const active = compared.has(card.id);
+      button.classList.toggle("active", active);
+      button.setAttribute("aria-pressed", String(active));
+      button.textContent = active ? "✓ Comparing" : "+ Compare";
+    });
+    if (!compareTray) return;
+    const names = [...compared].map((slug) => profiles.get(slug)?.name).filter(Boolean);
+    compareTray.hidden = !names.length;
+    compareTray.querySelector(".breed-compare-summary").textContent = message || `${names.length}/3 selected${names.length ? `: ${names.join(", ")}` : ""}`;
+    compareTray.querySelector(".breed-compare-open").disabled = names.length < 2;
+  }
+
+  function renderComparison() {
+    if (!compareDialog) return;
+    const selected = [...compared].map((slug) => ({ profile: profiles.get(slug), card: document.getElementById(slug) })).filter((item) => item.profile);
+    const fields = [
+      ["Size", (p) => p.size], ["Weight", (p) => p.weight], ["Lifespan", (p) => p.lifespan],
+      ["Energy", (p) => `${p.energy} (${p.energyNumber}%)`], ["Grooming", (p) => p.grooming],
+      ["Trainability", (p) => p.trainability], ["Friendliness", (p) => p.friendliness], ["Barking", (p) => p.barking],
+      ["Apartment-friendly", (p) => yesNo(p.apartment)], ["Family-friendly", (p) => yesNo(p.family)],
+      ["Lower shedding", (p) => yesNo(p.lowShedding)], ["Beginner-friendly", (p) => yesNo(p.beginner)],
+      ["Temperament", (p) => titleCase(p.temperament)], ["Molly similarity", (p) => `${p.ratings.molly}%`],
+      ["Shaina similarity", (p) => `${p.ratings.shaina}%`]
+    ];
+    const grid = compareDialog.querySelector(".breed-compare-grid");
+    grid.dataset.count = String(selected.length);
+    grid.innerHTML = `
+      <div class="breed-compare-head" aria-hidden="true"><span>Compare</span>${selected.map(({ profile, card }) => {
+        const image = card?.querySelector(".breed-portrait img");
+        return `<article>${image ? `<img src="${image.src}" alt="">` : ""}<strong>${profile.name}</strong></article>`;
+      }).join("")}</div>
+      ${fields.map(([label, value]) => `<div class="breed-compare-row"><strong>${label}</strong>${selected.map(({ profile }) => `<span>${value(profile)}</span>`).join("")}</div>`).join("")}
+    `;
+  }
+
+  function setupComparison() {
+    compareTray = document.createElement("aside");
+    compareTray.className = "breed-compare-tray";
+    compareTray.hidden = true;
+    compareTray.setAttribute("aria-label", "Selected breeds to compare");
+    compareTray.innerHTML = `<span class="breed-compare-summary"></span><div><button type="button" class="breed-compare-clear">Clear</button><button type="button" class="breed-compare-open">Compare breeds</button></div>`;
+    document.body.appendChild(compareTray);
+
+    compareDialog = document.createElement("dialog");
+    compareDialog.className = "breed-compare-dialog";
+    compareDialog.innerHTML = `<div class="breed-compare-title"><div><p class="breed-kicker">Side by side</p><h2>Breed comparison</h2></div><button type="button" class="breed-compare-close" aria-label="Close comparison">×</button></div><div class="breed-compare-grid"></div>`;
+    document.body.appendChild(compareDialog);
+
+    compareTray.querySelector(".breed-compare-clear").addEventListener("click", () => {
+      compared.clear();
+      updateCompareUI();
+    });
+    compareTray.querySelector(".breed-compare-open").addEventListener("click", () => {
+      renderComparison();
+      compareDialog.showModal();
+    });
+    compareDialog.querySelector(".breed-compare-close").addEventListener("click", () => compareDialog.close());
+    compareDialog.addEventListener("click", (event) => {
+      if (event.target === compareDialog) compareDialog.close();
     });
   }
 
@@ -425,6 +506,18 @@ document.addEventListener("DOMContentLoaded", async () => {
   }
 
   results.addEventListener("click", (event) => {
+    const compare = event.target.closest(".breed-compare-toggle");
+    if (compare) {
+      const slug = compare.dataset.compare;
+      if (compared.has(slug)) compared.delete(slug);
+      else if (compared.size < 3) compared.add(slug);
+      else {
+        updateCompareUI("Choose up to three breeds. Remove one before adding another.");
+        return;
+      }
+      updateCompareUI();
+      return;
+    }
     const favorite = event.target.closest(".breed-favorite");
     if (favorite) {
       const card = favorite.closest(".breed-card");
@@ -479,6 +572,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   window.addEventListener("ms:favourites-changed", () => { syncFavoriteButtons(); applyFilters(); });
 
   setupCards();
+  setupComparison();
   buildFilterControls();
   renderBreedOfDay();
   syncFavoriteButtons();

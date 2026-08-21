@@ -43,6 +43,12 @@
         <h1>Favourites</h1>
         <p>Breeds, comics, photos, and posts you have saved stay here on this device.</p>
         <div class="system-summary"><span><strong id="favouriteTotal">0</strong> saved</span></div>
+        <div class="system-backup-actions" aria-label="Collection backup">
+          <button id="exportCollection" type="button">Export collection</button>
+          <label for="importCollection">Restore collection</label>
+          <input id="importCollection" type="file" accept=".mollypack,.molly,application/json,.json">
+        </div>
+        <p class="system-backup-status" id="collectionBackupStatus" role="status"></p>
         <button class="system-danger" id="clearFavourites" type="button">Clear all favourites</button>
       </section>
       <div id="favouritesContent"></div>
