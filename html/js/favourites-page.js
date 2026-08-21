@@ -99,7 +99,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     const blob = new Blob([JSON.stringify(backup, null, 2)], { type: "application/json" });
     const link = document.createElement("a");
     link.href = URL.createObjectURL(blob);
-    link.download = "collection-backup.mollypack";
+    link.download = "favourites.mollypack";
     link.click();
     URL.revokeObjectURL(link.href);
     backupStatus.textContent = "Collection exported. Keep that JSON file somewhere safe.";
