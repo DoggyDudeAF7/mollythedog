@@ -64,7 +64,10 @@
             <p class="merch-eyebrow">Available first</p>
             <h2 id="stickerHeading">Homemade stickers</h2>
           </div>
-          <span class="merch-category-price">Individual stickers · 50¢</span>
+          <div class="merch-heading-actions">
+            <span class="merch-category-price">Individual stickers · 50¢</span>
+            <a class="merch-bag-link" href="./checkout/">Bag <span data-bag-count>0</span></a>
+          </div>
         </header>
         <div class="merch-grid" id="merchGrid" aria-live="polite"></div>
         <div class="merch-empty" id="merchEmpty">
@@ -102,7 +105,9 @@
         <h2 id="merchDialogTitle" data-product-name></h2>
         <p data-product-description></p>
         <strong class="merch-dialog-price" data-product-price></strong>
-        <a class="merch-checkout-link" href="../merch/checkout/" data-checkout-link>Continue to checkout</a>
+        <button class="merch-add-button" type="button" data-add-to-bag>Add to bag</button>
+        <p class="merch-add-status" data-add-status aria-live="polite"></p>
+        <a class="merch-checkout-link" href="../merch/checkout/">View bag (<span data-bag-count>0</span>)</a>
       </div>
     </dialog>
 
@@ -116,6 +121,7 @@
     <script src="../js/animations.js"></script>
     <script src="../js/search.js"></script>
     <script src="../js/merch-data.js"></script>
+    <script src="../js/merch-bag.js"></script>
     <script src="../js/merch.js"></script>
   </body>
 </html>
