@@ -37,6 +37,7 @@
           <a href="../molly-faq/" title="FAQ"><span>:faq:</span></a>
           <a href="../molly-dog-breeds/" title="Breeds"><span>:breeds:</span></a>
           <a href="../comics/" title="Comics"><span>📚</span></a>
+          <a href="../merch/" title="Merch" aria-current="page"><span>🏷️</span></a>
           <a href="../about-me/" title="About the Human"><span>:about:</span></a>
           <a href="../shaina/" title="Shaina"><span>🐶</span></a>
           <a href="../poppy/" title="Poppy"><span>🐩</span></a>
@@ -91,6 +92,20 @@
       </section>
     </main>
 
+    <dialog class="merch-dialog" id="merchProductDialog" aria-labelledby="merchDialogTitle">
+      <button class="merch-dialog-close" type="button" data-dialog-close aria-label="Close product view">×</button>
+      <div class="merch-dialog-image-wrap">
+        <img data-product-image src="" alt="">
+      </div>
+      <div class="merch-dialog-copy">
+        <p class="merch-eyebrow">Handmade sticker</p>
+        <h2 id="merchDialogTitle" data-product-name></h2>
+        <p data-product-description></p>
+        <strong class="merch-dialog-price" data-product-price></strong>
+        <a class="merch-checkout-link" href="../merch/checkout/" data-checkout-link>Continue to checkout</a>
+      </div>
+    </dialog>
+
     <footer>
       <strong>Molly &amp; Shaina</strong>
       <br>
@@ -100,6 +115,7 @@
     </footer>
     <script src="../js/animations.js"></script>
     <script src="../js/search.js"></script>
+    <script src="../js/merch-data.js"></script>
     <script src="../js/merch.js"></script>
   </body>
 </html>
