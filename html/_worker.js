@@ -80,95 +80,9 @@ export default {
       });
     }
 
-    if (shouldServeNotFound(url.pathname)) {
-      return fetchNotFoundPage(request, env);
-    }
-
     return env.ASSETS.fetch(request);
   },
 };
-
-const pagePaths = new Set([
-  "/",
-  "/404/",
-  "/about-me/",
-  "/about-molly/",
-  "/about-shaina/",
-  "/about-poppy/",
-  "/blog/",
-  "/blog/admin/",
-  "/blog/admin/login/",
-  "/breed-quiz/",
-  "/certificate-editor/",
-  "/comic-viewer/",
-  "/comics/",
-  "/dog-breeds/",
-  "/freebie-den/",
-  "/favourites/",
-  "/html/",
-  "/home/",
-  "/kitchen-game/",
-  "/molly/",
-  "/molly-dog-breeds/",
-  "/molly-faq/",
-  "/molly-gallery/",
-  "/molly-habits/",
-  "/molly-mind/",
-  "/molly-traits/",
-  "/achievements/",
-  "/poppy/",
-  "/poppy-blog/",
-  "/poppy-dog-breeds/",
-  "/poppy-faq/",
-  "/poppy-gallery/",
-  "/poppy-habits/",
-  "/poppy-mind/",
-  "/poppy-stories/",
-  "/poppy-traits/",
-  "/preview/",
-  "/samuel-start/",
-  "/secret-control-panel/",
-  "/site-access/",
-  "/shaina/",
-  "/shaina-faq/",
-  "/shaina-gallery/",
-  "/shaina-habits/",
-  "/shaina-home/",
-  "/shaina-mind/",
-  "/shaina-traits/",
-  "/submit/",
-  "/test/",
-  "/merch/",
-]);
-
-const assetPathPrefixes = [
-  "/assets/",
-  "/css/",
-  "/images/",
-  "/js/",
-];
-
-function shouldServeNotFound(pathname) {
-  if (pathname.startsWith("/api/")) return false;
-  if (assetPathPrefixes.some(prefix => pathname.startsWith(prefix))) return false;
-  if (/\.[a-z0-9]+$/i.test(pathname)) return false;
-
-  const normalizedPath = pathname === "/" ? "/" : `${pathname.replace(/\/+$/, "")}/`;
-  return !pagePaths.has(normalizedPath);
-}
-
-async function fetchNotFoundPage(request, env) {
-  const notFoundUrl = new URL("/404/", request.url);
-  const response = await env.ASSETS.fetch(new Request(notFoundUrl, request));
-  const headers = new Headers(response.headers);
-  headers.set("cache-control", "no-store");
-
-  return new Response(response.body, {
-    status: 404,
-    statusText: "Not Found",
-    headers,
-  });
-}
 
 async function handlePostsApi(request, env) {
   if (request.method === "HEAD") {
