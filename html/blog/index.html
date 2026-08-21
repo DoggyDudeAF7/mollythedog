@@ -25,16 +25,39 @@
   </head>
   <body>
     <div class="bg"></div>
++    <nav>
+      <div class="nav-inner">
+        <button id="navToggle" aria-label="Toggle menu" aria-expanded="false">☰</button>
+        <div class="nav-links" id="navLinks">
+          <a href="/molly/" title="Home"><span>:home:</span></a>
+          <a href="/molly-traits/" title="Traits"><span>:traits:</span></a>
+          <a href="/molly-habits/" title="Habits"><span>:habits:</span></a>
+          <a href="/molly-mind/" title="Mind"><span>:mind:</span></a>
+          <a href="/molly-gallery/" title="Gallery"><span>:gallery:</span></a>
+          <a href="/molly-faq/" title="FAQ"><span>:faq:</span></a>
+          <a href="/molly-dog-breeds/" title="Breeds"><span>:breeds:</span></a>
+          <a href="/comics/" title="Comics"><span>📚</span></a>
+          <a href="/blog/" title="Blog"><span>:blog:</span></a>
+          <a href="/merch/" title="Merch"><span>🏷️</span></a>
+          <a href="/about-me/" title="About the Human"><span>:about:</span></a>
+          <a href="/shaina/" title="Shaina"><span>🐶</span></a>
+          <a href="/poppy/" title="Poppy"><span>🐩</span></a>
+        </div>
+        <button id="searchBtn" type="button" aria-label="Open site search">:search:</button>
+      </div>
+    </nav>
+    <div id="searchBox" class="hidden">
+      <input id="searchInput" placeholder="Search...">
+      <div id="results"></div>
+    </div>
     <main class="blog-page">
       <section class="blog-hero reveal left">
         <p class="blog-kicker">blog.mollyandshaina.com</p>
         <h1>Molly & Shaina Blog</h1>
         <p>Field notes from the couch, the window, the snack zone, and wherever Shaina just heard something suspicious.</p>
-        <nav class="blog-actions" aria-label="Blog destinations">
-          <a href="/molly/">Main Site</a>
+        <div class="blog-actions">
           <a href="/blog/admin/" rel="nofollow">Writer Login</a>
-          <button id="searchBtn" type="button" aria-label="Open site search">:search:</button>
-        </nav>
+        </div>
       </section>
       <section class="blog-shell">
         <aside class="blog-sidebar reveal left">
