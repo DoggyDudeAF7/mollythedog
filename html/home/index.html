@@ -12,37 +12,25 @@
     <link rel="manifest" href="/site.webmanifest?v=20260817-2">
     <meta name="theme-color" content="#090910">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800;900&amp;display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../css/home-feed.css">
   </head>
   <body>
     <div class="feed-bg" aria-hidden="true"></div>
 
-    <nav>
-      <div class="nav-inner">
-        <button id="navToggle" type="button" aria-label="Toggle menu" aria-expanded="false">☰</button>
-        <div class="nav-links" id="navLinks">
-          <a href="/molly/" title="Home"><span>:home:</span></a>
-          <a href="/molly-traits/" title="Traits"><span>:traits:</span></a>
-          <a href="/molly-habits/" title="Habits"><span>:habits:</span></a>
-          <a href="/molly-mind/" title="Mind"><span>:mind:</span></a>
-          <a href="/molly-gallery/" title="Gallery"><span>:gallery:</span></a>
-          <a href="/molly-faq/" title="FAQ"><span>:faq:</span></a>
-          <a href="/molly-dog-breeds/" title="Breeds"><span>:breeds:</span></a>
-          <a href="/comics/" title="Comics"><span>📚</span></a>
-          <a href="/blog/" title="Blog"><span>:blog:</span></a>
-          <a href="/merch/" title="Merch"><span>🏷️</span></a>
-          <a href="/about-me/" title="About the Human"><span>:about:</span></a>
-          <a href="/shaina/" title="Shaina"><span>🐶</span></a>
-          <a href="/poppy/" title="Poppy"><span>🐩</span></a>
-        </div>
-        <button id="searchBtn" type="button" aria-label="Open site search">:search:</button>
-      </div>
-    </nav>
-    <div id="searchBox" class="hidden">
-      <input id="searchInput" placeholder="Search...">
-      <div id="results"></div>
-    </div>
+    <header class="feed-header">
+      <a class="feed-brand" href="./" aria-label="Molly and Shaina home">
+        <span>:molly:</span>
+        <strong>Molly &amp; Shaina</strong>
+      </a>
+      <nav aria-label="Main destinations">
+        <a href="/molly/">Main Site</a>
+        <a href="/blog/">Blog</a>
+        <a href="/comics/">Comics</a>
+        <a href="/merch/">Merch</a>
+        <a href="/poppy/">Poppy</a>
+        <button id="searchBtn" class="ms-search-launch ms-header-search" type="button" aria-label="Open site search">:search:</button>
+      </nav>
+    </header>
 
     <main class="feed-shell">
       <section class="feed-hero" aria-labelledby="homeTitle">
@@ -131,7 +119,6 @@
     </footer>
 
     <script src="../js/animations.js"></script>
-    <script src="../js/search.js"></script>
     <script src="../js/home-feed.js"></script>
   </body>
 </html>
