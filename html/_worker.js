@@ -58,6 +58,18 @@ export default {
       return Response.redirect(url.toString(), 301);
     }
 
+    if (
+      url.pathname === "/poppy-blog" ||
+      url.pathname.startsWith("/poppy-blog/") ||
+      url.pathname === "/molly-blog" ||
+      url.pathname.startsWith("/molly-blog/") ||
+      url.pathname === "/shaina-blog" ||
+      url.pathname.startsWith("/shaina-blog/")
+    ) {
+      url.pathname = "/blog/";
+      return Response.redirect(url.toString(), 301);
+    }
+
     if (url.pathname === "/html" || url.pathname.startsWith("/html/")) {
       url.pathname = url.pathname.replace(/^\/html\/?/, "/");
       return Response.redirect(url.toString(), 301);

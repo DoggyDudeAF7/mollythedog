@@ -1,120 +1,15 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="The blog of Poppy, a four-year-old chocolate brown toy poodle.">
-  <meta name="theme-color" content="#07070c">
-  <title>Poppy — Blog</title>
-  <link rel="icon" href="/favicon.ico?v=20260817-2" type="image/x-icon" sizes="any">
-  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png?v=20260817-2">
-  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png?v=20260817-2">
-  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=20260817-2">
-  <link rel="manifest" href="/site.webmanifest?v=20260817-2">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800;900&amp;display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../css/style.css">
-    <link rel="stylesheet" href="../css/blog.css">
-    <link rel="stylesheet" href="../css/poppy-real.css">
-</head>
-<body>
-  <div class="bg"></div>
-  <nav>
-    <div class="nav-inner">
-      <button id="navToggle" aria-label="Toggle menu" aria-expanded="false">☰</button>
-      <div class="nav-links" id="navLinks">
-        <a href="/molly/" title="Home"><span>:home:</span></a>
-        <a href="/molly-traits/" title="Traits"><span>:traits:</span></a>
-        <a href="/molly-habits/" title="Habits"><span>:habits:</span></a>
-        <a href="/molly-mind/" title="Mind"><span>:mind:</span></a>
-        <a href="/molly-gallery/" title="Gallery"><span>:gallery:</span></a>
-        <a href="/molly-faq/" title="FAQ"><span>:faq:</span></a>
-        <a href="/molly-dog-breeds/" title="Breeds"><span>:breeds:</span></a>
-        <a href="/comics/" title="Comics"><span>📚</span></a>
-        <a href="/blog/" title="Blog"><span>:blog:</span></a>
-        <a href="/merch/" title="Merch"><span>🏷️</span></a>
-        <a href="/about-me/" title="About the Human"><span>:about:</span></a>
-        <a href="/shaina/" title="Shaina"><span>🐶</span></a>
-        <a href="/poppy/" title="Poppy"><span>🐩</span></a>
-      </div>
-      <button id="searchBtn">:search:</button>
-    </div>
-  </nav>
-  <div id="searchBox" class="hidden">
-    <input id="searchInput" placeholder="Search..." />
-    <div id="results"></div>
-  </div>
-
-  <main class="blog-page" id="main-content">
-    <section class="blog-hero reveal left">
-      <p class="blog-kicker">poppy / blog</p>
-      <h1>Blog</h1>
-      <p>Short records of Poppy’s routines, surroundings, and changing attention.</p>
-    </section>
-
-    <section class="blog-shell">
-      <aside class="blog-sidebar reveal left">
-        <p class="blog-kicker">Archive</p>
-        <h2>Notes from 2026</h2>
-        <p>Observations are dated and presented in reverse chronological order.</p>
-      </aside>
-
-      <section class="blog-posts" aria-label="Blog posts">
-        <article class="blog-post reveal right">
-          <div class="poppy-photo-placeholder"><span>:poppy:</span><small>Real photo coming soon</small></div>
-          <p class="blog-date"><span>07 August 2026</span><span>Outdoors · 3 min</span></p>
-          <h2>An afternoon beyond the city</h2>
-          <p>Open ground changes the quality of Poppy’s attention. She moves slowly at first, reading the unfamiliar air before settling into the landscape.</p>
-        </article>
-        <article class="blog-post reveal right">
-          <div class="poppy-photo-placeholder"><span>:poppy:</span><small>Real photo coming soon</small></div>
-          <p class="blog-date"><span>02 August 2026</span><span>Home · 2 min</span></p>
-          <h2>The room at mid-afternoon</h2>
-          <p>Poppy returns to the same part of the sofa when the light softens. From there, she can see the hall, the window, and anyone entering the room.</p>
-        </article>
-        <article class="blog-post reveal right">
-          <p class="blog-date"><span>28 July 2026</span><span>Routine · 2 min</span></p>
-          <h2>The pace of an ordinary morning</h2>
-          <p>There is a sequence to the first hour: a quiet circuit of the house, breakfast, a pause by the door, then rest. It rarely varies.</p>
-        </article>
-        <article class="blog-post reveal right">
-          <p class="blog-date"><span>19 July 2026</span><span>Observation · 3 min</span></p>
-          <h2>What Poppy hears before we do</h2>
-          <p>Her attention often changes before there is any obvious reason for it. The head lifts first, then turns toward a sound still too distant for anyone else in the room. Most are dismissed quickly. A few deserve continued study.</p>
-        </article>
-        <article class="blog-post reveal right">
-          <p class="blog-date"><span>11 July 2026</span><span>Walking · 3 min</span></p>
-          <h2>The difference between distance and progress</h2>
-          <p>A walk with Poppy is not measured well in kilometres. Progress might mean examining one section of grass for several minutes or stopping to understand why a gate is open when it is usually closed.</p>
-        </article>
-        <article class="blog-post reveal right">
-          <p class="blog-date"><span>03 July 2026</span><span>Portrait · 2 min</span></p>
-          <h2>Photographing a dog who does not perform</h2>
-          <p>Poppy rarely changes herself for a camera. The strongest photographs arrive after the device stops being interesting and she returns to watching the room, resting, or looking beyond the frame.</p>
-        </article>
-        <article class="blog-post reveal right">
-          <p class="blog-date"><span>24 June 2026</span><span>Home · 2 min</span></p>
-          <h2>Choosing where to settle</h2>
-          <p>Comfort is only one part of the decision. The best place must also provide a view of the doorway, some knowledge of the hallway, and enough space to remain undisturbed.</p>
-        </article>
-        <article class="blog-post reveal right">
-          <p class="blog-date"><span>15 June 2026</span><span>Coat · 3 min</span></p>
-          <h2>The character of an untidy curl</h2>
-          <p>Poppy’s coat does not remain arranged for long. The longer hair across her crown shifts through the day, gathering into uneven curls that make each photograph recognisably hers.</p>
-        </article>
-      </section>
-    </section>
-  </main>
-
-  <footer>
-    <strong>Molly &amp; Shaina</strong>
-    <br>
-    mollyandshaina.com
-    <br>
-    © 2026
-  </footer>
-  <script src="../js/animations.js"></script>
-  <script src="../js/search.js"></script>
-</body>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex">
+    <meta http-equiv="refresh" content="0; url=/blog/">
+    <link rel="canonical" href="https://mollyandshaina.com/blog/">
+    <title>Redirecting to the Molly &amp; Shaina Blog</title>
+  </head>
+  <body>
+    <p>This blog has moved to <a href="/blog/">the Molly &amp; Shaina Blog</a>.</p>
+    <script>window.location.replace("/blog/");</script>
+  </body>
 </html>
