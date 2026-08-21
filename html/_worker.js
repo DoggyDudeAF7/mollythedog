@@ -138,6 +138,7 @@ const pagePaths = new Set([
   "/shaina-traits/",
   "/submit/",
   "/test/",
+  "/merch/",
 ]);
 
 const assetPathPrefixes = [
