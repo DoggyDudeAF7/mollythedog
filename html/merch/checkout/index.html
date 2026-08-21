@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="robots" content="noindex">
-    <meta name="description" content="Checkout preview for Molly and Shaina stickers.">
-    <title>Checkout Preview - Molly &amp; Shaina</title>
+    <meta name="description" content="Request free handmade Molly and Shaina stickers.">
+    <title>Free Sticker Request - Molly &amp; Shaina</title>
     <link rel="icon" href="/favicon.ico?v=20260817-2" type="image/x-icon" sizes="any">
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png?v=20260817-2">
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png?v=20260817-2">
@@ -48,17 +48,54 @@
       <a class="checkout-back" href="../">← Back to all stickers</a>
       <section class="checkout-card checkout-bag-card" aria-labelledby="checkoutTitle">
         <div class="checkout-copy">
-          <p class="merch-eyebrow">Checkout preview</p>
-          <h1 id="checkoutTitle">Your bag</h1>
-          <p class="checkout-description">Your sticker selections and quantities are saved on this device.</p>
+          <p class="merch-eyebrow">Free sticker request</p>
+          <h1 id="checkoutTitle">Your selection</h1>
+          <p class="checkout-description">Choose up to 5 stickers. Requests are available within Australia, reviewed before fulfilment, and subject to availability.</p>
           <div class="checkout-items" id="checkoutItems"></div>
           <div class="checkout-empty" id="checkoutEmpty" hidden>
-            <strong>Your bag is empty.</strong>
+            <strong>Your selection is empty.</strong>
             <a href="../">Choose a sticker</a>
           </div>
-          <div class="checkout-total"><span>Total</span><strong id="checkoutTotal">$0.00</strong></div>
-          <button class="checkout-disabled" type="button" disabled>Checkout unavailable</button>
-          <p class="checkout-notice">Orders and payments are not connected yet. This page is a preview only.</p>
+          <form class="sticker-request-form" id="stickerRequestForm">
+            <h2>Delivery details</h2>
+            <p>Only provide an address where you have permission to receive mail.</p>
+            <div class="request-form-grid">
+              <label class="request-field request-field-wide" for="requestName">Full name
+                <input id="requestName" name="name" type="text" autocomplete="name" maxlength="80" required>
+              </label>
+              <label class="request-field request-field-wide" for="requestEmail">Email
+                <input id="requestEmail" name="email" type="email" autocomplete="email" maxlength="120" required>
+              </label>
+              <label class="request-field request-field-wide" for="requestAddress1">Street address or PO box
+                <input id="requestAddress1" name="address1" type="text" autocomplete="address-line1" maxlength="120" required>
+              </label>
+              <label class="request-field request-field-wide" for="requestAddress2">Apartment, unit or other details <span>(optional)</span>
+                <input id="requestAddress2" name="address2" type="text" autocomplete="address-line2" maxlength="120">
+              </label>
+              <label class="request-field" for="requestSuburb">Suburb or town
+                <input id="requestSuburb" name="suburb" type="text" autocomplete="address-level2" maxlength="80" required>
+              </label>
+              <label class="request-field" for="requestState">State or territory
+                <select id="requestState" name="state" autocomplete="address-level1" required>
+                  <option value="">Choose one</option>
+                  <option>ACT</option><option>NSW</option><option>NT</option><option>QLD</option>
+                  <option>SA</option><option>TAS</option><option>VIC</option><option>WA</option>
+                </select>
+              </label>
+              <label class="request-field" for="requestPostcode">Postcode
+                <input id="requestPostcode" name="postcode" type="text" autocomplete="postal-code" inputmode="numeric" pattern="[0-9]{4}" maxlength="4" required>
+              </label>
+              <label class="request-field request-honeypot" for="requestWebsite" aria-hidden="true">Website
+                <input id="requestWebsite" name="website" type="text" tabindex="-1" autocomplete="off">
+              </label>
+            </div>
+            <label class="request-consent">
+              <input id="requestPermission" name="permission" type="checkbox" required>
+              <span>I am 18 or older, or a parent or guardian has approved this request and the delivery address.</span>
+            </label>
+            <button class="request-submit" id="sendStickerRequest" type="submit">Send free sticker request</button>
+            <p class="request-status" id="stickerRequestStatus" role="status">No payment details are collected. Delivery information is used only to review and mail this request.</p>
+          </form>
         </div>
       </section>
     </main>
