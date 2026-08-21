@@ -22,6 +22,10 @@ export default {
       return handleSubmissionEmail(request, env);
     }
 
+    if (url.pathname === "/api/sticker-request") {
+      return handleStickerRequest(request, env);
+    }
+
     if (url.hostname === "blog.mollyandshaina.com") {
       const assetUrl = new URL(request.url);
 
@@ -827,6 +831,161 @@ async function handleSubmissionEmail(request, env) {
       error: "The email could not be sent through Resend.",
       details: error && error.message ? error.message : "Unknown Resend error.",
     }, 502);
+  }
+}
+
+const stickerRequestCatalog = new Map([
+  ["molly-approved", "Molly Approved"],
+  ["shaina-energy", "Shaina Energy"],
+  ["poppy-power", "Poppy Power"],
+  ["three-breed-showdown", "Three-Breed Showdown"],
+  ["mollypack-backup", "Mollypack Backup"],
+  ["photo-of-the-day", "Photo of the Day"],
+  ["continue-reading", "Continue Reading"],
+  ["best-dog-ever", "Best Dog Ever"],
+  ["dog-mode", "Dog Mode"],
+  ["comic-time", "Comic Time"],
+  ["zoomies", "Zoomies"],
+  ["bark-bark", "Bark Bark"],
+  ["good-girl-club", "Good Girl Club"],
+  ["treat-tax", "Treat Tax"],
+  ["wag-more", "Wag More"],
+  ["backup-all-treats", "Backup All Treats"],
+  ["paw-print", "Paw Print"],
+  ["dog-bone", "Dog Bone"],
+  ["tennis-ball", "Tennis Ball"],
+  ["dog-bowl", "Dog Bowl"],
+  ["dog-house", "Dog House"],
+  ["heart", "Heart"],
+  ["molly-portrait", "Molly Portrait"],
+  ["shaina-portrait", "Shaina Portrait"],
+  ["poppy-portrait", "Poppy Portrait"],
+  ["resting-dog", "Resting Dog"],
+]);
+
+async function handleStickerRequest(request, env) {
+  if (request.method !== "POST") {
+    return jsonResponse({ error: "Method not allowed." }, 405, { allow: "POST" });
+  }
+
+  const contentLength = Number(request.headers.get("content-length") || 0);
+  if (contentLength > 20 * 1024) {
+    return jsonResponse({ error: "The request is too large." }, 413);
+  }
+
+  let body;
+  try {
+    body = await request.json();
+  } catch {
+    return jsonResponse({ error: "The sticker request must be valid JSON." }, 400);
+  }
+
+  if (cleanText(body.website, 200)) {
+    return jsonResponse({ ok: true });
+  }
+
+  const name = cleanText(body.name, 80);
+  const email = cleanText(body.email, 120);
+  const address1 = cleanText(body.address1, 120);
+  const address2 = cleanText(body.address2, 120);
+  const suburb = cleanText(body.suburb, 80);
+  const state = cleanText(body.state, 3).toUpperCase();
+  const postcode = cleanText(body.postcode, 4);
+  const permission = body.permission === true;
+  const validStates = new Set(["ACT", "NSW", "NT", "QLD", "SA", "TAS", "VIC", "WA"]);
+
+  if (!name || !email || !address1 || !suburb || !state || !postcode) {
+    return jsonResponse({ error: "Please complete every required delivery field." }, 400);
+  }
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    return jsonResponse({ error: "Please enter a valid email address." }, 400);
+  }
+  if (!validStates.has(state) || !/^\d{4}$/.test(postcode)) {
+    return jsonResponse({ error: "Please enter a valid Australian state and postcode." }, 400);
+  }
+  if (!permission) {
+    return jsonResponse({ error: "Adult or parent/guardian approval is required." }, 400);
+  }
+  if (!Array.isArray(body.items) || !body.items.length || body.items.length > 5) {
+    return jsonResponse({ error: "Choose between 1 and 5 sticker designs." }, 400);
+  }
+
+  const selected = new Map();
+  for (const item of body.items) {
+    const id = cleanText(item && item.id, 80);
+    const quantity = Number(item && item.quantity);
+    if (!stickerRequestCatalog.has(id) || !Number.isInteger(quantity) || quantity < 1 || quantity > 5) {
+      return jsonResponse({ error: "The sticker selection is invalid." }, 400);
+    }
+    selected.set(id, (selected.get(id) || 0) + quantity);
+  }
+
+  const total = [...selected.values()].reduce((sum, quantity) => sum + quantity, 0);
+  if (total < 1 || total > 5) {
+    return jsonResponse({ error: "A request can contain no more than 5 stickers." }, 400);
+  }
+
+  const resendApiKey = String(env.RESEND_API_KEY || "").trim();
+  const toEmail = String(env.SUBMISSION_TO_EMAIL || "").trim();
+  const fromEmail = String(env.SUBMISSION_FROM_EMAIL || "submissions@mollyandshaina.com").trim();
+  if (!resendApiKey || !toEmail) {
+    return jsonResponse({ error: "Sticker requests are not configured yet." }, 503);
+  }
+
+  const itemLines = [...selected.entries()].map(([id, quantity]) =>
+    `${quantity} × ${stickerRequestCatalog.get(id)}`
+  );
+  const addressLines = [name, address1, address2, `${suburb} ${state} ${postcode}`, "Australia"].filter(Boolean);
+  const text = [
+    "New free sticker request",
+    "",
+    "Stickers:",
+    ...itemLines,
+    "",
+    "Deliver to:",
+    ...addressLines,
+    "",
+    `Contact: ${email}`,
+    "Permission confirmed: yes",
+    "",
+    "Review this request before mailing anything.",
+  ].join("\n");
+  const htmlItems = itemLines.map((line) => `<li>${escapeHtml(line)}</li>`).join("");
+  const htmlAddress = addressLines.map((line) => escapeHtml(line)).join("<br>");
+  const html = `
+<!doctype html>
+<html><body style="margin:0;padding:28px;background:#f1f1f4;font-family:Inter,Arial,sans-serif;color:#17151d">
+  <div style="max-width:680px;margin:auto;padding:30px;border-radius:20px;background:#fff;border:1px solid #ddd">
+    <p style="margin:0 0 8px;color:#8a4f43;font-weight:800;text-transform:uppercase;letter-spacing:1px">Molly &amp; Shaina</p>
+    <h1 style="margin:0 0 22px">Free sticker request</h1>
+    <h2>Stickers</h2><ul>${htmlItems}</ul>
+    <h2>Delivery address</h2><p>${htmlAddress}</p>
+    <h2>Contact</h2><p><a href="mailto:${escapeHtml(email)}">${escapeHtml(email)}</a></p>
+    <p style="margin-top:26px;color:#666">Permission was confirmed. Review this request before mailing anything, then delete the address when it is no longer needed.</p>
+  </div>
+</body></html>`;
+
+  try {
+    const response = await fetch("https://api.resend.com/emails", {
+      method: "POST",
+      headers: {
+        "authorization": `Bearer ${resendApiKey}`,
+        "content-type": "application/json",
+      },
+      body: JSON.stringify({
+        to: [toEmail],
+        from: `Molly and Shaina <${fromEmail}>`,
+        reply_to: email,
+        subject: `Free sticker request from ${name}`,
+        text,
+        html,
+      }),
+    });
+    const result = await response.json().catch(() => ({}));
+    if (!response.ok) throw new Error(result.message || result.error || "Email delivery failed.");
+    return jsonResponse({ ok: true });
+  } catch {
+    return jsonResponse({ error: "The sticker request could not be sent. Please try again later." }, 502);
   }
 }
 
