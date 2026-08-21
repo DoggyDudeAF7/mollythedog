@@ -880,6 +880,10 @@ async function handleStickerRequest(request, env) {
     return jsonResponse({ error: "The sticker request must be valid JSON." }, 400);
   }
 
+  if (!body || typeof body !== "object" || Array.isArray(body)) {
+    return jsonResponse({ error: "The sticker request is invalid." }, 400);
+  }
+
   if (cleanText(body.website, 200)) {
     return jsonResponse({ ok: true });
   }

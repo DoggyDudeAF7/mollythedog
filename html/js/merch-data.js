@@ -6,7 +6,7 @@ window.MSMerchProducts = Object.freeze([
     "description": "Circular Molly portrait emblem with an approval mark.",
     "image": "/images/merch/stickers/molly-approved.webp",
     "alt": "Molly Approved portrait sticker",
-    "price": "50¢",
+    "price": "Free",
     "available": true
   },
   {
@@ -16,7 +16,7 @@ window.MSMerchProducts = Object.freeze([
     "description": "Shaina portrait design with bold hand-lettered type.",
     "image": "/images/merch/stickers/shaina-energy.webp",
     "alt": "Shaina Energy portrait sticker",
-    "price": "50¢",
+    "price": "Free",
     "available": true
   },
   {
@@ -26,7 +26,7 @@ window.MSMerchProducts = Object.freeze([
     "description": "Poppy portrait design with a compact monochrome finish.",
     "image": "/images/merch/stickers/poppy-power.webp",
     "alt": "Poppy Power portrait sticker",
-    "price": "50¢",
+    "price": "Free",
     "available": true
   },
   {
@@ -36,7 +36,7 @@ window.MSMerchProducts = Object.freeze([
     "description": "A shield-style group portrait featuring Molly, Shaina and Poppy.",
     "image": "/images/merch/stickers/three-breed-showdown.webp",
     "alt": "Three-Breed Showdown group sticker",
-    "price": "50¢",
+    "price": "Free",
     "available": true
   },
   {
@@ -46,7 +46,7 @@ window.MSMerchProducts = Object.freeze([
     "description": "A restrained technology-themed design inspired by the site backup format.",
     "image": "/images/merch/stickers/mollypack-backup.webp",
     "alt": "Mollypack backup design sticker",
-    "price": "50¢",
+    "price": "Free",
     "available": true
   },
   {
@@ -56,7 +56,7 @@ window.MSMerchProducts = Object.freeze([
     "description": "A framed Molly portrait inspired by the homepage daily photo.",
     "image": "/images/merch/stickers/photo-of-the-day.webp",
     "alt": "Photo of the Day Molly sticker",
-    "price": "50¢",
+    "price": "Free",
     "available": true
   },
   {
@@ -66,7 +66,7 @@ window.MSMerchProducts = Object.freeze([
     "description": "Directional label inspired by the comic reading-progress feature.",
     "image": "/images/merch/stickers/continue-reading.webp",
     "alt": "Continue Reading arrow sticker",
-    "price": "50¢",
+    "price": "Free",
     "available": true
   },
   {
@@ -76,7 +76,7 @@ window.MSMerchProducts = Object.freeze([
     "description": "Rosette-style award design with a paw-print detail.",
     "image": "/images/merch/stickers/best-dog-ever.webp",
     "alt": "Best Dog Ever award sticker",
-    "price": "50¢",
+    "price": "Free",
     "available": true
   },
   {
@@ -86,7 +86,7 @@ window.MSMerchProducts = Object.freeze([
     "description": "Monochrome on-and-off switch design.",
     "image": "/images/merch/stickers/dog-mode.webp",
     "alt": "Dog Mode switch sticker",
-    "price": "50¢",
+    "price": "Free",
     "available": true
   },
   {
@@ -96,7 +96,7 @@ window.MSMerchProducts = Object.freeze([
     "description": "High-impact comic burst with hand-lettered text.",
     "image": "/images/merch/stickers/comic-time.webp",
     "alt": "Comic Time burst sticker",
-    "price": "50¢",
+    "price": "Free",
     "available": true
   },
   {
@@ -106,7 +106,7 @@ window.MSMerchProducts = Object.freeze([
     "description": "Running-dog illustration with energetic motion lines.",
     "image": "/images/merch/stickers/zoomies.webp",
     "alt": "Running dog Zoomies sticker",
-    "price": "50¢",
+    "price": "Free",
     "available": true
   },
   {
@@ -116,7 +116,7 @@ window.MSMerchProducts = Object.freeze([
     "description": "Bold speech-bubble design with compact lettering.",
     "image": "/images/merch/stickers/bark-bark.webp",
     "alt": "Bark Bark speech bubble sticker",
-    "price": "50¢",
+    "price": "Free",
     "available": true
   },
   {
@@ -126,7 +126,7 @@ window.MSMerchProducts = Object.freeze([
     "description": "Circular club badge centred on a paw print.",
     "image": "/images/merch/stickers/good-girl-club.webp",
     "alt": "Good Girl Club paw badge sticker",
-    "price": "50¢",
+    "price": "Free",
     "available": true
   },
   {
@@ -136,7 +136,7 @@ window.MSMerchProducts = Object.freeze([
     "description": "Ticket-style design marked Pay in Snacks.",
     "image": "/images/merch/stickers/treat-tax.webp",
     "alt": "Treat Tax pay in snacks sticker",
-    "price": "50¢",
+    "price": "Free",
     "available": true
   },
   {
@@ -146,7 +146,7 @@ window.MSMerchProducts = Object.freeze([
     "description": "Round typographic design with understated heart details.",
     "image": "/images/merch/stickers/wag-more.webp",
     "alt": "Wag More circular sticker",
-    "price": "50¢",
+    "price": "Free",
     "available": true
   },
   {
@@ -156,7 +156,7 @@ window.MSMerchProducts = Object.freeze([
     "description": "Floppy-disk design combining the collection's dog and technology themes.",
     "image": "/images/merch/stickers/backup-all-treats.webp",
     "alt": "Backup All Treats floppy disk sticker",
-    "price": "50¢",
+    "price": "Free",
     "available": true
   },
   {
@@ -166,7 +166,7 @@ window.MSMerchProducts = Object.freeze([
     "description": "Compact solid paw-print design.",
     "image": "/images/merch/stickers/paw-print.webp",
     "alt": "Black paw-print sticker",
-    "price": "50¢",
+    "price": "Free",
     "available": true
   },
   {
@@ -176,7 +176,7 @@ window.MSMerchProducts = Object.freeze([
     "description": "Simple outlined dog-bone design.",
     "image": "/images/merch/stickers/dog-bone.webp",
     "alt": "Outlined dog-bone sticker",
-    "price": "50¢",
+    "price": "Free",
     "available": true
   },
   {
@@ -186,7 +186,7 @@ window.MSMerchProducts = Object.freeze([
     "description": "Minimal tennis-ball line illustration.",
     "image": "/images/merch/stickers/tennis-ball.webp",
     "alt": "Tennis-ball sticker",
-    "price": "50¢",
+    "price": "Free",
     "available": true
   },
   {
@@ -196,7 +196,7 @@ window.MSMerchProducts = Object.freeze([
     "description": "Food-bowl design finished with a centred paw mark.",
     "image": "/images/merch/stickers/dog-bowl.webp",
     "alt": "Dog bowl with paw-print sticker",
-    "price": "50¢",
+    "price": "Free",
     "available": true
   },
   {
@@ -206,7 +206,7 @@ window.MSMerchProducts = Object.freeze([
     "description": "Small architectural kennel illustration.",
     "image": "/images/merch/stickers/dog-house.webp",
     "alt": "Dog-house sticker",
-    "price": "50¢",
+    "price": "Free",
     "available": true
   },
   {
@@ -216,7 +216,7 @@ window.MSMerchProducts = Object.freeze([
     "description": "Hatched monochrome heart design.",
     "image": "/images/merch/stickers/heart.webp",
     "alt": "Hatched heart sticker",
-    "price": "50¢",
+    "price": "Free",
     "available": true
   },
   {
@@ -226,7 +226,7 @@ window.MSMerchProducts = Object.freeze([
     "description": "Detailed standalone portrait of Molly.",
     "image": "/images/merch/stickers/molly-portrait.webp",
     "alt": "Molly portrait sticker",
-    "price": "50¢",
+    "price": "Free",
     "available": true
   },
   {
@@ -236,7 +236,7 @@ window.MSMerchProducts = Object.freeze([
     "description": "Detailed standalone portrait of Shaina.",
     "image": "/images/merch/stickers/shaina-portrait.webp",
     "alt": "Shaina portrait sticker",
-    "price": "50¢",
+    "price": "Free",
     "available": true
   },
   {
@@ -246,7 +246,7 @@ window.MSMerchProducts = Object.freeze([
     "description": "Detailed standalone portrait of Poppy.",
     "image": "/images/merch/stickers/poppy-portrait.webp",
     "alt": "Poppy portrait sticker",
-    "price": "50¢",
+    "price": "Free",
     "available": true
   },
   {
@@ -256,7 +256,7 @@ window.MSMerchProducts = Object.freeze([
     "description": "Relaxed full-body dog illustration.",
     "image": "/images/merch/stickers/resting-dog.webp",
     "alt": "Dog resting on her back sticker",
-    "price": "50¢",
+    "price": "Free",
     "available": true
   }
 ]);
