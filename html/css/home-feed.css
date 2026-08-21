@@ -78,6 +78,7 @@ body {
 }
 
 .feed-header nav a,
+.feed-header nav #searchBtn,
 .card-action,
 .explore-links a,
 #shufflePhoto {
@@ -96,8 +97,19 @@ body {
   font-size: 0.86rem;
 }
 
+.feed-header nav #searchBtn {
+  padding: 8px 12px;
+}
+
+.feed-header nav #searchBtn .dog-emoji {
+  width: 1.4rem;
+  height: 1.4rem;
+}
+
 .feed-header nav a:hover,
 .feed-header nav a:focus-visible,
+.feed-header nav #searchBtn:hover,
+.feed-header nav #searchBtn:focus-visible,
 .card-action:hover,
 .card-action:focus-visible,
 .explore-links a:hover,
