@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-FG9NLMSQLX"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-FG9NLMSQLX');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Molly and Shaina merchandise, beginning with homemade stickers.">
+    <title>Molly &amp; Shaina - Merch</title>
+    <link rel="icon" href="/favicon.ico?v=20260817-2" type="image/x-icon" sizes="any">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png?v=20260817-2">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png?v=20260817-2">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=20260817-2">
+    <link rel="manifest" href="/site.webmanifest?v=20260817-2">
+    <meta name="theme-color" content="#090910">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800;900&amp;display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/merch.css">
+  </head>
+  <body>
+    <div class="bg"></div>
+    <nav>
+      <div class="nav-inner">
+        <button id="navToggle" aria-label="Toggle menu" aria-expanded="false">☰</button>
+        <div class="nav-links" id="navLinks">
+          <a href="../molly/" title="Home"><span>:home:</span></a>
+          <a href="../molly-traits/" title="Traits"><span>:traits:</span></a>
+          <a href="../molly-habits/" title="Habits"><span>:habits:</span></a>
+          <a href="../molly-mind/" title="Mind"><span>:mind:</span></a>
+          <a href="../molly-gallery/" title="Gallery"><span>:gallery:</span></a>
+          <a href="../molly-faq/" title="FAQ"><span>:faq:</span></a>
+          <a href="../molly-dog-breeds/" title="Breeds"><span>:breeds:</span></a>
+          <a href="../comics/" title="Comics"><span>📚</span></a>
+          <a href="../about-me/" title="About the Human"><span>:about:</span></a>
+          <a href="../shaina/" title="Shaina"><span>🐶</span></a>
+          <a href="../poppy/" title="Poppy"><span>🐩</span></a>
+        </div>
+        <button id="searchBtn" type="button" aria-label="Open site search">:search:</button>
+      </div>
+    </nav>
+    <div id="searchBox" class="hidden">
+      <input id="searchInput" placeholder="Search...">
+      <div id="results"></div>
+    </div>
+
+    <main class="merch-page">
+      <section class="merch-hero reveal left">
+        <p class="merch-eyebrow">Molly &amp; Shaina Merch</p>
+        <h1>Merch</h1>
+        <p>Small-run Molly &amp; Shaina items, starting with homemade stickers.</p>
+        <div class="merch-price"><strong>50¢</strong><span>per homemade sticker</span></div>
+      </section>
+
+      <section class="merch-catalog" aria-labelledby="stickerHeading">
+        <header class="merch-section-heading reveal right">
+          <div>
+            <p class="merch-eyebrow">Available first</p>
+            <h2 id="stickerHeading">Homemade stickers</h2>
+          </div>
+          <span class="merch-category-price">50¢ each</span>
+        </header>
+        <div class="merch-grid" id="merchGrid" aria-live="polite"></div>
+        <div class="merch-empty" id="merchEmpty">
+          <strong>Sticker designs are being prepared.</strong>
+          <p>The real sticker images will appear here as soon as they are added.</p>
+        </div>
+      </section>
+
+      <section class="merch-details" aria-label="Merchandise details">
+        <article class="merch-detail reveal left">
+          <span>01</span>
+          <h2>Homemade</h2>
+          <p>The first stickers are made by hand in small quantities.</p>
+        </article>
+        <article class="merch-detail reveal right">
+          <span>02</span>
+          <h2>Simple pricing</h2>
+          <p>Every homemade sticker is 50¢ unless a product is clearly marked otherwise.</p>
+        </article>
+        <article class="merch-detail reveal left">
+          <span>03</span>
+          <h2>More later</h2>
+          <p>Shirts, phone cases, hoodies and other items can be added here as the collection grows.</p>
+        </article>
+      </section>
+
+      <section class="merch-coming reveal right">
+        <p class="merch-eyebrow">Future collection</p>
+        <h2>More items are planned.</h2>
+        <div class="merch-category-list" aria-label="Planned merchandise categories">
+          <span>Shirts</span><span>Phone cases</span><span>Hoodies</span><span>More</span>
+        </div>
+        <p>Ordering information will be added when the first designs are ready.</p>
+      </section>
+    </main>
+
+    <footer>
+      <strong>Molly &amp; Shaina Merch</strong>
+      <br>
+      Stickers • Clothing • Accessories
+      <br>
+      © 2026
+    </footer>
+    <script src="../js/animations.js"></script>
+    <script src="../js/search.js"></script>
+    <script src="../js/merch.js"></script>
+  </body>
+</html>
