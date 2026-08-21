@@ -2,26 +2,29 @@
   "use strict";
 
   const storageKey = "mollyandshaina-merch-bag-v1";
+  let memoryBag = {};
 
   function load() {
     try {
       const saved = JSON.parse(localStorage.getItem(storageKey));
-      if (!saved || typeof saved !== "object" || Array.isArray(saved)) return {};
-      return Object.fromEntries(
+      if (!saved || typeof saved !== "object" || Array.isArray(saved)) return { ...memoryBag };
+      memoryBag = Object.fromEntries(
         Object.entries(saved)
           .map(([id, quantity]) => [id, Math.max(1, Math.min(20, Number(quantity) || 1))])
           .filter(([id]) => typeof id === "string" && id)
       );
+      return { ...memoryBag };
     } catch {
-      return {};
+      return { ...memoryBag };
     }
   }
 
   function save(bag) {
+    memoryBag = { ...bag };
     try {
       localStorage.setItem(storageKey, JSON.stringify(bag));
     } catch {
-      // The bag still works for this page view if storage is unavailable.
+      // memoryBag keeps the bag working for this page view if storage is unavailable.
     }
   }
 
