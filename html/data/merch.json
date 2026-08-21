@@ -1,1 +1,13 @@
-[]
+[
+  {
+    "id": "homemade-sticker-designs",
+    "category": "Sticker",
+    "name": "Homemade Sticker Designs",
+    "description": "Choose any design shown on the sheet. Each homemade sticker costs 50¢.",
+    "image": "/images/merch/sticker-sheet.webp",
+    "alt": "Black-and-white sheet of Molly, Shaina and Poppy homemade sticker designs",
+    "price": "50¢ each",
+    "available": true,
+    "layout": "sheet"
+  }
+]
