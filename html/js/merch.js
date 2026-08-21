@@ -17,6 +17,7 @@
     stickers.forEach((product) => {
       const article = document.createElement("article");
       article.className = "merch-item";
+      if (product.layout === "sheet") article.classList.add("merch-item-sheet");
       const image = document.createElement("img");
       image.src = product.image;
       image.alt = product.alt || `${product.name} sticker`;
