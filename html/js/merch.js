@@ -17,24 +17,11 @@
     stickers.forEach((product) => {
       const article = document.createElement("article");
       article.className = "merch-item";
-      if (product.layout === "sheet") article.classList.add("merch-item-sheet");
       const image = document.createElement("img");
       image.src = product.image;
       image.alt = product.alt || `${product.name} sticker`;
       image.loading = "lazy";
       image.decoding = "async";
-      let visual = image;
-      if (Array.isArray(product.crop) && product.crop.length === 4) {
-        const [x, y, width, height] = product.crop.map(Number);
-        const crop = document.createElement("div");
-        crop.className = "merch-sticker-crop";
-        crop.style.aspectRatio = `${width} / ${height}`;
-        image.style.width = `${(1055 / width) * 100}%`;
-        image.style.left = `${(-x / width) * 100}%`;
-        image.style.top = `${(-y / height) * 100}%`;
-        crop.appendChild(image);
-        visual = crop;
-      }
       const copy = document.createElement("div");
       copy.className = "merch-item-copy";
       const title = document.createElement("h3");
@@ -49,7 +36,7 @@
       price.textContent = product.price || "50¢";
       meta.append(status, price);
       copy.append(title, description, meta);
-      article.append(visual, copy);
+      article.append(image, copy);
       fragment.appendChild(article);
     });
     grid.appendChild(fragment);

@@ -36,8 +36,6 @@
 .merch-grid { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 17px; }
 .merch-item { overflow: hidden; border: 1px solid rgba(255,255,255,.13); border-radius: 22px; background: rgba(255,255,255,.07); }
 .merch-item img { width: 100%; aspect-ratio: 1; display: block; object-fit: contain; padding: 18px; background: rgba(0,0,0,.2); }
-.merch-sticker-crop { position: relative; width: 100%; overflow: hidden; background: #fff; }
-.merch-sticker-crop img { position: absolute; display: block; max-width: none; height: auto; aspect-ratio: auto; padding: 0; background: #fff; }
 .merch-item-copy { padding: 18px; }
 .merch-item-copy h3 { margin-bottom: 7px; font-size: 1.2rem; }
 .merch-item-copy p { color: rgba(255,255,255,.58); font-size: .86rem; line-height: 1.5; }
