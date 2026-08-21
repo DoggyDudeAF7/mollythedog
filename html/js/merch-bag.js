@@ -10,7 +10,7 @@
       if (!saved || typeof saved !== "object" || Array.isArray(saved)) return { ...memoryBag };
       memoryBag = Object.fromEntries(
         Object.entries(saved)
-          .map(([id, quantity]) => [id, Math.max(1, Math.min(20, Number(quantity) || 1))])
+          .map(([id, quantity]) => [id, Math.max(1, Math.min(5, Number(quantity) || 1))])
           .filter(([id]) => typeof id === "string" && id)
       );
       return { ...memoryBag };
@@ -34,7 +34,9 @@
 
   function add(id, quantity = 1) {
     const bag = load();
-    bag[id] = Math.min(20, (bag[id] || 0) + Math.max(1, Number(quantity) || 1));
+    const remaining = Math.max(0, 5 - count(bag));
+    if (!remaining) return bag;
+    bag[id] = Math.min(5, (bag[id] || 0) + Math.min(remaining, Math.max(1, Number(quantity) || 1)));
     save(bag);
     return bag;
   }
