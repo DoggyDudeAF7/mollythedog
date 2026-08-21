@@ -1,0 +1,263 @@
+window.MSMerchProducts = Object.freeze([
+  {
+    "id": "molly-approved",
+    "category": "Sticker",
+    "name": "Molly Approved",
+    "description": "Circular Molly portrait emblem with an approval mark.",
+    "image": "/images/merch/stickers/molly-approved.webp",
+    "alt": "Molly Approved portrait sticker",
+    "price": "50¢",
+    "available": true
+  },
+  {
+    "id": "shaina-energy",
+    "category": "Sticker",
+    "name": "Shaina Energy",
+    "description": "Shaina portrait design with bold hand-lettered type.",
+    "image": "/images/merch/stickers/shaina-energy.webp",
+    "alt": "Shaina Energy portrait sticker",
+    "price": "50¢",
+    "available": true
+  },
+  {
+    "id": "poppy-power",
+    "category": "Sticker",
+    "name": "Poppy Power",
+    "description": "Poppy portrait design with a compact monochrome finish.",
+    "image": "/images/merch/stickers/poppy-power.webp",
+    "alt": "Poppy Power portrait sticker",
+    "price": "50¢",
+    "available": true
+  },
+  {
+    "id": "three-breed-showdown",
+    "category": "Sticker",
+    "name": "Three-Breed Showdown",
+    "description": "A shield-style group portrait featuring Molly, Shaina and Poppy.",
+    "image": "/images/merch/stickers/three-breed-showdown.webp",
+    "alt": "Three-Breed Showdown group sticker",
+    "price": "50¢",
+    "available": true
+  },
+  {
+    "id": "mollypack-backup",
+    "category": "Sticker",
+    "name": "Mollypack Backup",
+    "description": "A restrained technology-themed design inspired by the site backup format.",
+    "image": "/images/merch/stickers/mollypack-backup.webp",
+    "alt": "Mollypack backup design sticker",
+    "price": "50¢",
+    "available": true
+  },
+  {
+    "id": "photo-of-the-day",
+    "category": "Sticker",
+    "name": "Photo of the Day",
+    "description": "A framed Molly portrait inspired by the homepage daily photo.",
+    "image": "/images/merch/stickers/photo-of-the-day.webp",
+    "alt": "Photo of the Day Molly sticker",
+    "price": "50¢",
+    "available": true
+  },
+  {
+    "id": "continue-reading",
+    "category": "Sticker",
+    "name": "Continue Reading",
+    "description": "Directional label inspired by the comic reading-progress feature.",
+    "image": "/images/merch/stickers/continue-reading.webp",
+    "alt": "Continue Reading arrow sticker",
+    "price": "50¢",
+    "available": true
+  },
+  {
+    "id": "best-dog-ever",
+    "category": "Sticker",
+    "name": "Best Dog Ever",
+    "description": "Rosette-style award design with a paw-print detail.",
+    "image": "/images/merch/stickers/best-dog-ever.webp",
+    "alt": "Best Dog Ever award sticker",
+    "price": "50¢",
+    "available": true
+  },
+  {
+    "id": "dog-mode",
+    "category": "Sticker",
+    "name": "Dog Mode",
+    "description": "Monochrome on-and-off switch design.",
+    "image": "/images/merch/stickers/dog-mode.webp",
+    "alt": "Dog Mode switch sticker",
+    "price": "50¢",
+    "available": true
+  },
+  {
+    "id": "comic-time",
+    "category": "Sticker",
+    "name": "Comic Time",
+    "description": "High-impact comic burst with hand-lettered text.",
+    "image": "/images/merch/stickers/comic-time.webp",
+    "alt": "Comic Time burst sticker",
+    "price": "50¢",
+    "available": true
+  },
+  {
+    "id": "zoomies",
+    "category": "Sticker",
+    "name": "Zoomies",
+    "description": "Running-dog illustration with energetic motion lines.",
+    "image": "/images/merch/stickers/zoomies.webp",
+    "alt": "Running dog Zoomies sticker",
+    "price": "50¢",
+    "available": true
+  },
+  {
+    "id": "bark-bark",
+    "category": "Sticker",
+    "name": "Bark Bark",
+    "description": "Bold speech-bubble design with compact lettering.",
+    "image": "/images/merch/stickers/bark-bark.webp",
+    "alt": "Bark Bark speech bubble sticker",
+    "price": "50¢",
+    "available": true
+  },
+  {
+    "id": "good-girl-club",
+    "category": "Sticker",
+    "name": "Good Girl Club",
+    "description": "Circular club badge centred on a paw print.",
+    "image": "/images/merch/stickers/good-girl-club.webp",
+    "alt": "Good Girl Club paw badge sticker",
+    "price": "50¢",
+    "available": true
+  },
+  {
+    "id": "treat-tax",
+    "category": "Sticker",
+    "name": "Treat Tax",
+    "description": "Ticket-style design marked Pay in Snacks.",
+    "image": "/images/merch/stickers/treat-tax.webp",
+    "alt": "Treat Tax pay in snacks sticker",
+    "price": "50¢",
+    "available": true
+  },
+  {
+    "id": "wag-more",
+    "category": "Sticker",
+    "name": "Wag More",
+    "description": "Round typographic design with understated heart details.",
+    "image": "/images/merch/stickers/wag-more.webp",
+    "alt": "Wag More circular sticker",
+    "price": "50¢",
+    "available": true
+  },
+  {
+    "id": "backup-all-treats",
+    "category": "Sticker",
+    "name": "Backup All Treats",
+    "description": "Floppy-disk design combining the collection's dog and technology themes.",
+    "image": "/images/merch/stickers/backup-all-treats.webp",
+    "alt": "Backup All Treats floppy disk sticker",
+    "price": "50¢",
+    "available": true
+  },
+  {
+    "id": "paw-print",
+    "category": "Sticker",
+    "name": "Paw Print",
+    "description": "Compact solid paw-print design.",
+    "image": "/images/merch/stickers/paw-print.webp",
+    "alt": "Black paw-print sticker",
+    "price": "50¢",
+    "available": true
+  },
+  {
+    "id": "dog-bone",
+    "category": "Sticker",
+    "name": "Dog Bone",
+    "description": "Simple outlined dog-bone design.",
+    "image": "/images/merch/stickers/dog-bone.webp",
+    "alt": "Outlined dog-bone sticker",
+    "price": "50¢",
+    "available": true
+  },
+  {
+    "id": "tennis-ball",
+    "category": "Sticker",
+    "name": "Tennis Ball",
+    "description": "Minimal tennis-ball line illustration.",
+    "image": "/images/merch/stickers/tennis-ball.webp",
+    "alt": "Tennis-ball sticker",
+    "price": "50¢",
+    "available": true
+  },
+  {
+    "id": "dog-bowl",
+    "category": "Sticker",
+    "name": "Dog Bowl",
+    "description": "Food-bowl design finished with a centred paw mark.",
+    "image": "/images/merch/stickers/dog-bowl.webp",
+    "alt": "Dog bowl with paw-print sticker",
+    "price": "50¢",
+    "available": true
+  },
+  {
+    "id": "dog-house",
+    "category": "Sticker",
+    "name": "Dog House",
+    "description": "Small architectural kennel illustration.",
+    "image": "/images/merch/stickers/dog-house.webp",
+    "alt": "Dog-house sticker",
+    "price": "50¢",
+    "available": true
+  },
+  {
+    "id": "heart",
+    "category": "Sticker",
+    "name": "Heart",
+    "description": "Hatched monochrome heart design.",
+    "image": "/images/merch/stickers/heart.webp",
+    "alt": "Hatched heart sticker",
+    "price": "50¢",
+    "available": true
+  },
+  {
+    "id": "molly-portrait",
+    "category": "Sticker",
+    "name": "Molly Portrait",
+    "description": "Detailed standalone portrait of Molly.",
+    "image": "/images/merch/stickers/molly-portrait.webp",
+    "alt": "Molly portrait sticker",
+    "price": "50¢",
+    "available": true
+  },
+  {
+    "id": "shaina-portrait",
+    "category": "Sticker",
+    "name": "Shaina Portrait",
+    "description": "Detailed standalone portrait of Shaina.",
+    "image": "/images/merch/stickers/shaina-portrait.webp",
+    "alt": "Shaina portrait sticker",
+    "price": "50¢",
+    "available": true
+  },
+  {
+    "id": "poppy-portrait",
+    "category": "Sticker",
+    "name": "Poppy Portrait",
+    "description": "Detailed standalone portrait of Poppy.",
+    "image": "/images/merch/stickers/poppy-portrait.webp",
+    "alt": "Poppy portrait sticker",
+    "price": "50¢",
+    "available": true
+  },
+  {
+    "id": "resting-dog",
+    "category": "Sticker",
+    "name": "Resting Dog",
+    "description": "Relaxed full-body dog illustration.",
+    "image": "/images/merch/stickers/resting-dog.webp",
+    "alt": "Dog resting on her back sticker",
+    "price": "50¢",
+    "available": true
+  }
+]);
+
