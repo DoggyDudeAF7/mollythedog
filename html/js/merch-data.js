@@ -260,4 +260,3 @@ window.MSMerchProducts = Object.freeze([
     "available": true
   }
 ]);
-
