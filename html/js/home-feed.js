@@ -87,60 +87,71 @@ async function loadLatestComic() {
   }
 }
 
-function choosePhoto(forceDifferent = true) {
-  let previous = -1;
-  try {
-    previous = Number(localStorage.getItem("homeFeedPhoto"));
-  } catch {}
-
-  let next = Math.floor(Math.random() * photos.length);
-  if (forceDifferent && photos.length > 1 && next === previous) {
-    next = (next + 1 + Math.floor(Math.random() * (photos.length - 1))) % photos.length;
-  }
-
-  const photo = photos[next];
+function showPhotoAt(index, shuffled = false) {
+  const photo = photos[index];
+  if (!photo) return;
   randomPhoto.src = photo.src;
   randomPhoto.alt = photo.alt;
   randomPhotoLink.href = photo.href;
   randomPhotoLink.setAttribute("aria-label", `Open gallery: ${photo.alt}`);
-  randomPhotoCaption.textContent = `${photo.alt}.`;
+  randomPhotoCaption.textContent = `${photo.alt}.${shuffled ? " Shuffled just now." : " Photo of the Day."}`;
+  randomPhoto.dataset.photoIndex = String(index);
+}
 
+function chooseDailyPhoto() {
+  const today = new Date();
+  const dayNumber = Math.floor(Date.UTC(today.getFullYear(), today.getMonth(), today.getDate()) / 86400000);
+  showPhotoAt(dayNumber % photos.length);
+}
+
+function choosePhoto() {
+  const previous = Number(randomPhoto.dataset.photoIndex || -1);
+  let next = Math.floor(Math.random() * photos.length);
+  if (photos.length > 1 && next === previous) {
+    next = (next + 1 + Math.floor(Math.random() * (photos.length - 1))) % photos.length;
+  }
+  showPhotoAt(next, true);
+}
+
+async function loadRealPoppyPhotos() {
   try {
-    localStorage.setItem("homeFeedPhoto", String(next));
+    const response = await fetch("/data/poppy-photos.json", { cache: "force-cache" });
+    const poppyPhotos = response.ok ? await response.json() : [];
+    if (Array.isArray(poppyPhotos)) {
+      poppyPhotos.filter((photo) => photo?.src && photo?.alt).forEach((photo) => {
+        photos.push({ src: photo.src, alt: photo.alt, href: "/poppy-gallery/" });
+      });
+    }
   } catch {}
+  chooseDailyPhoto();
 }
 
 async function loadBreedOfTheDay() {
   try {
-    const response = await fetch("/molly-dog-breeds/", { cache: "no-store" });
+    const response = await fetch("/data/breeds.json", { cache: "force-cache" });
     if (!response.ok) throw new Error("Breed guide unavailable");
-
-    const pageText = await response.text();
-    const breedDocument = new DOMParser().parseFromString(pageText, "text/html");
-    const breedCards = [...breedDocument.querySelectorAll(".breed-card")];
-    if (!breedCards.length) throw new Error("No breeds found");
+    const breedCards = await response.json();
+    if (!Array.isArray(breedCards) || !breedCards.length) throw new Error("No breeds found");
 
     // This is deliberately identical to getDailyBreedIndex() in dog-breeds.js.
     const now = new Date();
     const dayNumber = Math.floor(Date.UTC(now.getFullYear(), now.getMonth(), now.getDate()) / 86400000);
     const breed = breedCards[dayNumber % breedCards.length];
-    const name = breed.querySelector("h2")?.textContent.trim() || "Today’s breed";
-    const description = breed.querySelector(".breed-card-copy > p:not(.breed-kicker)")?.textContent.trim() || "Today’s excellent dog breed.";
-    const match = breed.dataset.match || "Daily pick";
-    const meter = breed.querySelector(".breed-meter span")?.style.width || "50%";
-    const image = breed.querySelector(".breed-portrait img");
-    const guideUrl = new URL("/molly-dog-breeds/", location.href);
+    const name = breed.title || "Today’s breed";
+    const description = breed.description || "Today’s excellent dog breed.";
+    const match = breed.match || "Daily pick";
+    const meter = `${breed.energy || 50}%`;
 
     document.getElementById("dogName").textContent = name;
     document.getElementById("dogDescription").textContent = description;
     document.getElementById("dogMeter").style.width = meter;
     document.getElementById("dogMatch").textContent = match;
     document.getElementById("dogEnergy").textContent = `${meter.replace("%", "")}% energy`;
-    document.getElementById("dogLink").href = new URL(`#${breed.id}`, guideUrl).href;
+    document.getElementById("dogLink").href = breed.url || `/molly-dog-breeds/#${breed.slug}`;
 
-    if (image) {
-      document.getElementById("dogImage").src = new URL(image.getAttribute("src"), guideUrl).href;
-      document.getElementById("dogImage").alt = image.alt || name;
+    if (breed.image) {
+      document.getElementById("dogImage").src = breed.image;
+      document.getElementById("dogImage").alt = breed.alt || name;
     }
   } catch {
     // The card keeps its useful link to the full breed guide if it cannot be loaded.
@@ -148,10 +159,10 @@ async function loadBreedOfTheDay() {
 }
 
 shufflePhoto.addEventListener("click", () => {
-  choosePhoto(true);
+  choosePhoto();
   (window.MSSystemsReady || Promise.resolve()).then(() => window.MSAchievements?.record("shuffles", 1));
 });
-choosePhoto(true);
+loadRealPoppyPhotos();
 loadBreedOfTheDay();
 loadLatestPost();
 loadLatestComic();

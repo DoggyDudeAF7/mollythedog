@@ -144,9 +144,19 @@
   }
 
   function photoForImage(image) {
-    if (!window.MSData) return null;
     const pathname = new URL(image.currentSrc || image.src, location.href).pathname;
-    return window.MSData.photos.find((photo) => photo.image === pathname) || null;
+    const knownPhoto = window.MSData?.photos.find((photo) => photo.image === pathname);
+    if (knownPhoto) return knownPhoto;
+    if (!image.dataset.favouriteId) return null;
+    return {
+      id: image.dataset.favouriteId,
+      title: image.dataset.favouriteTitle || image.alt,
+      type: "Gallery",
+      url: location.pathname,
+      image: pathname,
+      description: image.dataset.favouriteDescription || image.alt,
+      icon: ":gallery:"
+    };
   }
 
   function enhanceComicShelf(root = document) {

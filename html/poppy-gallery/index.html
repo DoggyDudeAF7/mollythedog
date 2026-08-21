@@ -21,6 +21,7 @@
     <meta name="theme-color" content="#000000">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/gallery.css">
   </head>
   <body>
     <div class="bg"></div>
@@ -83,13 +84,12 @@
     <section class="section">
       <div class="card reveal left">
         <h2>🐩 Poppy</h2>
-        <p>Selected photographs from home and the meadow.</p>
-        <div class="grid">
-          <img src="../images/poppy/poppy-meadow-v2.webp" alt="Poppy outdoors in an open landscape" loading="lazy" decoding="async">
-          <img src="../images/poppy/poppy-home-v3.webp" alt="Poppy resting at home" loading="lazy" decoding="async">
-          <img src="../images/poppy/poppy-home-v2.webp" alt="Poppy resting at home with a naturally untidy coat" loading="lazy" decoding="async">
-          <img src="../images/poppy/poppy-home-v2.webp" alt="Portrait of Poppy at home" loading="lazy" decoding="async">
+        <p>Real Poppy photos will live here.</p>
+        <div class="gallery-empty">
+          <strong>Poppy's real gallery is being prepared.</strong>
+          <p>No substitute pictures—only the real Poppy belongs here.</p>
         </div>
+        <div class="grid gallery-grid" data-gallery="poppy" data-manifest="/data/poppy-photos.json"></div>
       </div>
     </section>
     <footer>
@@ -106,5 +106,6 @@
     </div>
     <script src="../js/animations.js"></script>
     <script src="../js/search.js"></script>
+    <script src="../js/gallery.js"></script>
   </body>
 </html>

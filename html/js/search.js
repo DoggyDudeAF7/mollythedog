@@ -41,26 +41,10 @@
 
   async function loadBreedItems() {
     try {
-      const response = await fetch("/molly-dog-breeds/", { cache: "force-cache" });
+      const response = await fetch("/data/breeds.json", { cache: "force-cache" });
       if (!response.ok) return [];
-      const text = await response.text();
-      const page = new DOMParser().parseFromString(text, "text/html");
-      return [...page.querySelectorAll(".breed-card")].map((card) => {
-        const title = card.querySelector("h2")?.textContent.trim() || card.id;
-        const description = card.querySelector(".breed-card-copy > p:not(.breed-kicker)")?.textContent.trim() || `Learn about the ${title}.`;
-        const image = card.querySelector("img")?.getAttribute("src") || "";
-        const guideUrl = new URL("/molly-dog-breeds/", location.href);
-        return {
-          id: `breed:${card.id}`,
-          title,
-          description,
-          type: "Breed",
-          icon: ":breeds:",
-          url: `/molly-dog-breeds/#${card.id}`,
-          image: image ? new URL(image, guideUrl).pathname : "",
-          keywords: `${card.dataset.group || ""} ${card.dataset.match || ""} ${card.querySelector(".breed-kicker")?.textContent || ""}`
-        };
-      });
+      const breeds = await response.json();
+      return Array.isArray(breeds) ? breeds : [];
     } catch {
       return [];
     }

@@ -4,6 +4,9 @@ document.addEventListener("DOMContentLoaded", async () => {
   const content = document.getElementById("favouritesContent");
   const total = document.getElementById("favouriteTotal");
   const clearButton = document.getElementById("clearFavourites");
+  const exportButton = document.getElementById("exportCollection");
+  const importInput = document.getElementById("importCollection");
+  const backupStatus = document.getElementById("collectionBackupStatus");
   if (!api || !content) return;
 
   const categoryOrder = ["Breed", "Comic", "Gallery", "Blog"];
@@ -73,6 +76,59 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   clearButton.addEventListener("click", () => {
     if (confirm("Clear every saved favourite from this device?")) api.clear();
+  });
+
+  function storedObject(key, fallback) {
+    try {
+      const value = JSON.parse(localStorage.getItem(key));
+      return value && typeof value === "object" ? value : fallback;
+    } catch {
+      return fallback;
+    }
+  }
+
+  exportButton?.addEventListener("click", () => {
+    const backup = {
+      app: "mollyandshaina.com",
+      version: 1,
+      exportedAt: new Date().toISOString(),
+      favourites: storedObject(api.storageKey, { version: 1, items: {} }),
+      achievements: storedObject("msAchievementsV1", {}),
+      comicProgress: storedObject("msComicProgressV1", {})
+    };
+    const blob = new Blob([JSON.stringify(backup, null, 2)], { type: "application/json" });
+    const link = document.createElement("a");
+    link.href = URL.createObjectURL(blob);
+    link.download = "collection-backup.mollypack";
+    link.click();
+    URL.revokeObjectURL(link.href);
+    backupStatus.textContent = "Collection exported. Keep that JSON file somewhere safe.";
+  });
+
+  importInput?.addEventListener("change", async () => {
+    const file = importInput.files?.[0];
+    if (!file) return;
+    if (file.size > 1_000_000) {
+      backupStatus.textContent = "That file is too large to be a collection backup.";
+      importInput.value = "";
+      return;
+    }
+    try {
+      const backup = JSON.parse(await file.text());
+      if (backup?.app !== "mollyandshaina.com" || backup.version !== 1 || typeof backup.favourites !== "object") {
+        throw new Error("invalid");
+      }
+      if (!confirm("Replace the favourites, achievements, and comic progress on this device with this backup?")) return;
+      localStorage.setItem(api.storageKey, JSON.stringify(backup.favourites));
+      localStorage.setItem("msAchievementsV1", JSON.stringify(backup.achievements || {}));
+      localStorage.setItem("msComicProgressV1", JSON.stringify(backup.comicProgress || {}));
+      backupStatus.textContent = "Collection restored. Refreshing…";
+      location.reload();
+    } catch {
+      backupStatus.textContent = "That is not a valid Molly & Shaina collection backup.";
+    } finally {
+      importInput.value = "";
+    }
   });
   window.addEventListener("ms:favourites-changed", render);
   render();
