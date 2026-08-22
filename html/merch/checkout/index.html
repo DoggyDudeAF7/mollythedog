@@ -14,7 +14,7 @@
     <meta name="theme-color" content="#090910">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800;900&amp;display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../../css/style.css">
-    <link rel="stylesheet" href="../../css/merch.css">
+    <link rel="stylesheet" href="../../css/merch.css?v=20260822-2">
   </head>
   <body>
     <div class="bg"></div>
@@ -60,10 +60,10 @@
             <h2>Delivery details</h2>
             <p>Only provide an address where you have permission to receive mail.</p>
             <div class="request-form-grid">
-              <label class="request-field request-field-wide" for="requestName">Full name
+              <label class="request-field request-field-half" for="requestName">Full name
                 <input id="requestName" name="name" type="text" autocomplete="name" maxlength="80" required>
               </label>
-              <label class="request-field request-field-wide" for="requestEmail">Email
+              <label class="request-field request-field-half" for="requestEmail">Email
                 <input id="requestEmail" name="email" type="email" autocomplete="email" maxlength="120" required>
               </label>
               <label class="request-field request-field-wide" for="requestAddress1">Street address or PO box
@@ -72,17 +72,17 @@
               <label class="request-field request-field-wide" for="requestAddress2">Apartment, unit or other details <span>(optional)</span>
                 <input id="requestAddress2" name="address2" type="text" autocomplete="address-line2" maxlength="120">
               </label>
-              <label class="request-field" for="requestSuburb">Suburb or town
+              <label class="request-field request-field-suburb" for="requestSuburb">Suburb or town
                 <input id="requestSuburb" name="suburb" type="text" autocomplete="address-level2" maxlength="80" required>
               </label>
-              <label class="request-field" for="requestState">State or territory
+              <label class="request-field request-field-state" for="requestState">State or territory
                 <select id="requestState" name="state" autocomplete="address-level1" required>
                   <option value="">Choose one</option>
                   <option>ACT</option><option>NSW</option><option>NT</option><option>QLD</option>
                   <option>SA</option><option>TAS</option><option>VIC</option><option>WA</option>
                 </select>
               </label>
-              <label class="request-field" for="requestPostcode">Postcode
+              <label class="request-field request-field-postcode" for="requestPostcode">Postcode
                 <input id="requestPostcode" name="postcode" type="text" autocomplete="postal-code" inputmode="numeric" pattern="[0-9]{4}" maxlength="4" required>
               </label>
               <label class="request-field request-honeypot" for="requestWebsite" aria-hidden="true">Website
