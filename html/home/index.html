@@ -12,7 +12,7 @@
     <link rel="manifest" href="/site.webmanifest?v=20260817-2">
     <meta name="theme-color" content="#090910">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800;900&amp;display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../css/home-feed.css">
+    <link rel="stylesheet" href="../css/home-feed.css?v=20260822-1">
   </head>
   <body>
     <div class="feed-bg" aria-hidden="true"></div>
@@ -118,7 +118,24 @@
       © 2026
     </footer>
 
+    <button class="home-secret-trigger" id="homeSecretTrigger" type="button" aria-label="Open hidden sound"></button>
+    <dialog class="home-secret-dialog" id="homeSecretDialog" aria-labelledby="homeSecretTitle">
+      <button class="home-secret-close" id="homeSecretClose" type="button" aria-label="Close hidden sound">×</button>
+      <p class="home-secret-label">You found it</p>
+      <h2 id="homeSecretTitle">A secret button</h2>
+      <iframe
+        width="110"
+        height="200"
+        src="https://www.myinstants.com/instant/apple-pay-45496/embed/"
+        title="Apple Pay sound button"
+        loading="lazy"
+        frameborder="0"
+        scrolling="no"
+      ></iframe>
+    </dialog>
+
     <script src="../js/animations.js"></script>
     <script src="../js/home-feed.js"></script>
+    <script src="../js/home-secret.js"></script>
   </body>
 </html>
