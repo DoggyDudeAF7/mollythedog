@@ -235,4 +235,16 @@
     <priority>0.8</priority>
   </url>
 
+  <url>
+    <loc>https://mollyandshaina.com/privacy-policy/</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.5</priority>
+  </url>
+
+  <url>
+    <loc>https://mollyandshaina.com/terms-of-use/</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.5</priority>
+  </url>
+
 </urlset>

@@ -40,6 +40,8 @@
     ["page:submit", "Submit an Idea", "Send a comic idea, fan art, feedback, or a general message.", "Page", "✉️", "/submit/", "contact message fan art"],
     ["page:freebies", "The Freebie Den", "Molly and Shaina downloads, wallpapers, and printable surprises.", "Page", "🎁", "/freebie-den/", "downloads wallpaper printable"],
     ["page:merch", "Molly and Shaina Merch", "The current collection of handmade Molly and Shaina stickers.", "Page", "🏷️", "/merch/", "stickers shop handmade collection"],
+    ["page:privacy", "Privacy Policy", "How the Molly and Shaina website collects, uses, stores, and shares information.", "Policy", "🔒", "/privacy-policy/", "privacy data cookies analytics information"],
+    ["page:terms", "Terms of Use & Request Policies", "Rules for using the site, sending submissions, downloads, and requesting free stickers.", "Policy", "📄", "/terms-of-use/", "terms conditions rules sticker requests policy"],
     ["page:favourites", "Your Favourites", "All your saved breeds, comics, photos, and blog posts.", "Page", "♥", "/favourites/", "saved collection"],
     ["page:achievements", "Achievements", "Explore your unlocked and hidden Molly and Shaina achievements.", "Page", "🏆", "/achievements/", "progress trophies" ]
   ].map(([id, title, description, type, icon, url, keywords]) => ({ id, title, description, type, icon, url, keywords }));
