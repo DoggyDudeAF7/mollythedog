@@ -184,6 +184,23 @@ footer{
   background:#050508;
 }
 
+footer p {
+  margin: 0;
+}
+
+footer a {
+  color: #aaa;
+  text-decoration: underline;
+  text-decoration-color: rgba(255,255,255,.28);
+  text-underline-offset: 3px;
+}
+
+footer a:hover,
+footer a:focus-visible {
+  color: #fff;
+  text-decoration-color: #ffb7a5;
+}
+
 .searchBox{
   position:fixed;
   top:90px;
