@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#07070c">
+  <meta name="description" content="Geoff, the Molly & Shaina site assistant.">
+  <title>Geoff — Molly & Shaina AI</title>
+
+  <!-- Uses the REAL Molly & Shaina stylesheet. -->
+  <link rel="stylesheet" href="https://mollyandshaina.com/css/style.css">
+
+  <!-- Only Geoff-specific layout rules live here. The site theme comes from style.css above. -->
+  <style>
+    :root { color-scheme: dark; }
+    body { min-height: 100vh; }
+    .geoff-shell { width:min(1180px,94vw); margin:0 auto; padding:110px 0 44px; }
+    .geoff-header { display:flex; align-items:center; justify-content:space-between; gap:18px; margin-bottom:22px; }
+    .geoff-title { display:flex; align-items:center; gap:14px; }
+    .geoff-logo { width:58px; height:58px; border-radius:18px; display:grid; place-items:center; font-size:29px; background:linear-gradient(135deg,#ffb7a5,#bfa8ff); box-shadow:0 14px 35px rgba(0,0,0,.28); }
+    .geoff-title h1 { margin:0; font-size:clamp(2rem,5vw,3.2rem); line-height:.95; background:linear-gradient(90deg,#ffb7a5,#bfa8ff); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
+    .geoff-title p { margin:7px 0 0; color:#aaa; }
+    .status-pill { border:1px solid rgba(255,255,255,.14); background:rgba(255,255,255,.07); padding:9px 12px; border-radius:999px; font-size:.82rem; color:#ddd; white-space:nowrap; }
+    .status-dot { width:8px; height:8px; border-radius:50%; display:inline-block; background:#72d57a; margin-right:7px; box-shadow:0 0 0 4px rgba(114,213,122,.12); }
+
+    .geoff-layout { display:grid; grid-template-columns:minmax(0,1fr) 300px; gap:22px; align-items:start; }
+    .geoff-card { border-radius:28px; border:1px solid rgba(255,255,255,.16); background:linear-gradient(135deg,rgba(255,255,255,.11),rgba(255,255,255,.035)); box-shadow:0 20px 60px rgba(0,0,0,.38); backdrop-filter:blur(18px); overflow:hidden; }
+    .chat-window { min-height:610px; display:flex; flex-direction:column; }
+    .chat-top { padding:18px 20px; border-bottom:1px solid rgba(255,255,255,.1); display:flex; align-items:center; justify-content:space-between; gap:12px; }
+    .chat-top strong { font-size:1rem; }
+    .chat-top small { color:#888; }
+    .new-chat { border:1px solid rgba(255,255,255,.12); background:rgba(255,255,255,.07); color:white; border-radius:12px; padding:9px 12px; cursor:pointer; }
+    .new-chat:hover { background:rgba(255,255,255,.13); }
+
+    #chat { flex:1; overflow:auto; min-height:420px; max-height:62vh; padding:24px 20px; scroll-behavior:smooth; }
+    .message { display:flex; gap:11px; margin:0 0 20px; align-items:flex-start; }
+    .message.me { justify-content:flex-end; }
+    .message-avatar { width:36px; height:36px; flex:0 0 36px; border-radius:12px; display:grid; place-items:center; font-weight:900; }
+    .message.geoff .message-avatar { background:linear-gradient(135deg,#ffb7a5,#bfa8ff); color:#100f16; }
+    .message.me .message-avatar { background:rgba(255,255,255,.11); }
+    .message-content { max-width:min(720px,82%); }
+    .message.me .message-content { order:-1; }
+    .message-meta { font-size:.74rem; color:#777; margin:0 0 6px 2px; }
+    .message.me .message-meta { text-align:right; margin-right:2px; }
+    .bubble { padding:13px 15px; border-radius:6px 17px 17px 17px; background:rgba(255,255,255,.085); color:#ddd; line-height:1.62; border:1px solid rgba(255,255,255,.08); white-space:pre-wrap; overflow-wrap:anywhere; }
+    .message.me .bubble { color:#15131b; background:linear-gradient(135deg,#ffb7a5,#bfa8ff); border:0; border-radius:17px 6px 17px 17px; font-weight:600; }
+    .bubble a { color:#ffcabd; text-decoration:underline; text-underline-offset:3px; }
+    .bubble strong { color:#fff; }
+    .source-row { display:flex; flex-wrap:wrap; gap:7px; margin-top:9px; }
+    .source-chip { display:inline-flex; max-width:100%; padding:6px 9px; border-radius:999px; border:1px solid rgba(255,255,255,.12); color:#bbb; background:rgba(255,255,255,.05); text-decoration:none; font-size:.72rem; }
+    .source-chip:hover { background:rgba(255,255,255,.11); color:white; }
+
+    .typing { display:flex; gap:5px; align-items:center; min-height:18px; }
+    .typing i { width:6px; height:6px; border-radius:50%; background:#aaa; animation:geoffBounce .8s ease-in-out infinite alternate; }
+    .typing i:nth-child(2){animation-delay:.14s}.typing i:nth-child(3){animation-delay:.28s}
+    @keyframes geoffBounce { to { transform:translateY(-4px); opacity:.42; } }
+
+    .suggestions { display:flex; flex-wrap:wrap; gap:8px; padding:0 20px 16px; }
+    .suggestions button { border:1px solid rgba(255,255,255,.12); background:rgba(255,255,255,.055); color:#d6d6d6; border-radius:999px; padding:8px 11px; cursor:pointer; font-size:.78rem; }
+    .suggestions button:hover { background:rgba(255,255,255,.12); transform:translateY(-1px); }
+
+    .composer { border-top:1px solid rgba(255,255,255,.1); padding:15px; display:grid; grid-template-columns:1fr auto; gap:10px; background:rgba(0,0,0,.12); }
+    .composer textarea { width:100%; min-height:46px; max-height:140px; resize:none; border-radius:15px; border:1px solid rgba(255,255,255,.14); background:rgba(0,0,0,.23); color:white; outline:none; padding:13px 14px; line-height:1.45; }
+    .composer textarea:focus { border-color:rgba(255,183,165,.65); box-shadow:0 0 0 3px rgba(255,183,165,.09); }
+    .composer button { width:48px; border:0; border-radius:15px; cursor:pointer; color:#16131b; font-size:1.1rem; font-weight:900; background:linear-gradient(135deg,#ffb7a5,#bfa8ff); }
+    .composer button:disabled { opacity:.45; cursor:not-allowed; }
+    .fineprint { padding:0 17px 14px; color:#666; font-size:.7rem; text-align:center; }
+
+    .side-card { padding:18px; margin-bottom:16px; }
+    .side-card h2 { font-size:1rem; margin:0 0 13px; color:white; -webkit-text-fill-color:initial; background:none; }
+    .sync-line { display:flex; gap:10px; align-items:center; }
+    .sync-icon { width:38px; height:38px; display:grid; place-items:center; border-radius:12px; background:rgba(255,255,255,.08); }
+    .sync-line strong { display:block; font-size:.88rem; }
+    .sync-line small { display:block; color:#888; margin-top:2px; }
+    .index-stats { display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-top:15px; }
+    .stat { padding:11px; border-radius:13px; background:rgba(255,255,255,.055); border:1px solid rgba(255,255,255,.08); }
+    .stat b { display:block; font-size:1.1rem; }
+    .stat span { font-size:.67rem; color:#858585; }
+    .context-list { list-style:none; padding:0; margin:0; display:grid; gap:8px; }
+    .context-list li { border-radius:12px; background:rgba(255,255,255,.045); padding:10px 11px; font-size:.77rem; color:#aaa; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+    .context-list a { color:inherit; text-decoration:none; }
+    .context-list a:hover { color:white; }
+    .side-note { color:#888; font-size:.76rem; line-height:1.55; margin:0; }
+
+    @media(max-width:880px){
+      .geoff-shell{padding-top:86px}.geoff-layout{grid-template-columns:1fr}.geoff-sidebar{display:grid;grid-template-columns:1fr 1fr;gap:14px}.side-card{margin:0}.chat-window{min-height:70vh}
+    }
+    @media(max-width:600px){
+      .geoff-shell{width:min(100% - 18px,1180px);padding-top:78px}.geoff-header{align-items:flex-start}.status-pill{display:none}.geoff-title p{font-size:.82rem}.geoff-layout{gap:12px}.geoff-card{border-radius:20px}.message-content{max-width:88%}.geoff-sidebar{grid-template-columns:1fr}.composer{padding:10px}.suggestions{padding:0 12px 12px}#chat{padding:18px 12px;max-height:none}.chat-top{padding:14px}
+    }
+  </style>
+</head>
+<body>
+  <div class="bg"></div>
+
+  <main class="geoff-shell">
+    <header class="geoff-header">
+      <div class="geoff-title">
+        <div class="geoff-logo" aria-hidden="true">🐾</div>
+        <div>
+          <h1>Geoff</h1>
+          <p>The Molly &amp; Shaina site assistant</p>
+        </div>
+      </div>
+      <div class="status-pill"><span class="status-dot"></span><span id="statusText">Connecting to mollyandshaina.com…</span></div>
+    </header>
+
+    <div class="geoff-layout">
+      <section class="geoff-card chat-window" aria-label="Chat with Geoff">
+        <div class="chat-top">
+          <div><strong>Ask Geoff</strong><br><small id="chatSubtitle">Learning the site…</small></div>
+          <button class="new-chat" id="newChat" type="button">New chat</button>
+        </div>
+
+        <div id="chat" aria-live="polite"></div>
+
+        <div class="suggestions" id="suggestions">
+          <button type="button" data-prompt="Who are Molly and Shaina?">Who are Molly &amp; Shaina?</button>
+          <button type="button" data-prompt="What can I do on this website?">What’s on the site?</button>
+          <button type="button" data-prompt="Tell me about the comics.">Comics</button>
+          <button type="button" data-prompt="What dog breed pages are there?">Dog breeds</button>
+        </div>
+
+        <form class="composer" id="composer">
+          <textarea id="prompt" rows="1" placeholder="Ask Geoff about mollyandshaina.com…" autocomplete="off"></textarea>
+          <button id="sendButton" type="submit" aria-label="Send">➜</button>
+        </form>
+        <div class="fineprint">Geoff searches Molly &amp; Shaina pages for context. He can still misunderstand things, so use the linked source pages to check.</div>
+      </section>
+
+      <aside class="geoff-sidebar">
+        <section class="geoff-card side-card">
+          <h2>Site connection</h2>
+          <div class="sync-line">
+            <div class="sync-icon">🌐</div>
+            <div><strong>mollyandshaina.com</strong><small id="syncState">Connecting…</small></div>
+          </div>
+          <div class="index-stats">
+            <div class="stat"><b id="pageCount">0</b><span>pages indexed</span></div>
+            <div class="stat"><b id="wordCount">0</b><span>words searchable</span></div>
+          </div>
+        </section>
+
+        <section class="geoff-card side-card">
+          <h2>Best matching pages</h2>
+          <ul class="context-list" id="contextList"><li>Ask something to see sources here.</li></ul>
+        </section>
+
+        <section class="geoff-card side-card">
+          <h2>How Geoff works</h2>
+          <p class="side-note">Geoff builds a small searchable index from the public Molly &amp; Shaina site in your browser. When you ask something, he finds the best matching pages and writes a focused answer from their text instead of throwing out a random canned response.</p>
+        </section>
+      </aside>
+    </div>
+  </main>
+
+<script>
+(() => {
+  const SITE = 'https://mollyandshaina.com';
+  const MAX_PAGES = 40;
+  const FALLBACK_ROUTES = [
+    '/', '/molly/', '/shaina/', '/traits/', '/habits/', '/mind/', '/gallery/', '/faq/', '/about/',
+    '/dog-breeds/', '/comics/', '/blog/'
+  ];
+
+  const state = { pages: [], ready: false, indexing: false };
+  const $ = id => document.getElementById(id);
+  const chat = $('chat');
+  const form = $('composer');
+  const prompt = $('prompt');
+  const sendButton = $('sendButton');
+
+  const time = () => new Intl.DateTimeFormat('en-AU', { hour:'numeric', minute:'2-digit' }).format(new Date());
+  const escapeHTML = value => String(value).replace(/[&<>'"]/g, ch => ({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[ch]));
+  const normalise = text => text.replace(/\s+/g, ' ').trim();
+  const words = text => normalise(text.toLowerCase()).match(/[a-z0-9]+/g) || [];
+
+  function addMessage(role, text, sources = []) {
+    const wrap = document.createElement('div');
+    wrap.className = `message ${role === 'me' ? 'me' : 'geoff'}`;
+    const avatar = `<div class="message-avatar">${role === 'me' ? 'A' : 'G'}</div>`;
+    const sourceHTML = sources.length ? `<div class="source-row">${sources.slice(0,4).map(s => `<a class="source-chip" href="${escapeHTML(s.url)}" target="_blank" rel="noopener">${escapeHTML(s.title || s.path)}</a>`).join('')}</div>` : '';
+    const content = `<div class="message-content"><div class="message-meta">${role === 'me' ? 'You' : 'Geoff'} · ${time()}</div><div class="bubble">${role === 'me' ? escapeHTML(text) : renderGeoffText(text)}</div>${sourceHTML}</div>`;
+    wrap.innerHTML = role === 'me' ? content + avatar : avatar + content;
+    chat.appendChild(wrap);
+    chat.scrollTop = chat.scrollHeight;
+    return wrap;
+  }
+
+  function renderGeoffText(text) {
+    return escapeHTML(text)
+      .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+      .replace(/\n/g, '<br>');
+  }
+
+  function addTyping() {
+    const wrap = document.createElement('div');
+    wrap.className = 'message geoff';
+    wrap.innerHTML = `<div class="message-avatar">G</div><div class="message-content"><div class="message-meta">Geoff · ${time()}</div><div class="bubble"><span class="typing"><i></i><i></i><i></i></span></div></div>`;
+    chat.appendChild(wrap);
+    chat.scrollTop = chat.scrollHeight;
+    return wrap;
+  }
+
+  function pageTitle(doc, url) {
+    const h1 = doc.querySelector('h1');
+    const title = h1?.textContent || doc.title || new URL(url).pathname;
+    return normalise(title).replace(/\s+[|—-]\s+Molly\s*&\s*Shaina.*$/i, '');
+  }
+
+  function extractPage(html, url) {
+    const doc = new DOMParser().parseFromString(html, 'text/html');
+    doc.querySelectorAll('script,style,noscript,svg,nav,footer').forEach(el => el.remove());
+    const main = doc.querySelector('main') || doc.body;
+    const text = normalise(main?.textContent || '');
+    const headings = [...doc.querySelectorAll('h1,h2,h3')].map(h => normalise(h.textContent)).filter(Boolean);
+    return {
+      url,
+      path: new URL(url).pathname,
+      title: pageTitle(doc, url),
+      text,
+      headings,
+      tokens: words(`${pageTitle(doc,url)} ${headings.join(' ')} ${text}`)
+    };
+  }
+
+  async function getSitemapUrls() {
+    try {
+      const res = await fetch(`${SITE}/sitemap.xml`, { cache:'no-store' });
+      if (!res.ok) throw new Error('No sitemap');
+      const xml = await res.text();
+      const doc = new DOMParser().parseFromString(xml, 'application/xml');
+      const urls = [...doc.querySelectorAll('loc')].map(n => n.textContent.trim()).filter(u => u.startsWith(SITE));
+      return [...new Set(urls)].slice(0, MAX_PAGES);
+    } catch {
+      return FALLBACK_ROUTES.map(route => new URL(route, SITE).href);
+    }
+  }
+
+  async function indexSite() {
+    if (state.indexing) return;
+    state.indexing = true;
+    $('syncState').textContent = 'Reading public pages…';
+    $('statusText').textContent = 'Indexing site…';
+
+    const urls = await getSitemapUrls();
+    const pages = [];
+
+    // Small batches keep the browser responsive and avoid hammering the site.
+    for (let i = 0; i < urls.length; i += 5) {
+      const batch = urls.slice(i, i + 5);
+      const results = await Promise.allSettled(batch.map(async url => {
+        const res = await fetch(url, { cache:'no-store' });
+        if (!res.ok) throw new Error(String(res.status));
+        const type = res.headers.get('content-type') || '';
+        if (!type.includes('text/html')) throw new Error('Not HTML');
+        return extractPage(await res.text(), url);
+      }));
+      results.forEach(r => { if (r.status === 'fulfilled' && r.value.text.length > 40) pages.push(r.value); });
+      $('pageCount').textContent = pages.length;
+    }
+
+    state.pages = pages;
+    state.ready = pages.length > 0;
+    state.indexing = false;
+    const totalWords = pages.reduce((sum,p) => sum + p.tokens.length, 0);
+    $('wordCount').textContent = totalWords > 999 ? `${(totalWords/1000).toFixed(1)}k` : totalWords;
+
+    if (state.ready) {
+      $('syncState').textContent = `Synced just now`;
+      $('statusText').textContent = 'Geoff is online';
+      $('chatSubtitle').textContent = `${pages.length} site pages searchable`;
+    } else {
+      $('syncState').textContent = 'Browser could not read site pages';
+      $('statusText').textContent = 'Limited mode';
+      $('chatSubtitle').textContent = 'Using built-in site knowledge';
+    }
+  }
+
+  function scorePage(page, query) {
+    const q = [...new Set(words(query).filter(w => w.length > 2))];
+    if (!q.length) return 0;
+    const title = page.title.toLowerCase();
+    const path = page.path.toLowerCase();
+    const headingText = page.headings.join(' ').toLowerCase();
+    const text = page.text.toLowerCase();
+    let score = 0;
+    for (const term of q) {
+      if (title.includes(term)) score += 18;
+      if (path.includes(term)) score += 12;
+      if (headingText.includes(term)) score += 8;
+      const occurrences = text.split(term).length - 1;
+      score += Math.min(occurrences, 8) * 2;
+    }
+    const phrase = normalise(query.toLowerCase());
+    if (phrase.length > 5 && text.includes(phrase)) score += 30;
+    return score;
+  }
+
+  function searchPages(query, limit = 5) {
+    return state.pages
+      .map(page => ({ page, score: scorePage(page, query) }))
+      .filter(x => x.score > 0)
+      .sort((a,b) => b.score - a.score)
+      .slice(0, limit)
+      .map(x => x.page);
+  }
+
+  function relevantSentences(page, query, limit = 2) {
+    const terms = [...new Set(words(query).filter(w => w.length > 2))];
+    const sentences = page.text.match(/[^.!?]+[.!?]+|[^.!?]+$/g) || [];
+    return sentences
+      .map(sentence => ({
+        sentence: normalise(sentence),
+        score: terms.reduce((n,t) => n + (sentence.toLowerCase().includes(t) ? 1 : 0), 0)
+      }))
+      .filter(x => x.sentence.length > 35 && x.sentence.length < 320)
+      .sort((a,b) => b.score - a.score)
+      .slice(0, limit)
+      .map(x => x.sentence);
+  }
+
+  function intentAnswer(query, matches) {
+    const q = query.toLowerCase();
+    const top = matches[0];
+
+    if (/^(hi|hello|hey|yo|sup)\b/.test(q.trim())) {
+      return `Hey! I’m Geoff 🐾 I can search Molly & Shaina for you. Ask me about Molly, Shaina, their traits and habits, galleries, dog breeds, comics, the blog, or what you can find around the site.`;
+    }
+
+    if (/who (are|is) (molly|shaina)|tell me about (molly|shaina)/.test(q) && matches.length) {
+      const lines = matches.slice(0,3).flatMap(p => relevantSentences(p, query, 2)).slice(0,4);
+      return lines.length
+        ? `Here’s what I found on the site:\n\n${lines.map(s => `• ${s}`).join('\n')}\n\nI linked the pages I used below.`
+        : `I found pages about that, but I couldn’t pull a clean description from the text. The best matching pages are linked below.`;
+    }
+
+    if (/what (is|can .* do|does .* have)|what'?s on|features|explore|website/.test(q)) {
+      const named = matches.slice(0,5).map(p => p.title).filter(Boolean);
+      return `Molly & Shaina is built around the dogs and the stuff you can explore about them. ${named.length ? `For your question, the strongest matches are **${named.join('**, **')}**.` : 'You can explore profiles, traits and habits, galleries, dog-breed content, comics and blog-style updates.'}\n\nAsk me about one part and I’ll dig into the matching pages instead of just giving you a generic overview.`;
+    }
+
+    if (/comic/.test(q)) {
+      const lines = matches.flatMap(p => relevantSentences(p, query, 2)).slice(0,4);
+      return lines.length
+        ? `Yep — the site has comics. Here are the most relevant details I found:\n\n${lines.map(s => `• ${s}`).join('\n')}`
+        : `Yep — Molly & Shaina has a comics section with photo-style stories. I’ve linked the closest comic pages I found below.`;
+    }
+
+    if (/breed/.test(q)) {
+      const lines = matches.flatMap(p => relevantSentences(p, query, 2)).slice(0,5);
+      return lines.length
+        ? `The dog-breed section is one of the bigger parts of the site. From the pages matching your question:\n\n${lines.map(s => `• ${s}`).join('\n')}`
+        : `There’s a dog-breed section with searchable breed information and comparison-style content. Try asking me for a specific breed or comparison.`;
+    }
+
+    if (/gallery|photo|picture|image/.test(q)) {
+      return matches.length
+        ? `I found the gallery/photo pages that best match that. ${relevantSentences(matches[0], query, 2).join(' ') || 'Open the linked page below to jump straight to the relevant gallery.'}`
+        : `The site has galleries for Molly and Shaina. I couldn’t retrieve a matching page in this browser session, but that section is part of the site.`;
+    }
+
+    if (/where|page|link|find/.test(q) && top) {
+      return `The best match is **${top.title}**. I’ve put the direct page link underneath this answer. ${relevantSentences(top, query, 1)[0] || ''}`.trim();
+    }
+
+    if (matches.length) {
+      const evidence = matches.slice(0,3).flatMap(p => relevantSentences(p, query, 2)).filter(Boolean).slice(0,5);
+      if (evidence.length) {
+        return `I searched Molly & Shaina for that. Here’s the most relevant stuff I found:\n\n${evidence.map(s => `• ${s}`).join('\n')}\n\nThe source pages are linked below, so you can jump straight to them.`;
+      }
+      return `I found pages that look related — especially **${top.title}** — but the page text didn’t give me a clean enough answer to pretend I know more than I do. I’ve linked the matches below.`;
+    }
+
+    return `I couldn’t find a good match for that on Molly & Shaina yet. Try using a more specific word — for example **Molly**, **Shaina**, **traits**, **habits**, **gallery**, **breed**, **comic**, or **blog** — and I’ll search the site again.`;
+  }
+
+  function updateContext(matches) {
+    const list = $('contextList');
+    if (!matches.length) {
+      list.innerHTML = '<li>No matching pages yet.</li>';
+      return;
+    }
+    list.innerHTML = matches.slice(0,6).map(p => `<li><a href="${escapeHTML(p.url)}" target="_blank" rel="noopener">${escapeHTML(p.title || p.path)}</a></li>`).join('');
+  }
+
+  async function answer(query) {
+    if (!state.ready && !state.indexing) await indexSite();
+    const matches = searchPages(query, 6);
+    updateContext(matches);
+    return { text: intentAnswer(query, matches), sources: matches.slice(0,4) };
+  }
+
+  async function send(text) {
+    text = text.trim();
+    if (!text) return;
+    addMessage('me', text);
+    prompt.value = '';
+    prompt.style.height = 'auto';
+    sendButton.disabled = true;
+    const typing = addTyping();
+    const started = performance.now();
+    const result = await answer(text);
+    const minimumTyping = 320;
+    const delay = Math.max(0, minimumTyping - (performance.now() - started));
+    setTimeout(() => {
+      typing.remove();
+      addMessage('geoff', result.text, result.sources);
+      sendButton.disabled = false;
+      prompt.focus();
+    }, delay);
+  }
+
+  function resetChat() {
+    chat.innerHTML = '';
+    updateContext([]);
+    addMessage('geoff', `Hi! I’m Geoff 🐾\n\nI’m connected to **mollyandshaina.com** and I’ll search the site before answering questions about Molly, Shaina, their pages, comics, galleries, dog breeds and more. What do you want to know?`);
+    prompt.focus();
+  }
+
+  form.addEventListener('submit', e => { e.preventDefault(); send(prompt.value); });
+  prompt.addEventListener('keydown', e => {
+    if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); send(prompt.value); }
+  });
+  prompt.addEventListener('input', () => {
+    prompt.style.height = 'auto';
+    prompt.style.height = `${Math.min(prompt.scrollHeight, 140)}px`;
+  });
+  $('suggestions').addEventListener('click', e => {
+    const b = e.target.closest('[data-prompt]');
+    if (b) send(b.dataset.prompt);
+  });
+  $('newChat').addEventListener('click', resetChat);
+
+  resetChat();
+  indexSite();
+})();
+</script>
+</body>
+</html>
