@@ -356,14 +356,9 @@
 PAGE: ${page.title}
 URL: ${page.url}
 
-${useful.join('
-')}
+${useful.join('\n')}
       `.trim();
-    }).join('
-
----
-
-');
+    }).join('\n\n---\n\n');
 
     const response = await fetch('/api/geoff', {
       method: 'POST',
