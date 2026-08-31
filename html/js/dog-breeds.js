@@ -462,6 +462,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   function applyFilters() {
     const query = search.value.trim().toLowerCase();
+    const showingWholeList = !favoritesOnly && !query && activeFilters.size === 0;
     let visibleCount = 0;
     sortCards();
     cards.forEach((card) => {
@@ -478,6 +479,10 @@ document.addEventListener("DOMContentLoaded", async () => {
     const activeCount = document.getElementById("activeFilterCount");
     if (activeCount) activeCount.textContent = `${activeFilters.size} active`;
     counter.textContent = `Showing ${visibleCount} of ${cards.length} breeds • ${favouriteAPI?.list("Breed").length || 0} saved`;
+    if (breedOfDay) {
+      breedOfDay.hidden = !showingWholeList;
+      if (showingWholeList) results.appendChild(breedOfDay);
+    }
   }
 
   function toggleCard(card) {

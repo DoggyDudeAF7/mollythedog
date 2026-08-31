@@ -229,38 +229,34 @@
 }
 
 .breed-of-day {
-  min-height: 420px;
+  width: min(360px, 100%);
+  min-height: 0;
   position: relative;
   display: grid;
-  grid-template-columns: minmax(220px, 0.48fr) minmax(0, 1fr);
-  gap: 34px;
+  grid-template-columns: 92px minmax(0, 1fr);
+  gap: 16px;
   align-items: center;
-  padding: 38px;
-  border-radius: 24px;
+  justify-self: end;
+  padding: 18px;
+  border-radius: 18px;
   background:
     radial-gradient(circle at 18% 20%, rgba(255, 183, 165, 0.28), transparent 36%),
     linear-gradient(135deg, rgba(255,255,255,0.18), rgba(255,255,255,0.05));
   border: 1px solid rgba(255,255,255,0.18);
-  box-shadow: 0 24px 80px rgba(0,0,0,0.38);
+  box-shadow: 0 16px 46px rgba(0,0,0,0.34);
   overflow: hidden;
 }
 
+.breed-of-day[hidden] {
+  display: none;
+}
+
 .breed-of-day::before {
-  content: "Daily";
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  padding: 8px 12px;
-  border-radius: 999px;
-  color: rgba(255,255,255,0.78);
-  background: rgba(255,255,255,0.1);
-  font-size: 0.76rem;
-  font-weight: 800;
-  text-transform: uppercase;
+  content: none;
 }
 
 .breed-of-day-image {
-  width: min(100%, 280px);
+  width: 92px;
   aspect-ratio: 1;
   justify-self: center;
   border-radius: 50%;
@@ -283,22 +279,22 @@
 }
 
 .breed-of-day h2 {
-  margin-bottom: 14px;
-  font-size: clamp(2.7rem, 7vw, 5.7rem);
-  line-height: 0.94;
+  margin-bottom: 8px;
+  font-size: 1.45rem;
+  line-height: 1.05;
   background: linear-gradient(90deg,#ffb7a5,#bfa8ff);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
 .breed-of-day p:not(.breed-kicker) {
-  max-width: 660px;
+  display: none;
 }
 
 .breed-daily-jump {
-  margin-top: 18px;
-  min-height: 46px;
-  padding: 12px 16px;
+  margin-top: 12px;
+  min-height: 36px;
+  padding: 8px 11px;
   border: 0;
   border-radius: 12px;
   color: #08080d;
@@ -651,27 +647,18 @@
   }
 
   .breed-of-day {
-    min-height: auto;
-    grid-template-columns: 1fr;
-    padding: 28px 22px;
-    text-align: center;
-  }
-
-  .breed-of-day::before {
-    top: 14px;
-    right: 14px;
+    width: min(360px, 100%);
+    grid-template-columns: 80px minmax(0, 1fr);
+    padding: 16px;
+    text-align: left;
   }
 
   .breed-of-day-image {
-    width: min(220px, 72vw);
-  }
-
-  .breed-of-day p:not(.breed-kicker) {
-    margin-inline: auto;
+    width: 80px;
   }
 
   .breed-of-day h2 {
-    font-size: clamp(2.2rem, 11vw, 3.8rem);
+    font-size: 1.3rem;
   }
 
   .breed-card {
