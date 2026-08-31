@@ -125,7 +125,7 @@
           <textarea id="prompt" rows="1" placeholder="Ask Geoff about mollyandshaina.com…" autocomplete="off"></textarea>
           <button id="sendButton" type="submit" aria-label="Send">➜</button>
         </form>
-        <div class="fineprint">Geoff searches Molly &amp; Shaina pages for context. He can still misunderstand things, so use the linked source pages to check.</div>
+        <div class="fineprint">Geoff searches Molly &amp; Shaina pages for context, then uses AI to answer naturally. He can still make mistakes, so use the linked source pages to check.</div>
       </section>
 
       <aside class="geoff-sidebar">
@@ -148,7 +148,7 @@
 
         <section class="geoff-card side-card">
           <h2>How Geoff works</h2>
-          <p class="side-note">Geoff builds a small searchable index from the public Molly &amp; Shaina site in your browser. When you ask something, he finds the best matching pages and writes a focused answer from their text instead of throwing out a random canned response.</p>
+          <p class="side-note">Geoff searches the public Molly &amp; Shaina site for relevant context, then sends that context to his AI brain to write a natural answer.</p>
         </section>
       </aside>
     </div>
@@ -159,8 +159,20 @@
   const SITE = 'https://mollyandshaina.com';
   const MAX_PAGES = 40;
   const FALLBACK_ROUTES = [
-    '/', '/molly/', '/shaina/', '/traits/', '/habits/', '/mind/', '/gallery/', '/faq/', '/about/',
-    '/dog-breeds/', '/comics/', '/blog/'
+    '/',
+    '/molly/',
+    '/molly-traits/',
+    '/molly-habits/',
+    '/molly-mind/',
+    '/molly-gallery/',
+    '/molly-faq/',
+    '/molly-dog-breeds/',
+    '/shaina/',
+    '/poppy/',
+    '/comics/',
+    '/blog/',
+    '/merch/',
+    '/about-me/'
   ];
 
   const state = { pages: [], ready: false, indexing: false };
@@ -320,61 +332,6 @@
       .map(x => x.sentence);
   }
 
-  function intentAnswer(query, matches) {
-    const q = query.toLowerCase();
-    const top = matches[0];
-
-    if (/^(hi|hello|hey|yo|sup)\b/.test(q.trim())) {
-      return `Hey! I’m Geoff 🐾 I can search Molly & Shaina for you. Ask me about Molly, Shaina, their traits and habits, galleries, dog breeds, comics, the blog, or what you can find around the site.`;
-    }
-
-    if (/who (are|is) (molly|shaina)|tell me about (molly|shaina)/.test(q) && matches.length) {
-      const lines = matches.slice(0,3).flatMap(p => relevantSentences(p, query, 2)).slice(0,4);
-      return lines.length
-        ? `Here’s what I found on the site:\n\n${lines.map(s => `• ${s}`).join('\n')}\n\nI linked the pages I used below.`
-        : `I found pages about that, but I couldn’t pull a clean description from the text. The best matching pages are linked below.`;
-    }
-
-    if (/what (is|can .* do|does .* have)|what'?s on|features|explore|website/.test(q)) {
-      const named = matches.slice(0,5).map(p => p.title).filter(Boolean);
-      return `Molly & Shaina is built around the dogs and the stuff you can explore about them. ${named.length ? `For your question, the strongest matches are **${named.join('**, **')}**.` : 'You can explore profiles, traits and habits, galleries, dog-breed content, comics and blog-style updates.'}\n\nAsk me about one part and I’ll dig into the matching pages instead of just giving you a generic overview.`;
-    }
-
-    if (/comic/.test(q)) {
-      const lines = matches.flatMap(p => relevantSentences(p, query, 2)).slice(0,4);
-      return lines.length
-        ? `Yep — the site has comics. Here are the most relevant details I found:\n\n${lines.map(s => `• ${s}`).join('\n')}`
-        : `Yep — Molly & Shaina has a comics section with photo-style stories. I’ve linked the closest comic pages I found below.`;
-    }
-
-    if (/breed/.test(q)) {
-      const lines = matches.flatMap(p => relevantSentences(p, query, 2)).slice(0,5);
-      return lines.length
-        ? `The dog-breed section is one of the bigger parts of the site. From the pages matching your question:\n\n${lines.map(s => `• ${s}`).join('\n')}`
-        : `There’s a dog-breed section with searchable breed information and comparison-style content. Try asking me for a specific breed or comparison.`;
-    }
-
-    if (/gallery|photo|picture|image/.test(q)) {
-      return matches.length
-        ? `I found the gallery/photo pages that best match that. ${relevantSentences(matches[0], query, 2).join(' ') || 'Open the linked page below to jump straight to the relevant gallery.'}`
-        : `The site has galleries for Molly and Shaina. I couldn’t retrieve a matching page in this browser session, but that section is part of the site.`;
-    }
-
-    if (/where|page|link|find/.test(q) && top) {
-      return `The best match is **${top.title}**. I’ve put the direct page link underneath this answer. ${relevantSentences(top, query, 1)[0] || ''}`.trim();
-    }
-
-    if (matches.length) {
-      const evidence = matches.slice(0,3).flatMap(p => relevantSentences(p, query, 2)).filter(Boolean).slice(0,5);
-      if (evidence.length) {
-        return `I searched Molly & Shaina for that. Here’s the most relevant stuff I found:\n\n${evidence.map(s => `• ${s}`).join('\n')}\n\nThe source pages are linked below, so you can jump straight to them.`;
-      }
-      return `I found pages that look related — especially **${top.title}** — but the page text didn’t give me a clean enough answer to pretend I know more than I do. I’ve linked the matches below.`;
-    }
-
-    return `I couldn’t find a good match for that on Molly & Shaina yet. Try using a more specific word — for example **Molly**, **Shaina**, **traits**, **habits**, **gallery**, **breed**, **comic**, or **blog** — and I’ll search the site again.`;
-  }
-
   function updateContext(matches) {
     const list = $('contextList');
     if (!matches.length) {
@@ -385,30 +342,105 @@
   }
 
   async function answer(query) {
-    if (!state.ready && !state.indexing) await indexSite();
+    if (!state.ready && !state.indexing) {
+      await indexSite();
+    }
+
     const matches = searchPages(query, 6);
     updateContext(matches);
-    return { text: intentAnswer(query, matches), sources: matches.slice(0,4) };
+
+    const contextText = matches.slice(0, 4).map(page => {
+      const useful = relevantSentences(page, query, 5);
+
+      return `
+PAGE: ${page.title}
+URL: ${page.url}
+
+${useful.join('
+')}
+      `.trim();
+    }).join('
+
+---
+
+');
+
+    const response = await fetch('/api/geoff', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        messages: [
+          {
+            role: 'user',
+            content: `
+My question:
+${query}
+
+Relevant information retrieved from mollyandshaina.com:
+
+${contextText || 'No relevant website information was found.'}
+
+Answer my question naturally using the website information when relevant.
+            `.trim()
+          }
+        ]
+      })
+    });
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      throw new Error(data.error || 'Geoff failed to answer.');
+    }
+
+    return {
+      text: data.answer,
+      sources: matches.slice(0, 4)
+    };
   }
 
   async function send(text) {
     text = text.trim();
     if (!text) return;
+
     addMessage('me', text);
     prompt.value = '';
     prompt.style.height = 'auto';
     sendButton.disabled = true;
+
     const typing = addTyping();
     const started = performance.now();
-    const result = await answer(text);
-    const minimumTyping = 320;
-    const delay = Math.max(0, minimumTyping - (performance.now() - started));
-    setTimeout(() => {
+
+    try {
+      const result = await answer(text);
+
+      const minimumTyping = 320;
+      const delay = Math.max(
+        0,
+        minimumTyping - (performance.now() - started)
+      );
+
+      setTimeout(() => {
+        typing.remove();
+        addMessage('geoff', result.text, result.sources);
+        sendButton.disabled = false;
+        prompt.focus();
+      }, delay);
+
+    } catch (error) {
+      console.error(error);
+
       typing.remove();
-      addMessage('geoff', result.text, result.sources);
+      addMessage(
+        'geoff',
+        `Sorry — I couldn't reach my AI brain right now. Try again in a moment.`
+      );
+
       sendButton.disabled = false;
       prompt.focus();
-    }, delay);
+    }
   }
 
   function resetChat() {
