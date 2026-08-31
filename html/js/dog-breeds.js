@@ -481,7 +481,6 @@ document.addEventListener("DOMContentLoaded", async () => {
     counter.textContent = `Showing ${visibleCount} of ${cards.length} breeds • ${favouriteAPI?.list("Breed").length || 0} saved`;
     if (breedOfDay) {
       breedOfDay.hidden = !showingWholeList;
-      if (showingWholeList) results.appendChild(breedOfDay);
     }
   }
 

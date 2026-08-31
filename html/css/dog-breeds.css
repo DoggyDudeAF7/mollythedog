@@ -231,7 +231,10 @@
 .breed-of-day {
   width: min(360px, 100%);
   min-height: 0;
-  position: relative;
+  position: fixed;
+  right: 14px;
+  bottom: 76px;
+  z-index: 1100;
   display: grid;
   grid-template-columns: 92px minmax(0, 1fr);
   gap: 16px;
@@ -647,7 +650,9 @@
   }
 
   .breed-of-day {
-    width: min(360px, 100%);
+    width: min(360px, calc(100vw - 18px));
+    right: 9px;
+    bottom: 64px;
     grid-template-columns: 80px minmax(0, 1fr);
     padding: 16px;
     text-align: left;
