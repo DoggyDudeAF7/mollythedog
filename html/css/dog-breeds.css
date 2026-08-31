@@ -225,6 +225,8 @@
 
 .breed-results {
   display: grid;
+  align-self: start;
+  align-content: start;
   gap: 24px;
 }
 
