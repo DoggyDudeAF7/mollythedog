@@ -181,6 +181,11 @@ document.addEventListener("DOMContentLoaded", async () => {
     return 35 + Math.abs(hash % 66);
   }
 
+  const similarityOverrides = {
+    cavoodle: { molly: 98 },
+    "shih-tzu": { shaina: 100 }
+  };
+
   function profileFor(card) {
     const name = card.querySelector("h2")?.textContent.trim() || "This breed";
     const slug = card.id;
@@ -217,8 +222,8 @@ document.addEventListener("DOMContentLoaded", async () => {
       exercise, temperament, fit: titleCase(base.purpose), consider, apartment, family, lowShedding, beginner, match,
       description,
       ratings: {
-        molly: match.includes("molly") ? 94 : hashScore(slug, 1),
-        shaina: match.includes("shaina") ? 94 : hashScore(slug, 2),
+        molly: similarityOverrides[slug]?.molly ?? (match.includes("molly") ? 94 : hashScore(slug, 1)),
+        shaina: similarityOverrides[slug]?.shaina ?? (match.includes("shaina") ? 94 : hashScore(slug, 2)),
         snack: hashScore(slug, 3), nap: Math.max(25, 110 - energyNumber), chaos: hashScore(slug, 4)
       }
     };
