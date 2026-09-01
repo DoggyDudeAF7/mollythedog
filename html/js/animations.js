@@ -90,6 +90,12 @@
       file: "shaina-emoji"
     },
 
+    geoff: {
+      alt: "Geoff",
+      file: "geoff-emoji",
+      extension: "png"
+    },
+
     breeds: {
       alt: "Dog Breeds",
       file: "breeds-emoji"
@@ -147,7 +153,7 @@
   };
 
   var dogTextPattern =
-    /:(molly|poppy|shaina|breeds|comics|blog|home|traits|habits|mind|gallery|faq|about|search):|(🐶|🐕|🐩|📚)/gi;
+    /:(molly|poppy|shaina|geoff|breeds|comics|blog|home|traits|habits|mind|gallery|faq|about|search):|(🐶|🐕|🐩|📚)/gi;
 
   var excludedTags = {
     CODE: true,
@@ -190,6 +196,7 @@
 
   function createDogEmoji(name) {
     var data = dogEmojiData[name];
+    var extension = data.extension || "webp";
 
     var picture = document.createElement("picture");
     var source = document.createElement("source");
@@ -197,11 +204,11 @@
 
     picture.className = "dog-emoji-picture";
 
-    source.type = "image/webp";
-    source.srcset = emojiRoot + data.file + ".webp";
+    source.type = "image/" + extension;
+    source.srcset = emojiRoot + data.file + "." + extension;
 
     image.className = "dog-emoji";
-    image.src = emojiRoot + data.file + ".webp";
+    image.src = emojiRoot + data.file + "." + extension;
     image.alt = data.alt;
     image.width = 256;
     image.height = 256;
