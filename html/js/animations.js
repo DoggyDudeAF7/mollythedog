@@ -92,7 +92,7 @@
 
     geoff: {
       alt: "Geoff",
-      file: "geoff-emoji",
+      file: "geoff-nav-icon",
       extension: "png"
     },
 
