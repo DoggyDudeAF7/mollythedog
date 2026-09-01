@@ -46,6 +46,25 @@
     .message.me .bubble { color:#15131b; background:linear-gradient(135deg,#ffb7a5,#bfa8ff); border:0; border-radius:17px 6px 17px 17px; font-weight:600; }
     .bubble a { color:#ffcabd; text-decoration:underline; text-underline-offset:3px; }
     .bubble strong { color:#fff; }
+    .message.geoff .bubble { white-space:normal; }
+    .markdown-body > :first-child { margin-top:0; }
+    .markdown-body > :last-child { margin-bottom:0; }
+    .markdown-body p { margin:.7em 0; }
+    .markdown-body h1,.markdown-body h2,.markdown-body h3,.markdown-body h4,.markdown-body h5,.markdown-body h6 { margin:1em 0 .45em; color:#fff; line-height:1.2; -webkit-text-fill-color:initial; background:none; }
+    .markdown-body h1 { font-size:1.6rem; }
+    .markdown-body h2 { font-size:1.35rem; }
+    .markdown-body h3 { font-size:1.15rem; }
+    .markdown-body h4,.markdown-body h5,.markdown-body h6 { font-size:1rem; }
+    .markdown-body ul,.markdown-body ol { margin:.7em 0; padding-left:1.5rem; }
+    .markdown-body li + li { margin-top:.3em; }
+    .markdown-body blockquote { margin:.8em 0; padding:.15em 0 .15em 1em; border-left:3px solid #bfa8ff; color:#bdb8ca; }
+    .markdown-body hr { margin:1.1em 0; border:0; border-top:1px solid rgba(255,255,255,.16); }
+    .markdown-body code { padding:.15em .38em; border:1px solid rgba(255,255,255,.12); border-radius:6px; background:rgba(0,0,0,.3); color:#ffd2c7; font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace; font-size:.9em; }
+    .markdown-body pre { margin:.8em 0; padding:13px 14px; overflow:auto; border:1px solid rgba(255,255,255,.12); border-radius:12px; background:rgba(0,0,0,.38); }
+    .markdown-body pre code { padding:0; border:0; background:none; color:#e7e1f3; white-space:pre; }
+    .markdown-body img { display:block; max-width:100%; height:auto; margin:.8em 0; border-radius:12px; }
+    .markdown-body input[type="checkbox"] { margin-right:.45em; accent-color:#bfa8ff; }
+    .markdown-body u { text-decoration-thickness:2px; text-underline-offset:3px; }
     .source-row { display:flex; flex-wrap:wrap; gap:7px; margin-top:9px; }
     .source-chip { display:inline-flex; max-width:100%; padding:6px 9px; border-radius:999px; border:1px solid rgba(255,255,255,.12); color:#bbb; background:rgba(255,255,255,.05); text-decoration:none; font-size:.72rem; }
     .source-chip:hover { background:rgba(255,255,255,.11); color:white; }
@@ -216,6 +235,127 @@
   const normalise = text => text.replace(/\s+/g, ' ').trim();
   const words = text => normalise(text.toLowerCase()).match(/[a-z0-9]+/g) || [];
 
+  function safeMarkdownURL(value) {
+    const url = String(value || '').trim();
+    return /^(?:https?:\/\/|mailto:|\/(?!\/)|\.\.?\/|#)/i.test(url) ? escapeHTML(url) : '#';
+  }
+
+  function renderInlineMarkdown(value) {
+    const tokens = [];
+    const stash = html => `\u0000${tokens.push(html) - 1}\u0000`;
+    let text = String(value || '');
+
+    text = text.replace(/`([^`\n]+)`/g, (_, code) => stash(`<code>${escapeHTML(code)}</code>`));
+    text = text.replace(/!\[([^\]]*)\]\(([^)\s]+)(?:\s+"[^"]*")?\)/g, (_, alt, url) => {
+      const src = safeMarkdownURL(url);
+      return src === '#' ? escapeHTML(alt) : stash(`<img src="${src}" alt="${escapeHTML(alt)}" loading="lazy">`);
+    });
+    text = text.replace(/\[([^\]]+)\]\(([^)\s]+)(?:\s+"[^"]*")?\)/g, (_, label, url) => {
+      const href = safeMarkdownURL(url);
+      return stash(`<a href="${href}"${/^https?:\/\//i.test(url) ? ' target="_blank" rel="noopener noreferrer"' : ''}>${renderInlineMarkdown(label)}</a>`);
+    });
+
+    text = escapeHTML(text)
+      .replace(/\*\*\*([^*\n]+)\*\*\*/g, '<strong><em>$1</em></strong>')
+      .replace(/___([^_\n]+)___/g, '<strong><em>$1</em></strong>')
+      .replace(/\*\*([^*\n]+)\*\*/g, '<strong>$1</strong>')
+      .replace(/__([^_\n]+)__/g, '<strong>$1</strong>')
+      .replace(/~~([^~\n]+)~~/g, '<del>$1</del>')
+      .replace(/(^|[^\w])\*([^*\n]+)\*(?!\*)/g, '$1<em>$2</em>')
+      .replace(/(^|[^\w])_([^_\n]+)_(?!\w)/g, '$1<em>$2</em>')
+      .replace(/&lt;u&gt;([\s\S]*?)&lt;\/u&gt;/gi, '<u>$1</u>');
+
+    return text.replace(/\u0000(\d+)\u0000/g, (_, index) => tokens[Number(index)]);
+  }
+
+  function renderMarkdown(value) {
+    const lines = String(value || '').replace(/\r\n?/g, '\n').split('\n');
+    const output = [];
+    let paragraph = [];
+
+    const flushParagraph = () => {
+      if (!paragraph.length) return;
+      output.push(`<p>${renderInlineMarkdown(paragraph.join('\n')).replace(/\n/g, '<br>')}</p>`);
+      paragraph = [];
+    };
+
+    for (let index = 0; index < lines.length;) {
+      const line = lines[index];
+
+      if (!line.trim()) {
+        flushParagraph();
+        index += 1;
+        continue;
+      }
+
+      const fence = line.match(/^\s*```([a-z0-9_-]*)\s*$/i);
+      if (fence) {
+        flushParagraph();
+        const code = [];
+        index += 1;
+        while (index < lines.length && !/^\s*```\s*$/.test(lines[index])) code.push(lines[index++]);
+        if (index < lines.length) index += 1;
+        const language = fence[1] ? ` class="language-${escapeHTML(fence[1])}"` : '';
+        output.push(`<pre><code${language}>${escapeHTML(code.join('\n'))}</code></pre>`);
+        continue;
+      }
+
+      const heading = line.match(/^\s{0,3}(#{1,6})\s+(.+?)\s*$/);
+      if (heading) {
+        flushParagraph();
+        const level = heading[1].length;
+        const content = heading[2].replace(/\s+#+\s*$/, '');
+        output.push(`<h${level}>${renderInlineMarkdown(content)}</h${level}>`);
+        index += 1;
+        continue;
+      }
+
+      if (/^\s{0,3}(?:-{3,}|\*{3,}|_{3,})\s*$/.test(line)) {
+        flushParagraph();
+        output.push('<hr>');
+        index += 1;
+        continue;
+      }
+
+      if (/^\s{0,3}>/.test(line)) {
+        flushParagraph();
+        const quote = [];
+        while (index < lines.length && /^\s{0,3}>/.test(lines[index])) {
+          quote.push(lines[index].replace(/^\s{0,3}>\s?/, ''));
+          index += 1;
+        }
+        output.push(`<blockquote>${renderMarkdown(quote.join('\n'))}</blockquote>`);
+        continue;
+      }
+
+      const unordered = line.match(/^\s*[-+*]\s+(.+)$/);
+      const ordered = line.match(/^\s*\d+[.)]\s+(.+)$/);
+      if (unordered || ordered) {
+        flushParagraph();
+        const tag = ordered ? 'ol' : 'ul';
+        const items = [];
+        const pattern = ordered ? /^\s*\d+[.)]\s+(.+)$/ : /^\s*[-+*]\s+(.+)$/;
+        while (index < lines.length) {
+          const item = lines[index].match(pattern);
+          if (!item) break;
+          const task = item[1].match(/^\[([ xX])\]\s+(.+)$/);
+          items.push(task
+            ? `<li><input type="checkbox" disabled${task[1].toLowerCase() === 'x' ? ' checked' : ''}>${renderInlineMarkdown(task[2])}</li>`
+            : `<li>${renderInlineMarkdown(item[1])}</li>`);
+          index += 1;
+        }
+        output.push(`<${tag}>${items.join('')}</${tag}>`);
+        continue;
+      }
+
+      paragraph.push(line);
+      index += 1;
+    }
+
+    flushParagraph();
+    return output.join('');
+  }
+
   function addMessage(role, text, sources = []) {
     const wrap = document.createElement('div');
     wrap.className = `message ${role === 'me' ? 'me' : 'geoff'}`;
@@ -229,9 +369,7 @@
   }
 
   function renderGeoffText(text) {
-    return escapeHTML(text)
-      .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
-      .replace(/\n/g, '<br>');
+    return `<div class="markdown-body">${renderMarkdown(text)}</div>`;
   }
 
   function addTyping() {
@@ -407,6 +545,7 @@ Relevant information retrieved from mollyandshaina.com:
 ${contextText || 'No relevant website information was found.'}
 
 Answer my question naturally using the website information when relevant.
+Format the answer with Markdown when it improves clarity. You may use headings, bold, italics, bold italics, links, lists, blockquotes, inline code, fenced code blocks, strikethrough, horizontal rules, and <u>underlined text</u>.
             `.trim()
           }
         ]
