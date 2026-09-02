@@ -79,8 +79,9 @@
     .suggestions button:hover { background:rgba(255,255,255,.12); transform:translateY(-1px); }
 
     .composer { border-top:1px solid rgba(255,255,255,.1); padding:15px; display:grid; grid-template-columns:1fr auto; gap:10px; background:rgba(0,0,0,.12); }
-    .composer textarea { width:100%; min-height:46px; max-height:140px; resize:none; border-radius:15px; border:1px solid rgba(255,255,255,.14); background:rgba(0,0,0,.23); color:white; outline:none; padding:13px 14px; line-height:1.45; }
-    .composer textarea:focus { border-color:rgba(255,183,165,.65); box-shadow:0 0 0 3px rgba(255,183,165,.09); }
+    .composer textarea,.composer input { width:100%; min-height:46px; border-radius:15px; border:1px solid rgba(255,255,255,.14); background:rgba(0,0,0,.23); color:white; outline:none; padding:13px 14px; line-height:1.45; }
+    .composer textarea { max-height:140px; resize:none; }
+    .composer textarea:focus,.composer input:focus { border-color:rgba(255,183,165,.65); box-shadow:0 0 0 3px rgba(255,183,165,.09); }
     .composer button { width:48px; border:0; border-radius:15px; cursor:pointer; color:#16131b; font-size:1.1rem; font-weight:900; background:linear-gradient(135deg,#ffb7a5,#bfa8ff); }
     .composer button:disabled { opacity:.45; cursor:not-allowed; }
     .fineprint { padding:0 17px 14px; color:#666; font-size:.7rem; text-align:center; }
@@ -172,6 +173,7 @@
 
         <form class="composer" id="composer">
           <textarea id="prompt" rows="1" placeholder="Ask Geoff about mollyandshaina.com…" autocomplete="off"></textarea>
+          <input id="trainingPassword" type="password" placeholder="Enter the admin password…" autocomplete="current-password" aria-label="Admin password" hidden>
           <button id="sendButton" type="submit" aria-label="Send">➜</button>
         </form>
         <div class="fineprint">Geoff searches Molly &amp; Shaina pages for context, then uses AI to answer naturally. He can still make mistakes, so use the linked source pages to check. If he cannot help, <a href="/contact/" data-contact-link>ask the human</a>.</div>
@@ -240,7 +242,22 @@
   const chat = $('chat');
   const form = $('composer');
   const prompt = $('prompt');
+  const trainingPassword = $('trainingPassword');
   const sendButton = $('sendButton');
+
+  function showPasswordComposer(show) {
+    prompt.hidden = show;
+    trainingPassword.hidden = !show;
+    if (!show) trainingPassword.value = '';
+  }
+
+  function focusComposer() {
+    (trainingState.awaitingPassword ? trainingPassword : prompt).focus();
+  }
+
+  function composerValue() {
+    return trainingState.awaitingPassword ? trainingPassword.value : prompt.value;
+  }
 
   const time = () => new Intl.DateTimeFormat('en-AU', { hour:'numeric', minute:'2-digit' }).format(new Date());
   const escapeHTML = value => String(value).replace(/[&<>'"]/g, ch => ({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[ch]));
@@ -582,6 +599,7 @@ If the website information cannot answer the question, say so honestly and offer
     if (!text) return;
 
     prompt.value = '';
+    trainingPassword.value = '';
     prompt.style.height = 'auto';
 
     if (text.toLowerCase() === '/retrain') {
@@ -618,7 +636,7 @@ If the website information cannot answer the question, say so honestly and offer
         typing.remove();
         addMessage('geoff', result.text, result.sources);
         sendButton.disabled = false;
-        prompt.focus();
+        focusComposer();
       }, delay);
 
     } catch (error) {
@@ -631,7 +649,7 @@ If the website information cannot answer the question, say so honestly and offer
       );
 
       sendButton.disabled = false;
-      prompt.focus();
+      focusComposer();
     }
   }
 
@@ -685,6 +703,7 @@ Geoff currently has **${count} saved training note${count === 1 ? '' : 's'}**. S
     trainingState.awaitingPassword = false;
     trainingState.entries = [];
     prompt.placeholder = defaultPromptPlaceholder;
+    showPasswordComposer(false);
     addMessage('geoff', message);
   }
 
@@ -701,7 +720,7 @@ Geoff currently has **${count} saved training note${count === 1 ? '' : 's'}**. S
 
       if (response.status === 401) {
         trainingState.awaitingPassword = true;
-        prompt.placeholder = 'Enter the admin password…';
+        showPasswordComposer(true);
         addMessage('geoff', '### Admin authentication required\n\nEnter the site admin password to unlock retraining mode. Your password will be hidden in the conversation. Type `/done` to cancel.');
         return;
       }
@@ -709,12 +728,13 @@ Geoff currently has **${count} saved training note${count === 1 ? '' : 's'}**. S
       const data = await readApiResponse(response);
       trainingState.entries = Array.isArray(data.entries) ? data.entries : [];
       prompt.placeholder = 'Teach Geoff a fact or instruction…';
+      showPasswordComposer(false);
       addMessage('geoff', trainingHelp());
     } catch (error) {
       leaveTrainingMode(`**Retraining mode could not start:** ${error.message}`);
     } finally {
       sendButton.disabled = false;
-      prompt.focus();
+      focusComposer();
     }
   }
 
@@ -741,6 +761,7 @@ Geoff currently has **${count} saved training note${count === 1 ? '' : 's'}**. S
         await readApiResponse(response);
         trainingState.awaitingPassword = false;
         prompt.placeholder = 'Teach Geoff a fact or instruction…';
+        showPasswordComposer(false);
         await fetchTrainingEntries();
         addMessage('geoff', `**Authentication successful.**\n\n${trainingHelp()}`);
         return;
@@ -782,7 +803,7 @@ Geoff currently has **${count} saved training note${count === 1 ? '' : 's'}**. S
       addMessage('geoff', `**Training error:** ${error.message}`);
     } finally {
       sendButton.disabled = false;
-      prompt.focus();
+      focusComposer();
     }
   }
 
@@ -791,22 +812,27 @@ Geoff currently has **${count} saved training note${count === 1 ? '' : 's'}**. S
     trainingState.awaitingPassword = false;
     trainingState.entries = [];
     prompt.placeholder = defaultPromptPlaceholder;
+    showPasswordComposer(false);
     sendButton.disabled = false;
     chat.innerHTML = '';
     updateContext([]);
     addMessage('geoff', `Hi! I’m Geoff 🐾\n\nI’m connected to **mollyandshaina.com** and I’ll search the site before answering questions about Molly, Shaina, their pages, comics, galleries, dog breeds and more. What do you want to know?`);
-    prompt.focus();
+    focusComposer();
   }
 
-  form.addEventListener('submit', e => { e.preventDefault(); send(prompt.value); });
+  form.addEventListener('submit', e => { e.preventDefault(); send(composerValue()); });
   prompt.addEventListener('keydown', e => {
     if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); send(prompt.value); }
+  });
+  trainingPassword.addEventListener('keydown', e => {
+    if (e.key === 'Enter') { e.preventDefault(); send(trainingPassword.value); }
   });
   prompt.addEventListener('input', () => {
     prompt.style.height = 'auto';
     prompt.style.height = `${Math.min(prompt.scrollHeight, 140)}px`;
   });
   $('suggestions').addEventListener('click', e => {
+    if (trainingState.active) return;
     const b = e.target.closest('[data-prompt]');
     if (b) send(b.dataset.prompt);
   });
