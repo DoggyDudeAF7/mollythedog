@@ -1,45 +1,7 @@
 #chat-widget-mount {
-  position: relative;
-  min-height: 64px;
-  margin-top: 28px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-#chat-container {
-  position: relative !important;
-  right: auto !important;
-  bottom: auto !important;
-}
-
-#chat-bubble {
-  width: 64px !important;
-  height: 64px !important;
-  border: 2px solid rgba(255, 255, 255, 0.34);
-  background: linear-gradient(135deg, #ff9d88, #b99cff) !important;
-  box-shadow: 0 14px 38px rgba(153, 111, 255, 0.44) !important;
-  transition: transform 160ms ease, box-shadow 160ms ease !important;
-}
-
-#chat-bubble:hover,
-#chat-bubble:focus-visible {
-  background: linear-gradient(135deg, #ffb09e, #cbb5ff) !important;
-  box-shadow: 0 18px 48px rgba(153, 111, 255, 0.58) !important;
-  transform: translateY(-3px) scale(1.04);
-  outline: 3px solid rgba(255, 255, 255, 0.3);
-  outline-offset: 3px;
-}
-
-#chat-box {
-  right: auto !important;
-  left: 50% !important;
-  bottom: 76px !important;
-  width: min(360px, calc(100vw - 32px)) !important;
-  height: min(600px, 68vh) !important;
-  transform: translateX(-50%);
-  border: 1px solid rgba(255, 255, 255, 0.24) !important;
-  box-shadow: 0 28px 80px rgba(0, 0, 0, 0.58) !important;
+  width: min(720px, 100%);
+  margin: 28px auto 0;
+  text-align: left;
 }
 
 .faq-chat-note {
@@ -48,15 +10,166 @@
   color: rgba(255, 255, 255, 0.7);
 }
 
-@media (max-width: 768px) {
-  #chat-bubble {
-    width: 56px !important;
-    height: 56px !important;
+.faq-ai {
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 22px;
+  background: rgba(7, 7, 14, 0.72);
+  box-shadow: 0 24px 70px rgba(0, 0, 0, 0.36);
+  backdrop-filter: blur(18px);
+}
+
+.faq-ai-header {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  padding: 14px 16px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  background: linear-gradient(110deg, rgba(255, 157, 136, 0.14), rgba(185, 156, 255, 0.12));
+}
+
+.faq-ai-avatar {
+  display: grid;
+  width: 40px;
+  height: 40px;
+  place-items: center;
+  flex: 0 0 40px;
+}
+
+.faq-ai-avatar .dog-emoji {
+  width: 36px;
+  height: 36px;
+}
+
+.faq-ai-header strong,
+.faq-ai-header small {
+  display: block;
+}
+
+.faq-ai-header small {
+  margin-top: 2px;
+  color: rgba(255, 255, 255, 0.56);
+}
+
+.faq-ai-reset {
+  margin-left: auto;
+  border: 1px solid rgba(255, 255, 255, 0.13);
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.07);
+  color: #fff;
+  cursor: pointer;
+  font: inherit;
+  font-size: 0.78rem;
+  font-weight: 800;
+  padding: 8px 10px;
+}
+
+.faq-ai-messages {
+  display: flex;
+  min-height: 250px;
+  max-height: 440px;
+  flex-direction: column;
+  gap: 12px;
+  overflow-y: auto;
+  padding: 18px;
+}
+
+.faq-ai-message {
+  max-width: 82%;
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  border-radius: 6px 16px 16px;
+  background: rgba(255, 255, 255, 0.08);
+  color: rgba(255, 255, 255, 0.88);
+  line-height: 1.55;
+  padding: 11px 13px;
+  white-space: pre-wrap;
+}
+
+.faq-ai-message.user {
+  align-self: flex-end;
+  border: 0;
+  border-radius: 16px 6px 16px 16px;
+  background: linear-gradient(135deg, #ffb7a5, #bfa8ff);
+  color: #17131d;
+  font-weight: 700;
+}
+
+.faq-ai-message.pending {
+  color: rgba(255, 255, 255, 0.56);
+  font-style: italic;
+}
+
+.faq-ai-form {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 9px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 12px;
+}
+
+.faq-ai-form textarea {
+  width: 100%;
+  min-height: 46px;
+  max-height: 120px;
+  resize: none;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 13px;
+  box-sizing: border-box;
+  background: rgba(0, 0, 0, 0.24);
+  color: #fff;
+  font: inherit;
+  line-height: 1.4;
+  outline: none;
+  padding: 12px 13px;
+}
+
+.faq-ai-form textarea:focus {
+  border-color: rgba(191, 168, 255, 0.7);
+  box-shadow: 0 0 0 3px rgba(191, 168, 255, 0.1);
+}
+
+.faq-ai-form button {
+  width: 48px;
+  border: 0;
+  border-radius: 13px;
+  background: linear-gradient(135deg, #ffb7a5, #bfa8ff);
+  color: #17131d;
+  cursor: pointer;
+  font-size: 1.15rem;
+  font-weight: 900;
+}
+
+.faq-ai-form button:disabled,
+.faq-ai-form textarea:disabled {
+  cursor: wait;
+  opacity: 0.55;
+}
+
+.faq-ai-note {
+  margin: 0;
+  padding: 0 14px 13px;
+  color: rgba(255, 255, 255, 0.52);
+  font-size: 0.72rem;
+  text-align: center;
+}
+
+.faq-ai-note a {
+  color: #c9b6ff;
+}
+
+@media (max-width: 600px) {
+  .faq-ai-messages {
+    min-height: 220px;
+    padding: 12px;
+  }
+
+  .faq-ai-message {
+    max-width: 90%;
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  #chat-bubble {
-    transition: none !important;
+  .faq-ai * {
+    scroll-behavior: auto !important;
   }
 }
