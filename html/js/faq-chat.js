@@ -1,6 +1,118 @@
 (function () {
   "use strict";
 
+  const escapeHTML = value => String(value).replace(/[&<>'"]/g, character => ({
+    "&": "&amp;", "<": "&lt;", ">": "&gt;", "'": "&#39;", '"': "&quot;"
+  })[character]);
+
+  function safeURL(value) {
+    const url = String(value || "").trim();
+    return /^(?:https?:\/\/|mailto:|\/(?!\/)|\.\.?\/|#)/i.test(url) ? escapeHTML(url) : "#";
+  }
+
+  function renderInline(value) {
+    const tokens = [];
+    const stash = html => `\u0000${tokens.push(html) - 1}\u0000`;
+    let text = String(value || "")
+      .replace(/`\[([^\]]+)\]`\(\[[^\]]*\]\((https?:\/\/[^)\s]+)\)\)/gi, "[$1]($2)")
+      .replace(/\[([^\]]+)\]\(\[[^\]]*\]\((https?:\/\/[^)\s]+)\)\)/gi, "[$1]($2)");
+
+    text = text.replace(/`([^`\n]+)`/g, (_, code) => stash(`<code>${escapeHTML(code)}</code>`));
+    text = text.replace(/\[([^\]]+)\]\(([^)\s]+)(?:\s+"[^"]*")?\)/g, (_, label, url) => {
+      const href = safeURL(url);
+      const external = /^https?:\/\//i.test(url);
+      return stash(`<a href="${href}"${external ? ' target="_blank" rel="noopener noreferrer"' : ""}>${renderInline(label)}</a>`);
+    });
+
+    text = escapeHTML(text)
+      .replace(/\*\*\*([^*\n]+)\*\*\*/g, "<strong><em>$1</em></strong>")
+      .replace(/___([^_\n]+)___/g, "<strong><em>$1</em></strong>")
+      .replace(/\*\*([^*\n]+)\*\*/g, "<strong>$1</strong>")
+      .replace(/__([^_\n]+)__/g, "<strong>$1</strong>")
+      .replace(/~~([^~\n]+)~~/g, "<del>$1</del>")
+      .replace(/(^|[^\w])\*([^*\n]+)\*(?!\*)/g, "$1<em>$2</em>")
+      .replace(/(^|[^\w])_([^_\n]+)_(?!\w)/g, "$1<em>$2</em>")
+      .replace(/&lt;br\s*\/?&gt;/gi, "<br>")
+      .replace(/&lt;u&gt;([\s\S]*?)&lt;\/u&gt;/gi, "<u>$1</u>");
+
+    return text.replace(/\u0000(\d+)\u0000/g, (_, index) => tokens[Number(index)]);
+  }
+
+  function splitTableRow(value) {
+    let row = String(value || "").trim().replace(/^\\(?=\|)/, "").replace(/\\\s*$/, "");
+    if (row.startsWith("|")) row = row.slice(1);
+    if (row.endsWith("|")) row = row.slice(0, -1);
+    return row.split(/(?<!\\)\|/).map(cell => cell.replace(/\\\|/g, "|").trim());
+  }
+
+  function renderMarkdown(value) {
+    const lines = String(value || "").replace(/\r\n?/g, "\n").split("\n");
+    const output = [];
+    let paragraph = [];
+
+    const flushParagraph = () => {
+      if (!paragraph.length) return;
+      output.push(`<p>${renderInline(paragraph.join("\n")).replace(/\n/g, "<br>")}</p>`);
+      paragraph = [];
+    };
+
+    for (let index = 0; index < lines.length;) {
+      const line = lines[index];
+      if (!line.trim()) {
+        flushParagraph();
+        index += 1;
+        continue;
+      }
+
+      if (index + 1 < lines.length && line.includes("|")) {
+        const headers = splitTableRow(line);
+        const separators = splitTableRow(lines[index + 1]);
+        if (headers.length === separators.length && separators.every(cell => /^:?-{3,}:?$/.test(cell.replace(/\s/g, "")))) {
+          flushParagraph();
+          const rows = [];
+          index += 2;
+          while (index < lines.length && lines[index].trim() && lines[index].includes("|")) {
+            const cells = splitTableRow(lines[index]);
+            while (cells.length < headers.length) cells.push("");
+            rows.push(cells.slice(0, headers.length));
+            index += 1;
+          }
+          output.push(`<div class="faq-table-wrap"><table><thead><tr>${headers.map(cell => `<th>${renderInline(cell)}</th>`).join("")}</tr></thead><tbody>${rows.map(row => `<tr>${row.map(cell => `<td>${renderInline(cell)}</td>`).join("")}</tr>`).join("")}</tbody></table></div>`);
+          continue;
+        }
+      }
+
+      const heading = line.match(/^\s{0,3}(#{1,6})\s+(.+)$/);
+      if (heading) {
+        flushParagraph();
+        const level = heading[1].length;
+        output.push(`<h${level}>${renderInline(heading[2])}</h${level}>`);
+        index += 1;
+        continue;
+      }
+
+      const unordered = line.match(/^\s*[-+*]\s+(.+)$/);
+      if (unordered) {
+        flushParagraph();
+        const items = [];
+        while (index < lines.length) {
+          const item = lines[index].match(/^\s*[-+*]\s+(.+)$/);
+          if (!item) break;
+          items.push(`<li>${renderInline(item[1])}</li>`);
+          index += 1;
+        }
+        output.push(`<ul>${items.join("")}</ul>`);
+        continue;
+      }
+
+      paragraph.push(line);
+      index += 1;
+    }
+
+    flushParagraph();
+    return output.join("");
+  }
+
   function dogForPage() {
     if (location.pathname.includes("shaina")) return "Shaina";
     if (location.pathname.includes("poppy")) return "Poppy";
@@ -51,7 +163,8 @@
     function addMessage(role, text, pending = false) {
       const message = document.createElement("div");
       message.className = `faq-ai-message ${role}${pending ? " pending" : ""}`;
-      message.textContent = text;
+      if (role === "assistant" && !pending) message.innerHTML = renderMarkdown(text);
+      else message.textContent = text;
       transcript.appendChild(message);
       transcript.scrollTop = transcript.scrollHeight;
       return message;
