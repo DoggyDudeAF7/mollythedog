@@ -121,6 +121,24 @@
   grid-template-columns: 1fr;
 }
 
+.printable-card > img {
+  aspect-ratio: 210 / 297;
+  object-fit: contain;
+  background: #fff;
+}
+
+.printable-card .download-actions {
+  grid-template-columns: 1fr;
+}
+
+.print-tip {
+  margin-top: 18px;
+  padding: 16px 18px;
+  border-left: 3px solid #ffb7a5;
+  background: rgba(255, 255, 255, .06);
+  color: rgba(255, 255, 255, .75);
+}
+
 .download-card {
   padding: 14px;
 }
