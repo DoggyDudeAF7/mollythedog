@@ -100,6 +100,9 @@
     .context-list a { color:inherit; text-decoration:none; }
     .context-list a:hover { color:white; }
     .side-note { color:#888; font-size:.76rem; line-height:1.55; margin:0; }
+    .geoff-contact-link { display:inline-flex; margin-top:13px; padding:9px 12px; border:1px solid rgba(255,255,255,.13); border-radius:11px; background:rgba(255,255,255,.07); color:#fff; font-size:.8rem; font-weight:800; text-decoration:none; }
+    .geoff-contact-link:hover { background:rgba(255,255,255,.13); }
+    .fineprint a { color:#bfa8ff; }
 
     @media(max-width:880px){
       .geoff-shell{padding-top:86px}.geoff-layout{grid-template-columns:1fr}.geoff-sidebar{display:grid;grid-template-columns:1fr 1fr;gap:14px}.side-card{margin:0}.chat-window{min-height:70vh}
@@ -171,7 +174,7 @@
           <textarea id="prompt" rows="1" placeholder="Ask Geoff about mollyandshaina.com…" autocomplete="off"></textarea>
           <button id="sendButton" type="submit" aria-label="Send">➜</button>
         </form>
-        <div class="fineprint">Geoff searches Molly &amp; Shaina pages for context, then uses AI to answer naturally. He can still make mistakes, so use the linked source pages to check.</div>
+        <div class="fineprint">Geoff searches Molly &amp; Shaina pages for context, then uses AI to answer naturally. He can still make mistakes, so use the linked source pages to check. If he cannot help, <a href="/contact/">ask the human</a>.</div>
       </section>
 
       <aside class="geoff-sidebar">
@@ -195,6 +198,12 @@
         <section class="geoff-card side-card">
           <h2>How Geoff works</h2>
           <p class="side-note">Geoff searches the public Molly &amp; Shaina site for relevant context, then sends that context to his AI brain to write a natural answer.</p>
+        </section>
+
+        <section class="geoff-card side-card">
+          <h2>Geoff is stumped?</h2>
+          <p class="side-note">Send your unanswered question privately to the person behind the site.</p>
+          <a class="geoff-contact-link" href="/contact/">Ask the human</a>
         </section>
       </aside>
     </div>
@@ -220,6 +229,7 @@
     '/comics/',
     '/blog/',
     '/merch/',
+    '/contact/',
     '/about-me/'
   ];
 
@@ -548,6 +558,7 @@ ${contextText || 'No relevant website information was found.'}
 
 Answer my question naturally using the website information when relevant.
 Use Markdown whenever it improves clarity, but do not over-format. Keep simple answers as short paragraphs; use headings, bold, italics, bold italics, links, lists, blockquotes, inline code, fenced code blocks, strikethrough, horizontal rules, or <u>underlined text</u> only when they genuinely help.
+If the website information cannot answer the question, say so honestly and offer this link: [Ask the human](/contact/).
             `.trim()
           }
         ]
