@@ -89,6 +89,59 @@
   font-size: 1.02rem;
 }
 
+.about-card a,
+.about-note a {
+  color: #ffd0c5;
+  text-underline-offset: 3px;
+}
+
+.about-card-link {
+  display: inline-flex;
+  margin-top: 18px;
+  font-weight: 900;
+}
+
+.creator-story {
+  margin-top: 78px;
+}
+
+.creator-story > h2 {
+  max-width: 850px;
+  margin: 10px 0 28px;
+  font-size: clamp(2.4rem, 6vw, 5rem);
+  line-height: 0.98;
+}
+
+.creator-timeline {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.creator-timeline article {
+  padding: 26px;
+  border: 1px solid rgba(255,255,255,0.13);
+  border-radius: 18px;
+  background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0.035));
+}
+
+.creator-timeline span {
+  color: #ffb8a8;
+  font-size: 0.78rem;
+  font-weight: 900;
+  letter-spacing: 0.12em;
+}
+
+.creator-timeline h3 {
+  margin: 10px 0 9px;
+  font-size: 1.45rem;
+}
+
+.creator-timeline p {
+  color: rgba(255,255,255,0.72);
+  line-height: 1.65;
+}
+
 .about-note {
   margin-top: 24px;
 }
@@ -105,6 +158,10 @@
   }
 
   .about-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .creator-timeline {
     grid-template-columns: 1fr;
   }
 }
