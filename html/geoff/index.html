@@ -65,6 +65,12 @@
     .markdown-body img { display:block; max-width:100%; height:auto; margin:.8em 0; border-radius:12px; }
     .markdown-body input[type="checkbox"] { margin-right:.45em; accent-color:#bfa8ff; }
     .markdown-body u { text-decoration-thickness:2px; text-underline-offset:3px; }
+    .markdown-body .table-wrap { max-width:100%; margin:.9em 0; overflow-x:auto; border:1px solid rgba(255,255,255,.14); border-radius:12px; }
+    .markdown-body table { width:100%; border-collapse:collapse; background:rgba(0,0,0,.16); font-size:.88rem; }
+    .markdown-body th,.markdown-body td { min-width:130px; padding:10px 12px; border-right:1px solid rgba(255,255,255,.1); border-bottom:1px solid rgba(255,255,255,.1); text-align:left; vertical-align:top; }
+    .markdown-body th { background:rgba(191,168,255,.12); color:#fff; font-weight:900; }
+    .markdown-body th:last-child,.markdown-body td:last-child { border-right:0; }
+    .markdown-body tbody tr:last-child td { border-bottom:0; }
     .source-row { display:flex; flex-wrap:wrap; gap:7px; margin-top:9px; }
     .source-chip { display:inline-flex; max-width:100%; padding:6px 9px; border-radius:999px; border:1px solid rgba(255,255,255,.12); color:#bbb; background:rgba(255,255,255,.05); text-decoration:none; font-size:.72rem; }
     .source-chip:hover { background:rgba(255,255,255,.11); color:white; }
@@ -274,7 +280,11 @@
     const stash = html => `\u0000${tokens.push(html) - 1}\u0000`;
     let text = String(value || '');
 
+    text = text
+      .replace(/`\[([^\]]+)\]`\(\[[^\]]*\]\((https?:\/\/[^)\s]+)\)\)/gi, '[$1]($2)')
+      .replace(/\[([^\]]+)\]\(\[[^\]]*\]\((https?:\/\/[^)\s]+)\)\)/gi, '[$1]($2)');
     text = text.replace(/`([^`\n]+)`/g, (_, code) => stash(`<code>${escapeHTML(code)}</code>`));
+    text = text.replace(/<(https?:\/\/[^\s<>]+)>/gi, (_, url) => stash(`<a href="${escapeHTML(url)}" target="_blank" rel="noopener noreferrer">${escapeHTML(url)}</a>`));
     text = text.replace(/!\[([^\]]*)\]\(([^)\s]+)(?:\s+"[^"]*")?\)/g, (_, alt, url) => {
       const src = safeMarkdownURL(url);
       return src === '#' ? escapeHTML(alt) : stash(`<img src="${src}" alt="${escapeHTML(alt)}" loading="lazy">`);
@@ -295,6 +305,38 @@
       .replace(/&lt;u&gt;([\s\S]*?)&lt;\/u&gt;/gi, '<u>$1</u>');
 
     return text.replace(/\u0000(\d+)\u0000/g, (_, index) => tokens[Number(index)]);
+  }
+
+  function splitMarkdownTableRow(value) {
+    let row = String(value || '').trim().replace(/^\\(?=\|)/, '').replace(/\\\s*$/, '');
+    if (row.startsWith('|')) row = row.slice(1);
+    if (row.endsWith('|')) row = row.slice(0, -1);
+
+    const cells = [];
+    let cell = '';
+    let escaped = false;
+
+    for (const character of row) {
+      if (escaped) {
+        cell += character === '|' ? '|' : `\\${character}`;
+        escaped = false;
+      } else if (character === '\\') {
+        escaped = true;
+      } else if (character === '|') {
+        cells.push(cell.trim());
+        cell = '';
+      } else {
+        cell += character;
+      }
+    }
+
+    if (escaped) cell += '\\';
+    cells.push(cell.trim());
+    return cells;
+  }
+
+  function isMarkdownTableSeparator(cells) {
+    return cells.length > 0 && cells.every(cell => /^:?-{3,}:?$/.test(cell.replace(/\s/g, '')));
   }
 
   function renderMarkdown(value) {
@@ -327,6 +369,35 @@
         const language = fence[1] ? ` class="language-${escapeHTML(fence[1])}"` : '';
         output.push(`<pre><code${language}>${escapeHTML(code.join('\n'))}</code></pre>`);
         continue;
+      }
+
+      if (index + 1 < lines.length && line.includes('|')) {
+        const headers = splitMarkdownTableRow(line);
+        const separators = splitMarkdownTableRow(lines[index + 1]);
+
+        if (headers.length === separators.length && isMarkdownTableSeparator(separators)) {
+          flushParagraph();
+          const alignments = separators.map(separator => {
+            const clean = separator.replace(/\s/g, '');
+            if (clean.startsWith(':') && clean.endsWith(':')) return 'center';
+            if (clean.endsWith(':')) return 'right';
+            return 'left';
+          });
+          const rows = [];
+          index += 2;
+
+          while (index < lines.length && lines[index].trim() && lines[index].includes('|')) {
+            const cells = splitMarkdownTableRow(lines[index]);
+            while (cells.length < headers.length) cells.push('');
+            rows.push(cells.slice(0, headers.length));
+            index += 1;
+          }
+
+          const headingHTML = headers.map((cell, cellIndex) => `<th style="text-align:${alignments[cellIndex]}">${renderInlineMarkdown(cell)}</th>`).join('');
+          const bodyHTML = rows.map(row => `<tr>${row.map((cell, cellIndex) => `<td style="text-align:${alignments[cellIndex]}">${renderInlineMarkdown(cell)}</td>`).join('')}</tr>`).join('');
+          output.push(`<div class="table-wrap"><table><thead><tr>${headingHTML}</tr></thead><tbody>${bodyHTML}</tbody></table></div>`);
+          continue;
+        }
       }
 
       const heading = line.match(/^\s{0,3}(#{1,6})\s+(.+?)\s*$/);
@@ -574,7 +645,7 @@ Relevant information retrieved from mollyandshaina.com:
 ${contextText || 'No relevant website information was found.'}
 
 Answer my question naturally using the website information when relevant.
-Use Markdown whenever it improves clarity, but do not over-format. Keep simple answers as short paragraphs; use headings, bold, italics, bold italics, links, lists, blockquotes, inline code, fenced code blocks, strikethrough, horizontal rules, or <u>underlined text</u> only when they genuinely help.
+Use Markdown whenever it improves clarity, but do not over-format. Keep simple answers as short paragraphs; use headings, bold, italics, bold italics, links, GitHub-style tables, lists, blockquotes, inline code, fenced code blocks, strikethrough, horizontal rules, or <u>underlined text</u> only when they genuinely help. Always write links in the standard form [label](URL), with no backticks or nested link syntax.
 If the website information cannot answer the question, say so honestly and offer this link: [Ask the human](/contact/).
             `.trim()
           }
