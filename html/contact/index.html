@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Contact the person behind Molly & Shaina when Geoff cannot answer your question.">
+    <meta name="theme-color" content="#090910">
+    <title>Contact the Human — Molly &amp; Shaina</title>
+    <link rel="icon" href="/favicon.ico?v=20260817-2" type="image/x-icon" sizes="any">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png?v=20260817-2">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png?v=20260817-2">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=20260817-2">
+    <link rel="manifest" href="/site.webmanifest?v=20260817-2">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/submit.css">
+  </head>
+  <body>
+    <div class="bg"></div>
+    <nav aria-label="Main navigation">
+      <div class="nav-inner">
+        <button id="navToggle" type="button" aria-label="Toggle menu" aria-expanded="false">☰</button>
+        <div class="nav-links" id="navLinks">
+          <a href="/molly/" title="Home"><span>:home:</span></a>
+          <a href="/molly-traits/" title="Traits"><span>:traits:</span></a>
+          <a href="/molly-habits/" title="Habits"><span>:habits:</span></a>
+          <a href="/molly-mind/" title="Mind"><span>:mind:</span></a>
+          <a href="/molly-gallery/" title="Gallery"><span>:gallery:</span></a>
+          <a href="/molly-faq/" title="FAQ"><span>:faq:</span></a>
+          <a href="/molly-dog-breeds/" title="Breeds"><span>:breeds:</span></a>
+          <a href="/comics/" title="Comics"><span>:comics:</span></a>
+          <a href="/blog/" title="Blog"><span>:blog:</span></a>
+          <a href="/merch/" title="Merch"><span>🏷️</span></a>
+          <a href="/about-me/" title="About the Human"><span>:about:</span></a>
+          <a href="/shaina/" title="Shaina"><span>:shaina:</span></a>
+          <a href="/poppy/" title="Poppy"><span>:poppy:</span></a>
+          <a href="/geoff/" title="Geoff"><span>:geoff:</span></a>
+        </div>
+        <button id="searchBtn" type="button" aria-label="Open site search">:search:</button>
+      </div>
+    </nav>
+    <div id="searchBox" class="hidden">
+      <input id="searchInput" type="search" placeholder="Search...">
+      <div id="results"></div>
+    </div>
+
+    <main class="submit-page">
+      <section class="submit-hero reveal left">
+        <p class="submit-eyebrow">Geoff Is Stumped</p>
+        <h1>Ask The Human</h1>
+        <p>If Geoff could not answer your question, send it here. Your message will be emailed privately to the person behind Molly &amp; Shaina.</p>
+      </section>
+
+      <section class="submit-layout">
+        <form class="submit-card reveal left" id="contactForm" action="/api/submit" method="POST">
+          <input name="submissionType" type="hidden" value="Question for site owner">
+
+          <div class="form-group">
+            <label for="contactName">Your Name</label>
+            <input id="contactName" name="name" type="text" autocomplete="name" maxlength="80" required>
+          </div>
+
+          <div class="form-group">
+            <label for="contactEmail">Your Email</label>
+            <input id="contactEmail" name="email" type="email" autocomplete="email" maxlength="120" placeholder="So you can receive a reply" required>
+          </div>
+
+          <div class="form-group">
+            <label for="contactSubject">Question Topic</label>
+            <input id="contactSubject" name="subject" type="text" maxlength="120" placeholder="What is your question about?" required>
+          </div>
+
+          <div class="form-group">
+            <label for="contactMessage">Your Question</label>
+            <textarea id="contactMessage" name="message" maxlength="5000" placeholder="Tell me what Geoff could not answer…" required></textarea>
+          </div>
+
+          <label class="consent-row">
+            <input name="consent" type="checkbox" value="true" required>
+            <span>I understand that my name, email address, and question will be emailed to the site owner so they can respond.</span>
+          </label>
+
+          <button id="sendContact" type="submit">Send Question</button>
+          <p class="submit-note" id="contactStatus" aria-live="polite">Your email address is used only so the site owner can reply.</p>
+        </form>
+
+        <aside class="preview-card reveal right">
+          <p class="submit-eyebrow">Before You Send</p>
+          <h2>Try Geoff First</h2>
+          <p>Geoff can answer most questions about Molly, Shaina, Poppy, dog breeds, comics, galleries, and the website.</p>
+          <a class="contact-geoff-link" href="/geoff/">Go back to Geoff</a>
+          <p>Please do not include passwords, payment details, home addresses, or other sensitive information.</p>
+        </aside>
+      </section>
+    </main>
+
+    <footer>
+      <p>© 2026 Molly &amp; Shaina | <a href="/privacy-policy/">Privacy Policy</a> | <a href="/terms-of-use/">Terms of Use &amp; Request Policies</a></p>
+    </footer>
+    <script src="../js/animations.js"></script>
+    <script src="../js/search.js"></script>
+    <script src="../js/contact.js"></script>
+  </body>
+</html>
