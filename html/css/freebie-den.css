@@ -53,6 +53,18 @@
   padding: 14px;
 }
 
+.image-gallery-link {
+  display: inline-flex;
+  margin-bottom: 10px;
+  border: 1px solid rgba(255, 255, 255, .16);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, .09);
+  color: #fff;
+  font-weight: 900;
+  padding: 13px 16px;
+  text-decoration: none;
+}
+
 .freebie-preview img,
 .download-card img {
   display: block;
@@ -115,10 +127,6 @@
 
 .download-card .format-preview .phone-preview {
   aspect-ratio: 9 / 16;
-}
-
-.archive-section .download-actions {
-  grid-template-columns: 1fr;
 }
 
 .printable-card > img {
