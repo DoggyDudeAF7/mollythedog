@@ -72,6 +72,10 @@
     .markdown-body th { background:rgba(191,168,255,.12); color:#fff; font-weight:900; }
     .markdown-body th:last-child,.markdown-body td:last-child { border-right:0; }
     .markdown-body tbody tr:last-child td { border-bottom:0; }
+    .markdown-body mark { border-radius:4px; background:#ffe08a; color:#21180a; padding:.05em .25em; }
+    .markdown-body kbd { border:1px solid rgba(255,255,255,.2); border-bottom-width:3px; border-radius:6px; background:rgba(255,255,255,.1); padding:.08em .38em; font:inherit; font-size:.85em; }
+    .markdown-body details { margin:.8em 0; padding:.65em .8em; border:1px solid rgba(255,255,255,.13); border-radius:10px; background:rgba(0,0,0,.16); }
+    .markdown-body summary { color:#fff; cursor:pointer; font-weight:800; }
     .source-row { display:flex; flex-wrap:wrap; gap:7px; margin-top:9px; }
     .source-chip { display:inline-flex; max-width:100%; padding:6px 9px; border-radius:999px; border:1px solid rgba(255,255,255,.12); color:#bbb; background:rgba(255,255,255,.05); text-decoration:none; font-size:.72rem; }
     .source-chip:hover { background:rgba(255,255,255,.11); color:white; }
@@ -276,6 +280,51 @@
     return /^(?:https?:\/\/|mailto:|\/(?!\/)|\.\.?\/|#)/i.test(url) ? escapeHTML(url) : '#';
   }
 
+  const safeRawHTMLTags = new Set([
+    'a', 'abbr', 'b', 'blockquote', 'br', 'code', 'del', 'details', 'div', 'em',
+    'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'hr', 'i', 'img', 'kbd', 'li', 'mark',
+    'ol', 'p', 'pre', 's', 'small', 'span', 'strong', 'sub', 'summary', 'sup',
+    'table', 'tbody', 'td', 'tfoot', 'th', 'thead', 'tr', 'u', 'ul'
+  ]);
+  const voidRawHTMLTags = new Set(['br', 'hr', 'img']);
+
+  function rawHTMLAttribute(tag, name) {
+    const pattern = new RegExp(`(?:^|\\s)${name}\\s*=\\s*(?:"([^"]*)"|'([^']*)'|([^\\s>]+))`, 'i');
+    const match = String(tag).replace(/^<\s*[^\s>]+/, '').match(pattern);
+    return match ? (match[1] ?? match[2] ?? match[3] ?? '') : '';
+  }
+
+  function sanitizeRawHTMLTag(rawTag) {
+    const match = String(rawTag).match(/^<\s*(\/?)\s*([a-z0-9]+)\b/i);
+    if (!match) return escapeHTML(rawTag);
+
+    const closing = Boolean(match[1]);
+    const tag = match[2].toLowerCase();
+    if (!safeRawHTMLTags.has(tag)) return escapeHTML(rawTag);
+    if (closing) return voidRawHTMLTags.has(tag) ? '' : `</${tag}>`;
+
+    if (tag === 'a') {
+      const rawHref = rawHTMLAttribute(rawTag, 'href');
+      const href = safeMarkdownURL(rawHref);
+      const external = /^https?:\/\//i.test(rawHref);
+      return `<a href="${href}"${external ? ' target="_blank" rel="noopener noreferrer"' : ''}>`;
+    }
+
+    if (tag === 'img') {
+      const src = safeMarkdownURL(rawHTMLAttribute(rawTag, 'src'));
+      const alt = escapeHTML(rawHTMLAttribute(rawTag, 'alt'));
+      return src === '#' ? '' : `<img src="${src}" alt="${alt}" loading="lazy">`;
+    }
+
+    if (tag === 'td' || tag === 'th') {
+      const colspan = Math.min(12, Math.max(1, Number(rawHTMLAttribute(rawTag, 'colspan')) || 1));
+      const rowspan = Math.min(50, Math.max(1, Number(rawHTMLAttribute(rawTag, 'rowspan')) || 1));
+      return `<${tag} colspan="${colspan}" rowspan="${rowspan}">`;
+    }
+
+    return `<${tag}>`;
+  }
+
   function renderInlineMarkdown(value) {
     const tokens = [];
     const stash = html => `\u0000${tokens.push(html) - 1}\u0000`;
@@ -286,6 +335,7 @@
       .replace(/\[([^\]]+)\]\(\[[^\]]*\]\((https?:\/\/[^)\s]+)\)\)/gi, '[$1]($2)');
     text = text.replace(/`([^`\n]+)`/g, (_, code) => stash(`<code>${escapeHTML(code)}</code>`));
     text = text.replace(/<(https?:\/\/[^\s<>]+)>/gi, (_, url) => stash(`<a href="${escapeHTML(url)}" target="_blank" rel="noopener noreferrer">${escapeHTML(url)}</a>`));
+    text = text.replace(/<\/?[a-z][^<>]*>/gi, rawTag => stash(sanitizeRawHTMLTag(rawTag)));
     text = text.replace(/!\[([^\]]*)\]\(([^)\s]+)(?:\s+"[^"]*")?\)/g, (_, alt, url) => {
       const src = safeMarkdownURL(url);
       return src === '#' ? escapeHTML(alt) : stash(`<img src="${src}" alt="${escapeHTML(alt)}" loading="lazy">`);
@@ -302,8 +352,7 @@
       .replace(/__([^_\n]+)__/g, '<strong>$1</strong>')
       .replace(/~~([^~\n]+)~~/g, '<del>$1</del>')
       .replace(/(^|[^\w])\*([^*\n]+)\*(?!\*)/g, '$1<em>$2</em>')
-      .replace(/(^|[^\w])_([^_\n]+)_(?!\w)/g, '$1<em>$2</em>')
-      .replace(/&lt;u&gt;([\s\S]*?)&lt;\/u&gt;/gi, '<u>$1</u>');
+      .replace(/(^|[^\w])_([^_\n]+)_(?!\w)/g, '$1<em>$2</em>');
 
     return text.replace(/\u0000(\d+)\u0000/g, (_, index) => tokens[Number(index)]);
   }
@@ -646,7 +695,7 @@ Relevant information retrieved from mollyandshaina.com:
 ${contextText || 'No relevant website information was found.'}
 
 Answer my question naturally using the website information when relevant.
-Use Markdown whenever it improves clarity, but do not over-format. Keep simple answers as short paragraphs; use headings, bold, italics, bold italics, links, GitHub-style tables, lists, blockquotes, inline code, fenced code blocks, strikethrough, horizontal rules, or <u>underlined text</u> only when they genuinely help. Always write links in the standard form [label](URL), with no backticks or nested link syntax.
+Use Markdown whenever it improves clarity, but do not over-format. Keep simple answers as short paragraphs; use headings, bold, italics, bold italics, links, GitHub-style tables, lists, blockquotes, inline code, fenced code blocks, strikethrough, horizontal rules, or safe HTML only when they genuinely help. Safe HTML such as <br>, <u>, <mark>, <kbd>, <details>, headings, lists, tables, links, and images can be rendered. Always write Markdown links in the standard form [label](URL), with no backticks or nested link syntax.
 If the website information cannot answer the question, say so honestly and offer this link: [Ask the human](/contact/).
             `.trim()
           }
