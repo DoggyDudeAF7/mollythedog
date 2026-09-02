@@ -224,6 +224,8 @@
   ];
 
   const state = { pages: [], ready: false, indexing: false };
+  const trainingState = { active: false, awaitingPassword: false, entries: [] };
+  const defaultPromptPlaceholder = 'Ask Geoff about mollyandshaina.com…';
   const $ = id => document.getElementById(id);
   const chat = $('chat');
   const form = $('composer');
@@ -568,9 +570,21 @@ Use Markdown whenever it improves clarity, but do not over-format. Keep simple a
     text = text.trim();
     if (!text) return;
 
-    addMessage('me', text);
     prompt.value = '';
     prompt.style.height = 'auto';
+
+    if (text.toLowerCase() === '/retrain') {
+      addMessage('me', text);
+      await enterTrainingMode();
+      return;
+    }
+
+    if (trainingState.active) {
+      await handleTrainingInput(text);
+      return;
+    }
+
+    addMessage('me', text);
     sendButton.disabled = true;
 
     const typing = addTyping();
@@ -606,7 +620,163 @@ Use Markdown whenever it improves clarity, but do not over-format. Keep simple a
     }
   }
 
+  async function readApiResponse(response) {
+    const data = await response.json().catch(() => ({}));
+    if (!response.ok) throw new Error(data.error || `Request failed (${response.status}).`);
+    return data;
+  }
+
+  async function fetchTrainingEntries() {
+    const response = await fetch('/api/geoff-training', {
+      method: 'GET',
+      credentials: 'same-origin'
+    });
+    const data = await readApiResponse(response);
+    trainingState.entries = Array.isArray(data.entries) ? data.entries : [];
+    return trainingState.entries;
+  }
+
+  async function updateTraining(action, extra = {}) {
+    const response = await fetch('/api/geoff-training', {
+      method: 'POST',
+      credentials: 'same-origin',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ action, ...extra })
+    });
+    const data = await readApiResponse(response);
+    trainingState.entries = Array.isArray(data.entries) ? data.entries : [];
+    return trainingState.entries;
+  }
+
+  function trainingHelp() {
+    const count = trainingState.entries.length;
+    return `### Retraining mode active
+
+Geoff currently has **${count} saved training note${count === 1 ? '' : 's'}**. Send one fact or instruction per message to teach him.
+
+- \`/list\` — show saved notes
+- \`/remove 2\` — remove note number 2
+- \`/clear confirm\` — erase every saved note
+- \`/done\` — leave retraining mode`;
+  }
+
+  function formatTrainingEntries() {
+    if (!trainingState.entries.length) return '**No training notes have been saved yet.**';
+    return `### Saved training notes\n\n${trainingState.entries.map((entry, index) => `${index + 1}. ${entry.text}`).join('\n')}`;
+  }
+
+  function leaveTrainingMode(message = 'Retraining mode closed. Geoff is ready to chat normally again.') {
+    trainingState.active = false;
+    trainingState.awaitingPassword = false;
+    trainingState.entries = [];
+    prompt.placeholder = defaultPromptPlaceholder;
+    addMessage('geoff', message);
+  }
+
+  async function enterTrainingMode() {
+    trainingState.active = true;
+    trainingState.awaitingPassword = false;
+    sendButton.disabled = true;
+
+    try {
+      const response = await fetch('/api/geoff-training', {
+        method: 'GET',
+        credentials: 'same-origin'
+      });
+
+      if (response.status === 401) {
+        trainingState.awaitingPassword = true;
+        prompt.placeholder = 'Enter the admin password…';
+        addMessage('geoff', '### Admin authentication required\n\nEnter the site admin password to unlock retraining mode. Your password will be hidden in the conversation. Type `/done` to cancel.');
+        return;
+      }
+
+      const data = await readApiResponse(response);
+      trainingState.entries = Array.isArray(data.entries) ? data.entries : [];
+      prompt.placeholder = 'Teach Geoff a fact or instruction…';
+      addMessage('geoff', trainingHelp());
+    } catch (error) {
+      leaveTrainingMode(`**Retraining mode could not start:** ${error.message}`);
+    } finally {
+      sendButton.disabled = false;
+      prompt.focus();
+    }
+  }
+
+  async function handleTrainingInput(text) {
+    const command = text.toLowerCase();
+
+    if (command === '/done') {
+      addMessage('me', text);
+      leaveTrainingMode();
+      return;
+    }
+
+    sendButton.disabled = true;
+
+    try {
+      if (trainingState.awaitingPassword) {
+        addMessage('me', '••••••••');
+        const response = await fetch('/api/login', {
+          method: 'POST',
+          credentials: 'same-origin',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ password: text })
+        });
+        await readApiResponse(response);
+        trainingState.awaitingPassword = false;
+        prompt.placeholder = 'Teach Geoff a fact or instruction…';
+        await fetchTrainingEntries();
+        addMessage('geoff', `**Authentication successful.**\n\n${trainingHelp()}`);
+        return;
+      }
+
+      addMessage('me', text);
+
+      if (command === '/list') {
+        await fetchTrainingEntries();
+        addMessage('geoff', formatTrainingEntries());
+        return;
+      }
+
+      if (command === '/clear') {
+        addMessage('geoff', 'That would erase every saved training note. Type `/clear confirm` to continue.');
+        return;
+      }
+
+      if (command === '/clear confirm') {
+        await updateTraining('clear');
+        addMessage('geoff', '**All saved training notes were erased.** Retraining mode is still active.');
+        return;
+      }
+
+      const remove = command.match(/^\/remove\s+(\d+)$/);
+      if (remove) {
+        await fetchTrainingEntries();
+        const index = Number(remove[1]) - 1;
+        const entry = trainingState.entries[index];
+        if (!entry) throw new Error('That training-note number does not exist. Use `/list` to see the current numbers.');
+        await updateTraining('remove', { id: entry.id });
+        addMessage('geoff', `Removed training note **${index + 1}**. Geoff now has **${trainingState.entries.length}** saved note${trainingState.entries.length === 1 ? '' : 's'}.`);
+        return;
+      }
+
+      await updateTraining('add', { text });
+      addMessage('geoff', `**Learned.** Geoff now has **${trainingState.entries.length}** saved training note${trainingState.entries.length === 1 ? '' : 's'}. Send another note or type \`/done\`.`);
+    } catch (error) {
+      addMessage('geoff', `**Training error:** ${error.message}`);
+    } finally {
+      sendButton.disabled = false;
+      prompt.focus();
+    }
+  }
+
   function resetChat() {
+    trainingState.active = false;
+    trainingState.awaitingPassword = false;
+    trainingState.entries = [];
+    prompt.placeholder = defaultPromptPlaceholder;
+    sendButton.disabled = false;
     chat.innerHTML = '';
     updateContext([]);
     addMessage('geoff', `Hi! I’m Geoff 🐾\n\nI’m connected to **mollyandshaina.com** and I’ll search the site before answering questions about Molly, Shaina, their pages, comics, galleries, dog breeds and more. What do you want to know?`);
