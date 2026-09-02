@@ -21,7 +21,8 @@
 .phone-gallery { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; }
 .phone-card { padding-bottom: 18px; }
 .phone-card img { aspect-ratio: 9 / 16; }
-.phone-card h3, .phone-card a { margin-left: 14px; margin-right: 14px; }
+.phone-card h3 { margin-left: 14px; margin-right: 14px; }
+.phone-card a { margin-left: 14px; margin-right: 0; }
 .phone-card h3 { margin-top: 14px; }
 @media (max-width: 900px) { .feature-gallery { grid-template-columns: 1fr 44%; } .phone-gallery { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
 @media (max-width: 650px) { .images-page { padding-top: 115px; } .feature-gallery, .print-gallery { grid-template-columns: 1fr; } .phone-gallery { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
