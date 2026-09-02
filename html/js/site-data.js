@@ -38,6 +38,7 @@
     ["page:about-shaina", "About Shaina", "A closer look at Shaina and her story.", "Shaina", ":shaina:", "/about-shaina/", "book story"],
     ["page:about-poppy", "About Poppy", "A closer look at Poppy and her story.", "Poppy", ":poppy:", "/about-poppy/", "story"],
     ["page:submit", "Submit an Idea", "Send a comic idea, fan art, feedback, or a general message.", "Page", "✉️", "/submit/", "contact message fan art"],
+    ["page:contact", "Ask the Human", "Email a question to the person behind Molly & Shaina when Geoff cannot answer.", "Page", "✉️", "/contact/", "contact human question geoff email help"],
     ["page:freebies", "The Freebie Den", "Molly and Shaina downloads, wallpapers, and printable surprises.", "Page", "🎁", "/freebie-den/", "downloads wallpaper printable"],
     ["page:merch", "Molly and Shaina Merch", "The current collection of handmade Molly and Shaina stickers.", "Page", "🏷️", "/merch/", "stickers shop handmade collection"],
     ["page:privacy", "Privacy Policy", "How the Molly and Shaina website collects, uses, stores, and shares information.", "Policy", "🔒", "/privacy-policy/", "privacy data cookies analytics information"],
