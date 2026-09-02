@@ -4,6 +4,7 @@
 .images-hero h1 { margin: 8px 0 18px; font-size: clamp(5rem, 15vw, 11rem); line-height: .82; letter-spacing: -.075em; }
 .images-hero > p:not(.images-eyebrow) { max-width: 720px; color: rgba(255,255,255,.72); font-size: clamp(1.05rem, 2vw, 1.3rem); line-height: 1.7; }
 .images-hero a, .image-card a, .phone-card a { display: inline-flex; margin-top: 18px; color: #fff; font-weight: 900; text-decoration: none; }
+.images-jump-links { display: flex; flex-wrap: wrap; gap: 10px 22px; }
 .gallery-section { margin-top: 90px; }
 .gallery-heading { max-width: 850px; margin-bottom: 28px; }
 .gallery-heading h2 { margin: 8px 0 12px; font-size: clamp(2.4rem, 6vw, 5rem); line-height: .96; }
@@ -20,7 +21,10 @@
 .image-card a, .phone-card a { color: #ffd0c5; }
 .phone-gallery { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; }
 .phone-card { padding-bottom: 18px; }
-.phone-card img { aspect-ratio: 9 / 16; }
+.archive-images { display: grid; grid-template-columns: minmax(0, 1fr) minmax(64px, .38fr); gap: 8px; align-items: start; padding: 8px; background: rgba(0,0,0,.18); }
+.phone-card .archive-images img { width: 100%; border-radius: 10px; }
+.phone-card .archive-images .archive-desktop { aspect-ratio: 16 / 9; }
+.phone-card .archive-images .archive-phone { aspect-ratio: 9 / 16; }
 .phone-card h3 { margin-left: 14px; margin-right: 14px; }
 .phone-card a { margin-left: 14px; margin-right: 0; }
 .phone-card h3 { margin-top: 14px; }
