@@ -119,6 +119,56 @@
     return "Molly";
   }
 
+  const siteRoutes = [
+    "/molly/", "/about-molly/", "/molly-traits/", "/molly-habits/", "/molly-mind/", "/molly-gallery/", "/molly-faq/",
+    "/shaina/", "/shaina-home/", "/about-shaina/", "/shaina-traits/", "/shaina-habits/", "/shaina-mind/", "/shaina-gallery/", "/shaina-faq/",
+    "/poppy/", "/about-poppy/", "/poppy-traits/", "/poppy-habits/", "/poppy-mind/", "/poppy-gallery/", "/poppy-faq/",
+    "/about-me/", "/comics/", "/molly-dog-breeds/", "/blog/", "/home/"
+  ];
+
+  async function loadSitePage(path) {
+    try {
+      const response = await fetch(path, { cache: "force-cache" });
+      if (!response.ok) return null;
+      const documentCopy = new DOMParser().parseFromString(await response.text(), "text/html");
+      documentCopy.querySelectorAll("nav, footer, script, style, form, button, #searchBox").forEach(element => element.remove());
+      const root = documentCopy.querySelector("main") || documentCopy.body;
+      const text = root.innerText.replace(/\s+/g, " ").trim();
+      const title = (documentCopy.querySelector("h1")?.textContent || documentCopy.title || path).trim();
+      return { path, title, text: text.slice(0, 10000) };
+    } catch {
+      return null;
+    }
+  }
+
+  async function loadSiteIndex() {
+    const pages = await Promise.all(siteRoutes.map(loadSitePage));
+    return pages.filter(Boolean);
+  }
+
+  function relevantSiteContext(pages, question, dog, fallbackContext) {
+    const stopWords = new Set(["about", "what", "when", "where", "which", "with", "that", "this", "from", "have", "does", "tell", "give", "would", "could", "there", "their"]);
+    const words = (question.toLowerCase().match(/[a-z0-9]+/g) || [])
+      .filter(word => word.length > 2 && !stopWords.has(word));
+    const dogName = dog.toLowerCase();
+
+    const ranked = pages.map(page => {
+      const title = page.title.toLowerCase();
+      const text = page.text.toLowerCase();
+      let score = page.path.includes(dogName) ? 3 : 0;
+      for (const word of words) {
+        if (title.includes(word)) score += 12;
+        if (page.path.includes(word)) score += 8;
+        if (text.includes(word)) score += 2;
+      }
+      return { ...page, score };
+    }).sort((a, b) => b.score - a.score);
+
+    const selected = ranked.slice(0, 7);
+    const siteContext = selected.map(page => `PAGE: ${page.title}\nURL: ${page.path}\n${page.text.slice(0, 3600)}`).join("\n\n---\n\n");
+    return (siteContext || `CURRENT FAQ PAGE:\n${fallbackContext}`).slice(0, 24000);
+  }
+
   function pageContext(mount) {
     return Array.from(document.querySelectorAll(".section .card"))
       .filter(card => !card.contains(mount))
@@ -133,14 +183,15 @@
     if (!mount) return;
 
     const dog = dogForPage();
-    const context = pageContext(mount);
+    const currentPageContext = pageContext(mount);
+    const siteIndexPromise = loadSiteIndex();
     const messages = [];
 
     mount.innerHTML = `
       <section class="faq-ai" aria-label="Ask the ${dog} FAQ assistant">
         <div class="faq-ai-header">
           <span class="faq-ai-avatar" aria-hidden="true">:faq:</span>
-          <div><strong>${dog} FAQ Assistant</strong><small>Powered by Ollama</small></div>
+          <div><strong>${dog} FAQ Assistant</strong><small>Indexing the whole site…</small></div>
           <button class="faq-ai-reset" type="button">New chat</button>
         </div>
         <div class="faq-ai-messages" aria-live="polite" aria-relevant="additions"></div>
@@ -159,6 +210,13 @@
     const input = mount.querySelector("textarea");
     const sendButton = form.querySelector("button");
     const resetButton = mount.querySelector(".faq-ai-reset");
+    const connectionStatus = mount.querySelector(".faq-ai-header small");
+
+    siteIndexPromise.then(pages => {
+      connectionStatus.textContent = pages.length
+        ? `Ollama · ${pages.length} site pages connected`
+        : "Ollama · current FAQ page connected";
+    });
 
     function addMessage(role, text, pending = false) {
       const message = document.createElement("div");
@@ -192,6 +250,8 @@
       const pending = addMessage("assistant", "Thinking…", true);
 
       try {
+        const sitePages = await siteIndexPromise;
+        const context = relevantSiteContext(sitePages, question, dog, currentPageContext);
         const response = await fetch("/api/faq-chat", {
           method: "POST",
           headers: { "content-type": "application/json" },
