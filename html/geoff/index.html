@@ -688,6 +688,7 @@ If the website information cannot answer the question, say so honestly and offer
 Geoff currently has **${count} saved training note${count === 1 ? '' : 's'}**. Send one fact or instruction per message to teach him.
 
 - \`/list\` — show saved notes
+- \`Test: (your question)\` — test Geoff without saving it
 - \`/remove 2\` — remove note number 2
 - \`/clear confirm\` — erase every saved note
 - \`/done\` — leave retraining mode`;
@@ -727,7 +728,7 @@ Geoff currently has **${count} saved training note${count === 1 ? '' : 's'}**. S
 
       const data = await readApiResponse(response);
       trainingState.entries = Array.isArray(data.entries) ? data.entries : [];
-      prompt.placeholder = 'Teach Geoff a fact or instruction…';
+      prompt.placeholder = 'Teach Geoff, or type Test: (a question)…';
       showPasswordComposer(false);
       addMessage('geoff', trainingHelp());
     } catch (error) {
@@ -760,7 +761,7 @@ Geoff currently has **${count} saved training note${count === 1 ? '' : 's'}**. S
         });
         await readApiResponse(response);
         trainingState.awaitingPassword = false;
-        prompt.placeholder = 'Teach Geoff a fact or instruction…';
+        prompt.placeholder = 'Teach Geoff, or type Test: (a question)…';
         showPasswordComposer(false);
         await fetchTrainingEntries();
         addMessage('geoff', `**Authentication successful.**\n\n${trainingHelp()}`);
@@ -783,6 +784,26 @@ Geoff currently has **${count} saved training note${count === 1 ? '' : 's'}**. S
       if (command === '/clear confirm') {
         await updateTraining('clear');
         addMessage('geoff', '**All saved training notes were erased.** Retraining mode is still active.');
+        return;
+      }
+
+      const testMatch = text.match(/^test:\s*([\s\S]+)$/i);
+      if (testMatch) {
+        let testContent = testMatch[1].trim();
+        if (testContent.startsWith('(') && testContent.endsWith(')')) {
+          testContent = testContent.slice(1, -1).trim();
+        }
+        if (!testContent) throw new Error('Put something after `Test:` for Geoff to answer.');
+
+        const typing = addTyping();
+        try {
+          const result = await answer(testContent);
+          typing.remove();
+          addMessage('geoff', `### Test response\n\n${result.text}\n\n---\n*This test was not saved as a training note. Retraining mode is still active.*`, result.sources);
+        } catch (error) {
+          typing.remove();
+          throw error;
+        }
         return;
       }
 
