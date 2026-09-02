@@ -492,7 +492,7 @@ async function handleSubmissionEmail(request, env) {
   }
 
   if (!consent) {
-    return jsonResponse({ error: "Please check the permission box before sending." }, 400);
+    return jsonResponse({ error: "Please check the required consent box before sending." }, 400);
   }
 
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
