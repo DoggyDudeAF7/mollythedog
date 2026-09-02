@@ -174,7 +174,7 @@
           <textarea id="prompt" rows="1" placeholder="Ask Geoff about mollyandshaina.com…" autocomplete="off"></textarea>
           <button id="sendButton" type="submit" aria-label="Send">➜</button>
         </form>
-        <div class="fineprint">Geoff searches Molly &amp; Shaina pages for context, then uses AI to answer naturally. He can still make mistakes, so use the linked source pages to check. If he cannot help, <a href="/contact/">ask the human</a>.</div>
+        <div class="fineprint">Geoff searches Molly &amp; Shaina pages for context, then uses AI to answer naturally. He can still make mistakes, so use the linked source pages to check. If he cannot help, <a href="/contact/" data-contact-link>ask the human</a>.</div>
       </section>
 
       <aside class="geoff-sidebar">
@@ -203,7 +203,7 @@
         <section class="geoff-card side-card">
           <h2>Geoff is stumped?</h2>
           <p class="side-note">Send your unanswered question privately to the person behind the site.</p>
-          <a class="geoff-contact-link" href="/contact/">Ask the human</a>
+          <a class="geoff-contact-link" href="/contact/" data-contact-link>Ask the human</a>
         </section>
       </aside>
     </div>
@@ -594,6 +594,10 @@ If the website information cannot answer the question, say so honestly and offer
       await handleTrainingInput(text);
       return;
     }
+
+    document.querySelectorAll('[data-contact-link]').forEach(link => {
+      link.href = `/contact/?question=${encodeURIComponent(text)}`;
+    });
 
     addMessage('me', text);
     sendButton.disabled = true;
