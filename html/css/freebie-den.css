@@ -71,6 +71,56 @@
   gap: 20px;
 }
 
+.freebie-section {
+  margin-top: 72px;
+}
+
+.section-heading {
+  max-width: 820px;
+  margin-bottom: 24px;
+}
+
+.section-heading h2 {
+  margin: 8px 0 12px;
+  font-size: clamp(2.3rem, 6vw, 5rem);
+  line-height: .96;
+}
+
+.section-heading > p:last-child {
+  color: rgba(255, 255, 255, .7);
+  font-size: 1.05rem;
+  line-height: 1.65;
+}
+
+.featured-grid {
+  align-items: start;
+}
+
+.format-preview {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(86px, 22%);
+  gap: 10px;
+  align-items: stretch;
+  margin-bottom: 18px;
+}
+
+.download-card .format-preview img {
+  height: 100%;
+  margin: 0;
+}
+
+.download-card .format-preview .desktop-preview {
+  aspect-ratio: 16 / 9;
+}
+
+.download-card .format-preview .phone-preview {
+  aspect-ratio: 9 / 16;
+}
+
+.archive-section .download-actions {
+  grid-template-columns: 1fr;
+}
+
 .download-card {
   padding: 14px;
 }
