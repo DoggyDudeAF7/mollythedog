@@ -123,7 +123,7 @@
     "/molly/", "/about-molly/", "/molly-traits/", "/molly-habits/", "/molly-mind/", "/molly-gallery/", "/molly-faq/",
     "/shaina/", "/shaina-home/", "/about-shaina/", "/shaina-traits/", "/shaina-habits/", "/shaina-mind/", "/shaina-gallery/", "/shaina-faq/",
     "/poppy/", "/about-poppy/", "/poppy-traits/", "/poppy-habits/", "/poppy-mind/", "/poppy-gallery/", "/poppy-faq/",
-    "/about-me/", "/comics/", "/molly-dog-breeds/", "/blog/", "/home/"
+    "/about-me/", "/dog-diaries/", "/comics/", "/molly-dog-breeds/", "/blog/", "/home/"
   ];
 
   async function loadSitePage(path) {
