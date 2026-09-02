@@ -1,6 +1,11 @@
 export async function onRequestPost(context) {
   try {
     const body = await context.request.json();
+    const trainingEntries = await loadGeoffTraining(context.env);
+    const trainedKnowledge = trainingEntries
+      .map((entry, index) => `${index + 1}. ${entry.text}`)
+      .join("\n")
+      .slice(0, 16000);
 
     const messages = [
       {
@@ -22,6 +27,11 @@ Do not repeat navigation, buttons, menus, headings, or unrelated content.
 Do not invent facts about Molly, Shaina, Poppy, or the website.
 
 If website context is supplied, use it to answer the question naturally.
+
+Owner-approved training notes:
+${trainedKnowledge || "No additional training notes have been saved."}
+
+Use relevant training notes as additional knowledge. The core identity and safety rules above always take priority.
 `
       },
       ...(body.messages || [])
@@ -64,5 +74,18 @@ If website context is supplied, use it to answer the question naturally.
       { error: "Something went wrong." },
       { status: 500 }
     );
+  }
+}
+
+async function loadGeoffTraining(env) {
+  if (!env.BLOG_POSTS) return [];
+
+  try {
+    const stored = await env.BLOG_POSTS.get("geoff:training", { type: "json" });
+    return Array.isArray(stored)
+      ? stored.filter((entry) => entry && typeof entry.text === "string").slice(0, 50)
+      : [];
+  } catch {
+    return [];
   }
 }
