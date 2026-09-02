@@ -133,7 +133,7 @@
       const documentCopy = new DOMParser().parseFromString(await response.text(), "text/html");
       documentCopy.querySelectorAll("nav, footer, script, style, form, button, #searchBox").forEach(element => element.remove());
       const root = documentCopy.querySelector("main") || documentCopy.body;
-      const text = root.innerText.replace(/\s+/g, " ").trim();
+      const text = root.textContent.replace(/\s+/g, " ").trim();
       const title = (documentCopy.querySelector("h1")?.textContent || documentCopy.title || path).trim();
       return { path, title, text: text.slice(0, 10000) };
     } catch {
