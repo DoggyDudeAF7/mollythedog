@@ -1,0 +1,27 @@
+.images-page { width: min(1180px, calc(100% - 28px)); margin: 0 auto; padding: 150px 0 90px; }
+.images-hero { min-height: 64vh; display: flex; flex-direction: column; justify-content: center; align-items: flex-start; }
+.images-eyebrow { margin: 0; color: #ffb7a5; font-size: .78rem; font-weight: 900; letter-spacing: .14em; text-transform: uppercase; }
+.images-hero h1 { margin: 8px 0 18px; font-size: clamp(5rem, 15vw, 11rem); line-height: .82; letter-spacing: -.075em; }
+.images-hero > p:not(.images-eyebrow) { max-width: 720px; color: rgba(255,255,255,.72); font-size: clamp(1.05rem, 2vw, 1.3rem); line-height: 1.7; }
+.images-hero a, .image-card a, .phone-card a { display: inline-flex; margin-top: 18px; color: #fff; font-weight: 900; text-decoration: none; }
+.gallery-section { margin-top: 90px; }
+.gallery-heading { max-width: 850px; margin-bottom: 28px; }
+.gallery-heading h2 { margin: 8px 0 12px; font-size: clamp(2.4rem, 6vw, 5rem); line-height: .96; }
+.gallery-heading > p:last-child:not(.images-eyebrow) { color: rgba(255,255,255,.7); line-height: 1.65; }
+.feature-gallery { display: grid; grid-template-columns: minmax(0, 1.7fr) minmax(220px, .7fr); gap: 18px; align-items: start; }
+.print-gallery { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
+.image-card, .phone-card { overflow: hidden; border: 1px solid rgba(255,255,255,.14); border-radius: 18px; background: rgba(255,255,255,.07); box-shadow: 0 24px 70px rgba(0,0,0,.25); }
+.image-card img, .phone-card img { display: block; width: 100%; object-fit: cover; }
+.image-card.wide img { aspect-ratio: 16 / 9; }
+.image-card.tall img { aspect-ratio: 9 / 16; }
+.image-card.paper img { aspect-ratio: 210 / 297; object-fit: contain; background: #fff; }
+.image-card > div { padding: 18px; }
+.image-card h3, .phone-card h3 { margin: 0; font-size: 1.15rem; }
+.image-card a, .phone-card a { color: #ffd0c5; }
+.phone-gallery { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; }
+.phone-card { padding-bottom: 18px; }
+.phone-card img { aspect-ratio: 9 / 16; }
+.phone-card h3, .phone-card a { margin-left: 14px; margin-right: 14px; }
+.phone-card h3 { margin-top: 14px; }
+@media (max-width: 900px) { .feature-gallery { grid-template-columns: 1fr 44%; } .phone-gallery { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+@media (max-width: 650px) { .images-page { padding-top: 115px; } .feature-gallery, .print-gallery { grid-template-columns: 1fr; } .phone-gallery { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
