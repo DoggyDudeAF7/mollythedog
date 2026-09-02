@@ -95,6 +95,95 @@
   white-space: pre-wrap;
 }
 
+.faq-ai-message.assistant {
+  white-space: normal;
+}
+
+.faq-ai-message.assistant > :first-child {
+  margin-top: 0;
+}
+
+.faq-ai-message.assistant > :last-child {
+  margin-bottom: 0;
+}
+
+.faq-ai-message.assistant p,
+.faq-ai-message.assistant ul {
+  margin: 0.65em 0;
+}
+
+.faq-ai-message.assistant h1,
+.faq-ai-message.assistant h2,
+.faq-ai-message.assistant h3,
+.faq-ai-message.assistant h4,
+.faq-ai-message.assistant h5,
+.faq-ai-message.assistant h6 {
+  margin: 0.9em 0 0.4em;
+  background: none;
+  color: #fff;
+  font-size: 1.05rem;
+  line-height: 1.25;
+  -webkit-text-fill-color: initial;
+}
+
+.faq-ai-message.assistant code {
+  border-radius: 5px;
+  background: rgba(0, 0, 0, 0.3);
+  color: #ffd2c7;
+  padding: 0.12em 0.35em;
+}
+
+.faq-ai-message.assistant a {
+  color: #ffc3b4;
+  text-underline-offset: 3px;
+}
+
+.faq-ai-message.assistant a::after {
+  content: " ↗";
+  display: inline-block;
+  font-size: 0.82em;
+  font-weight: 900;
+}
+
+.faq-table-wrap {
+  max-width: 100%;
+  margin: 0.8em 0;
+  overflow-x: auto;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 10px;
+}
+
+.faq-table-wrap table {
+  width: 100%;
+  border-collapse: collapse;
+  background: rgba(0, 0, 0, 0.16);
+  font-size: 0.85rem;
+}
+
+.faq-table-wrap th,
+.faq-table-wrap td {
+  min-width: 130px;
+  border-right: 1px solid rgba(255, 255, 255, 0.1);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 9px 10px;
+  text-align: left;
+  vertical-align: top;
+}
+
+.faq-table-wrap th {
+  background: rgba(191, 168, 255, 0.13);
+  color: #fff;
+}
+
+.faq-table-wrap th:last-child,
+.faq-table-wrap td:last-child {
+  border-right: 0;
+}
+
+.faq-table-wrap tbody tr:last-child td {
+  border-bottom: 0;
+}
+
 .faq-ai-message.user {
   align-self: flex-end;
   border: 0;
