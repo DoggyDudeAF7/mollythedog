@@ -41,6 +41,7 @@
     ["page:submit", "Submit an Idea", "Send a comic idea, fan art, feedback, or a general message.", "Page", "✉️", "/submit/", "contact message fan art"],
     ["page:contact", "Ask the Human", "Email a question to the person behind Molly & Shaina when Geoff cannot answer.", "Page", "✉️", "/contact/", "contact human question geoff email help"],
     ["page:images", "Images", "Browse Molly, Shaina, and Poppy wallpapers, colouring pages, and bookmarks.", "Gallery", ":gallery:", "/images/", "pictures downloads wallpapers printables colouring bookmarks"],
+    ["page:arcade", "Molly & Shaina Arcade", "Play 16 minigames, earn Dog Coins, and unlock arcade achievements.", "Page", "🎮", "/games/", "games play memory treats maze trivia puzzle arcade"],
     ["page:merch", "Molly and Shaina Merch", "The current collection of handmade Molly and Shaina stickers.", "Page", "🏷️", "/merch/", "stickers shop handmade collection"],
     ["page:privacy", "Privacy Policy", "How the Molly and Shaina website collects, uses, stores, and shares information.", "Policy", "🔒", "/privacy-policy/", "privacy data cookies analytics information"],
     ["page:terms", "Terms of Use & Request Policies", "Rules for using the site, sending submissions, downloads, and requesting free stickers.", "Policy", "📄", "/terms-of-use/", "terms conditions rules sticker requests policy"],
