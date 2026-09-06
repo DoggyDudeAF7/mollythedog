@@ -25,10 +25,15 @@
     <link rel="stylesheet" href="../css/poppy-real.css">
   </head>
   <body>
+      <!-- Background styling element -->
     <div class="bg"></div>
+    
+      <!-- Main navigation bar with logo and site menu -->
     <nav>
       <div class="nav-inner">
+          <!-- Mobile hamburger menu toggle button -->
         <button id="navToggle" type="button" aria-label="Toggle menu" aria-expanded="false">☰</button>
+          <!-- Navigation links to all main pages -->
         <div class="nav-links" id="navLinks">
           <a href="/molly/" title="Home"><span>:home:</span></a>
           <a href="/molly-traits/" title="Traits"><span>:traits:</span></a>
@@ -46,31 +51,41 @@
           <a href="/poppy/" title="Poppy"><span>:poppy:</span></a>
           <a href="/geoff/" title="Geoff"><span>:geoff:</span></a>
         </div>
+          <!-- Search button that opens the search overlay -->
         <button id="searchBtn" type="button" aria-label="Open site search">:search:</button>
       </div>
     </nav>
-    <!-- SEARCH BOX MUST BE OUTSIDE NAV -->
+    <!-- Search overlay: hidden by default, shown when search button clicked. Placed outside nav for proper layering -->
     <div id="searchBox" class="hidden">
       <input id="searchInput" placeholder="Search..." />
       <div id="results"></div>
+    
+      <!-- Hero section: main headline, tagline, and large portrait image (custom emoji for Poppy) -->
     </div>
     <section class="section hero">
       <h1>Poppy</h1>
       <p>Observant. Independent. Four years old. Entirely at home in Melbourne.</p>
       <img src="../images/emoji/poppy-emoji.webp" class="hero-img poppy-emoji-portrait" alt="Poppy's custom site icon">
       <br>
+        <!-- Scroll indicator prompting user to explore more content below -->
       <br>
       <br>
       <br>
       <p class="scroll-down-prompt">↓Scroll Down↓</p>
     </section>
+    
+      <!-- Personality trait card: Poppy's attentive observation nature -->
     <section class="section">
       <div class="card reveal left">
         <div class="split left">
+                    <!-- Emoji icon for the trait -->
           <div class="emoji">🪟</div>
+                    <!-- Trait title and description -->
           <div>
             <h2>Attentive by Nature</h2>
             <p>Poppy notices changes in sound, movement, and routine. She prefers to understand a room before settling into it.</p>
+    
+            <!-- Personality trait card: Independent but likes company -->
           </div>
         </div>
       </div>
@@ -78,10 +93,15 @@
     <section class="section">
       <div class="card reveal right">
         <div class="split right">
+                    <!-- Emoji icon for the trait -->
           <div class="emoji">🛏️</div>
+                    <!-- Trait title and description -->
           <div>
             <h2>Independent in Company</h2>
             <p>She values proximity without spectacle—close enough to observe, comfortable enough to remain entirely herself.</p>
+    
+            <!-- Personality trait card: Structured daily routine -->
+                    <!-- Emoji icon for the trait -->
           </div>
         </div>
       </div>
@@ -90,9 +110,13 @@
       <div class="card reveal left">
         <div class="split left">
           <div class="emoji">🌙</div>
+                    <!-- Trait title and description -->
           <div>
             <h2>A Measured Routine</h2>
             <p>Most days are structured by familiar rooms, regular walks, and long periods of deliberate rest.</p>
+    
+            <!-- Personality trait card: Careful outdoor exploration -->
+                    <!-- Emoji icon for the trait -->
           </div>
         </div>
       </div>
@@ -101,9 +125,13 @@
       <div class="card reveal right">
         <div class="split right">
           <div class="emoji">🍪</div>
+                    <!-- Trait title and description -->
           <div>
             <h2>Outside, at Her Own Pace</h2>
             <p>New ground is approached carefully. Poppy reads a space before moving through it with confidence.</p>
+    
+            <!-- Personality trait card: Precise observation skills -->
+                    <!-- Emoji icon for the trait -->
           </div>
         </div>
       </div>
@@ -112,9 +140,13 @@
       <div class="card reveal left">
         <div class="split left">
           <div class="emoji">👀</div>
+                    <!-- Trait title and description -->
           <div>
             <h2>Precise Attention</h2>
             <p>Small changes are rarely missed. A different sound, an open gate, or an unfamiliar object receives careful study.</p>
+    
+            <!-- Personality trait card: Memory for places and spaces -->
+                    <!-- Emoji icon for the trait -->
           </div>
         </div>
       </div>
@@ -123,9 +155,13 @@
       <div class="card reveal right">
         <div class="split right">
           <div class="emoji">🚪</div>
+                    <!-- Trait title and description -->
           <div>
             <h2>A Memory for Place</h2>
             <p>Routes, doorways, resting places, and familiar turns are remembered. New spaces become subjects for quiet assessment.</p>
+    
+            <!-- Personality trait card: Rest and sleep importance -->
+                    <!-- Emoji icon for the trait -->
           </div>
         </div>
       </div>
@@ -134,9 +170,13 @@
       <div class="card reveal left">
         <div class="split left">
           <div class="emoji">😴</div>
+                    <!-- Trait title and description -->
           <div>
             <h2>Rest as Routine</h2>
             <p>Long periods of sleep are not interruptions to the day. They are part of its structure and are taken seriously.</p>
+    
+            <!-- Personality trait card: Weather and atmospheric sensitivity -->
+                    <!-- Emoji icon for the trait -->
           </div>
         </div>
       </div>
@@ -145,9 +185,13 @@
       <div class="card reveal right">
         <div class="split right">
           <div class="emoji">🌧️</div>
+                    <!-- Trait title and description -->
           <div>
             <h2>Sensitive to Atmosphere</h2>
             <p>Weather changes the pace of a walk. Wind carries information; rain calls for a more considered route.</p>
+    
+            <!-- Personality trait card: Learning and understanding ability -->
+                    <!-- Emoji icon for the trait -->
           </div>
         </div>
       </div>
@@ -156,9 +200,13 @@
       <div class="card reveal left">
         <div class="split left">
           <div class="emoji">🧠</div>
+                    <!-- Trait title and description -->
           <div>
             <h2>Quiet Intelligence</h2>
             <p>Poppy learns patterns quickly and responds to small cues in voice, posture, timing, and place.</p>
+    
+            <!-- Photo carousel section: scrolling image gallery -->
+            <!-- Carousel track that slides left/right to show different images -->
           </div>
         </div>
       </div>
@@ -167,19 +215,30 @@
       <div>
         <div class="carousel">
           <div class="track" id="track"></div>
+          <!-- Dot navigation buttons to jump to specific images -->
         </div>
         <div class="dots" id="dots"></div>
+    
+        <!-- Page footer with copyright and policy links -->
       </div>
     </section>
     <footer>
       <p>© 2026 Molly &amp; Shaina | <a href="/privacy-policy/">Privacy Policy</a> | <a href="/terms-of-use/">Terms of Use &amp; Request Policies</a></p>
     </footer>
+    
+      <!-- Lightbox modal: enlarged image viewer for gallery photos -->
     <div id="lightbox">
+        <!-- Large image displayed in lightbox -->
       <img id="lightboxImg" alt="Enlarged photo from the Poppy gallery">
+        <!-- Button to close lightbox and return to gallery -->
       <button id="lightboxClose" type="button" aria-label="Close image">X</button>
+    
+      <!-- Load emoji animation system -->
     </div>
     <script src="../js/animations.js"></script>
+      <!-- Load global search functionality -->
     <script src="../js/search.js"></script>
+      <!-- Load carousel image gallery functionality -->
     <script src="../js/carousel.js"></script>
   </body>
 </html>
