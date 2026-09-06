@@ -352,10 +352,12 @@ document.addEventListener("DOMContentLoaded", async () => {
     });
   }
 
+  /* Convert boolean to Yes/No string */
   function yesNo(value) {
     return value ? "Yes" : "No";
   }
 
+  /* Update comparison UI with selected breeds and enable/disable compare button */
   function updateCompareUI(message = "") {
     cards.forEach((card) => {
       const button = card.querySelector(".breed-compare-toggle");
@@ -372,6 +374,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     compareTray.querySelector(".breed-compare-open").disabled = names.length < 2;
   }
 
+  /* Display comparison table in modal dialog */
   function renderComparison() {
     if (!compareDialog) return;
     const selected = [...compared].map((slug) => ({ profile: profiles.get(slug), card: document.getElementById(slug) })).filter((item) => item.profile);
