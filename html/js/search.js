@@ -13,6 +13,7 @@
     return String(value || "").toLowerCase().normalize("NFKD").replace(/[^a-z0-9\s-]/g, " ").replace(/\s+/g, " ").trim();
   }
 
+  /* Convert post to searchable item format */
   function makeBlogItem(post) {
     const title = String(post.title || "Blog post");
     return {
@@ -27,6 +28,7 @@
     };
   }
 
+  /* Load blog posts from API or fallback JSON */
   async function loadBlogItems() {
     let posts = null;
     try {
@@ -42,6 +44,7 @@
     return Array.isArray(posts) ? posts.map(makeBlogItem) : [];
   }
 
+  /* Load dog breed data from JSON */
   async function loadBreedItems() {
     try {
       const response = await fetch("/data/breeds.json", { cache: "force-cache" });
@@ -53,6 +56,7 @@
     }
   }
 
+  /* Build complete searchable index from all data sources */
   async function buildIndex() {
     if (indexPromise) return indexPromise;
     indexPromise = (async () => {
@@ -73,6 +77,7 @@
     return indexPromise;
   }
 
+  /* Calculate relevance score for a search result */
   function score(item, rawQuery) {
     const query = normalise(rawQuery);
     if (!query) return 0;
