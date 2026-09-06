@@ -24,10 +24,15 @@
     <link rel="stylesheet" href="../css/style.css">
   </head>
   <body>
+      <!-- Background styling element -->
     <div class="bg"></div>
+    
+      <!-- Main navigation bar with logo and site menu -->
     <nav>
       <div class="nav-inner">
+          <!-- Mobile hamburger menu toggle button -->
         <button id="navToggle" type="button" aria-label="Toggle menu" aria-expanded="false">☰</button>
+          <!-- Navigation links to all main pages -->
         <div class="nav-links" id="navLinks">
           <a href="/molly/" title="Home"><span>:home:</span></a>
           <a href="/molly-traits/" title="Traits"><span>:traits:</span></a>
@@ -45,29 +50,43 @@
           <a href="/poppy/" title="Poppy"><span>:poppy:</span></a>
           <a href="/geoff/" title="Geoff"><span>:geoff:</span></a>
         </div>
+          <!-- Search button that opens the search overlay -->
         <button id="searchBtn" type="button" aria-label="Open site search">:search:</button>
       </div>
     </nav>
+    
+      <!-- Search overlay: hidden by default, shown when search button clicked -->
     <div id="searchBox" class="hidden">
       <input id="searchInput" placeholder="Search..." />
       <div id="results"></div>
+    
+      <!-- Hero section: page title and subtitle -->
     </div>
     <section class="section hero">
+        <!-- Page title: "Molly's Traits" with animation -->
       <h1 class="reveal left">Molly’s Traits</h1>
+        <!-- Tagline describing page content with animation -->
       <p class="reveal right">A scientific breakdown of vibes, fears, and heroic couch defense.</p>
       <br>
+        <!-- Scroll indicator prompting user to explore more content below -->
       <br>
       <br>
       <br>
       <p class="scroll-down-prompt">↓Scroll Down↓</p>
     </section>
+    
+      <!-- Personality trait card: Skittish behavior -->
     <section class="section">
       <div class="card reveal left">
         <div class="split left">
+                    <!-- Emoji icon for the trait -->
           <div class="emoji">😨</div>
+                    <!-- Trait title and description -->
           <div>
             <h2>Skittish</h2>
             <p>Molly reacts to unexpected sounds as if the universe has personally betrayed her. Crinkling bags, distant footsteps, and the suspicious existence of wind all trigger a full alert response.</p>
+    
+            <!-- Personality trait card: Sleepy nature -->
           </div>
         </div>
       </div>
@@ -75,10 +94,15 @@
     <section class="section">
       <div class="card reveal right">
         <div class="split right">
+                    <!-- Emoji icon for the trait -->
           <div class="emoji">😴</div>
+                    <!-- Trait title and description -->
           <div>
             <h2>Sleepy</h2>
             <p>Naps are her primary occupation. Every surface is evaluated for softness, temperature, and emotional safety before being selected as today’s resting station.</p>
+    
+            <!-- Personality trait card: Helicopter tail spinning -->
+                    <!-- Emoji icon for the trait -->
           </div>
         </div>
       </div>
@@ -87,9 +111,13 @@
       <div class="card reveal left">
         <div class="split left">
           <div class="emoji">🚁</div>
+                    <!-- Trait title and description -->
           <div>
             <h2>Helicopter Tail</h2>
             <p>Her tail spins when excited, confused, or simply existing. It is both a mood indicator and a potential household hazard.</p>
+    
+            <!-- Personality trait card: Contemplative thinking -->
+                    <!-- Emoji icon for the trait -->
           </div>
         </div>
       </div>
@@ -98,9 +126,13 @@
       <div class="card reveal right">
         <div class="split right">
           <div class="emoji">🧠</div>
+                    <!-- Trait title and description -->
           <div>
             <h2>Deep Thinker</h2>
             <p>Molly stares into space contemplating things humans cannot perceive, possibly snacks in alternate dimensions.</p>
+    
+            <!-- Personality trait card: Heightened awareness -->
+                    <!-- Emoji icon for the trait -->
           </div>
         </div>
       </div>
@@ -109,9 +141,13 @@
       <div class="card reveal left">
         <div class="split left">
           <div class="emoji">👀</div>
+                    <!-- Trait title and description -->
           <div>
             <h2>Hyper Aware</h2>
             <p>She notices everything, especially when she is pretending not to.</p>
+    
+            <!-- Personality trait card: Loyalty and companionship -->
+                    <!-- Emoji icon for the trait -->
           </div>
         </div>
       </div>
@@ -120,81 +156,113 @@
       <div class="card reveal right">
         <div class="split right">
           <div class="emoji">❤️</div>
+                    <!-- Trait title and description -->
           <div>
             <h2>Loyal</h2>
             <p>Molly follows her people room to room, guarding them from invisible dangers and loneliness alike.</p>
+    
+            <!-- Comparison chart section: Molly vs other dogs -->
           </div>
         </div>
       </div>
     </section>
     <section class="section">
       <div class="card reveal fade">
+          <!-- Comparison section title -->
         <h2>🐕 Molly vs Other Dogs</h2>
+          <!-- Section description -->
         <p>A highly scientific comparison based on observation, vibes, and hallway patrol data.</p>
+          <!-- Comparison chart container -->
         <div class="compare">
+                    <!-- Row: Bravery comparison bars -->
           <div class="row">
             <span>Bravery</span>
+                        <!-- Bar visualization: two bars showing Molly vs Other dogs -->
             <div class="bars">
+                            <!-- Molly's bravery score bar -->
               <div class="bar">
                 <div class="fill molly" style="width:30%"></div>
+                            <!-- Other dogs' bravery score bar -->
               </div>
               <div class="bar">
                 <div class="fill other" style="width:80%"></div>
+                        <!-- Row: Nap Skill comparison bars -->
               </div>
             </div>
           </div>
           <div class="row">
             <span>Nap Skill</span>
+                        <!-- Bar visualization: two bars showing Molly vs Other dogs -->
+                          <!-- Molly's nap skill score bar -->
             <div class="bars">
               <div class="bar">
                 <div class="fill molly" style="width:95%"></div>
+                            <!-- Other dogs' nap skill score bar -->
               </div>
               <div class="bar">
                 <div class="fill other" style="width:60%"></div>
+                        <!-- Row: Snack Detection comparison bars -->
               </div>
             </div>
           </div>
           <div class="row">
             <span>Snack Detection</span>
+                        <!-- Bar visualization: two bars showing Molly vs Other dogs -->
+                          <!-- Molly's snack detection score bar -->
             <div class="bars">
               <div class="bar">
                 <div class="fill molly" style="width:90%"></div>
+                            <!-- Other dogs' snack detection score bar -->
               </div>
               <div class="bar">
                 <div class="fill other" style="width:50%"></div>
+                        <!-- Row: Noise Tolerance comparison bars -->
               </div>
             </div>
           </div>
           <div class="row">
             <span>Noise Tolerance</span>
+                        <!-- Bar visualization: two bars showing Molly vs Other dogs -->
+                          <!-- Molly's noise tolerance score bar -->
             <div class="bars">
               <div class="bar">
                 <div class="fill molly" style="width:20%"></div>
+                            <!-- Other dogs' noise tolerance score bar -->
               </div>
               <div class="bar">
                 <div class="fill other" style="width:75%"></div>
+                        <!-- Row: Judgment ability comparison bars -->
               </div>
             </div>
           </div>
           <div class="row">
             <span>Judgment</span>
+                        <!-- Bar visualization: two bars showing Molly vs Other dogs -->
+                          <!-- Molly's judgment score bar -->
             <div class="bars">
               <div class="bar">
                 <div class="fill molly" style="width:85%"></div>
+                            <!-- Other dogs' judgment score bar -->
               </div>
               <div class="bar">
                 <div class="fill other" style="width:40%"></div>
+                <!-- Conclusion text summarizing Molly's traits -->
               </div>
             </div>
           </div>
         </div>
         <p style="margin-top:30px; color:#aaa;">Conclusion: Molly excels at naps and emotional awareness, but remains suspicious of most inanimate objects.</p>
+    
+        <!-- Page footer with copyright and policy links -->
       </div>
     </section>
     <footer>
       <p>© 2026 Molly &amp; Shaina | <a href="/privacy-policy/">Privacy Policy</a> | <a href="/terms-of-use/">Terms of Use &amp; Request Policies</a></p>
     </footer>
+    
+      <!-- Load emoji animation system -->
     <script src="../js/animations.js"></script>
+      <!-- Load global search functionality -->
     <script src="../js/search.js"></script>
   </body>
 </html>
