@@ -487,6 +487,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     sorted.forEach((card) => results.appendChild(card));
   }
 
+  /* Filter and display cards based on search query, filters, and favorites */
   function applyFilters() {
     const query = search.value.trim().toLowerCase();
     const showingWholeList = !favoritesOnly && !query && activeFilters.size === 0;
@@ -511,6 +512,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
   }
 
+  /* Toggle expanded detail view for a breed card */
   function toggleCard(card) {
     const expanded = card.classList.toggle("expanded");
     card.setAttribute("aria-expanded", String(expanded));
