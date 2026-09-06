@@ -1,11 +1,14 @@
+/* Global search across blog posts, dog breeds, pages, and comics */
 (function () {
   "use strict";
   if (window.MSSearchBooted) return;
   window.MSSearchBooted = true;
 
+  /* Search index cache and currently selected result */
   let indexPromise = null;
   let selectedIndex = 0;
 
+  /* Normalize text for consistent search matching */
   function normalise(value) {
     return String(value || "").toLowerCase().normalize("NFKD").replace(/[^a-z0-9\s-]/g, " ").replace(/\s+/g, " ").trim();
   }

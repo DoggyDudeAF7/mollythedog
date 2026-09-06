@@ -1,9 +1,12 @@
+/* Image carousel with lightbox: rotates photos, navigates via keyboard/dots */
 document.addEventListener("DOMContentLoaded", async () => {
+  /* Get carousel track and dot navigation container */
   const track = document.getElementById("track");
   const dotsWrap = document.getElementById("dots");
 
   if (!track || !dotsWrap) return;
 
+  /* Detect which dog character's photos to load */
   const pageTitle = document.querySelector("h1")?.textContent?.toLowerCase() || "";
   const isShaina = pageTitle.includes("shaina");
   const isPoppy = pageTitle.includes("poppy");
