@@ -12,6 +12,7 @@ function escapeHtml(value) {
   }[char]));
 }
 
+/* Render blog posts as HTML articles with safe HTML escaping */
 function renderPosts(posts) {
   if (!postsContainer) return;
 

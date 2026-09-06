@@ -1,6 +1,7 @@
 (function () {
   "use strict";
 
+  /* Get DOM elements for merchandise grid and dialog */
   const grid = document.getElementById("merchGrid");
   const empty = document.getElementById("merchEmpty");
   const dialog = document.getElementById("merchProductDialog");
@@ -22,6 +23,7 @@
   const closeButton = dialog.querySelector("[data-dialog-close]");
   let selectedProduct = null;
 
+  /* Update product count display across the page */
   function updateBagCounts(bag = bagApi.load()) {
     const amount = bagApi.count(bag);
     document.querySelectorAll("[data-bag-count]").forEach((counter) => {
@@ -29,6 +31,7 @@
     });
   }
 
+  /* Display product details in modal dialog */
   function openProduct(product) {
     selectedProduct = product;
     dialogImage.src = product.image;
