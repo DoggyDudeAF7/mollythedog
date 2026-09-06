@@ -256,10 +256,12 @@ document.addEventListener("DOMContentLoaded", async () => {
     };
   }
 
+  /* Check if a breed is in user's saved favorites */
   function isFavourite(id) {
     return favouriteAPI ? favouriteAPI.has(`breed:${id}`) : false;
   }
 
+  /* Update favorite button UI based on current favorites */
   function syncFavoriteButtons() {
     cards.forEach((card) => {
       const button = card.querySelector(".breed-favorite");
@@ -278,10 +280,12 @@ document.addEventListener("DOMContentLoaded", async () => {
     });
   }
 
+  /* Render a rating bar with label and percentage */
   function rating(label, value) {
     return `<div class="breed-rating"><span>${label}</span><div><i style="width:${value}%"></i></div><strong>${value}%</strong></div>`;
   }
 
+  /* Add click handlers and detail panels to breed cards */
   function setupCards() {
     cards.forEach((card) => {
       const profile = profiles.get(card.id);
