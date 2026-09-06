@@ -1,4 +1,6 @@
+/* Load animated emoji and system scripts for site */
 (function () {
+  /* Locate this script to determine the site root directory */
   var scriptElement = document.currentScript;
   var scriptElements;
   var scriptIndex;
@@ -74,6 +76,7 @@
     }
   }
 
+  /* Define emoji-to-image mappings for dog characters and page icons */
   var dogEmojiData = {
     molly: {
       alt: "Molly",
