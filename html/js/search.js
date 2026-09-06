@@ -183,6 +183,7 @@
     window.renderDogEmojis?.(results);
   }
 
+  /* Retrieve recent searches from browser localStorage */
   function readRecent() {
     try {
       const recent = JSON.parse(localStorage.getItem("msRecentSearches") || "[]");
@@ -192,11 +193,13 @@
     }
   }
 
+  /* Save search result ID to recent searches in localStorage */
   function remember(id) {
     const recent = [id, ...readRecent().filter((item) => item !== id)].slice(0, 6);
     try { localStorage.setItem("msRecentSearches", JSON.stringify(recent)); } catch {}
   }
 
+  /* Initialize search system and attach event listeners */
   async function boot() {
     if (/^\/404(?:\/|$)/.test(location.pathname) || /^404\b/.test(document.title)) return;
     await (window.MSSystemsReady || Promise.resolve());
