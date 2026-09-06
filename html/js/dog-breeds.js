@@ -1,11 +1,16 @@
+/* Dog breed database: search, filter, sort, compare, favorites, and breed-of-the-day feature */
 document.addEventListener("DOMContentLoaded", async () => {
+  /* Wait for global systems to load */
   await (window.MSSystemsReady || Promise.resolve());
 
+  /* Get DOM elements for breed display and filtering */
   const results = document.getElementById("breedResults");
   const menu = document.getElementById("breedMenu");
   const search = document.getElementById("breedSearch");
   const counter = document.getElementById("breedCounter");
   const favoriteToggle = document.getElementById("favoriteToggle");
+  
+  /* Breed of the Day feature elements */
   const breedOfDay = document.getElementById("breedOfDay");
   const breedOfDayImage = document.getElementById("breedOfDayImage");
   const breedOfDayName = document.getElementById("breedOfDayName");
