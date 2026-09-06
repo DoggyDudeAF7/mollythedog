@@ -18,11 +18,14 @@
   <body>
     <div class="feed-bg" aria-hidden="true"></div>
 
+  <!-- Decorative background element -->
     <header class="feed-header">
+        <!-- Site branding logo and home link -->
       <a class="feed-brand" href="./" aria-label="Molly and Shaina home">
         <span>:molly:</span>
         <strong>Molly &amp; Shaina</strong>
       </a>
+        <!-- Navigation to main site sections and search -->
       <nav aria-label="Main destinations">
         <a href="/molly/">Main Site</a>
         <a href="/blog/">Blog</a>
@@ -31,77 +34,102 @@
         <a href="/merch/">Merch</a>
         <a href="/poppy/">Poppy</a>
         <a href="/geoff/">Geoff</a>
+          <!-- Search trigger button -->
         <button id="searchBtn" class="ms-search-launch ms-header-search" type="button" aria-label="Open site search">:search:</button>
       </nav>
     </header>
 
+  <!-- Main content area -->
     <main class="feed-shell">
+        <!-- Hero section: page title and tagline -->
       <section class="feed-hero" aria-labelledby="homeTitle">
         <p class="feed-eyebrow">Fresh from dog headquarters</p>
         <h1 id="homeTitle">The Daily Dog Feed</h1>
         <p>New stories, suspicious behaviour, and one excellent dog selected for official daily recognition.</p>
       </section>
 
+  <!-- Grid of featured content cards -->
       <section class="feed-grid" aria-label="Latest from the site">
+          <!-- Latest Comic card -->
         <article class="feed-card comic-card">
           <div class="card-copy">
             <p class="card-label">Latest Comic</p>
             <h2 id="latestComicTitle">The Great Zoom Meeting</h2>
             <p id="latestComicText">Molly and Shaina discover the webcam and immediately improve the meeting.</p>
+                        <!-- Link to read the comic story -->
             <a class="card-action" id="latestComicLink" href="../comic-viewer/?q=zoom">Read the comic</a>
           </div>
+                    <!-- Comic cover image -->
           <img id="latestComicImage" src="../images/comics/zoom-cover.webp" alt="Front cover for The Great Zoom Meeting">
         </article>
 
+  <!-- Latest Blog Post card -->
         <article class="feed-card blog-card">
           <p class="card-label">Latest Blog Post</p>
+                    <!-- Blog post metadata: category tag and date -->
           <p class="post-meta">
             <span id="latestPostTag">Update</span>
             <span id="latestPostDate">Loading…</span>
           </p>
+                    <!-- Blog post title, summary, and link (populated by JavaScript) -->
           <h2 id="latestPostTitle">Checking the blog</h2>
           <p id="latestPostBody">The newest note from Molly and Shaina headquarters is loading.</p>
           <a class="card-action" href="/blog/">Read the blog</a>
         </article>
 
+  <!-- Photo of the Day card -->
         <article class="feed-card photo-card">
+                    <!-- Card header with title and shuffle button -->
           <div class="card-topline">
             <div>
               <p class="card-label">Photo of the Day</p>
               <h2>Today's dog moment</h2>
+                        <!-- Button to load a different random photo -->
             </div>
             <button id="shufflePhoto" type="button">Shuffle another</button>
+                    <!-- Random photo image and link to gallery -->
           </div>
           <a id="randomPhotoLink" href="../molly-gallery/" aria-label="Open the gallery for this photo">
             <img id="randomPhoto" src="../images/molly/both1.webp" alt="Molly and Shaina together">
+                    <!-- Photo caption describing the image -->
           </a>
           <p class="photo-caption" id="randomPhotoCaption">Molly and Shaina together.</p>
         </article>
 
+  <!-- Breed of the Day card -->
         <article class="feed-card dog-card" aria-label="Breed of the day">
+                    <!-- Breed image (emoji or photo) -->
           <div class="breed-of-day-image">
             <img id="dogImage" src="../images/emoji/breeds-emoji.webp" alt="Dog breeds">
+                    <!-- Breed information and details -->
           </div>
           <div class="breed-of-day-copy">
             <p class="breed-kicker">Breed Of The Day</p>
+                        <!-- Breed name (populated by JavaScript) -->
             <h2 id="dogName">Loading...</h2>
+                        <!-- Short breed description (populated by JavaScript) -->
             <p id="dogDescription">Finding today’s breed.</p>
+                        <!-- Energy level meter bar -->
             <div class="breed-meter" aria-label="Breed of the day energy">
               <span id="dogMeter"></span>
+                        <!-- Breed metadata: match score and energy level -->
             </div>
             <div class="breed-meta">
               <span id="dogMatch">Daily pick</span>
               <span id="dogEnergy">Energy</span>
+                        <!-- Link to view full breed details -->
             </div>
             <a class="breed-daily-jump" id="dogLink" href="../molly-dog-breeds/">View Breed</a>
           </div>
         </article>
       </section>
 
+  <!-- Explore more links section: promotes other site areas -->
       <section class="explore-strip" aria-labelledby="exploreTitle">
         <div>
           <p class="feed-eyebrow">Keep exploring</p>
           <h2 id="exploreTitle">There is plenty more behind the feed.</h2>
+          <!-- Grid of links to other major sections -->
         </div>
         <div class="explore-links">
           <a href="../molly-gallery/"><span>:gallery:</span> Galleries</a>
@@ -114,17 +142,24 @@
       </section>
     </main>
 
+  <!-- Page footer with copyright and policy links -->
     <footer>
       <p>© 2026 Molly &amp; Shaina | <a href="/privacy-policy/">Privacy Policy</a> | <a href="/terms-of-use/">Terms of Use &amp; Request Policies</a></p>
     </footer>
 
+  <!-- Secret Easter egg: hidden trigger button for sound -->
     <button class="home-secret-trigger" id="homeSecretTrigger" type="button" aria-label="Open hidden sound"></button>
+    
+      <!-- Secret Easter egg: modal dialog with hidden sound feature -->
     <dialog class="home-secret-dialog" id="homeSecretDialog" aria-labelledby="homeSecretTitle">
+        <!-- Close button for the modal -->
       <button class="home-secret-close" id="homeSecretClose" type="button" aria-label="Close hidden sound">×</button>
+        <!-- Decorative mark indicating hidden content unlocked -->
       <div class="home-secret-mark" aria-hidden="true">✦</div>
       <p class="home-secret-label">Secret unlocked</p>
       <h2 id="homeSecretTitle">You found the sound</h2>
       <p class="home-secret-hint">Press the button to play it.</p>
+        <!-- Embedded sound player from external source -->
       <div class="home-secret-embed">
         <iframe
           width="110"
@@ -138,8 +173,11 @@
       </div>
     </dialog>
 
+  <!-- Load emoji animation system -->
     <script src="../js/animations.js"></script>
+      <!-- Load homepage-specific functionality: latest posts, photos, breed of day -->
     <script src="../js/home-feed.js"></script>
+      <!-- Load secret easter egg interaction handler -->
     <script src="../js/home-secret.js"></script>
   </body>
 </html>
