@@ -26,8 +26,10 @@
       /\/blog\/admin(?:\/|$)|\/preview(?:\/|$)|\/site-access(?:\/|$)|\/404(?:\/|$)/.test(location.pathname) ||
       /^404\b/.test(document.title);
 
+    /* Load a system script dynamically if not already loaded */
     function loadSystemScript(filename) {
       return new Promise(function (resolve) {
+        /* Check if script is already loaded */
         var alreadyLoaded = Array.prototype.some.call(document.scripts, function (item) {
           return item.src && item.src.split(/[?#]/)[0].endsWith("/js/" + filename);
         });
@@ -173,6 +175,7 @@
     TEMPLATE: true
   };
 
+  /* Check if node is inside an excluded tag (code, script, form input, etc) */
   function isExcluded(node, boundary) {
     var parent = node.parentNode;
 
@@ -197,6 +200,7 @@
     return false;
   }
 
+  /* Build emoji HTML element from emoji name and metadata */
   function createDogEmoji(name) {
     var data = dogEmojiData[name];
     var extension = data.extension || "webp";
