@@ -98,6 +98,7 @@
     return words.every((word) => haystack.includes(word)) ? value : 0;
   }
 
+  /* Create or retrieve search overlay UI */
   function createOverlay() {
     let searchBox = document.getElementById("searchBox");
     if (!searchBox) {
@@ -117,6 +118,7 @@
     return searchBox;
   }
 
+  /* Create search button if not present in navigation */
   function createFallbackButton() {
     let button = document.getElementById("searchBtn");
     if (button) return button;
@@ -136,6 +138,7 @@
     return button;
   }
 
+  /* Display message in search results (e.g., "No results found") */
   function renderMessage(results, message) {
     results.innerHTML = "";
     const empty = document.createElement("div");
@@ -144,6 +147,7 @@
     results.appendChild(empty);
   }
 
+  /* Render search results as clickable links */
   function renderResults(results, matches) {
     results.innerHTML = "";
     selectedIndex = 0;
