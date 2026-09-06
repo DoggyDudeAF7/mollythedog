@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="16 playable Molly & Shaina minigames. Catch treats, solve photo puzzles, earn Dog Coins and take on the Ultimate Dog Challenge.">
+  <meta name="theme-color" content="#090910">
+  <title>The Arcade · Molly &amp; Shaina</title>
+  <link rel="icon" href="/favicon.ico">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/arcade.css">
+</head>
+<body class="arcade-page">
+  <div class="bg" aria-hidden="true"></div>
+  <a class="skip-link" href="#arcade-main">Skip to games</a>
+    <nav>
+      <div class="nav-inner">
+        <button id="navToggle" type="button" aria-label="Toggle menu" aria-expanded="false">☰</button>
+        <div class="nav-links" id="navLinks">
+          <a href="/molly/" title="Home"><span>:home:</span></a>
+          <a href="/molly-traits/" title="Traits"><span>:traits:</span></a>
+          <a href="/molly-habits/" title="Habits"><span>:habits:</span></a>
+          <a href="/molly-mind/" title="Mind"><span>:mind:</span></a>
+          <a href="/molly-gallery/" title="Gallery"><span>:gallery:</span></a>
+          <a href="/molly-faq/" title="FAQ"><span>:faq:</span></a>
+          <a href="/molly-dog-breeds/" title="Breeds"><span>:breeds:</span></a>
+          <a href="/comics/" title="Comics"><span>:comics:</span></a>
+          <a href="/blog/" title="Blog"><span>:blog:</span></a>
+          <a href="/games/" title="Arcade" aria-current="page"><span>🎮</span></a>
+          <a href="/merch/" title="Merch"><span>🏷️</span></a>
+          <a href="/about-me/" title="About the Human"><span>:about:</span></a>
+          <a href="/shaina/" title="Shaina"><span>:shaina:</span></a>
+          <a href="/poppy/" title="Poppy"><span>:poppy:</span></a>
+          <a href="/geoff/" title="Geoff"><span>:geoff:</span></a>
+        </div>
+        <button id="searchBtn" type="button" aria-label="Open site search">:search:</button>
+      </div>
+    </nav>
+    <div id="searchBox" class="hidden">
+      <input id="searchInput" placeholder="Search..." aria-label="Search the site">
+      <div id="results"></div>
+    </div>
+  <main id="arcade-main" class="arcade-shell">
+    <div class="arcade-toolbar">
+      <a href="/games/" class="arcade-wordmark">PLAY DEPARTMENT <span> / 16 GAMES</span></a>
+      <div class="arcade-wallet"><span class="coin-symbol" aria-hidden="true">✦</span><strong id="coin-balance">0</strong> Dog Coins</div>
+      <button id="mute-toggle" class="quiet-button" type="button" aria-pressed="true">Sound off</button>
+    </div>
+    <p id="storage-warning" class="storage-warning" role="status" hidden>Browser saving is unavailable. You can still play; progress will last for this visit.</p>
+    <div id="hub-view">
+      <section class="arcade-hero" aria-labelledby="arcade-title">
+        <div class="hero-copy"><p class="feed-eyebrow">Officially approved. Mildly supervised.</p><h1 id="arcade-title">Small games.<br><span>Big dog energy.</span></h1><p>Welcome to the Molly &amp; Shaina Arcade. Sixteen little adventures, two very good dogs, and absolutely no shortage of treats.</p><a class="primary-button" href="#memory-match">Let’s play <span>↗</span></a></div>
+        <div class="hero-photo"><img src="/images/molly/both1.webp" alt="Molly and Shaina resting together"><span class="photo-stamp">YOUR HOSTS<br><strong>Molly + Shaina</strong></span></div>
+      </section>
+      <section class="arcade-progress" aria-label="Your arcade progress"><div><strong id="played-count">0 / 16</strong><span>games explored</span></div><div><strong id="win-count">0</strong><span>challenges won</span></div><div><strong id="badge-count">0 / 8</strong><span>achievements</span></div><p>Made for a quick break.<br>Saved for your next one.</p></section>
+      <section aria-labelledby="all-games-title"><div class="section-heading"><div><p class="feed-eyebrow">Pick your next obsession</p><h2 id="all-games-title">The game shelf</h2></div><div class="game-filters" role="group" aria-label="Filter games"><button type="button" data-filter="All" aria-pressed="true">All 16</button><button type="button" data-filter="Quick paws" aria-pressed="false">Quick paws</button><button type="button" data-filter="Brain games" aria-pressed="false">Brain games</button><button type="button" data-filter="Play & create" aria-pressed="false">Play & create</button></div></div><div id="game-cards" class="arcade-cards"></div></section>
+      <section class="badge-section" aria-labelledby="badges-title"><div class="section-heading"><div><p class="feed-eyebrow">Little wins count</p><h2 id="badges-title">Your trophy shelf</h2></div><a href="/achievements/">Site achievements ↗</a></div><div id="arcade-badges" class="badge-grid"></div><p class="save-note">Dog Coins are earned in play: up to 20 for your score, 15 for a win, and 10 for each new achievement. Personal bests, trophies, sound and drawings stay in this browser. No sign-in needed.</p></section>
+    </div>
+    <section id="player-view" hidden aria-labelledby="game-title">
+      <div class="player-heading"><a href="/games/" id="back-to-arcade">← All games</a><p id="game-category"></p></div>
+      <h1 id="game-title" tabindex="-1"></h1><p id="game-description"></p>
+      <div class="game-shell"><div class="game-topbar"><div id="game-hud" aria-label="Game statistics"></div><div class="session-controls"><button id="pause-game" class="quiet-button" type="button" hidden>Pause</button><button id="restart-game" class="quiet-button" type="button" hidden>Restart</button></div></div><p id="game-status" class="game-status" role="status" aria-live="polite"></p><div id="game-stage" class="game-stage"></div><div id="pause-cover" class="pause-cover" hidden><h2>Taking a breather.</h2><p>Your game is paused.</p><button type="button" id="resume-game" class="primary-button">Keep playing</button></div></div>
+      <p class="control-note">Every game supports touch and keyboard. Pause any time; switching tabs pauses automatically.</p>
+    </section>
+    <noscript><p>Please enable JavaScript to play the arcade games.</p></noscript>
+  </main>
+  <footer><p>© 2026 Molly &amp; Shaina | <a href="/privacy-policy/">Privacy Policy</a> | <a href="/terms-of-use/">Terms of Use &amp; Request Policies</a></p></footer>
+  <div id="arcade-toast" role="status" aria-live="polite"></div>
+  <script src="/js/animations.js"></script>
+  <script type="module" src="/js/arcade/app.js"></script>
+</body>
+</html>
