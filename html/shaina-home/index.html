@@ -24,10 +24,15 @@
     <link rel="stylesheet" href="../css/style.css">
   </head>
   <body>
+      <!-- Background styling element -->
     <div class="bg"></div>
+    
+      <!-- Main navigation bar with logo and site menu -->
     <nav>
       <div class="nav-inner">
+          <!-- Mobile hamburger menu toggle button -->
         <button id="navToggle" type="button" aria-label="Toggle menu" aria-expanded="false">☰</button>
+          <!-- Navigation links to all main pages (Molly site primarily) -->
         <div class="nav-links" id="navLinks">
           <a href="/molly/" title="Home"><span>:home:</span></a>
           <a href="/molly-traits/" title="Traits"><span>:traits:</span></a>
@@ -45,30 +50,42 @@
           <a href="/poppy/" title="Poppy"><span>:poppy:</span></a>
           <a href="/geoff/" title="Geoff"><span>:geoff:</span></a>
         </div>
+          <!-- Search button that opens the search overlay -->
         <button id="searchBtn" type="button" aria-label="Open site search">:search:</button>
       </div>
     </nav>
+    
+      <!-- Search overlay: hidden by default, shown when search button clicked -->
     <div id="searchBox" class="hidden">
       <input id="searchInput" placeholder="Search..." />
       <div id="results"></div>
+    
+      <!-- Hero section: main headline, tagline, and large portrait image -->
     </div>
     <section class="section hero">
       <h1>Shaina</h1>
       <p>Alert. Fast. Snack driven. The whole site is hers now.</p>
       <img src="../images/shaina/shaina.webp" class="hero-img" alt="Shaina, a small white dog, looking at the camera">
       <br>
+        <!-- Scroll indicator prompting user to explore more content below -->
       <br>
       <br>
       <br>
       <p class="scroll-down-prompt">↓Scroll Down↓</p>
     </section>
+    
+      <!-- Personality trait card: introducing Shaina's site structure -->
     <section class="section">
       <div class="card reveal left">
         <div class="split left">
+                    <!-- Emoji icon for the trait -->
           <div class="emoji">🏁</div>
+                    <!-- Trait title and description -->
           <div>
             <h2>Shaina Home Base</h2>
             <p>This is Shaina's version of the Molly site: her home page, her traits, her habits, her thoughts, her gallery, and her FAQ.</p>
+    
+            <!-- Personality trait card: Alert and observant nature -->
           </div>
         </div>
       </div>
@@ -76,10 +93,15 @@
     <section class="section">
       <div class="card reveal right">
         <div class="split right">
+                    <!-- Emoji icon for the trait -->
           <div class="emoji">👂</div>
+                    <!-- Trait title and description -->
           <div>
             <h2>Always On Alert</h2>
             <p>Shaina notices the small things first: footsteps, wrappers, doors, weather changes, and any suspicious movement that might involve snacks.</p>
+    
+            <!-- Personality trait card: Brief comparison to Molly -->
+                    <!-- Emoji icon for the trait -->
           </div>
         </div>
       </div>
@@ -88,12 +110,17 @@
       <div class="card reveal left">
         <div class="split left">
           <div class="emoji">🐾</div>
+                    <!-- Trait title and description with link -->
           <div>
             <h2>Molly Summary</h2>
             <p>Molly is still the original sleepy window-watcher: skittish, loyal, snack-aware, and powered mostly by naps. This Shaina site gives her a respectful one-page nod.</p>
+                        <!-- Link back to Molly's site -->
             <p>
               <a class="feature-link" href="../molly/">Back to Molly's original site</a>
             </p>
+    
+            <!-- Photo carousel section: scrolling image gallery -->
+            <!-- Carousel track that slides left/right to show different images -->
           </div>
         </div>
       </div>
@@ -102,19 +129,30 @@
       <div>
         <div class="carousel">
           <div class="track" id="track"></div>
+          <!-- Dot navigation buttons to jump to specific images -->
         </div>
         <div class="dots" id="dots"></div>
+    
+        <!-- Page footer with copyright and policy links -->
       </div>
     </section>
     <footer>
       <p>© 2026 Molly &amp; Shaina | <a href="/privacy-policy/">Privacy Policy</a> | <a href="/terms-of-use/">Terms of Use &amp; Request Policies</a></p>
     </footer>
+    
+      <!-- Lightbox modal: enlarged image viewer for gallery photos -->
     <div id="lightbox">
+        <!-- Large image displayed in lightbox -->
       <img id="lightboxImg" alt="Enlarged photo from the Shaina gallery">
+        <!-- Button to close lightbox and return to gallery -->
       <button id="lightboxClose" type="button" aria-label="Close image">X</button>
+    
+      <!-- Load emoji animation system -->
     </div>
     <script src="../js/animations.js"></script>
+      <!-- Load global search functionality -->
     <script src="../js/search.js"></script>
+      <!-- Load carousel image gallery functionality -->
     <script src="../js/carousel.js"></script>
   </body>
 </html>
