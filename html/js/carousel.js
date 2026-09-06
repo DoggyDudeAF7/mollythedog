@@ -46,6 +46,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
   }
 
+  /* Try candidate image sources in order until one loads */
   function attachFallbacks(img, candidates) {
     let current = 0;
     img.src = candidates[current];
@@ -57,6 +58,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     };
   }
 
+  /* Create and show lightbox overlay with enlarged image */
   function openLightbox(src, alt) {
     let lightbox = document.getElementById("lightbox");
     let lightboxImg = document.getElementById("lightboxImg");
@@ -125,6 +127,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   index = middleIndex;
 
+  /* Calculate pixel width of a single slide including margins */
   function getSlideStep() {
     const slide = slides[0];
     const styles = window.getComputedStyle(slide);
@@ -133,6 +136,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     return slide.offsetWidth + marginLeft + marginRight;
   }
 
+  /* Update carousel position and animation timing */
   function moveTrack(animate = true) {
     if (!slides[index]) return;
 
@@ -170,6 +174,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
   }
 
+  /* Recenter track if carousel drifted past visible buffer zone */
   function normalizeIndex() {
     const real = ((index % images.length) + images.length) % images.length;
     if (index < images.length * 2 || index > slides.length - images.length * 2) {
@@ -178,10 +183,12 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
   }
 
+  /* Refresh carousel position (called on resize/orientation change) */
   function update() {
     moveTrack(true);
   }
 
+  /* Advance carousel to next slide */
   function next() {
     index++;
     update();
