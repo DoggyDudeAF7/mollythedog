@@ -1,6 +1,8 @@
+/* Site-wide data: page catalog, comics, photos, and utilities */
 (function () {
   "use strict";
 
+  /* Convert text to URL-safe slugs */
   function slugify(value) {
     return String(value || "item")
       .toLowerCase()
@@ -9,6 +11,7 @@
       .replace(/^-+|-+$/g, "");
   }
 
+  /* Catalog of all public pages: id, title, description, type, icon, URL, keywords */
   const pages = [
     ["page:home", "The Daily Dog Feed", "Latest comics, blog posts, photos, and the Breed of the Day.", "Page", ":home:", "/home/", "homepage latest daily"],
     ["molly:home", "Molly", "Skittish, sleepy, helicopter-tailed, and powered by naps and suspicion.", "Molly", ":molly:", "/molly/", "dog home"],
@@ -49,6 +52,7 @@
     ["page:achievements", "Achievements", "Explore your unlocked and hidden Molly and Shaina achievements.", "Page", "🏆", "/achievements/", "progress trophies" ]
   ].map(([id, title, description, type, icon, url, keywords]) => ({ id, title, description, type, icon, url, keywords }));
 
+  /* Comic series data: slug, title, description, and cover image */
   const comics = [
     ["kibble", "The Great Kibble Incident", "One open bag becomes a feast, a regret, and a very supervised recovery.", "kibble-cover.webp"],
     ["paint", "The Great Paint Disaster", "A blank canvas becomes modern art after paint, panic, and framing.", "paint-cover.webp"],
