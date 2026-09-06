@@ -1,6 +1,8 @@
+/* Gallery: load photos, filter by dog and category, shuffle display */
 (async function () {
   "use strict";
 
+  /* Get all gallery grid elements */
   const grids = [...document.querySelectorAll(".grid[data-gallery], .grid.gallery-grid")];
   if (!grids.length) return;
 
@@ -26,6 +28,7 @@
     } catch {}
   }));
 
+  /* Determine which dog and category a photo belongs to */
   function detailsFor(image) {
     const text = `${image.alt} ${image.src}`.toLowerCase();
     const dog = text.includes("molly") && text.includes("shaina") || text.includes("both")
@@ -39,6 +42,7 @@
     return { dog, category };
   }
 
+  /* Wrap image in figure with metadata and caption */
   function prepareItem(image) {
     if (image.closest(".gallery-item")) return image.closest(".gallery-item");
     const { dog, category } = detailsFor(image);
