@@ -24,10 +24,16 @@
     <link rel="stylesheet" href="../css/style.css">
   </head>
   <body>
+    <!-- Background styling element -->
     <div class="bg"></div>
+    
+    <!-- Main navigation bar with logo and site menu -->
     <nav>
       <div class="nav-inner">
+        <!-- Mobile hamburger menu toggle button -->
         <button id="navToggle" type="button" aria-label="Toggle menu" aria-expanded="false">☰</button>
+        
+        <!-- Navigation links to all main pages and characters -->
         <div class="nav-links" id="navLinks">
           <a href="/molly/" title="Home"><span>:home:</span></a>
           <a href="/molly-traits/" title="Traits"><span>:traits:</span></a>
@@ -45,14 +51,20 @@
           <a href="/poppy/" title="Poppy"><span>:poppy:</span></a>
           <a href="/geoff/" title="Geoff"><span>:geoff:</span></a>
         </div>
+        
+        <!-- Search button that opens the search overlay -->
         <button id="searchBtn" type="button" aria-label="Open site search">:search:</button>
       </div>
     </nav>
-    <!-- SEARCH BOX MUST BE OUTSIDE NAV -->
+    
+    <!-- Search overlay: hidden by default, shown when search button clicked -->
+    <!-- Placed outside nav for z-index and modal layering -->
     <div id="searchBox" class="hidden">
       <input id="searchInput" placeholder="Search..." />
       <div id="results"></div>
     </div>
+    
+    <!-- Hero section: main headline, tagline, and large portrait image -->
     <section class="section hero">
       <h1>Molly</h1>
       <p>Skittish. Sleepy. Helicopter tail. Powered by naps and paranoia.</p>
@@ -61,12 +73,17 @@
       <br>
       <br>
       <br>
+      <!-- Scroll indicator prompting user to explore more content below -->
       <p class="scroll-down-prompt">↓Scroll Down↓</p>
     </section>
+    
+    <!-- Personality trait card: Window Watcher habit -->
     <section class="section">
       <div class="card reveal left">
         <div class="split left">
+          <!-- Emoji icon for the trait -->
           <div class="emoji">🪟</div>
+          <!-- Trait title and description -->
           <div>
             <h2>Window Watcher</h2>
             <p>Constant surveillance of birds, leaves, and suspicious outdoor movement. Nothing escapes unnoticed.</p>
@@ -74,10 +91,14 @@
         </div>
       </div>
     </section>
+    
+    <!-- Personality trait card: Blanket Architect habit -->
     <section class="section">
       <div class="card reveal right">
         <div class="split right">
+          <!-- Emoji icon for the trait -->
           <div class="emoji">🛏️</div>
+          <!-- Trait title and description -->
           <div>
             <h2>Architect of Blankets</h2>
             <p>Every blanket must be rearranged into the optimal comfort structure. Geometry is optional, coziness is mandatory.</p>
@@ -85,10 +106,14 @@
         </div>
       </div>
     </section>
+    
+    <!-- Personality trait card: Midnight Sprint behavior -->
     <section class="section">
       <div class="card reveal left">
         <div class="split left">
+          <!-- Emoji icon for the trait -->
           <div class="emoji">🌙</div>
+          <!-- Trait title and description -->
           <div>
             <h2>Midnight Sprint Ritual</h2>
             <p>Sudden bursts of hallway speed at 3AM for unknown reasons. Possibly training for invisible battles.</p>
@@ -96,10 +121,14 @@
         </div>
       </div>
     </section>
+    
+    <!-- Personality trait card: Snack Detection ability -->
     <section class="section">
       <div class="card reveal right">
         <div class="split right">
+          <!-- Emoji icon for the trait -->
           <div class="emoji">🍪</div>
+          <!-- Trait title and description -->
           <div>
             <h2>Snack Detection System</h2>
             <p>Detects food-related activity instantly. Packaging sounds are interpreted as emergency alerts.</p>
@@ -107,10 +136,14 @@
         </div>
       </div>
     </section>
+    
+    <!-- Personality trait card: Awareness and anxiety trait -->
     <section class="section">
       <div class="card reveal left">
         <div class="split left">
+          <!-- Emoji icon for the trait -->
           <div class="emoji">👀</div>
+          <!-- Trait title and description -->
           <div>
             <h2>Hyper Awareness Mode</h2>
             <p>Molly notices everything — especially things that are not supposed to move. Even silence feels suspicious.</p>
