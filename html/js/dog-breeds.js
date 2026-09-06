@@ -168,18 +168,22 @@ document.addEventListener("DOMContentLoaded", async () => {
     ...["beagle", "chesapeake-bay-retriever", "curly-coated-retriever", "english-setter", "golden-retriever", "rhodesian-ridgeback", "samoyed", "soft-coated-wheaten-terrier", "staffordshire-bull-terrier", "whippet"].map((slug) => [slug, 76])
   ]);
 
+  /* Convert string to Title Case */
   function titleCase(value) {
     return String(value || "").replace(/\b\w/g, (letter) => letter.toUpperCase());
   }
 
+  /* Extract numeric meter value from breed card */
   function numberFromMeter(card) {
     return Number.parseInt(card.querySelector(".breed-meter span")?.style.width, 10) || 50;
   }
 
+  /* Convert energy number to Low/Medium/High rating */
   function levelFromNumber(value) {
     return value < 45 ? "Low" : value < 72 ? "Medium" : "High";
   }
 
+  /* Generate consistent pseudo-random hash score from breed slug */
   function hashScore(value, offset) {
     let hash = offset * 31;
     for (const character of value) hash = ((hash << 5) - hash + character.charCodeAt(0)) | 0;
@@ -191,6 +195,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     "shih-tzu": { shaina: 100 }
   };
 
+  /* Extract and format all breed metadata from card HTML */
   function profileFor(card) {
     const name = card.querySelector("h2")?.textContent.trim() || "This breed";
     const slug = card.id;
@@ -236,6 +241,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   const profiles = new Map(cards.map((card) => [card.id, profileFor(card)]));
 
+  /* Convert breed card to favorite item format for save/recall */
   function favouriteItem(card) {
     const profile = profiles.get(card.id);
     const image = card.querySelector("img")?.getAttribute("src") || "";
