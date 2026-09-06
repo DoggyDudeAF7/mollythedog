@@ -398,6 +398,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     `;
   }
 
+  /* Create and initialize breed comparison UI (tray and modal dialog) */
   function setupComparison() {
     compareTray = document.createElement("aside");
     compareTray.className = "breed-compare-tray";
@@ -425,6 +426,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     });
   }
 
+  /* Create filter and sort controls UI */
   function buildFilterControls() {
     const panel = document.createElement("section");
     panel.className = "breed-filter-panel";
@@ -459,6 +461,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     });
   }
 
+  /* Check if card matches all active filter criteria */
   function matchesFilters(card) {
     const grouped = {};
     activeFilters.forEach((filter) => {
@@ -468,6 +471,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     return Object.entries(grouped).every(([key, values]) => values.includes(card.dataset[key]));
   }
 
+  /* Sort breed cards by selected sort mode */
   function sortCards() {
     const sizeRank = { small: 1, medium: 2, large: 3 };
     const groomingRank = { low: 1, medium: 2, high: 3 };
