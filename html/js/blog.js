@@ -1,5 +1,7 @@
+/* Fetch and render blog posts from API or fallback JSON file */
 const postsContainer = document.getElementById("blogPosts");
 
+/* Escape HTML special characters to prevent injection */
 function escapeHtml(value) {
   return String(value || "").replace(/[&<>"']/g, (char) => ({
     "&": "&amp;",
