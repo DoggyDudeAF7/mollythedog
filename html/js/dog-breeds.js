@@ -519,11 +519,13 @@ document.addEventListener("DOMContentLoaded", async () => {
     if (expanded) window.MSAchievements?.record("breeds", card.id);
   }
 
+  /* Calculate which breed should be featured today (changes daily) */
   function getDailyBreedIndex() {
     const today = new Date();
     return Math.floor(Date.UTC(today.getFullYear(), today.getMonth(), today.getDate()) / 86400000) % cards.length;
   }
 
+  /* Display the breed-of-the-day feature panel */
   function renderBreedOfDay() {
     if (!breedOfDay || !cards.length) return;
     dailyBreedCard = cards[getDailyBreedIndex()];
