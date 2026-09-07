@@ -1560,7 +1560,7 @@ nav .nav-links {
     13px;
 
   align-items:
-    flex-end;
+    center;
 
 }
 
@@ -2354,6 +2354,15 @@ nav .nav-links a span {
 
   font-size:
     28px;
+
+  display:
+    grid;
+
+  place-items:
+    center;
+
+  line-height:
+    1;
 
 }
 
@@ -3657,3 +3666,90 @@ nav .nav-links a:hover::after {
   nav .nav-inner > #searchBtn { flex-shrink: 0; margin-left: 0; }
 }
 nav .nav-links a[aria-current="page"] { border-color: #ffb7a5; background: rgba(255, 183, 165, .14); }
+
+/* =========================
+   CYBER SAFETY PAGES
+   ========================= */
+
+.cybersafety-page nav .nav-inner {
+  width: 100%;
+}
+
+.cybersafety-page nav .nav-links {
+  justify-content: center;
+}
+
+.cybersafety-page nav .nav-links a {
+  flex: 0 0 60px;
+}
+
+.cybersafety-page .hero-img {
+  width: min(760px, 92vw);
+  max-width: none;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  display: block;
+}
+
+.cybersafety-page .table-wrap {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  border: 1px solid rgba(255,255,255,0.16);
+  border-radius: 18px;
+  background: rgba(3, 5, 12, 0.34);
+}
+
+.cybersafety-page table {
+  width: 100%;
+  min-width: 680px;
+  border-collapse: collapse;
+  color: #fff;
+}
+
+.cybersafety-page th,
+.cybersafety-page td {
+  padding: 16px 18px;
+  text-align: left;
+  vertical-align: top;
+  border-bottom: 1px solid rgba(255,255,255,0.12);
+}
+
+.cybersafety-page th {
+  background: rgba(255,255,255,0.10);
+  color: #fff;
+  font-weight: 800;
+}
+
+.cybersafety-page td {
+  color: #d9d9e3;
+  line-height: 1.55;
+}
+
+.cybersafety-page tbody tr:nth-child(even) {
+  background: rgba(255,255,255,0.045);
+}
+
+.cybersafety-page tbody tr:last-child td {
+  border-bottom: 0;
+}
+
+@media (max-width: 820px) {
+  .cybersafety-page nav .nav-links {
+    align-items: stretch;
+  }
+
+  .cybersafety-page nav .nav-links a {
+    flex: 0 0 56px;
+    align-items: center;
+  }
+
+  .cybersafety-page .hero-img {
+    width: min(520px, 92vw);
+    border-radius: 16px;
+  }
+
+  .cybersafety-page .table-wrap {
+    border-radius: 14px;
+  }
+}
