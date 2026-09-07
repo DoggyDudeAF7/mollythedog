@@ -2,6 +2,7 @@
 (function () {
   "use strict";
   if (window.MSSearchBooted) return;
+  if (document.body.classList.contains("cybersafety-page")) return;
   window.MSSearchBooted = true;
 
   /* Search index cache and currently selected result */
