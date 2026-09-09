@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>16 Colour Flash</title>
+<style>
+*{box-sizing:border-box}
+html,body{width:100%;height:100%;margin:0;font-family:Arial,sans-serif;background:#111;color:white;overflow:hidden}
+.screen{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;padding:30px;text-align:center;background:#111;z-index:10}
+.card{width:min(650px,100%);background:#1e1e1e;border:2px solid #444;border-radius:24px;padding:35px;box-shadow:0 20px 70px #000}
+h1{font-size:clamp(2rem,6vw,4rem);margin:0 0 18px}
+p{font-size:1.15rem;line-height:1.55}
+.warning{color:#ff5252}
+.buttons{display:flex;gap:15px;justify-content:center;flex-wrap:wrap;margin-top:28px}
+button{border:0;border-radius:14px;padding:15px 25px;font-size:1.05rem;font-weight:700;cursor:pointer}
+.continue{background:#ff3b30;color:white}
+.cancel{background:#444;color:white}
+.start{background:#ff0000;color:white;font-size:1.3rem;padding:18px 32px}
+.hidden{display:none!important}
+
+#flashScreen{
+position:fixed;
+inset:0;
+background:black;
+transition:none;
+}
+
+#controls{
+position:fixed;
+left:50%;
+bottom:25px;
+transform:translateX(-50%);
+z-index:5;
+display:flex;
+align-items:center;
+gap:14px;
+background:rgba(0,0,0,.75);
+padding:12px 16px;
+border-radius:18px;
+backdrop-filter:blur(8px);
+}
+
+#stop{
+background:white;
+color:black;
+font-size:1.2rem;
+padding:14px 28px;
+}
+
+label{font-size:.9rem}
+input[type=range]{width:150px}
+
+#speedText{min-width:52px}
+
+.small{opacity:.7;font-size:.9rem}
+</style>
+</head>
+<body>
+
+<div id="warning1" class="screen">
+<div class="card">
+<h1 class="warning">⚠️ SEIZURE WARNING</h1>
+<p>
+This page displays repeatedly changing bright colours.
+Flashing or rapidly changing visuals can cause seizures,
+migraines, dizziness, nausea or discomfort in some people,
+including people who may not know they are photosensitive.
+</p>
+<p><strong>Do not continue if flashing visuals may affect you.</strong></p>
+
+<div class="buttons">
+<button class="cancel" onclick="leave()">Go Back</button>
+<button class="continue" onclick="secondWarning()">I Understand</button>
+</div>
+</div>
+</div>
+
+<div id="warning2" class="screen hidden">
+<div class="card">
+<h1>Are you sure?</h1>
+<p>
+You are about to start a full-screen sequence of rapidly
+changing colours.
+</p>
+
+<p class="warning"><strong>Stop immediately if you feel unwell.</strong></p>
+
+<div class="buttons">
+<button class="cancel" onclick="backToWarning()">No, cancel</button>
+<button class="start" onclick="startFlash()">YES — START</button>
+</div>
+
+<p class="small">Nothing will flash until you press START.</p>
+</div>
+</div>
+
+<div id="flashScreen" class="hidden"></div>
+
+<div id="controls" class="hidden">
+<button id="stop" onclick="stopFlash()">■ STOP</button>
+
+<label>
+Speed
+<input id="speed" type="range" min="0.5" max="2" value="2" step="0.25">
+</label>
+
+<span id="speedText">2 Hz</span>
+</div>
+
+<script>
+const colours=[
+"#ff0000",
+"#ff7f00",
+"#ffff00",
+"#7fff00",
+"#00ff00",
+"#00ff7f",
+"#00ffff",
+"#007fff",
+"#0000ff",
+"#7f00ff",
+"#ff00ff",
+"#ff007f",
+"#ffffff",
+"#000000",
+"#ff1493",
+"#00bfff"
+];
+
+let timer=null;
+let index=0;
+
+const warning1=document.getElementById("warning1");
+const warning2=document.getElementById("warning2");
+const flashScreen=document.getElementById("flashScreen");
+const controls=document.getElementById("controls");
+const speed=document.getElementById("speed");
+const speedText=document.getElementById("speedText");
+
+function secondWarning(){
+warning1.classList.add("hidden");
+warning2.classList.remove("hidden");
+}
+
+function backToWarning(){
+warning2.classList.add("hidden");
+warning1.classList.remove("hidden");
+}
+
+function leave(){
+document.body.innerHTML=`
+<div class="screen">
+<div class="card">
+<h1>Stopped 👍</h1>
+<p>The flashing display was not started.</p>
+</div>
+</div>`;
+}
+
+function startFlash(){
+warning2.classList.add("hidden");
+flashScreen.classList.remove("hidden");
+controls.classList.remove("hidden");
+index=0;
+runFlash();
+}
+
+function runFlash(){
+clearInterval(timer);
+
+const hz=parseFloat(speed.value);
+const interval=1000/hz;
+
+speedText.textContent=hz+" Hz";
+
+flashScreen.style.background=colours[index];
+
+timer=setInterval(()=>{
+index=(index+1)%colours.length;
+flashScreen.style.background=colours[index];
+},interval);
+}
+
+function stopFlash(){
+clearInterval(timer);
+timer=null;
+
+flashScreen.classList.add("hidden");
+controls.classList.add("hidden");
+
+warning1.classList.remove("hidden");
+
+flashScreen.style.background="#000";
+}
+
+speed.addEventListener("input",()=>{
+if(timer) runFlash();
+else speedText.textContent=speed.value+" Hz";
+});
+
+document.addEventListener("keydown",e=>{
+if(e.key==="Escape") stopFlash();
+});
+
+document.addEventListener("visibilitychange",()=>{
+if(document.hidden && timer) stopFlash();
+});
+
+if(window.matchMedia("(prefers-reduced-motion: reduce)").matches){
+document.querySelector("#warning1 .card").insertAdjacentHTML(
+"beforeend",
+`<p class="warning"><strong>
+⚠️ Your device is set to Reduce Motion.
+Continuing is not recommended.
+</strong></p>`
+);
+}
+</script>
+
+</body>
+</html>
