@@ -57,11 +57,14 @@ async function check(name, fn) {
             const links = [...document.querySelectorAll('#navLinks a'), document.querySelector('#searchBtn')].map(el => {
               const r = el.getBoundingClientRect(); return {left: r.left, right: r.right, top: r.top, bottom: r.bottom};
             });
-            return {nav: {left: nav.left, right: nav.right}, links, overflow: document.documentElement.scrollWidth - innerWidth};
+            const overflowing = [...document.querySelectorAll('body *')].filter(el => {
+              const r = el.getBoundingClientRect(); return r.width > 0 && (r.right > innerWidth + 1 || r.left < -1);
+            }).slice(0, 8).map(el => ({tag: el.tagName, className: el.className, right: el.getBoundingClientRect().right}));
+            return {nav: {left: nav.left, right: nav.right}, links, overflow: document.documentElement.scrollWidth - innerWidth, overflowing};
           });
           assert.ok(layout.nav.left >= 0 && layout.nav.right <= width + 1);
           assert.ok(layout.links.every(r => r.left >= layout.nav.left - 1 && r.right <= layout.nav.right + 1), JSON.stringify(layout));
-          assert.ok(layout.overflow <= 1, `horizontal overflow ${layout.overflow}`);
+          assert.ok(layout.overflow <= 1, `horizontal overflow ${layout.overflow}: ${JSON.stringify(layout.overflowing)}`);
           assert.equal(await page.locator('#navToggle').isVisible(), false);
         });
       }
@@ -114,6 +117,12 @@ async function check(name, fn) {
             return {open: document.getElementById('navLinks').classList.contains('open'), expanded: document.getElementById('navToggle').getAttribute('aria-expanded')};
           });
           assert.deepEqual(observed, {open: false, expanded: 'false'});
+        });
+
+        await check(`${route} mobile ${width}px closed menu does not capture keyboard focus`, async () => {
+          await page.locator('#navToggle').focus();
+          await page.keyboard.press('Tab');
+          assert.equal(await page.evaluate(() => document.activeElement.id), 'searchBtn');
         });
       }
     }

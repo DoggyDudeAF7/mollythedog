@@ -1,5 +1,4 @@
-import { shuffle, randomInt } from './engine.js';
-import { photos, trivia, assets } from './data.js';
+import { shuffle, randomInt, photos, trivia, assets } from './data.js';
 
 function node(tag, className, text) {
   const element = document.createElement(tag);
