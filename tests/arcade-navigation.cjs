@@ -35,6 +35,7 @@ async function check(name, fn) {
         if (!html.includes('id="navLinks"')) continue;
         const links = html.match(/<div class="nav-links" id="navLinks">([\s\S]*?)<\/div>/)?.[1];
         assert.ok(links, `${file}: shared nav-links markup`);
+        if (!links.includes('href="/blog/"')) continue; // Cyber-safety has its own section navigation.
         assert.equal((links.match(/href="\/games\/"/g) || []).length, 1, `${file}: Arcade link count`);
         assert.ok(links.indexOf('href="/blog/"') < links.indexOf('href="/games/"'), `${file}: Blog comes first`);
         assert.ok(links.indexOf('href="/games/"') < links.indexOf('href="/merch/"'), `${file}: Merch follows`);
