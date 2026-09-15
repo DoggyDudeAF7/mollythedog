@@ -1,0 +1,42 @@
+/* Only action-game surfaces: shared site navigation is intentionally untouched. */
+.action-controls { gap: 14px; }
+.action-arrow { min-width: 78px; min-height: 52px; font-size: 1.5rem !important; user-select: none; -webkit-user-select: none; }
+.action-arrow:active { background: #e3b5ff40; transform: translateY(2px); }
+.action-control-label { color: #bbadc7; font-size: .7rem; letter-spacing: .13em; }
+.action-note { text-align: center; max-width: 660px; margin: 15px auto 0; }
+.action-main-button { min-width: 195px; user-select: none; -webkit-user-select: none; }
+.action-main-button span { font-size: .72rem; font-weight: 500; opacity: .7; }
+.fetch-controls { display: grid; grid-template-columns: 1fr 1fr auto; }
+.fetch-controls label { display: grid; grid-template-columns: auto 1fr auto; gap: 9px; font-size: .85rem; color: #e4cfe5; }
+.fetch-controls input[type=range] { min-width: 60px; max-width: none; width: 100%; accent-color: #ffb7a5; min-height: 44px; cursor: pointer; }
+.fetch-controls output { font-variant-numeric: tabular-nums; min-width: 36px; font-size: .78rem; color: #f0bf9f; }
+.reaction-board { max-width: 680px; margin: 0 auto; }
+.reaction-rounds { display: flex; justify-content: center; gap: 18px; margin: 0 0 22px; }
+.reaction-rounds span { display: grid; place-items: center; width: 36px; height: 36px; border-radius: 50%; background: #ffffff07; border: 1px solid #ffffff22; color: #a797b5; font-size: .85rem; font-variant-numeric: tabular-nums; }
+.reaction-rounds span.current { background: #b4a0d328; border-color: #d6b6eb; color: #f2d6ff; box-shadow: 0 0 0 4px #b4a0d30a; }
+.reaction-rounds span.done { background: #759b6940; border-color: #b4d997; color: #d9f5ba; }
+.reaction-pad { position: relative; width: 100%; min-height: 330px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; overflow: hidden; isolation: isolate; border: 2px solid #986478; border-radius: 25px; background: radial-gradient(ellipse at 50% 80%, #604152 0, #292035 80%); color: #fff1f6; padding: 28px; touch-action: manipulation; -webkit-user-select: none; user-select: none; }
+.reaction-pad img { position: relative; z-index: 1; width: 112px; height: 112px; object-fit: contain; filter: drop-shadow(0 8px 18px #0004); }
+.reaction-cue { position: relative; z-index: 1; font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 850; letter-spacing: -.05em; }
+.reaction-hint { position: relative; z-index: 1; color: #dbc2d6; font-size: .9rem; line-height: 1.6; }
+.reaction-orbit { position: absolute; width: 360px; height: 360px; border: 1px solid #e6bfec12; box-shadow: 0 0 0 38px #e6bfec07, 0 0 0 78px #e6bfec04; border-radius: 50%; transform: translateY(30px); }
+.reaction-pad.is-go { background: radial-gradient(ellipse at 50% 80%, #7aab59, #224831 85%); border-color: #d3f7b1; color: #fffed6; box-shadow: inset 0 0 55px #d5ffaa18, 0 0 28px #89ba5922; }
+.reaction-pad.is-go .reaction-cue { font-size: 4rem; line-height: 1; }
+.reaction-pad.is-go .reaction-hint { color: #f4ffd4; }
+.reaction-pad.is-go img { transform: rotate(-6deg) scale(1.05); }
+.reaction-pad.is-result { background: radial-gradient(ellipse at 50% 80%, #665180, #28213c 85%); border-color: #c9afe9; }
+.reaction-pad.is-error { background: radial-gradient(ellipse at 50% 80%, #804553, #352330 85%); border-color: #e699a4; }
+.reaction-times { display: flex; justify-content: center; flex-wrap: wrap; gap: 8px; margin: 16px 0; min-height: 32px; }
+.reaction-times span { border: 1px solid #c3a4da26; background: #c3a4da0a; border-radius: 20px; font-size: .78rem; color: #cfc0dd; padding: 7px 13px; font-variant-numeric: tabular-nums; }
+@media (max-width: 700px) {
+  .fetch-controls { grid-template-columns: 1fr; gap: 5px; }
+  .fetch-controls label { grid-template-columns: 48px 1fr 40px; }
+  .fetch-controls input[type=range] { max-width: none; }
+  .fetch-controls .action-main-button { margin-top: 9px; width: 100%; }
+  .action-arrow { min-width: 74px; min-height: 54px; }
+  .action-main-button { min-height: 54px; }
+  .reaction-pad { min-height: 310px; padding: 24px 15px; }
+  .reaction-rounds { gap: 14px; margin-bottom: 18px; }
+  .reaction-hint { font-size: .8rem; }
+  .reaction-pad img { width: 96px; height: 96px; }
+}
