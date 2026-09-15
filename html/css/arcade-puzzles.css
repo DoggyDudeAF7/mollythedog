@@ -1,0 +1,86 @@
+/* Puzzle layouts are contained inside the shared arcade player. */
+.arcade-page .puzzle-board { max-width:760px; margin:0 auto; }
+.arcade-page .puzzle-memory-grid { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:12px; max-width:630px; margin:0 auto; }
+.arcade-page .puzzle-memory-card { position:relative; aspect-ratio:1.18; padding:0; border:0; background:none; perspective:800px; border-radius:14px; }
+.arcade-page .puzzle-memory-inner { display:block; position:absolute; inset:0; transform-style:preserve-3d; transition:transform .36s ease; }
+.arcade-page .puzzle-memory-card.revealed .puzzle-memory-inner { transform:rotateY(180deg); }
+.arcade-page .puzzle-memory-back,.arcade-page .puzzle-memory-front { position:absolute; inset:0; display:flex; align-items:center; justify-content:center; border:1px solid #bda5e34d; border-radius:14px; overflow:hidden; backface-visibility:hidden; -webkit-backface-visibility:hidden; }
+.arcade-page .puzzle-memory-back { color:#e7cdfb; font-size:2.2rem; background:radial-gradient(circle at 40% 30%,#70558380,transparent 80%),repeating-linear-gradient(45deg,#31253e 0 14px,#382a4600 14px 28px),#221c30; box-shadow:inset 0 0 0 6px #1a14233b,0 5px 12px #0003; }
+.arcade-page .puzzle-memory-card:hover:not(.revealed) .puzzle-memory-back { border-color:#f5c79b; background-color:#433150; }
+.arcade-page .puzzle-memory-front { transform:rotateY(180deg); background:#292131; }
+.arcade-page .puzzle-memory-front img { width:100%; height:100%; object-fit:cover; }
+.arcade-page .puzzle-memory-card.matched .puzzle-memory-front { border:3px solid #a1dab7; box-shadow:0 0 16px #a1dab729; }
+.arcade-page .puzzle-memory-card.matched::after { content:'✓'; color:#193627; position:absolute; right:5px; bottom:5px; border-radius:50%; width:24px; height:24px; display:grid; place-items:center; background:#b4edc6; pointer-events:none; font-size:.8rem; font-weight:900; }
+.arcade-page .puzzle-memory .control-note { text-align:center; }
+.arcade-page .puzzle-round-banner { text-align:center; font-size:clamp(1.1rem,3vw,1.5rem); font-weight:750; min-height:58px; line-height:1.5; margin-top:15px; color:#ecd9f4; }
+.arcade-page .puzzle-towel-field { position:relative; height:285px; margin:8px auto 0; max-width:680px; border-bottom:3px solid #84715a; background:radial-gradient(ellipse at 50% 95%,#b4a27620,transparent 70%); }
+.arcade-page .puzzle-towel-field::after { content:''; position:absolute; top:100%; width:100%; height:12px; background:linear-gradient(#5f4a3655,transparent); pointer-events:none; }
+.arcade-page .puzzle-towel { position:absolute; left:0; bottom:15px; width:33.3333%; height:215px; background:transparent; border:0; color:white; padding:0 10px; transition:transform var(--shuffle-time,500ms) cubic-bezier(.4,0,.3,1); }
+.arcade-page .puzzle-towel-cloth { position:absolute; z-index:2; left:8%; right:8%; bottom:28px; height:120px; border-radius:44% 44% 12% 12% / 36% 36% 12% 12%; border:2px solid #c7b5d5; background:repeating-linear-gradient(90deg,#d0b6d512 0 17px,#71587822 17px 34px),linear-gradient(145deg,#bca1c5,#736381 70%,#ae96b7); box-shadow:inset 0 -12px 0 #4d3d5c30,0 8px 15px #0005; transition:transform .4s ease; transform-origin:center bottom; }
+.arcade-page .puzzle-towel-cloth::after { content:''; position:absolute; left:6%; right:6%; bottom:13px; height:4px; border-block:2px dashed #e9d7e466; }
+.arcade-page .puzzle-towel-stitch { position:absolute; left:0; right:0; top:36%; font-size:.7rem; font-weight:700; letter-spacing:.22em; color:#f5e5ecbb; }
+.arcade-page .puzzle-hidden-dog { position:absolute; left:16%; bottom:28px; width:68%; height:100px; object-fit:contain; }
+.arcade-page .puzzle-towel.lifted .puzzle-towel-cloth { transform:translateY(-100px) rotate(-5deg); }
+.arcade-page .puzzle-towel-number { position:absolute; bottom:-4px; left:calc(50% - 15px); border-radius:9px; padding:5px 10px; font-weight:800; font-size:.95rem; color:#fff0d0; border:1px solid #ffe4b255; background:#3f3040; }
+.arcade-page .puzzle-towel[aria-disabled=false]:hover .puzzle-towel-cloth { filter:brightness(1.15); }
+.arcade-page .puzzle-towel.puzzle-hit .puzzle-towel-number { background:#417258; border-color:#a2e4bc; }
+.arcade-page .puzzle-towel.puzzle-miss .puzzle-towel-number { background:#854154; border-color:#efa0b2; }
+.arcade-page .puzzle-shell-game .control-note { text-align:center; margin-top:25px; }
+.arcade-page .puzzle-quiz-progress { display:flex; gap:7px; justify-content:center; margin:0 0 24px; }
+.arcade-page .puzzle-quiz-dot { display:grid; place-items:center; width:29px; height:29px; flex:0 1 29px; border:1px solid #b39cc336; border-radius:50%; font-size:.7rem; color:#b9a9c6; }
+.arcade-page .puzzle-quiz-dot.current { border-color:#e9c296; color:#ffe1b9; box-shadow:0 0 0 3px #e9c29614; }
+.arcade-page .puzzle-quiz-dot.right { background:#407250; border-color:#9cdcaa; color:white; }
+.arcade-page .puzzle-quiz-dot.wrong { background:#733b4b; border-color:#dca0af; color:white; }
+.arcade-page .puzzle-question { font-size:clamp(1.3rem,3.5vw,1.8rem); line-height:1.5; letter-spacing:-.025em; margin:0 0 24px; text-align:center; }
+.arcade-page .puzzle-answers { gap:12px; }
+.arcade-page .puzzle-answer { min-height:70px; display:flex; align-items:center; gap:12px; line-height:1.5; font-size:.94rem; transition:border-color .2s,background .2s,transform .2s; }
+.arcade-page .puzzle-answer:not(:disabled):hover { border-color:#d6badf; transform:translateY(-2px); }
+.arcade-page .puzzle-answer-key { flex:0 0 29px; display:grid; place-items:center; align-self:center; width:29px; height:29px; border:1px solid #d1bfd333; background:#110d1f40; border-radius:7px; color:#e2bc9b; font-size:.8rem; }
+.arcade-page .puzzle-answer:disabled { opacity:.72; }
+.arcade-page .puzzle-answer.correct { opacity:1; }
+.arcade-page .puzzle-review { border:1px solid #d3b5e32b; border-left:3px solid #d1b69c; background:#a186b010; border-radius:12px; padding:18px 20px; margin:22px 0 16px; line-height:1.6; animation:arcade-pop .25s ease; }
+.arcade-page .puzzle-review strong { font-size:1rem; color:#fae0c3; }
+.arcade-page .puzzle-review p { margin:7px 0; font-size:.9rem; color:#d1c4db; }
+.arcade-page .puzzle-review .puzzle-source { display:inline-block; padding:7px 0; color:#cbb3ff; text-decoration:underline; text-underline-offset:3px; font-size:.85rem; }
+.arcade-page .puzzle-next { margin-top:2px; }
+.arcade-page .puzzle-quiz-media { position:relative; max-width:480px; margin:0 auto 22px; }
+.arcade-page .puzzle-quiz-media:empty { display:none; }
+.arcade-page .puzzle-identify-photo { display:block; width:100%; aspect-ratio:4/3; max-height:310px; object-fit:contain; background:#100b1c; border:1px solid #a68bb244; border-radius:16px; }
+.arcade-page .puzzle-photo-label { position:absolute; bottom:10px; left:12px; background:#160f25c9; border:1px solid #ffffff23; padding:5px 9px; border-radius:7px; color:#f3d9c5; font-size:.68rem; backdrop-filter:blur(8px); }
+.arcade-page .puzzle-identify .puzzle-question { margin-bottom:15px; }
+.arcade-page .puzzle-sliding-board { width:min(100%,510px); aspect-ratio:4/3; position:relative; margin:5px auto 0; border:5px solid #51384f; background:#171324; border-radius:17px; box-shadow:0 12px 35px #0003; overflow:hidden; }
+.arcade-page .puzzle-photo-tile,.arcade-page .puzzle-photo-gap { position:absolute; left:0; top:0; width:33.3333%; height:33.3333%; transition:transform .16s ease; }
+.arcade-page .puzzle-photo-gap { display:grid; place-items:center; color:#a48ead; font-size:2rem; background:radial-gradient(#51405770,transparent); border:2px dashed #95829e40; border-radius:7px; }
+.arcade-page .puzzle-photo-tile { border:2px solid #271a35; border-radius:7px; background-size:300% 300%; padding:0; box-shadow:inset 0 0 0 1px #ffffff1a; color:#fff; }
+.arcade-page .puzzle-photo-tile.movable { border-color:#f7d192; z-index:1; cursor:pointer; }
+.arcade-page .puzzle-photo-tile.movable:hover { filter:brightness(1.12); }
+.arcade-page .puzzle-photo-tile[aria-disabled=true] { cursor:default; }
+.arcade-page .puzzle-photo-tile>span { position:absolute; top:6px; left:6px; min-width:27px; height:27px; padding:3px; display:grid; place-items:center; background:#160e22ce; border:1px solid #ffffff50; border-radius:7px; color:#fff; font-size:.8rem; font-weight:800; }
+.arcade-page .puzzle-photo-tile.in-place>span { background:#244a35dd; border-color:#b0e4ba; }
+.arcade-page .puzzle-sliding-board.solved { border-color:#b1dfa3; box-shadow:0 0 35px #aade9c29; }
+.arcade-page .puzzle-sliding-board.solved .puzzle-photo-tile { border-color:#a7cc9866; }
+.arcade-page .puzzle-photo-preview { margin:20px auto; max-width:360px; padding:12px; border:1px solid #d5b9e030; background:#e0cbdf07; border-radius:14px; }
+.arcade-page .puzzle-photo-preview img { display:block; width:100%; border-radius:7px; }
+.arcade-page .puzzle-photo-preview figcaption { color:#beafca; font-size:.8rem; line-height:1.6; margin-top:10px; }
+@media(max-width:600px) {
+  .arcade-page .puzzle-memory-grid { grid-template-columns:repeat(3,minmax(0,1fr)); gap:9px; max-width:430px; }
+  .arcade-page .puzzle-memory-card { aspect-ratio:1.2; }
+  .arcade-page .puzzle-memory-back { font-size:1.8rem; }
+  .arcade-page .puzzle-towel-field { height:240px; }
+  .arcade-page .puzzle-towel { height:190px; }
+  .arcade-page .puzzle-towel-cloth { height:86px; }
+  .arcade-page .puzzle-towel.lifted .puzzle-towel-cloth { transform:translateY(-80px) rotate(-5deg); }
+  .arcade-page .puzzle-hidden-dog { height:77px; }
+  .arcade-page .puzzle-towel-stitch { font-size:.6rem; letter-spacing:.1em; }
+  .arcade-page .puzzle-answers { gap:9px; }
+  .arcade-page .puzzle-answer { font-size:.83rem; padding:11px; gap:8px; min-height:70px; }
+  .arcade-page .puzzle-answer-key { flex-basis:25px; width:25px; height:25px; font-size:.72rem; }
+  .arcade-page .puzzle-review { padding:13px 15px; }
+  .arcade-page .puzzle-quiz-progress { gap:5px; }
+  .arcade-page .puzzle-quiz-dot { height:25px; }
+}
+@media(max-width:380px) {
+  .arcade-page .puzzle-trivia .puzzle-answers { grid-template-columns:1fr; }
+  .arcade-page .puzzle-trivia .puzzle-answer { min-height:53px; }
+  .arcade-page .puzzle-photo-tile>span { top:4px; left:4px; min-width:23px; height:23px; font-size:.72rem; }
+}
