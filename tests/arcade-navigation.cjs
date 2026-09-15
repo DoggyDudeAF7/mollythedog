@@ -50,7 +50,7 @@ async function check(name, fn) {
         await check(`${route} desktop ${width}px has no dock or page overflow`, async () => {
           await page.setViewportSize({width, height: 1000});
           await page.goto(base + route);
-          await page.waitForSelector('#searchBox.ms-site-search');
+          await page.waitForSelector('#searchBox.ms-site-search', {state: 'attached'});
           for (const id of ids) assert.equal(await page.locator(`#${id}`).count(), 1, id);
           const layout = await page.evaluate(() => {
             const nav = document.querySelector('nav').getBoundingClientRect();
@@ -72,7 +72,7 @@ async function check(name, fn) {
         await check(`${route} mobile ${width}px opens, scrolls to final link, and closes outside`, async () => {
           await page.setViewportSize({width, height: width === 320 ? 568 : 844});
           await page.goto(base + route);
-          await page.waitForSelector('#searchBox.ms-site-search');
+          await page.waitForSelector('#searchBox.ms-site-search', {state: 'attached'});
           assert.equal(await page.locator('#navToggle').getAttribute('aria-expanded'), 'false');
           await page.locator('#navToggle').click();
           await page.waitForTimeout(350);
