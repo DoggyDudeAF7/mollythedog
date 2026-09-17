@@ -22,6 +22,8 @@ button{border:0;border-radius:14px;padding:15px 25px;font-size:1.05rem;font-weig
 #flashScreen{
 position:fixed;
 inset:0;
+width:100vw;
+height:100vh;
 background:black;
 transition:none;
 }
@@ -130,6 +132,7 @@ const colours=[
 
 let timer=null;
 let index=0;
+let startedFullscreen=false;
 
 const warning1=document.getElementById("warning1");
 const warning2=document.getElementById("warning2");
@@ -158,11 +161,20 @@ document.body.innerHTML=`
 </div>`;
 }
 
-function startFlash(){
+async function startFlash(){
 warning2.classList.add("hidden");
 flashScreen.classList.remove("hidden");
 controls.classList.remove("hidden");
 index=0;
+startedFullscreen=false;
+if(document.documentElement.requestFullscreen){
+try{
+await document.documentElement.requestFullscreen();
+startedFullscreen=true;
+}catch(error){
+startedFullscreen=false;
+}
+}
 runFlash();
 }
 
@@ -185,6 +197,7 @@ flashScreen.style.background=colours[index];
 function stopFlash(){
 clearInterval(timer);
 timer=null;
+startedFullscreen=false;
 
 flashScreen.classList.add("hidden");
 controls.classList.add("hidden");
@@ -192,6 +205,10 @@ controls.classList.add("hidden");
 warning1.classList.remove("hidden");
 
 flashScreen.style.background="#000";
+
+if(document.fullscreenElement && document.exitFullscreen){
+document.exitFullscreen().catch(()=>{});
+}
 }
 
 speed.addEventListener("input",()=>{
@@ -205,6 +222,10 @@ if(e.key==="Escape") stopFlash();
 
 document.addEventListener("visibilitychange",()=>{
 if(document.hidden && timer) stopFlash();
+});
+
+document.addEventListener("fullscreenchange",()=>{
+if(!document.fullscreenElement && timer && startedFullscreen) stopFlash();
 });
 
 if(window.matchMedia("(prefers-reduced-motion: reduce)").matches){
