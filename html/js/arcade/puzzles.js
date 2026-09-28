@@ -5,6 +5,9 @@ import {
   trivia,
   assets
 } from './data.js';
+import {
+  replaceChildren
+} from './engine.js';
 
 function node(tag, className, text) {
   const element = document.createElement(tag);
@@ -199,7 +202,7 @@ function wheresMolly(ctx) {
     if (phase !== 'choose') return;
     phase = 'reveal';
     cups[0].cup.classList.add('lifted');
-    const found = item?.id === 0;
+    const found = item && item.id === 0;
     if (found) correct++;
     else lives--;
     if (item) item.cup.classList.add(found ? 'puzzle-hit' : 'puzzle-miss');
@@ -319,14 +322,14 @@ function quiz(ctx, photoMode = false) {
     answered = false;
     const current = rounds[index];
     question.textContent = current.question;
-    media.replaceChildren();
+    replaceChildren(media);
     if (photoMode) {
       const img = node('img', 'puzzle-identify-photo');
       img.src = current.photo.src;
       img.alt = `Gallery photo: a dog ${current.photo.alt.replace(/^(Molly|Shaina) /, '')}. Identify Molly or Shaina below.`;
       media.append(img, node('span', 'puzzle-photo-label', 'From the real family album'));
     }
-    choices.replaceChildren(...current.options.map((option, i) => {
+    replaceChildren(choices, current.options.map((option, i) => {
       const answer = button('answer puzzle-answer');
       answer.dataset.answer = i;
       answer.append(node('span', 'puzzle-answer-key', i + 1), node('span', '', option.text));
@@ -368,7 +371,7 @@ function quiz(ctx, photoMode = false) {
     source.target = '_blank';
     source.rel = 'noopener';
     source.setAttribute('aria-label', `${source.textContent} (opens in a new tab)`);
-    review.replaceChildren(heading, node('p', '', current.explanation), source);
+    replaceChildren(review, [heading, node('p', '', current.explanation), source]);
     review.hidden = false;
     next.hidden = false;
     ctx.hud({

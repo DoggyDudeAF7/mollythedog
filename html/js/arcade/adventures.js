@@ -8,6 +8,9 @@ import {
 import {
   DRAWING_KEY
 } from './progress.js';
+import {
+  replaceChildren
+} from './engine.js';
 const $ = (ctx, s) => ctx.root.querySelector(s);
 
 function directions(ctx, move) {
@@ -78,7 +81,7 @@ function maze(ctx) {
   const board = $(ctx, '.maze-board');
 
   function render() {
-    board.replaceChildren();
+    replaceChildren(board);
     for (let yy = 0; yy < n; yy++)
       for (let xx = 0; xx < n; xx++) {
         const c = document.createElement('div');
@@ -97,7 +100,7 @@ function maze(ctx) {
   }
 
   function move(dx, dy) {
-    if (map[y + dy]?.[x + dx] !== 0) return;
+    if (!map[y + dy] || map[y + dy][x + dx] !== 0) return;
     x += dx;
     y += dy;
     moves++;
@@ -701,7 +704,7 @@ function ultimate(ctx) {
     deadline = 0;
     accept = false;
     next.hidden = true;
-    content.replaceChildren();
+    replaceChildren(content);
     buttons = [];
     mode = ['photo', 'spot', 'sequence', 'trivia'][(round - 1) % 4];
     hud();

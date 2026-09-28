@@ -6,6 +6,14 @@ import {
 const clamp = (n, min, max) => Math.max(min, Math.min(max, n));
 const isTyping = e => ['INPUT', 'TEXTAREA', 'SELECT'].includes(e.target.tagName);
 
+function setPointerCapture(element, pointerId) {
+  if (element.setPointerCapture) element.setPointerCapture(pointerId);
+}
+
+function hasPointerCapture(element, pointerId) {
+  return element.hasPointerCapture && element.hasPointerCapture(pointerId);
+}
+
 function controls(ctx, markup, note) {
   const box = document.createElement('div');
   box.className = 'game-controls action-controls';
@@ -24,7 +32,7 @@ function actionKey(ctx, codes, fn) {
   ctx.on(document, 'keydown', e => {
     if (!isTyping(e) && codes.includes(e.code) && !e.repeat) {
       // Leave the session's Pause and Restart buttons with their native controls.
-      if (e.target.closest?.('.session-controls')) return;
+      if (e.target.closest && e.target.closest('.session-controls')) return;
       e.preventDefault();
       fn();
     }
@@ -34,7 +42,7 @@ function actionKey(ctx, codes, fn) {
 function holdButton(ctx, button, key) {
   ctx.on(button, 'pointerdown', e => {
     e.preventDefault();
-    button.setPointerCapture?.(e.pointerId);
+    setPointerCapture(button, e.pointerId);
     ctx.keys.add(key);
   });
   for (const event of ['pointerup', 'pointercancel', 'lostpointercapture']) {
@@ -53,7 +61,21 @@ function holdButton(ctx, button, key) {
 function rounded(g, x, y, w, h, radius, fill) {
   g.fillStyle = fill;
   g.beginPath();
-  g.roundRect(x, y, Math.max(.1, w), h, radius);
+  w = Math.max(.1, w);
+  radius = Math.max(0, Math.min(radius, w / 2, h / 2));
+  if (g.roundRect) {
+    g.roundRect(x, y, w, h, radius);
+  } else {
+    g.moveTo(x + radius, y);
+    g.lineTo(x + w - radius, y);
+    g.quadraticCurveTo(x + w, y, x + w, y + radius);
+    g.lineTo(x + w, y + h - radius);
+    g.quadraticCurveTo(x + w, y + h, x + w - radius, y + h);
+    g.lineTo(x + radius, y + h);
+    g.quadraticCurveTo(x, y + h, x, y + h - radius);
+    g.lineTo(x, y + radius);
+    g.quadraticCurveTo(x, y, x + radius, y);
+  }
   g.fill();
 }
 
@@ -162,11 +184,11 @@ function treatCatch(ctx) {
   };
   ctx.on(canvas, 'pointerdown', e => {
     e.preventDefault();
-    canvas.setPointerCapture?.(e.pointerId);
+    setPointerCapture(canvas, e.pointerId);
     steer(e);
   });
   ctx.on(canvas, 'pointermove', e => {
-    if (e.buttons || canvas.hasPointerCapture?.(e.pointerId)) steer(e);
+    if (e.buttons || hasPointerCapture(canvas, e.pointerId)) steer(e);
   });
   ctx.status('A snack shower is on its way. Catch the bones; dodge the red rain clouds.');
   ctx.frame((dt, t) => {
