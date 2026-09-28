@@ -127,10 +127,11 @@ async function loadLatestComic() {
     const newest = comicCards.at(-1);
     if (!newest) throw new Error("No comics");
     const image = newest.querySelector("img");
-    const label = newest.querySelector("span")?.textContent.trim() || "Read the latest comic";
+    const newestLabel = newest.querySelector("span");
+    const label = newestLabel ? newestLabel.textContent.trim() : "Read the latest comic";
     const title = label.replace(/^Read\s+/i, "");
     latestComicTitle.textContent = title;
-    latestComicText.textContent = image?.alt || "The latest Molly and Shaina adventure is ready to read.";
+    latestComicText.textContent = image ? image.alt : "The latest Molly and Shaina adventure is ready to read.";
     const comicShelfUrl = new URL("/comics/", location.href);
     latestComicLink.href = new URL(newest.getAttribute("href"), comicShelfUrl).href;
     latestComicImage.src = new URL(image.getAttribute("src"), comicShelfUrl).href;
@@ -173,7 +174,7 @@ async function loadRealPoppyPhotos() {
     });
     const poppyPhotos = response.ok ? await response.json() : [];
     if (Array.isArray(poppyPhotos)) {
-      poppyPhotos.filter((photo) => photo?.src && photo?.alt).forEach((photo) => {
+      poppyPhotos.filter((photo) => photo && photo.src && photo.alt).forEach((photo) => {
         photos.push({
           src: photo.src,
           alt: photo.alt,
@@ -221,7 +222,9 @@ async function loadBreedOfTheDay() {
 
 shufflePhoto.addEventListener("click", () => {
   choosePhoto();
-  (window.MSSystemsReady || Promise.resolve()).then(() => window.MSAchievements?.record("shuffles", 1));
+  (window.MSSystemsReady || Promise.resolve()).then(() => {
+    if (window.MSAchievements) window.MSAchievements.record("shuffles", 1);
+  });
 });
 loadRealPoppyPhotos();
 loadBreedOfTheDay();

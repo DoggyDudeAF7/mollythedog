@@ -120,7 +120,8 @@
       const hint = document.createElement("p");
       hint.className = "ms-search-hint";
       hint.textContent = "Press Escape to close";
-      searchBox.querySelector("#searchInput")?.after(hint);
+      const input = searchBox.querySelector("#searchInput");
+      if (input) input.after(hint);
     }
     return searchBox;
   }
@@ -141,7 +142,7 @@
       button.classList.add("ms-header-search");
     }
     nav.appendChild(button);
-    window.renderDogEmojis?.(button);
+    if (window.renderDogEmojis) window.renderDogEmojis(button);
     return button;
   }
 
@@ -183,11 +184,11 @@
       link.append(icon, copy, type);
       link.addEventListener("click", () => {
         remember(item.id);
-        window.MSAchievements?.record("searches", 1);
+        if (window.MSAchievements) window.MSAchievements.record("searches", 1);
       });
       results.appendChild(link);
     });
-    window.renderDogEmojis?.(results);
+    if (window.renderDogEmojis) window.renderDogEmojis(results);
   }
 
   /* Retrieve recent searches from browser localStorage */
@@ -249,9 +250,11 @@
     function updateSelection() {
       const links = [...results.querySelectorAll(".ms-search-result")];
       links.forEach((link, index) => link.classList.toggle("active", index === selectedIndex));
-      links[selectedIndex]?.scrollIntoView({
-        block: "nearest"
-      });
+      if (links[selectedIndex]) {
+        links[selectedIndex].scrollIntoView({
+          block: "nearest"
+        });
+      }
     }
 
     searchButton.addEventListener("click", openSearch);
@@ -291,7 +294,8 @@
       if (event.target === searchBox) closeSearch();
     });
     document.addEventListener("keydown", (event) => {
-      const typing = /^(INPUT|TEXTAREA|SELECT)$/.test(document.activeElement?.tagName) || document.activeElement?.isContentEditable;
+      const active = document.activeElement;
+      const typing = /^(INPUT|TEXTAREA|SELECT)$/.test(active && active.tagName) || Boolean(active && active.isContentEditable);
       if (event.key === "/" && !typing) {
         event.preventDefault();
         openSearch();

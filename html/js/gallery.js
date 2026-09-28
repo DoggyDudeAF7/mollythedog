@@ -13,7 +13,7 @@
       });
       const photos = response.ok ? await response.json() : [];
       if (!Array.isArray(photos)) return;
-      photos.filter((photo) => photo?.src && photo?.alt).forEach((photo, index) => {
+      photos.filter((photo) => photo && photo.src && photo.alt).forEach((photo, index) => {
         const image = document.createElement("img");
         image.src = photo.src;
         image.alt = photo.alt;
@@ -26,7 +26,10 @@
         image.dataset.favouriteDescription = photo.caption || photo.alt;
         grid.appendChild(image);
       });
-      if (grid.children.length) grid.parentElement?.querySelector(".gallery-empty")?.setAttribute("hidden", "");
+      if (grid.children.length && grid.parentElement) {
+        const empty = grid.parentElement.querySelector(".gallery-empty");
+        if (empty) empty.setAttribute("hidden", "");
+      }
     } catch {}
   }));
 
@@ -91,7 +94,7 @@
     <button type="button" class="gallery-shuffle">↻ Shuffle photos</button>`;
 
   const firstSection = grids[0].closest("section");
-  firstSection?.parentNode.insertBefore(toolbar, firstSection);
+  if (firstSection) firstSection.parentNode.insertBefore(toolbar, firstSection);
 
   toolbar.addEventListener("click", (event) => {
     const filter = event.target.closest("[data-filter-kind]");
@@ -110,6 +113,6 @@
       .sort(() => Math.random() - 0.5)
         .forEach((item) => grid.appendChild(item));
     });
-    window.MSAchievements?.record("shuffles", 1);
+    if (window.MSAchievements) window.MSAchievements.record("shuffles", 1);
   });
 })();

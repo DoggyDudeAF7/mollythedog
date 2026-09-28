@@ -7,7 +7,8 @@ document.addEventListener("DOMContentLoaded", async () => {
   if (!track || !dotsWrap) return;
 
   /* Detect which dog character's photos to load */
-  const pageTitle = document.querySelector("h1")?.textContent?.toLowerCase() || "";
+  const heading = document.querySelector("h1");
+  const pageTitle = heading && heading.textContent ? heading.textContent.toLowerCase() : "";
   const isShaina = pageTitle.includes("shaina");
   const isPoppy = pageTitle.includes("poppy");
   let images = isShaina ?
@@ -67,7 +68,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
     if (!images.length) {
       track.innerHTML = `<div class="poppy-photo-placeholder carousel-empty"><span>:poppy:</span><small>Real Poppy photos are coming soon.</small></div>`;
-      window.renderDogEmojis?.(track);
+      if (window.renderDogEmojis) window.renderDogEmojis(track);
       dotsWrap.hidden = true;
       return;
     }
@@ -188,7 +189,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     slides[index].classList.add("active");
     dots[real].classList.add("active");
 
-    const fill = dots[real]?.querySelector(".fill");
+    const fill = dots[real] ? dots[real].querySelector(".fill") : null;
     if (fill) {
       fill.style.transition = `width ${interval}ms linear`;
       fill.style.width = "100%";

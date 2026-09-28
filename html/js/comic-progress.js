@@ -54,7 +54,8 @@
     shelf.querySelectorAll(".comic-cover-card").forEach((card) => {
       const slug = new URL(card.href, location.href).searchParams.get("q");
       const progress = state[slug];
-      card.querySelector(".comic-cover-progress")?.remove();
+      const existing = card.querySelector(".comic-cover-progress");
+      if (existing) existing.remove();
       if (!progress) return;
       const percent = progress.completed ? 100 : Math.min(100, Math.round(((progress.panel + 4) / progress.total) * 100));
       const marker = document.createElement("span");
@@ -63,13 +64,15 @@
       card.appendChild(marker);
     });
 
-    document.querySelector(".comic-continue")?.remove();
+    const existing = document.querySelector(".comic-continue");
+    if (existing) existing.remove();
     const latest = latestUnfinished();
     if (!latest) return;
     const [slug, progress] = latest;
     const card = [...shelf.querySelectorAll(".comic-cover-card")].find((item) => new URL(item.href, location.href).searchParams.get("q") === slug);
     if (!card) return;
-    const title = card.querySelector(":scope > span:not(.comic-cover-progress)")?.textContent.replace(/^Read\s+/i, "") || "your comic";
+    const titleNode = card.querySelector(":scope > span:not(.comic-cover-progress)");
+    const title = titleNode ? titleNode.textContent.replace(/^Read\s+/i, "") : "your comic";
     const banner = document.createElement("a");
     banner.className = "comic-continue";
     banner.href = card.href;

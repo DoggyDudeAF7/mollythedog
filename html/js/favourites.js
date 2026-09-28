@@ -64,7 +64,7 @@
   }
 
   function cleanItem(item) {
-    const id = String(item?.id || "").trim();
+    const id = String(item && item.id || "").trim();
     if (!id || !id.includes(":")) return null;
     const image = String(item.image || "");
     return {
@@ -103,7 +103,7 @@
   }
 
   function has(id) {
-    return Boolean(state.items?.[id]);
+    return Boolean(state.items && state.items[id]);
   }
 
   function add(item) {
@@ -160,7 +160,7 @@
 
   function photoForImage(image) {
     const pathname = new URL(image.currentSrc || image.src, location.href).pathname;
-    const knownPhoto = window.MSData?.photos.find((photo) => photo.image === pathname);
+    const knownPhoto = window.MSData ? window.MSData.photos.find((photo) => photo.image === pathname) : null;
     if (knownPhoto) return knownPhoto;
     if (!image.dataset.favouriteId) return null;
     return {
@@ -177,7 +177,7 @@
   function enhanceComicShelf(root = document) {
     root.querySelectorAll(".comic-cover-card:not([data-ms-favourite-ready])").forEach((card) => {
       const slug = new URL(card.href, location.href).searchParams.get("q");
-      const item = window.MSData?.comics.find((comic) => comic.slug === slug);
+      const item = window.MSData ? window.MSData.comics.find((comic) => comic.slug === slug) : null;
       if (!item) return;
       card.dataset.msFavouriteReady = "true";
       const wrapper = document.createElement("div");
@@ -201,17 +201,18 @@
 
   function enhanceBlog(root = document) {
     root.querySelectorAll(".blog-post:not([data-ms-favourite-ready])").forEach((post) => {
-      const title = post.querySelector("h2")?.textContent.trim();
+      const titleNode = post.querySelector("h2");
+      const title = titleNode ? titleNode.textContent.trim() : "";
       if (!title || /getting posts/i.test(title)) return;
       post.dataset.msFavouriteReady = "true";
       const image = post.querySelector("img");
       const item = {
-        id: post.dataset.favouriteId || `blog:${window.MSData?.slugify(title) || title.toLowerCase().replace(/\W+/g, "-")}`,
+        id: post.dataset.favouriteId || `blog:${window.MSData ? window.MSData.slugify(title) : title.toLowerCase().replace(/\W+/g, "-")}`,
         title,
         type: "Blog",
         url: "/blog/",
-        image: image?.getAttribute("src") || "",
-        description: post.querySelector("p:not(.blog-date)")?.textContent.trim() || "",
+        image: image ? image.getAttribute("src") : "",
+        description: post.querySelector("p:not(.blog-date)") ? post.querySelector("p:not(.blog-date)").textContent.trim() : "",
         icon: ":blog:"
       };
       post.appendChild(makeButton(item, "ms-blog-favourite"));
@@ -222,7 +223,7 @@
     const header = document.querySelector(".viewer-header");
     if (!header || header.dataset.msFavouriteReady) return;
     const slug = new URLSearchParams(location.search).get("q") || "kibble";
-    const item = window.MSData?.comics.find((comic) => comic.slug === slug);
+    const item = window.MSData ? window.MSData.comics.find((comic) => comic.slug === slug) : null;
     if (!item) return;
     header.dataset.msFavouriteReady = "true";
     header.appendChild(makeButton(item, "ms-viewer-favourite"));

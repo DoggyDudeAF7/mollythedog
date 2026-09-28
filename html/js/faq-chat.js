@@ -216,7 +216,7 @@
         <p class="faq-ai-note">AI can make mistakes. For anything it cannot answer, <a href="/contact/">ask the human</a>.</p>
       </section>`;
 
-    window.renderDogEmojis?.(mount);
+    if (window.renderDogEmojis) window.renderDogEmojis(mount);
 
     const transcript = mount.querySelector(".faq-ai-messages");
     const form = mount.querySelector(".faq-ai-form");
@@ -288,7 +288,7 @@
           role: "assistant",
           content: result.answer
         });
-        window.MSAchievements?.unlock("very-suspicious");
+        if (window.MSAchievements) window.MSAchievements.unlock("very-suspicious");
       } catch (error) {
         pending.remove();
         addMessage("assistant", `${error.message || "Something went wrong."} You can also ask Geoff or contact the human.`);
