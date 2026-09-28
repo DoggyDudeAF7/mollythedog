@@ -16,8 +16,12 @@ siteAccessForm.addEventListener("submit", async (event) => {
     const response = await fetch("/api/login", {
       method: "POST",
       credentials: "same-origin",
-      headers: { "content-type": "application/json" },
-      body: JSON.stringify({ password: siteAccessPassword.value })
+      headers: {
+        "content-type": "application/json"
+      },
+      body: JSON.stringify({
+        password: siteAccessPassword.value
+      })
     });
 
     if (!response.ok) {
@@ -25,7 +29,9 @@ siteAccessForm.addEventListener("submit", async (event) => {
       throw new Error(result.error || "That password did not work.");
     }
 
-    try { localStorage.setItem("msFoundSecret", "1"); } catch {}
+    try {
+      localStorage.setItem("msFoundSecret", "1");
+    } catch {}
     location.href = "/home/";
   } catch (error) {
     setSiteAccessStatus(error.message, true);

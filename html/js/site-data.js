@@ -1,5 +1,5 @@
 /* Site-wide data: page catalog, comics, photos, and utilities */
-(function () {
+(function() {
   "use strict";
 
   /* Convert text to URL-safe slugs */
@@ -49,8 +49,16 @@
     ["page:privacy", "Privacy Policy", "How the Molly and Shaina website collects, uses, stores, and shares information.", "Policy", "🔒", "/privacy-policy/", "privacy data cookies analytics information"],
     ["page:terms", "Terms of Use & Request Policies", "Rules for using the site, sending submissions, downloads, and requesting free stickers.", "Policy", "📄", "/terms-of-use/", "terms conditions rules sticker requests policy"],
     ["page:favourites", "Your Favourites", "All your saved breeds, comics, photos, and blog posts.", "Page", "♥", "/favourites/", "saved collection"],
-    ["page:achievements", "Achievements", "Explore your unlocked and hidden Molly and Shaina achievements.", "Page", "🏆", "/achievements/", "progress trophies" ]
-  ].map(([id, title, description, type, icon, url, keywords]) => ({ id, title, description, type, icon, url, keywords }));
+    ["page:achievements", "Achievements", "Explore your unlocked and hidden Molly and Shaina achievements.", "Page", "🏆", "/achievements/", "progress trophies"]
+  ].map(([id, title, description, type, icon, url, keywords]) => ({
+    id,
+    title,
+    description,
+    type,
+    icon,
+    url,
+    keywords
+  }));
 
   /* Comic series data: slug, title, description, and cover image */
   const comics = [
@@ -103,5 +111,10 @@
     keywords: "photo picture dog molly shaina"
   }));
 
-  window.MSData = Object.freeze({ pages, comics, photos, slugify });
+  window.MSData = Object.freeze({
+    pages,
+    comics,
+    photos,
+    slugify
+  });
 })();

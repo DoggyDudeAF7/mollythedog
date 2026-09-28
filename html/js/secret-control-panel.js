@@ -68,7 +68,11 @@ function setEditorStatus(message) {
 }
 
 function getTimeStamp() {
-  return new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit", second: "2-digit" });
+  return new Date().toLocaleTimeString([], {
+    hour: "2-digit",
+    minute: "2-digit",
+    second: "2-digit"
+  });
 }
 
 function updatePreview() {
@@ -88,7 +92,9 @@ function enableEditorActions() {
 async function hasWritePermission(handle) {
   if (!handle?.queryPermission || !handle?.requestPermission) return true;
 
-  const options = { mode: "readwrite" };
+  const options = {
+    mode: "readwrite"
+  };
   if (await handle.queryPermission(options) === "granted") return true;
   return await handle.requestPermission(options) === "granted";
 }
@@ -101,12 +107,12 @@ async function openPageForEditing() {
 
   try {
     const [handle] = await window.showOpenFilePicker({
-      types: [
-        {
-          description: "HTML pages",
-          accept: { "text/html": [".html", ".htm"] }
+      types: [{
+        description: "HTML pages",
+        accept: {
+          "text/html": [".html", ".htm"]
         }
-      ],
+      }],
       excludeAcceptAllOption: false,
       multiple: false
     });
@@ -167,7 +173,9 @@ async function savePage() {
 function downloadPageCopy() {
   if (!pageEditor?.value) return;
 
-  const blob = new Blob([pageEditor.value], { type: "text/html" });
+  const blob = new Blob([pageEditor.value], {
+    type: "text/html"
+  });
   const link = document.createElement("a");
   link.href = URL.createObjectURL(blob);
   link.download = pageFileName;

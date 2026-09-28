@@ -2,8 +2,8 @@
 CONFIG
 ========================= */
 
-const size = 21;   // maze cells (odd number)
-const cell = 28;   // pixel size
+const size = 21; // maze cells (odd number)
+const cell = 28; // pixel size
 const fogRadius = 2;
 
 const canvas = document.getElementById("maze");
@@ -27,118 +27,121 @@ TIMER
 ========================= */
 
 let seconds = 0;
-setInterval(()=>{
-seconds++;
-document.getElementById("timer").textContent = "Time: "+seconds+"s";
-},1000);
+setInterval(() => {
+  seconds++;
+  document.getElementById("timer").textContent = "Time: " + seconds + "s";
+}, 1000);
 
 /* =========================
 MAZE DATA
 ========================= */
 
 let maze = [];
-for(let y=0;y<size;y++){
-maze[y]=[];
-for(let x=0;x<size;x++){
-maze[y][x]=1;
-}
+for (let y = 0; y < size; y++) {
+  maze[y] = [];
+  for (let x = 0; x < size; x++) {
+    maze[y][x] = 1;
+  }
 }
 
 /* =========================
 RANDOM MAZE GENERATOR
 ========================= */
 
-function shuffle(arr){
-for(let i=arr.length-1;i>0;i--){
-const j=Math.floor(Math.random()*(i+1));
-[arr[i],arr[j]]=[arr[j],arr[i]];
-}
-return arr;
-}
-
-function carve(x,y){
-
-const dirs = shuffle([
-[2,0],[-2,0],[0,2],[0,-2]
-]);
-
-dirs.forEach(d=>{
-const nx = x + d[0];
-const ny = y + d[1];
-
-if(nx>0 && ny>0 && nx<size-1 && ny<size-1 && maze[ny][nx]===1){
-
-maze[ny][nx]=0;
-maze[y+d[1]/2][x+d[0]/2]=0;
-
-carve(nx,ny);
-
+function shuffle(arr) {
+  for (let i = arr.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [arr[i], arr[j]] = [arr[j], arr[i]];
+  }
+  return arr;
 }
 
-});
+function carve(x, y) {
+
+  const dirs = shuffle([
+    [2, 0],
+    [-2, 0],
+    [0, 2],
+    [0, -2]
+  ]);
+
+  dirs.forEach(d => {
+    const nx = x + d[0];
+    const ny = y + d[1];
+
+    if (nx > 0 && ny > 0 && nx < size - 1 && ny < size - 1 && maze[ny][nx] === 1) {
+
+      maze[ny][nx] = 0;
+      maze[y + d[1] / 2][x + d[0] / 2] = 0;
+
+      carve(nx, ny);
+
+    }
+
+  });
 
 }
 
-maze[1][1]=0;
-carve(1,1);
+maze[1][1] = 0;
+carve(1, 1);
 
-maze[size-2][size-2]=0;
+maze[size - 2][size - 2] = 0;
 
 /* =========================
 PLAYER
 ========================= */
 
-let player={
-x:1,
-y:1
+let player = {
+  x: 1,
+  y: 1
 };
 
 /* =========================
 DRAW
 ========================= */
 
-function draw(){
+function draw() {
 
-ctx.clearRect(0,0,canvas.width,canvas.height);
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-for(let y=0;y<size;y++){
-for(let x=0;x<size;x++){
+  for (let y = 0; y < size; y++) {
+    for (let x = 0; x < size; x++) {
 
-if(maze[y][x]===1){
-ctx.fillStyle="#222";
-ctx.fillRect(x*cell,y*cell,cell,cell);
-}
+      if (maze[y][x] === 1) {
+        ctx.fillStyle = "#222";
+        ctx.fillRect(x * cell, y * cell, cell, cell);
+      }
 
-}
+    }
 
-}
+  }
 
-/* exit */
+  /* exit */
 
-drawDogMarker(shainaImg, size - 2, size - 2, "#3cff84");
+  drawDogMarker(shainaImg, size - 2, size - 2, "#3cff84");
 
-/* player */
+  /* player */
 
-drawDogMarker(mollyImg, player.x, player.y, "#ffb7a5");
+  drawDogMarker(mollyImg, player.x, player.y, "#ffb7a5");
 
-/* fog of war */
+  /* fog of war */
 
-ctx.fillStyle="rgba(0,0,0,.8)";
+  ctx.fillStyle = "rgba(0,0,0,.8)";
 
-for(let y=0;y<size;y++){
-for(let x=0;x<size;x++){
+  for (let y = 0; y < size; y++) {
+    for (let x = 0; x < size; x++) {
 
-const dx=Math.abs(x-player.x);
-const dy=Math.abs(y-player.y);
+      const dx = Math.abs(x - player.x);
+      const dy = Math.abs(y - player.y);
 
-if(dx>fogRadius || dy>fogRadius){
+      if (dx > fogRadius || dy > fogRadius) {
 
-ctx.fillRect(x*cell,y*cell,cell,cell);
+        ctx.fillRect(x * cell, y * cell, cell, cell);
 
-}
+      }
 
-}
-}
+    }
+  }
 
 }
 
@@ -177,35 +180,35 @@ function drawDogMarker(image, x, y, fallbackColor) {
 MOVE
 ========================= */
 
-function move(dx,dy){
+function move(dx, dy) {
 
-const nx=player.x+dx;
-const ny=player.y+dy;
+  const nx = player.x + dx;
+  const ny = player.y + dy;
 
-if(nx<0||ny<0||nx>=size||ny>=size)return;
+  if (nx < 0 || ny < 0 || nx >= size || ny >= size) return;
 
-if(maze[ny][nx]===1)return;
+  if (maze[ny][nx] === 1) return;
 
-player.x=nx;
-player.y=ny;
+  player.x = nx;
+  player.y = ny;
 
-draw();
+  draw();
 
-checkWin();
-
-}
-
-function checkWin(){
-
-if(player.x===size-2 && player.y===size-2){
-
-document.getElementById("win").classList.add("show");
-
-setTimeout(()=>{
-location.href=getReturnPage();
-},2000);
+  checkWin();
 
 }
+
+function checkWin() {
+
+  if (player.x === size - 2 && player.y === size - 2) {
+
+    document.getElementById("win").classList.add("show");
+
+    setTimeout(() => {
+      location.href = getReturnPage();
+    }, 2000);
+
+  }
 
 }
 
@@ -229,11 +232,11 @@ function getReturnPage() {
 KEYS
 ========================= */
 
-document.addEventListener("keydown",e=>{
+document.addEventListener("keydown", e => {
 
-if(e.key==="ArrowUp")move(0,-1);
-if(e.key==="ArrowDown")move(0,1);
-if(e.key==="ArrowLeft")move(-1,0);
-if(e.key==="ArrowRight")move(1,0);
+  if (e.key === "ArrowUp") move(0, -1);
+  if (e.key === "ArrowDown") move(0, 1);
+  if (e.key === "ArrowLeft") move(-1, 0);
+  if (e.key === "ArrowRight") move(1, 0);
 
 });

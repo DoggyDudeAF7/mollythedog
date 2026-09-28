@@ -2,12 +2,19 @@ const DEFAULT_COMPASS_CALENDAR_URL = "https://viewbank-vic.compass.education/dow
 const SETTINGS_KEY = "samuel-start-settings";
 const CUSTOM_APPS_KEY = "samuel-start-custom-apps";
 
-const fallbackEvents = [
-  { timeLabel: "8:50", title: "Homeroom" },
-  { timeLabel: "9:10", title: "Period 1" },
-  { timeLabel: "11:20", title: "Period 2" },
-  { timeLabel: "1:40", title: "Afternoon class" },
-];
+const fallbackEvents = [{
+  timeLabel: "8:50",
+  title: "Homeroom"
+}, {
+  timeLabel: "9:10",
+  title: "Period 1"
+}, {
+  timeLabel: "11:20",
+  title: "Period 2"
+}, {
+  timeLabel: "1:40",
+  title: "Afternoon class"
+}, ];
 
 const defaults = {
   name: "Samuel",
@@ -90,7 +97,9 @@ function loadSettings() {
     };
   } catch {
     localStorage.removeItem(SETTINGS_KEY);
-    return { ...defaults };
+    return {
+      ...defaults
+    };
   }
 }
 
@@ -114,7 +123,10 @@ const appLinkObserver = new MutationObserver((changes) => {
 
 function watchAppLink(link) {
   updateAppIcon(link);
-  appLinkObserver.observe(link, { attributes: true, attributeFilter: ["href"] });
+  appLinkObserver.observe(link, {
+    attributes: true,
+    attributeFilter: ["href"]
+  });
 }
 
 function loadCustomApps() {
@@ -350,13 +362,13 @@ function parseCompassEvents(calendarText) {
       const start = parseCalendarDate(getCalendarValue(eventText, "DTSTART"));
       const summary = cleanCalendarText(getCalendarValue(eventText, "SUMMARY"));
 
-      return start && summary
-        ? {
-            start,
-            timeLabel: formatEventTime(start),
-            title: summary,
-          }
-        : null;
+      return start && summary ?
+        {
+          start,
+          timeLabel: formatEventTime(start),
+          title: summary,
+        } :
+        null;
     })
     .filter((event) => event && isToday(event.start))
     .sort((first, second) => first.start - second.start);
@@ -398,7 +410,10 @@ async function loadCompassEvents() {
     const todayEvents = parseCompassEvents(calendarText);
 
     if (todayEvents.length === 0) {
-      renderEvents([{ timeLabel: "--", title: "No more Compass events today" }]);
+      renderEvents([{
+        timeLabel: "--",
+        title: "No more Compass events today"
+      }]);
       elements.eventsStatus.textContent = "Compass is connected.";
       return;
     }

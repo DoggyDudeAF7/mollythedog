@@ -1,8 +1,12 @@
-(function () {
+(function() {
   "use strict";
 
   const escapeHTML = value => String(value).replace(/[&<>'"]/g, character => ({
-    "&": "&amp;", "<": "&lt;", ">": "&gt;", "'": "&#39;", '"': "&quot;"
+    "&": "&amp;",
+    "<": "&lt;",
+    ">": "&gt;",
+    "'": "&#39;",
+    '"': "&quot;"
   })[character]);
 
   function safeURL(value) {
@@ -128,14 +132,20 @@
 
   async function loadSitePage(path) {
     try {
-      const response = await fetch(path, { cache: "force-cache" });
+      const response = await fetch(path, {
+        cache: "force-cache"
+      });
       if (!response.ok) return null;
       const documentCopy = new DOMParser().parseFromString(await response.text(), "text/html");
       documentCopy.querySelectorAll("nav, footer, script, style, form, button, #searchBox").forEach(element => element.remove());
       const root = documentCopy.querySelector("main") || documentCopy.body;
       const text = root.textContent.replace(/\s+/g, " ").trim();
       const title = (documentCopy.querySelector("h1")?.textContent || documentCopy.title || path).trim();
-      return { path, title, text: text.slice(0, 10000) };
+      return {
+        path,
+        title,
+        text: text.slice(0, 10000)
+      };
     } catch {
       return null;
     }
@@ -161,7 +171,10 @@
         if (page.path.includes(word)) score += 8;
         if (text.includes(word)) score += 2;
       }
-      return { ...page, score };
+      return {
+        ...page,
+        score
+      };
     }).sort((a, b) => b.score - a.score);
 
     const selected = ranked.slice(0, 7);
@@ -213,9 +226,9 @@
     const connectionStatus = mount.querySelector(".faq-ai-header small");
 
     siteIndexPromise.then(pages => {
-      connectionStatus.textContent = pages.length
-        ? `Ollama · ${pages.length} site pages connected`
-        : "Ollama · current FAQ page connected";
+      connectionStatus.textContent = pages.length ?
+        `Ollama · ${pages.length} site pages connected` :
+        "Ollama · current FAQ page connected";
     });
 
     function addMessage(role, text, pending = false) {
@@ -242,7 +255,10 @@
       if (!question) return;
 
       addMessage("user", question);
-      messages.push({ role: "user", content: question });
+      messages.push({
+        role: "user",
+        content: question
+      });
       input.value = "";
       input.style.height = "auto";
       input.disabled = true;
@@ -254,15 +270,24 @@
         const context = relevantSiteContext(sitePages, question, dog, currentPageContext);
         const response = await fetch("/api/faq-chat", {
           method: "POST",
-          headers: { "content-type": "application/json" },
-          body: JSON.stringify({ dog, context, messages }),
+          headers: {
+            "content-type": "application/json"
+          },
+          body: JSON.stringify({
+            dog,
+            context,
+            messages
+          }),
         });
         const result = await response.json().catch(() => ({}));
         if (!response.ok) throw new Error(result.error || "The FAQ assistant could not answer.");
 
         pending.remove();
         addMessage("assistant", result.answer);
-        messages.push({ role: "assistant", content: result.answer });
+        messages.push({
+          role: "assistant",
+          content: result.answer
+        });
         window.MSAchievements?.unlock("very-suspicious");
       } catch (error) {
         pending.remove();
@@ -294,7 +319,9 @@
   }
 
   if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", mountChat, { once: true });
+    document.addEventListener("DOMContentLoaded", mountChat, {
+      once: true
+    });
   } else {
     mountChat();
   }

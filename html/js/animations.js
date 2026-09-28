@@ -1,5 +1,5 @@
 /* Load animated emoji and system scripts for site */
-(function () {
+(function() {
   /* Locate this script to determine the site root directory */
   var scriptElement = document.currentScript;
   var scriptElements;
@@ -15,9 +15,9 @@
     }
   }
 
-  var siteRoot = scriptElement && scriptElement.src
-    ? scriptElement.src.replace(/js\/animations\.js(?:[?#].*)?$/, "")
-    : "/";
+  var siteRoot = scriptElement && scriptElement.src ?
+    scriptElement.src.replace(/js\/animations\.js(?:[?#].*)?$/, "") :
+    "/";
 
   var emojiRoot = siteRoot + "images/emoji/";
 
@@ -28,9 +28,9 @@
 
     /* Load a system script dynamically if not already loaded */
     function loadSystemScript(filename) {
-      return new Promise(function (resolve) {
+      return new Promise(function(resolve) {
         /* Check if script is already loaded */
-        var alreadyLoaded = Array.prototype.some.call(document.scripts, function (item) {
+        var alreadyLoaded = Array.prototype.some.call(document.scripts, function(item) {
           return item.src && item.src.split(/[?#]/)[0].endsWith("/js/" + filename);
         });
 
@@ -62,14 +62,14 @@
       }
 
       window.MSSystemsReady = loadSystemScript("site-data.js")
-        .then(function () {
+        .then(function() {
           return loadSystemScript("favourites.js");
         })
-        .then(function () {
+        .then(function() {
           return loadSystemScript("achievements.js");
         });
 
-      window.MSSystemsReady.then(function () {
+      window.MSSystemsReady.then(function() {
         return loadSystemScript("search.js");
       });
 
@@ -381,8 +381,7 @@
     root =
       root || document;
 
-    var nodes =
-      [];
+    var nodes = [];
 
     var i;
 
@@ -426,9 +425,7 @@
     }
 
     for (
-      i = 0;
-      i < nodes.length;
-      i += 1
+      i = 0; i < nodes.length; i += 1
     ) {
       replaceShortcodesInTextNode(
         nodes[i]
@@ -440,8 +437,6 @@
     renderDogEmojis;
 
 }());
-
-
 
 function initMollyShainaAnimations() {
 
@@ -467,15 +462,12 @@ function initMollyShainaAnimations() {
       });
 
     dogEmojiObserver.observe(
-      document.body,
-      {
+      document.body, {
         childList: true,
         subtree: true
       }
     );
   }
-
-
 
   /* =========================================
      REMEMBER LAST PAGE
@@ -497,8 +489,6 @@ function initMollyShainaAnimations() {
     }
 
   } catch {}
-
-
 
   /* =========================================
      REVEAL ANIMATIONS
@@ -537,11 +527,9 @@ function initMollyShainaAnimations() {
 
             });
 
-          },
-          {
+          }, {
             threshold: 0.12,
-            rootMargin:
-              "0px 0px -40px 0px"
+            rootMargin: "0px 0px -40px 0px"
           }
         );
 
@@ -558,8 +546,6 @@ function initMollyShainaAnimations() {
     }
 
   }
-
-
 
   /* =========================================
      MOBILE NAVIGATION
@@ -587,14 +573,13 @@ function initMollyShainaAnimations() {
 
         toggle.setAttribute(
           "aria-expanded",
-          open
-            ? "true"
-            : "false"
+          open ?
+          "true" :
+          "false"
         );
 
       }
     );
-
 
     links
       .querySelectorAll("a")
@@ -615,7 +600,6 @@ function initMollyShainaAnimations() {
         );
 
       });
-
 
     document.addEventListener(
       "click",
@@ -640,8 +624,6 @@ function initMollyShainaAnimations() {
 
   }
 
-
-
   /* =========================================
      LIGHTBOX
      ========================================= */
@@ -662,7 +644,6 @@ function initMollyShainaAnimations() {
         "lightboxImg"
       );
 
-
     if (
       !lightbox
     ) {
@@ -678,7 +659,6 @@ function initMollyShainaAnimations() {
       );
 
     }
-
 
     if (
       !lightboxImg
@@ -699,12 +679,10 @@ function initMollyShainaAnimations() {
 
     }
 
-
     let closeButton =
       document.getElementById(
         "lightboxClose"
       );
-
 
     if (
       !closeButton
@@ -733,7 +711,6 @@ function initMollyShainaAnimations() {
 
     }
 
-
     function closeLightbox() {
 
       lightbox.style.display =
@@ -744,7 +721,6 @@ function initMollyShainaAnimations() {
       );
 
     }
-
 
     document.addEventListener(
       "click",
@@ -766,16 +742,15 @@ function initMollyShainaAnimations() {
           img.src;
 
         lightboxImg.alt =
-          img.alt
-            ? `Enlarged view: ${img.alt}`
-            : "Enlarged gallery image";
+          img.alt ?
+          `Enlarged view: ${img.alt}` :
+          "Enlarged gallery image";
 
         lightbox.style.display =
           "flex";
 
       }
     );
-
 
     lightbox.addEventListener(
       "click",
@@ -793,7 +768,6 @@ function initMollyShainaAnimations() {
       }
     );
 
-
     document.addEventListener(
       "keydown",
       event => {
@@ -809,8 +783,6 @@ function initMollyShainaAnimations() {
 
   }
 
-
-
   /* =========================================
      HABITS DATA
      ========================================= */
@@ -823,11 +795,10 @@ function initMollyShainaAnimations() {
     "sighs"
   ];
 
-
   if (
     habitIds.every(
       id =>
-        document.getElementById(id)
+      document.getElementById(id)
     )
   ) {
 
@@ -839,12 +810,10 @@ function initMollyShainaAnimations() {
       sighs: 3
     };
 
-
     const habitStorageKey =
-      location.pathname.includes("poppy")
-        ? "poppyHabits"
-        : "mollyHabits";
-
+      location.pathname.includes("poppy") ?
+      "poppyHabits" :
+      "mollyHabits";
 
     try {
 
@@ -857,7 +826,6 @@ function initMollyShainaAnimations() {
         data;
 
     } catch {}
-
 
     function setBar(
       id,
@@ -884,15 +852,14 @@ function initMollyShainaAnimations() {
 
     }
 
-
     function update() {
 
       habitIds.forEach(
         id => {
 
           document.getElementById(
-            id
-          ).textContent =
+              id
+            ).textContent =
             data[id];
 
           setBar(
@@ -903,12 +870,10 @@ function initMollyShainaAnimations() {
         }
       );
 
-
       const time =
         document.getElementById(
           "time"
         );
-
 
       if (
         time
@@ -917,10 +882,9 @@ function initMollyShainaAnimations() {
         time.textContent =
           "Last updated: " +
           new Date()
-            .toLocaleTimeString();
+          .toLocaleTimeString();
 
       }
-
 
       try {
 
@@ -933,9 +897,7 @@ function initMollyShainaAnimations() {
 
     }
 
-
     update();
-
 
     const today =
       new Date().getDay();
@@ -943,14 +905,12 @@ function initMollyShainaAnimations() {
     const index =
       (today + 6) % 7;
 
-
     const todayValues = [
       data.patrols * 12,
       data.sighs * 12,
       data.windows * 12,
       (data.naps + data.blankets) * 6
     ];
-
 
     document
       .querySelectorAll(".day")
@@ -962,14 +922,13 @@ function initMollyShainaAnimations() {
               ".vbar"
             );
 
-
           bars.forEach(
             (bar, j) => {
 
               bar.style.height =
-                i === index
-                  ? todayValues[j] + "%"
-                  : "0%";
+                i === index ?
+                todayValues[j] + "%" :
+                "0%";
 
             }
           );
@@ -978,8 +937,6 @@ function initMollyShainaAnimations() {
       );
 
   }
-
-
 
   /* =========================================
      DOG AI
@@ -1000,7 +957,6 @@ function initMollyShainaAnimations() {
       "answer"
     );
 
-
   if (
     questionInput &&
     askBtn &&
@@ -1010,42 +966,38 @@ function initMollyShainaAnimations() {
     const isShainaAI =
 
       document.title
-        .toLowerCase()
-        .includes("shaina")
+      .toLowerCase()
+      .includes("shaina")
 
       ||
 
       askBtn.textContent
-        .toLowerCase()
-        .includes("shaina");
-
+      .toLowerCase()
+      .includes("shaina");
 
     const isPoppyAI =
 
       document.title
-        .toLowerCase()
-        .includes("poppy")
+      .toLowerCase()
+      .includes("poppy")
 
       ||
 
       askBtn.textContent
-        .toLowerCase()
-        .includes("poppy");
-
+      .toLowerCase()
+      .includes("poppy");
 
     const dogName =
-      isPoppyAI
-        ? "Poppy"
-        : isShainaAI
-          ? "Shaina"
-          : "Molly";
-
+      isPoppyAI ?
+      "Poppy" :
+      isShainaAI ?
+      "Shaina" :
+      "Molly";
 
     const dogIcon =
-      isPoppyAI
-        ? "🐩"
-        : "🐕";
-
+      isPoppyAI ?
+      "🐩" :
+      "🐕";
 
     function includesAny(
       text,
@@ -1054,12 +1006,10 @@ function initMollyShainaAnimations() {
 
       return words.some(
         word =>
-          text.includes(word)
+        text.includes(word)
       );
 
     }
-
-
 
     function getDogResponse(
       question
@@ -1073,7 +1023,6 @@ function initMollyShainaAnimations() {
           /[^\w\s]/g,
           " "
         );
-
 
       /* SHAINA */
 
@@ -1097,7 +1046,6 @@ function initMollyShainaAnimations() {
 
         }
 
-
         if (
           includesAny(
             compact,
@@ -1116,7 +1064,6 @@ function initMollyShainaAnimations() {
 
         }
 
-
         if (
           includesAny(
             compact,
@@ -1132,7 +1079,6 @@ function initMollyShainaAnimations() {
 
         }
 
-
         if (
           includesAny(
             compact,
@@ -1147,7 +1093,6 @@ function initMollyShainaAnimations() {
           return "Molly is my sleepy best friend. She handles deep thoughts and window surveillance; I handle motion, alerts, and snack investigations.";
 
         }
-
 
         if (
           includesAny(
@@ -1165,7 +1110,6 @@ function initMollyShainaAnimations() {
 
         }
 
-
         if (
           includesAny(
             compact,
@@ -1181,7 +1125,6 @@ function initMollyShainaAnimations() {
           return "Games are best when they involve movement, focus, and winning. I enjoy a task with a clear reward structure.";
 
         }
-
 
         if (
           includesAny(
@@ -1199,7 +1142,6 @@ function initMollyShainaAnimations() {
 
         }
 
-
         if (
           includesAny(
             compact,
@@ -1215,7 +1157,6 @@ function initMollyShainaAnimations() {
           return "Sleep is recovery mode. I rest so I can return to full-speed observation later.";
 
         }
-
 
         if (
           includesAny(
@@ -1233,7 +1174,6 @@ function initMollyShainaAnimations() {
 
         }
 
-
         if (
           includesAny(
             compact,
@@ -1248,7 +1188,6 @@ function initMollyShainaAnimations() {
           return "Yes. I show love through attention, loyalty, quick check-ins, and appearing instantly when something interesting happens.";
 
         }
-
 
         if (
           includesAny(
@@ -1265,7 +1204,6 @@ function initMollyShainaAnimations() {
 
         }
 
-
         if (
           includesAny(
             compact,
@@ -1281,7 +1219,6 @@ function initMollyShainaAnimations() {
 
         }
 
-
         if (
           includesAny(
             compact,
@@ -1296,7 +1233,6 @@ function initMollyShainaAnimations() {
           return "Hello. I noticed you immediately. Do you have a question, a snack, or both?";
 
         }
-
 
         const shainaResponses = [
 
@@ -1316,7 +1252,6 @@ function initMollyShainaAnimations() {
 
         ];
 
-
         return shainaResponses[
           Math.floor(
             Math.random() *
@@ -1325,8 +1260,6 @@ function initMollyShainaAnimations() {
         ];
 
       }
-
-
 
       /* POPPY */
 
@@ -1347,7 +1280,6 @@ function initMollyShainaAnimations() {
           return "I am Poppy, a four-year-old chocolate brown toy poodle living in Melbourne.";
         }
 
-
         if (
           includesAny(
             compact,
@@ -1360,7 +1292,6 @@ function initMollyShainaAnimations() {
         ) {
           return "I am a toy poodle. The name describes my size variety; the attention, intelligence, and curly coat are thoroughly poodle.";
         }
-
 
         if (
           includesAny(
@@ -1376,7 +1307,6 @@ function initMollyShainaAnimations() {
           return "My coat is dense, curly, and continuously growing. It needs regular brushing and trimming, especially where the longer curls gather across my head.";
         }
 
-
         if (
           includesAny(
             compact,
@@ -1390,7 +1320,6 @@ function initMollyShainaAnimations() {
         ) {
           return "I prefer to understand a route as I move through it. Distance matters less than having time to notice what has changed.";
         }
-
 
         if (
           includesAny(
@@ -1406,7 +1335,6 @@ function initMollyShainaAnimations() {
           return "Rest is part of the structure of the day. The best place is comfortable, quiet, and positioned where I can still see the room.";
         }
 
-
         if (
           includesAny(
             compact,
@@ -1421,7 +1349,6 @@ function initMollyShainaAnimations() {
           return "I remember routes and routines, notice small changes, and read more from tone and posture than people sometimes realise.";
         }
 
-
         if (
           includesAny(
             compact,
@@ -1435,7 +1362,6 @@ function initMollyShainaAnimations() {
           return "I live in Melbourne. Home is a collection of known rooms, familiar people, and reliable sequences.";
         }
 
-
         if (
           includesAny(
             compact,
@@ -1448,7 +1374,6 @@ function initMollyShainaAnimations() {
         ) {
           return "Hello. I’m listening.";
         }
-
 
         const poppyResponses = [
 
@@ -1464,7 +1389,6 @@ function initMollyShainaAnimations() {
 
         ];
 
-
         return poppyResponses[
           Math.floor(
             Math.random() *
@@ -1473,8 +1397,6 @@ function initMollyShainaAnimations() {
         ];
 
       }
-
-
 
       /* MOLLY */
 
@@ -1494,7 +1416,6 @@ function initMollyShainaAnimations() {
 
       }
 
-
       if (
         includesAny(
           compact,
@@ -1505,7 +1426,6 @@ function initMollyShainaAnimations() {
         return "Shaina is my best friend 🐕 I trust her opinions on everything, even when she is moving too fast.";
 
       }
-
 
       if (
         includesAny(
@@ -1523,7 +1443,6 @@ function initMollyShainaAnimations() {
 
       }
 
-
       if (
         includesAny(
           compact,
@@ -1534,7 +1453,6 @@ function initMollyShainaAnimations() {
         return "Rain is suspicious, loud, and wet. I recommend avoiding it forever if possible.";
 
       }
-
 
       if (
         includesAny(
@@ -1547,7 +1465,6 @@ function initMollyShainaAnimations() {
 
       }
 
-
       if (
         includesAny(
           compact,
@@ -1558,7 +1475,6 @@ function initMollyShainaAnimations() {
         return "Toys are decorative emotional objects. I inspect them, then abandon them dramatically.";
 
       }
-
 
       if (
         includesAny(
@@ -1571,7 +1487,6 @@ function initMollyShainaAnimations() {
 
       }
 
-
       if (
         includesAny(
           compact,
@@ -1582,7 +1497,6 @@ function initMollyShainaAnimations() {
         return "I can help emotionally, but I may get distracted by a distant sound mid-sentence.";
 
       }
-
 
       if (
         includesAny(
@@ -1595,7 +1509,6 @@ function initMollyShainaAnimations() {
 
       }
 
-
       if (
         includesAny(
           compact,
@@ -1606,7 +1519,6 @@ function initMollyShainaAnimations() {
         return "That sounds emotionally complicated. I recommend lying down until it passes.";
 
       }
-
 
       if (
         includesAny(
@@ -1619,7 +1531,6 @@ function initMollyShainaAnimations() {
 
       }
 
-
       if (
         includesAny(
           compact,
@@ -1630,7 +1541,6 @@ function initMollyShainaAnimations() {
         return "School sounds like a long indoor walk without snacks. I am unsure about it.";
 
       }
-
 
       if (
         includesAny(
@@ -1643,7 +1553,6 @@ function initMollyShainaAnimations() {
 
       }
 
-
       if (
         includesAny(
           compact,
@@ -1654,7 +1563,6 @@ function initMollyShainaAnimations() {
         return "Night is for mysterious sounds and strategic sleeping positions.";
 
       }
-
 
       const mollyResponses = [
 
@@ -1680,7 +1588,6 @@ function initMollyShainaAnimations() {
 
       ];
 
-
       return mollyResponses[
         Math.floor(
           Math.random() *
@@ -1689,8 +1596,6 @@ function initMollyShainaAnimations() {
       ];
 
     }
-
-
 
     function typeText(
       text
@@ -1702,7 +1607,6 @@ function initMollyShainaAnimations() {
       let i =
         0;
 
-
       const interval =
         setInterval(
           () => {
@@ -1711,7 +1615,6 @@ function initMollyShainaAnimations() {
               text[i];
 
             i++;
-
 
             if (
               i >= text.length
@@ -1728,8 +1631,6 @@ function initMollyShainaAnimations() {
         );
 
     }
-
-
 
     questionInput.addEventListener(
       "keydown",
@@ -1748,15 +1649,12 @@ function initMollyShainaAnimations() {
       }
     );
 
-
-
     askBtn.addEventListener(
       "click",
       async () => {
 
         const q =
           questionInput.value.trim();
-
 
         if (
           !q
@@ -1770,36 +1668,32 @@ function initMollyShainaAnimations() {
 
         }
 
-
         (
           window.MSSystemsReady ||
           Promise.resolve()
         )
-          .then(
-            function () {
+        .then(
+          function() {
 
-              window.MSAchievements?.unlock(
-                "very-suspicious"
-              );
+            window.MSAchievements?.unlock(
+              "very-suspicious"
+            );
 
-            }
-          );
-
+          }
+        );
 
         answer.textContent =
           `${dogIcon} ${dogName} is thinking...`;
 
-
         await new Promise(
           resolve =>
-            setTimeout(
-              resolve,
-              900 +
-              Math.random() *
-              1200
-            )
+          setTimeout(
+            resolve,
+            900 +
+            Math.random() *
+            1200
+          )
         );
-
 
         typeText(
           `${dogIcon} ${dogName} says: ` +
@@ -1813,8 +1707,6 @@ function initMollyShainaAnimations() {
 
 }
 
-
-
 /* =========================================
    START
    ========================================= */
@@ -1825,8 +1717,7 @@ if (
 
   document.addEventListener(
     "DOMContentLoaded",
-    initMollyShainaAnimations,
-    {
+    initMollyShainaAnimations, {
       once: true
     }
   );

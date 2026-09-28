@@ -22,7 +22,7 @@
   width: 100%;
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
-  border: 1px solid rgba(255,255,255,0.16);
+  border: 1px solid rgba(255, 255, 255, 0.16);
   border-radius: 18px;
   background: rgba(3, 5, 12, 0.34);
 }
@@ -39,11 +39,11 @@
   padding: 16px 18px;
   text-align: left;
   vertical-align: top;
-  border-bottom: 1px solid rgba(255,255,255,0.12);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
 }
 
 .cybersafety-page th {
-  background: rgba(255,255,255,0.10);
+  background: rgba(255, 255, 255, 0.10);
   color: #fff;
   font-weight: 800;
 }
@@ -54,7 +54,7 @@
 }
 
 .cybersafety-page tbody tr:nth-child(even) {
-  background: rgba(255,255,255,0.045);
+  background: rgba(255, 255, 255, 0.045);
 }
 
 .cybersafety-page tbody tr:last-child td {

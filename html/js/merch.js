@@ -1,4 +1,4 @@
-(function () {
+(function() {
   "use strict";
 
   /* Get DOM elements for merchandise grid and dialog */

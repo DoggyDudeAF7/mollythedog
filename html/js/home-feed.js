@@ -11,24 +11,71 @@ const randomPhotoLink = document.getElementById("randomPhotoLink");
 const randomPhotoCaption = document.getElementById("randomPhotoCaption");
 const shufflePhoto = document.getElementById("shufflePhoto");
 
-const photos = [
-  { src: "/images/molly/molly0.webp", alt: "Molly looking toward the camera", href: "/molly-gallery/" },
-  { src: "/images/molly/molly1.webp", alt: "Close-up portrait of Molly", href: "/molly-gallery/" },
-  { src: "/images/molly/molly2.webp", alt: "Molly curled up on folded towels", href: "/molly-gallery/" },
-  { src: "/images/molly/molly3.webp", alt: "Molly resting on a patterned rug", href: "/molly-gallery/" },
-  { src: "/images/molly/molly4.webp", alt: "Molly sitting beside a phone", href: "/molly-gallery/" },
-  { src: "/images/molly/both1.webp", alt: "Molly and Shaina together", href: "/molly-gallery/" },
-  { src: "/images/molly/both2.webp", alt: "Molly and Shaina sharing a quiet moment", href: "/molly-gallery/" },
-  { src: "/images/molly/both3.webp", alt: "Molly and Shaina relaxing together", href: "/molly-gallery/" },
-  { src: "/images/molly/both4.webp", alt: "Molly and Shaina side by side", href: "/molly-gallery/" },
-  { src: "/images/molly/molly.webp", alt: "Portrait of Molly", href: "/molly-gallery/" },
-  { src: "/images/molly/molly-900.webp", alt: "Molly looking calmly toward the camera", href: "/molly-gallery/" },
-  { src: "/images/shaina/shaina.webp", alt: "Portrait of Shaina", href: "/shaina-gallery/" },
-  { src: "/images/shaina/shaina1.webp", alt: "Shaina lying on a patterned rug with a tennis ball", href: "/shaina-gallery/" },
-  { src: "/images/shaina/shaina2.webp", alt: "Shaina relaxing in sunlight by the back door", href: "/shaina-gallery/" },
-  { src: "/images/shaina/shaina3.webp", alt: "Shaina peeking from beneath an orange towel", href: "/shaina-gallery/" },
-  { src: "/images/shaina/shaina4.webp", alt: "Shaina carrying a plush toy", href: "/shaina-gallery/" }
-];
+const photos = [{
+  src: "/images/molly/molly0.webp",
+  alt: "Molly looking toward the camera",
+  href: "/molly-gallery/"
+}, {
+  src: "/images/molly/molly1.webp",
+  alt: "Close-up portrait of Molly",
+  href: "/molly-gallery/"
+}, {
+  src: "/images/molly/molly2.webp",
+  alt: "Molly curled up on folded towels",
+  href: "/molly-gallery/"
+}, {
+  src: "/images/molly/molly3.webp",
+  alt: "Molly resting on a patterned rug",
+  href: "/molly-gallery/"
+}, {
+  src: "/images/molly/molly4.webp",
+  alt: "Molly sitting beside a phone",
+  href: "/molly-gallery/"
+}, {
+  src: "/images/molly/both1.webp",
+  alt: "Molly and Shaina together",
+  href: "/molly-gallery/"
+}, {
+  src: "/images/molly/both2.webp",
+  alt: "Molly and Shaina sharing a quiet moment",
+  href: "/molly-gallery/"
+}, {
+  src: "/images/molly/both3.webp",
+  alt: "Molly and Shaina relaxing together",
+  href: "/molly-gallery/"
+}, {
+  src: "/images/molly/both4.webp",
+  alt: "Molly and Shaina side by side",
+  href: "/molly-gallery/"
+}, {
+  src: "/images/molly/molly.webp",
+  alt: "Portrait of Molly",
+  href: "/molly-gallery/"
+}, {
+  src: "/images/molly/molly-900.webp",
+  alt: "Molly looking calmly toward the camera",
+  href: "/molly-gallery/"
+}, {
+  src: "/images/shaina/shaina.webp",
+  alt: "Portrait of Shaina",
+  href: "/shaina-gallery/"
+}, {
+  src: "/images/shaina/shaina1.webp",
+  alt: "Shaina lying on a patterned rug with a tennis ball",
+  href: "/shaina-gallery/"
+}, {
+  src: "/images/shaina/shaina2.webp",
+  alt: "Shaina relaxing in sunlight by the back door",
+  href: "/shaina-gallery/"
+}, {
+  src: "/images/shaina/shaina3.webp",
+  alt: "Shaina peeking from beneath an orange towel",
+  href: "/shaina-gallery/"
+}, {
+  src: "/images/shaina/shaina4.webp",
+  alt: "Shaina carrying a plush toy",
+  href: "/shaina-gallery/"
+}];
 
 function showBlogPost(post) {
   latestPostTag.textContent = post.tag || "Post";
@@ -41,13 +88,17 @@ async function loadLatestPost() {
   let posts = null;
 
   try {
-    const response = await fetch("/api/posts", { cache: "no-store" });
+    const response = await fetch("/api/posts", {
+      cache: "no-store"
+    });
     if (response.ok) posts = await response.json();
   } catch {}
 
   if (!Array.isArray(posts) || !posts.length) {
     try {
-      const response = await fetch("/blog/posts.json", { cache: "no-store" });
+      const response = await fetch("/blog/posts.json", {
+        cache: "no-store"
+      });
       if (response.ok) posts = await response.json();
     } catch {}
   }
@@ -66,7 +117,9 @@ async function loadLatestPost() {
 
 async function loadLatestComic() {
   try {
-    const response = await fetch("/comics/", { cache: "no-store" });
+    const response = await fetch("/comics/", {
+      cache: "no-store"
+    });
     if (!response.ok) throw new Error("Comic shelf unavailable");
     const documentText = await response.text();
     const comicDocument = new DOMParser().parseFromString(documentText, "text/html");
@@ -115,11 +168,17 @@ function choosePhoto() {
 
 async function loadRealPoppyPhotos() {
   try {
-    const response = await fetch("/data/poppy-photos.json", { cache: "force-cache" });
+    const response = await fetch("/data/poppy-photos.json", {
+      cache: "force-cache"
+    });
     const poppyPhotos = response.ok ? await response.json() : [];
     if (Array.isArray(poppyPhotos)) {
       poppyPhotos.filter((photo) => photo?.src && photo?.alt).forEach((photo) => {
-        photos.push({ src: photo.src, alt: photo.alt, href: "/poppy-gallery/" });
+        photos.push({
+          src: photo.src,
+          alt: photo.alt,
+          href: "/poppy-gallery/"
+        });
       });
     }
   } catch {}
@@ -128,7 +187,9 @@ async function loadRealPoppyPhotos() {
 
 async function loadBreedOfTheDay() {
   try {
-    const response = await fetch("/data/breeds.json", { cache: "force-cache" });
+    const response = await fetch("/data/breeds.json", {
+      cache: "force-cache"
+    });
     if (!response.ok) throw new Error("Breed guide unavailable");
     const breedCards = await response.json();
     if (!Array.isArray(breedCards) || !breedCards.length) throw new Error("No breeds found");

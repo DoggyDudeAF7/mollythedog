@@ -10,7 +10,12 @@ document.addEventListener("DOMContentLoaded", async () => {
   if (!api || !content) return;
 
   const categoryOrder = ["Breed", "Comic", "Gallery", "Blog"];
-  const categoryLabels = { Breed: "Breeds", Comic: "Comics", Gallery: "Photos", Blog: "Blog Posts" };
+  const categoryLabels = {
+    Breed: "Breeds",
+    Comic: "Comics",
+    Gallery: "Photos",
+    Blog: "Blog Posts"
+  };
 
   function itemCard(item) {
     const article = document.createElement("article");
@@ -92,11 +97,16 @@ document.addEventListener("DOMContentLoaded", async () => {
       app: "mollyandshaina.com",
       version: 1,
       exportedAt: new Date().toISOString(),
-      favourites: storedObject(api.storageKey, { version: 1, items: {} }),
+      favourites: storedObject(api.storageKey, {
+        version: 1,
+        items: {}
+      }),
       achievements: storedObject("msAchievementsV1", {}),
       comicProgress: storedObject("msComicProgressV1", {})
     };
-    const blob = new Blob([JSON.stringify(backup, null, 2)], { type: "application/json" });
+    const blob = new Blob([JSON.stringify(backup, null, 2)], {
+      type: "application/json"
+    });
     const link = document.createElement("a");
     link.href = URL.createObjectURL(blob);
     link.download = "favourites.mollypack";

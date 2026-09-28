@@ -282,7 +282,7 @@ select {
 }
 
 .bottom-apps a,
-.bottom-apps > button {
+.bottom-apps>button {
   min-width: 0;
   display: grid;
   place-items: center;
@@ -299,7 +299,7 @@ select {
 }
 
 .bottom-apps a:hover,
-.bottom-apps > button:hover {
+.bottom-apps>button:hover {
   background: rgba(255, 255, 255, 0.32);
 }
 
@@ -478,6 +478,7 @@ dialog select {
 }
 
 @media (max-width: 800px) {
+
   html,
   body {
     overflow: auto;

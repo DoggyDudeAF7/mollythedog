@@ -1,4 +1,4 @@
-(function () {
+(function() {
   "use strict";
 
   const products = Array.isArray(window.MSMerchProducts) ? window.MSMerchProducts : [];
@@ -25,7 +25,10 @@
     empty.hidden = selected.length > 0;
     submitButton.disabled = selected.length === 0;
 
-    selected.forEach(({ product, quantity }) => {
+    selected.forEach(({
+      product,
+      quantity
+    }) => {
       const row = document.createElement("article");
       row.className = "checkout-item";
 
@@ -61,9 +64,9 @@
           .reduce((sum, [, amount]) => sum + Number(amount || 0), 0);
         nextBag[product.id] = Math.min(requested, Math.max(1, 5 - otherTotal));
         bagApi.save(nextBag);
-        status.textContent = requested + otherTotal > 5
-          ? "A request can contain no more than 5 stickers."
-          : "Your selection is saved on this device.";
+        status.textContent = requested + otherTotal > 5 ?
+          "A request can contain no more than 5 stickers." :
+          "Your selection is saved on this device.";
         render();
       });
 
@@ -104,7 +107,13 @@
       postcode: formData.get("postcode"),
       website: formData.get("website"),
       permission: formData.get("permission") === "on",
-      items: selected.map(({ product, quantity }) => ({ id: product.id, quantity })),
+      items: selected.map(({
+        product,
+        quantity
+      }) => ({
+        id: product.id,
+        quantity
+      })),
     };
 
     submitButton.disabled = true;
@@ -114,7 +123,9 @@
     try {
       const response = await fetch("/api/sticker-request", {
         method: "POST",
-        headers: { "content-type": "application/json" },
+        headers: {
+          "content-type": "application/json"
+        },
         body: JSON.stringify(payload),
       });
       const result = await response.json();

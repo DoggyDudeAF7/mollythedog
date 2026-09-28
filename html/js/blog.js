@@ -9,7 +9,7 @@ function escapeHtml(value) {
     ">": "&gt;",
     "\"": "&quot;",
     "'": "&#039;"
-  }[char]));
+  } [char]));
 }
 
 /* Render blog posts as HTML articles with safe HTML escaping */
@@ -29,12 +29,12 @@ function renderPosts(posts) {
 
   postsContainer.innerHTML = posts.map((post, index) => {
     const favouriteId = `blog:${escapeHtml(post.id || String(post.title || "post").toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, ""))}`;
-    const image = post.image
-      ? `<img class="blog-post-image" src="${escapeHtml(post.image)}" alt="${escapeHtml(post.imageAlt || post.title)}">`
-      : "";
-    const link = post.linkUrl && post.linkText
-      ? `<a href="${escapeHtml(post.linkUrl)}">${escapeHtml(post.linkText)}</a>`
-      : "";
+    const image = post.image ?
+      `<img class="blog-post-image" src="${escapeHtml(post.image)}" alt="${escapeHtml(post.imageAlt || post.title)}">` :
+      "";
+    const link = post.linkUrl && post.linkText ?
+      `<a href="${escapeHtml(post.linkUrl)}">${escapeHtml(post.linkText)}</a>` :
+      "";
 
     return `
       <article class="blog-post" data-favourite-id="${favouriteId}">

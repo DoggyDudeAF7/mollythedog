@@ -1,4 +1,4 @@
-(function () {
+(function() {
   "use strict";
 
   const storageKey = "mollyandshaina-merch-bag-v1";
@@ -7,20 +7,28 @@
   function load() {
     try {
       const saved = JSON.parse(localStorage.getItem(storageKey));
-      if (!saved || typeof saved !== "object" || Array.isArray(saved)) return { ...memoryBag };
+      if (!saved || typeof saved !== "object" || Array.isArray(saved)) return {
+        ...memoryBag
+      };
       memoryBag = Object.fromEntries(
         Object.entries(saved)
-          .map(([id, quantity]) => [id, Math.max(1, Math.min(5, Number(quantity) || 1))])
-          .filter(([id]) => typeof id === "string" && id)
+        .map(([id, quantity]) => [id, Math.max(1, Math.min(5, Number(quantity) || 1))])
+        .filter(([id]) => typeof id === "string" && id)
       );
-      return { ...memoryBag };
+      return {
+        ...memoryBag
+      };
     } catch {
-      return { ...memoryBag };
+      return {
+        ...memoryBag
+      };
     }
   }
 
   function save(bag) {
-    memoryBag = { ...bag };
+    memoryBag = {
+      ...bag
+    };
     try {
       localStorage.setItem(storageKey, JSON.stringify(bag));
     } catch {
@@ -41,5 +49,10 @@
     return bag;
   }
 
-  window.MSMerchBag = Object.freeze({ load, save, count, add });
+  window.MSMerchBag = Object.freeze({
+    load,
+    save,
+    count,
+    add
+  });
 })();

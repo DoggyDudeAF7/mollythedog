@@ -42,9 +42,9 @@
   width: 100%;
   aspect-ratio: 4 / 5;
   object-fit: cover;
-  border: 1px solid rgba(255,255,255,0.18);
+  border: 1px solid rgba(255, 255, 255, 0.18);
   border-radius: 8px;
-  box-shadow: 0 24px 60px rgba(0,0,0,0.32);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.32);
 }
 
 .about-photo-strip img:first-child {
@@ -60,10 +60,10 @@
 .about-card,
 .about-note {
   padding: 30px;
-  background: rgba(255,255,255,0.08);
-  border: 1px solid rgba(255,255,255,0.14);
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.14);
   border-radius: 8px;
-  box-shadow: 0 22px 50px rgba(0,0,0,0.22);
+  box-shadow: 0 22px 50px rgba(0, 0, 0, 0.22);
 }
 
 .about-card-icon {
@@ -74,7 +74,7 @@
   justify-content: center;
   margin-bottom: 18px;
   border-radius: 8px;
-  background: rgba(255,255,255,0.12);
+  background: rgba(255, 255, 255, 0.12);
   font-size: 1.55rem;
 }
 
@@ -105,7 +105,7 @@
   margin-top: 78px;
 }
 
-.creator-story > h2 {
+.creator-story>h2 {
   max-width: 850px;
   margin: 10px 0 28px;
   font-size: clamp(2.4rem, 6vw, 5rem);
@@ -120,9 +120,9 @@
 
 .creator-timeline article {
   padding: 26px;
-  border: 1px solid rgba(255,255,255,0.13);
+  border: 1px solid rgba(255, 255, 255, 0.13);
   border-radius: 18px;
-  background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0.035));
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.035));
 }
 
 .creator-timeline span {
@@ -138,7 +138,7 @@
 }
 
 .creator-timeline p {
-  color: rgba(255,255,255,0.72);
+  color: rgba(255, 255, 255, 0.72);
   line-height: 1.65;
 }
 

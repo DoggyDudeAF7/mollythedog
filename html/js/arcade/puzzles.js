@@ -1,4 +1,10 @@
-import { shuffle, randomInt, photos, trivia, assets } from './data.js';
+import {
+  shuffle,
+  randomInt,
+  photos,
+  trivia,
+  assets
+} from './data.js';
 
 function node(tag, className, text) {
   const element = document.createElement(tag);
@@ -6,20 +12,22 @@ function node(tag, className, text) {
   if (text !== undefined) element.textContent = text;
   return element;
 }
+
 function button(className, text) {
   const element = node('button', className, text);
   element.type = 'button';
   return element;
 }
+
 function board(ctx, name) {
   const element = node('div', `puzzle-board ${name}`);
   ctx.root.append(element);
   return element;
 }
+
 function keyInput(ctx, handler) {
   ctx.on(document, 'keydown', event => {
-    if (event.repeat || event.ctrlKey || event.metaKey || event.altKey ||
-        ['INPUT', 'TEXTAREA', 'SELECT'].includes(event.target.tagName)) return;
+    if (event.repeat || event.ctrlKey || event.metaKey || event.altKey || ['INPUT', 'TEXTAREA', 'SELECT'].includes(event.target.tagName)) return;
     if (handler(event.key)) event.preventDefault();
   });
 }
@@ -45,14 +53,27 @@ function memoryMatch(ctx) {
     inner.append(back, front);
     card.append(inner);
     grid.append(card);
-    return { photo, card, matched: false };
+    return {
+      photo,
+      card,
+      matched: false
+    };
   });
-  let open = [], moves = 0, matched = 0, locked = false, shownTime = -1;
-  const update = () => ctx.hud({ Pairs: `${matched} / 6`, Turns: moves, Time: `${Math.max(0, Math.ceil(90 - ctx.elapsed))}s` });
+  let open = [],
+    moves = 0,
+    matched = 0,
+    locked = false,
+    shownTime = -1;
+  const update = () => ctx.hud({
+    Pairs: `${matched} / 6`,
+    Turns: moves,
+    Time: `${Math.max(0, Math.ceil(90 - ctx.elapsed))}s`
+  });
   const reveal = item => {
     item.card.classList.add('revealed');
     item.card.setAttribute('aria-label', `${item.photo.alt}, card ${deck.indexOf(item) + 1}`);
   };
+
   function select(index) {
     const item = deck[index];
     if (locked || !item || item.matched || open.includes(item)) return;
@@ -77,7 +98,11 @@ function memoryMatch(ctx) {
       if (matched === 6) {
         locked = true;
         const score = 900 + Math.max(0, 90 - ctx.elapsed) * 12 - Math.max(0, moves - 6) * 15;
-        ctx.later(() => ctx.finish({ score: Math.max(600, score), won: true, message: `All six pairs in ${moves} turns and ${Math.ceil(ctx.elapsed)} seconds. A very familiar set of faces!` }), 600);
+        ctx.later(() => ctx.finish({
+          score: Math.max(600, score),
+          won: true,
+          message: `All six pairs in ${moves} turns and ${Math.ceil(ctx.elapsed)} seconds. A very familiar set of faces!`
+        }), 600);
       }
     } else {
       ctx.status('Different photos. Remember their places and try another pair.');
@@ -100,8 +125,15 @@ function memoryMatch(ctx) {
   ctx.frame(() => {
     if (matched === 6) return;
     const time = Math.max(0, Math.ceil(90 - ctx.elapsed));
-    if (time !== shownTime) { shownTime = time; update(); }
-    if (ctx.elapsed >= 90) ctx.finish({ score: matched * 150, won: false, message: `Time’s up with ${matched} of 6 pairs. Those familiar faces will be waiting for another try.` });
+    if (time !== shownTime) {
+      shownTime = time;
+      update();
+    }
+    if (ctx.elapsed >= 90) ctx.finish({
+      score: matched * 150,
+      won: false,
+      message: `Time’s up with ${matched} of 6 pairs. Those familiar faces will be waiting for another try.`
+    });
   });
   ctx.status('Turn over two cards to find your first matching photo.');
   update();
@@ -113,7 +145,9 @@ function wheresMolly(ctx) {
   const field = node('div', 'puzzle-towel-field');
   const note = node('p', 'control-note', 'Watch the towel hiding Molly. When the shuffle stops, tap a towel or press 1, 2 or 3.');
   root.append(banner, field, note);
-  const cups = Array.from({ length: 3 }, (_, id) => {
+  const cups = Array.from({
+    length: 3
+  }, (_, id) => {
     const cup = button('puzzle-towel');
     cup.dataset.cup = id;
     const hiddenDog = node('img', 'puzzle-hidden-dog');
@@ -126,12 +160,31 @@ function wheresMolly(ctx) {
     const label = node('span', 'puzzle-towel-number');
     cup.append(hiddenDog, cloth, label);
     field.append(cup);
-    return { id, cup, label, slot: id };
+    return {
+      id,
+      cup,
+      label,
+      slot: id
+    };
   });
-  let round = 0, lives = 3, correct = 0, phase = 'watch', chooseUntil = 0, shownTime = -1;
+  let round = 0,
+    lives = 3,
+    correct = 0,
+    phase = 'watch',
+    chooseUntil = 0,
+    shownTime = -1;
+
   function update() {
-    ctx.hud({ Round: `${round} / 5`, Hearts: '♥'.repeat(lives) + '♡'.repeat(3 - lives), Found: correct, ...(phase === 'choose' ? { Time: `${Math.max(0, Math.ceil(chooseUntil - ctx.elapsed))}s` } : {}) });
+    ctx.hud({
+      Round: `${round} / 5`,
+      Hearts: '♥'.repeat(lives) + '♡'.repeat(3 - lives),
+      Found: correct,
+      ...(phase === 'choose' ? {
+        Time: `${Math.max(0, Math.ceil(chooseUntil - ctx.elapsed))}s`
+      } : {})
+    });
   }
+
   function place() {
     cups.forEach(item => {
       item.cup.style.transform = `translateX(${item.slot * 100}%)`;
@@ -141,12 +194,14 @@ function wheresMolly(ctx) {
       item.cup.tabIndex = phase === 'choose' ? 0 : -1;
     });
   }
+
   function pick(item) {
     if (phase !== 'choose') return;
     phase = 'reveal';
     cups[0].cup.classList.add('lifted');
     const found = item?.id === 0;
-    if (found) correct++; else lives--;
+    if (found) correct++;
+    else lives--;
     if (item) item.cup.classList.add(found ? 'puzzle-hit' : 'puzzle-miss');
     banner.textContent = found ? 'There she is! 🐾' : item ? 'Molly was under another towel.' : 'Too slow! Molly peeked out.';
     ctx.status(found ? `You found Molly in round ${round}!` : `${banner.textContent} ${lives} ${lives === 1 ? 'heart' : 'hearts'} left.`);
@@ -155,10 +210,15 @@ function wheresMolly(ctx) {
     update();
     ctx.later(() => {
       if (!lives || round === 5) {
-        ctx.finish({ score: correct * 250 + lives * 100, won: lives > 0, message: `${correct} of ${round} hiding places found. ${lives > 0 ? 'You kept up with Molly through all five shuffles!' : 'Molly has perfected the art of disappearing into the laundry.'}` });
+        ctx.finish({
+          score: correct * 250 + lives * 100,
+          won: lives > 0,
+          message: `${correct} of ${round} hiding places found. ${lives > 0 ? 'You kept up with Molly through all five shuffles!' : 'Molly has perfected the art of disappearing into the laundry.'}`
+        });
       } else nextRound();
     }, 1450);
   }
+
   function nextRound() {
     round++;
     phase = 'watch';
@@ -175,6 +235,7 @@ function wheresMolly(ctx) {
       ctx.later(() => swap(0), 500);
     }, 1500);
   }
+
   function swap(step) {
     if (step >= 3 + round) {
       phase = 'choose';
@@ -185,7 +246,8 @@ function wheresMolly(ctx) {
       update();
       return;
     }
-    const first = randomInt(0, 2), second = (first + randomInt(1, 2)) % 3;
+    const first = randomInt(0, 2),
+      second = (first + randomInt(1, 2)) % 3;
     [cups[first].slot, cups[second].slot] = [cups[second].slot, cups[first].slot];
     place();
     ctx.later(() => swap(step + 1), Math.max(260, 690 - round * 80) + 160);
@@ -202,7 +264,10 @@ function wheresMolly(ctx) {
   ctx.frame(() => {
     if (phase !== 'choose') return;
     const time = Math.ceil(chooseUntil - ctx.elapsed);
-    if (time !== shownTime) { shownTime = time; update(); }
+    if (time !== shownTime) {
+      shownTime = time;
+      update();
+    }
     if (ctx.elapsed >= chooseUntil) pick(null);
   });
   nextRound();
@@ -224,20 +289,32 @@ function quiz(ctx, photoMode = false) {
   root.append(progress, question, media, choices, review, next, controlNote);
   const rounds = photoMode ? shuffle(photos).slice(0, 8).map(photo => ({
     question: 'Who’s in this photo?',
-    options: ['Molly', 'Shaina'].map(name => ({ text: name, correct: name === photo.dog })),
+    options: ['Molly', 'Shaina'].map(name => ({
+      text: name,
+      correct: name === photo.dog
+    })),
     explanation: `${photo.alt}.`,
     source: photo.dog === 'Molly' ? '/molly-gallery/' : '/shaina-gallery/',
     photo
-  })) : shuffle(trivia).slice(0, 10).map(item => ({ ...item,
-    options: shuffle(item.options.map((text, index) => ({ text, correct: index === item.answer })))
+  })) : shuffle(trivia).slice(0, 10).map(item => ({
+    ...item,
+    options: shuffle(item.options.map((text, index) => ({
+      text,
+      correct: index === item.answer
+    })))
   }));
-  let index = 0, correct = 0, streak = 0, score = 0, answered = false;
+  let index = 0,
+    correct = 0,
+    streak = 0,
+    score = 0,
+    answered = false;
   const dots = rounds.map((_, i) => {
     const dot = node('span', 'puzzle-quiz-dot', i + 1);
     dot.setAttribute('aria-label', `Question ${i + 1}, not answered`);
     progress.append(dot);
     return dot;
   });
+
   function display() {
     answered = false;
     const current = rounds[index];
@@ -259,14 +336,24 @@ function quiz(ctx, photoMode = false) {
     review.hidden = true;
     next.hidden = true;
     next.textContent = index === rounds.length - 1 ? 'See results →' : 'Next question →';
-    ctx.hud({ [photoMode ? 'Photo' : 'Question']: `${index + 1} / ${rounds.length}`, Correct: correct, Score: score });
+    ctx.hud({
+      [photoMode ? 'Photo' : 'Question']: `${index + 1} / ${rounds.length}`,
+      Correct: correct,
+      Score: score
+    });
     ctx.status(photoMode ? 'Look carefully, then choose Molly or Shaina.' : 'One correct answer. What do you remember from the site?');
   }
+
   function select(choice) {
     if (answered || !rounds[index].options[choice]) return;
     answered = true;
-    const current = rounds[index], right = current.options[choice].correct;
-    if (right) { correct++; streak++; score += 100 + Math.min(streak - 1, 4) * 10; } else streak = 0;
+    const current = rounds[index],
+      right = current.options[choice].correct;
+    if (right) {
+      correct++;
+      streak++;
+      score += 100 + Math.min(streak - 1, 4) * 10;
+    } else streak = 0;
     ctx.sound(right ? 'good' : 'bad');
     [...choices.children].forEach((answer, i) => {
       answer.disabled = true;
@@ -284,10 +371,16 @@ function quiz(ctx, photoMode = false) {
     review.replaceChildren(heading, node('p', '', current.explanation), source);
     review.hidden = false;
     next.hidden = false;
-    ctx.hud({ [photoMode ? 'Photo' : 'Question']: `${index + 1} / ${rounds.length}`, Correct: correct, Score: score });
+    ctx.hud({
+      [photoMode ? 'Photo' : 'Question']: `${index + 1} / ${rounds.length}`,
+      Correct: correct,
+      Score: score
+    });
     ctx.status(`${right ? 'Correct!' : 'Not quite.'} ${correct} correct so far. Read the explanation, then continue.`);
     // The focused answer is now disabled; move focus to the next usable control.
-    next.focus({ preventScroll: true });
+    next.focus({
+      preventScroll: true
+    });
   }
   ctx.on(choices, 'click', event => {
     const answer = event.target.closest('[data-answer]');
@@ -298,15 +391,24 @@ function quiz(ctx, photoMode = false) {
     index++;
     if (index >= rounds.length) {
       const threshold = photoMode ? 6 : 7;
-      ctx.finish({ score, won: correct >= threshold, message: `${correct} of ${rounds.length} ${photoMode ? 'photos recognised' : 'questions correct'}. ${correct >= threshold ? (photoMode ? 'You know those faces anywhere!' : 'An expert in household dog lore!') : `You need ${threshold} for the win. The gallery and About pages are excellent practice.`}` });
+      ctx.finish({
+        score,
+        won: correct >= threshold,
+        message: `${correct} of ${rounds.length} ${photoMode ? 'photos recognised' : 'questions correct'}. ${correct >= threshold ? (photoMode ? 'You know those faces anywhere!' : 'An expert in household dog lore!') : `You need ${threshold} for the win. The gallery and About pages are excellent practice.`}`
+      });
     } else {
       display();
-      choices.firstElementChild.focus({ preventScroll: true });
+      choices.firstElementChild.focus({
+        preventScroll: true
+      });
     }
   });
   keyInput(ctx, key => {
     const normal = key.toLowerCase();
-    if (photoMode && ['m', 's'].includes(normal)) { select(normal === 'm' ? 0 : 1); return true; }
+    if (photoMode && ['m', 's'].includes(normal)) {
+      select(normal === 'm' ? 0 : 1);
+      return true;
+    }
     if (!/^[1-4]$/.test(key)) return false;
     select(Number(key) - 1);
     return true;
@@ -336,7 +438,11 @@ function photoPuzzle(ctx) {
   controls.append(previewButton);
   root.append(picture, controls, preview, node('p', 'control-note', 'Tap a tile next to the gap. Arrow keys move the gap; Tab and Enter select a tile. Gold edges mark tiles that can move. No time limit.'));
   const positions = [1, 2, 3, 4, 5, 6, 7, 8, 0];
-  let empty = 8, previous = -1, moves = 0, complete = false, lastSecond = -1;
+  let empty = 8,
+    previous = -1,
+    moves = 0,
+    complete = false,
+    lastSecond = -1;
   const neighbours = position => [position - 3, position + 3, ...(position % 3 ? [position - 1] : []), ...(position % 3 < 2 ? [position + 1] : [])].filter(value => value >= 0 && value < 9);
   // Starting from the solution and making legal moves guarantees a solvable board.
   for (let step = 0; step < 40; step++) {
@@ -347,9 +453,13 @@ function photoPuzzle(ctx) {
     empty = next;
   }
   if (positions.every((value, index) => value === (index + 1) % 9)) {
-    positions[8] = positions[7]; positions[7] = 0; empty = 7;
+    positions[8] = positions[7];
+    positions[7] = 0;
+    empty = 7;
   }
-  const tiles = Array.from({ length: 8 }, (_, index) => {
+  const tiles = Array.from({
+    length: 8
+  }, (_, index) => {
     const tile = button('puzzle-photo-tile');
     tile.dataset.tile = index + 1;
     tile.style.backgroundImage = `url("${photo.src}")`;
@@ -358,22 +468,30 @@ function photoPuzzle(ctx) {
     picture.append(tile);
     return tile;
   });
+
   function positionElement(element, index) {
     element.style.transform = `translate(${(index % 3) * 100}%, ${Math.floor(index / 3) * 100}%)`;
   }
+
   function render() {
     const valid = neighbours(empty);
     positionElement(gap, empty);
     tiles.forEach((tile, index) => {
-      const position = positions.indexOf(index + 1), movable = valid.includes(position);
+      const position = positions.indexOf(index + 1),
+        movable = valid.includes(position);
       positionElement(tile, position);
       tile.classList.toggle('movable', movable);
       tile.classList.toggle('in-place', position === index);
       tile.setAttribute('aria-label', `Tile ${index + 1}, row ${Math.floor(position / 3) + 1}, column ${position % 3 + 1}${movable ? ', can move' : ''}`);
       tile.setAttribute('aria-disabled', String(!movable || complete));
     });
-    ctx.hud({ Moves: moves, Placed: `${positions.filter((value, index) => value !== 0 && value === index + 1).length} / 8`, Time: `${Math.floor(ctx.elapsed)}s` });
+    ctx.hud({
+      Moves: moves,
+      Placed: `${positions.filter((value, index) => value !== 0 && value === index + 1).length} / 8`,
+      Time: `${Math.floor(ctx.elapsed)}s`
+    });
   }
+
   function move(position) {
     if (complete || !neighbours(empty).includes(position)) return;
     [positions[empty], positions[position]] = [positions[position], positions[empty]];
@@ -388,7 +506,11 @@ function photoPuzzle(ctx) {
       ctx.status('Photo complete! Every piece is in its place.');
       const duration = Math.floor(ctx.elapsed);
       const score = Math.max(250, 2500 - moves * 15 - duration * 2);
-      ctx.later(() => ctx.finish({ score, won: true, message: `${photo.dog}’s photo restored in ${moves} moves and ${duration} seconds. Picture perfect!` }), 900);
+      ctx.later(() => ctx.finish({
+        score,
+        won: true,
+        message: `${photo.dog}’s photo restored in ${moves} moves and ${duration} seconds. Picture perfect!`
+      }), 900);
     } else ctx.status(`Tile moved. ${moves} ${moves === 1 ? 'move' : 'moves'} so far. Arrange the numbers in reading order.`);
   }
   ctx.on(picture, 'click', event => {
@@ -401,7 +523,12 @@ function photoPuzzle(ctx) {
     previewButton.setAttribute('aria-expanded', String(!preview.hidden));
   });
   keyInput(ctx, key => {
-    const offset = { ArrowUp: -3, ArrowDown: 3, ArrowLeft: -1, ArrowRight: 1 }[key];
+    const offset = {
+      ArrowUp: -3,
+      ArrowDown: 3,
+      ArrowLeft: -1,
+      ArrowRight: 1
+    } [key];
     if (!offset) return false;
     if ((key === 'ArrowLeft' && empty % 3 === 0) || (key === 'ArrowRight' && empty % 3 === 2)) return true;
     move(empty + offset);
@@ -409,7 +536,10 @@ function photoPuzzle(ctx) {
   });
   ctx.frame(() => {
     const second = Math.floor(ctx.elapsed);
-    if (!complete && second !== lastSecond) { lastSecond = second; render(); }
+    if (!complete && second !== lastSecond) {
+      lastSecond = second;
+      render();
+    }
   });
   ctx.status('Slide neighbouring tiles into the gap to restore the photo.');
   render();

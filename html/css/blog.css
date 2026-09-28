@@ -8,9 +8,9 @@
 
 .blog-hero,
 .blog-post {
-  border: 1px solid rgba(255,255,255,0.14);
-  background: linear-gradient(135deg, rgba(255,255,255,0.12), rgba(255,255,255,0.04));
-  box-shadow: 0 20px 60px rgba(0,0,0,0.35);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.04));
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
   backdrop-filter: blur(14px);
 }
 
@@ -23,7 +23,7 @@
 .blog-kicker,
 .blog-date {
   margin-bottom: 10px;
-  color: rgba(255,255,255,0.62);
+  color: rgba(255, 255, 255, 0.62);
   text-transform: uppercase;
   font-size: 0.78rem;
   font-weight: 800;
@@ -69,8 +69,8 @@
 .blog-actions a:last-child,
 .blog-actions button {
   color: #fff;
-  background: rgba(255,255,255,0.12);
-  border: 1px solid rgba(255,255,255,0.16);
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.16);
 }
 
 .blog-shell {
@@ -84,9 +84,9 @@
 .admin-post-list,
 .admin-form,
 .admin-preview {
-  border: 1px solid rgba(255,255,255,0.14);
-  background: linear-gradient(135deg, rgba(255,255,255,0.12), rgba(255,255,255,0.04));
-  box-shadow: 0 20px 60px rgba(0,0,0,0.35);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.04));
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
   backdrop-filter: blur(14px);
   border-radius: 22px;
 }
@@ -120,14 +120,14 @@
   margin-bottom: 20px;
   border-radius: 8px;
   object-fit: cover;
-  background: rgba(0,0,0,0.22);
+  background: rgba(0, 0, 0, 0.22);
 }
 
 .blog-post h2 {
   margin: 12px 0;
   font-size: clamp(1.8rem, 4vw, 3rem);
   line-height: 1;
-  background: linear-gradient(90deg,#ffb7a5,#bfa8ff);
+  background: linear-gradient(90deg, #ffb7a5, #bfa8ff);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
@@ -150,8 +150,8 @@
   display: inline-flex;
   padding: 7px 10px;
   border-radius: 8px;
-  color: rgba(255,255,255,0.82);
-  background: rgba(255,255,255,0.1);
+  color: rgba(255, 255, 255, 0.82);
+  background: rgba(255, 255, 255, 0.1);
   font-size: 0.78rem;
   font-weight: 800;
   text-transform: uppercase;
@@ -203,14 +203,14 @@
 .admin-status {
   padding: 12px;
   border-radius: 8px;
-  color: rgba(255,255,255,0.76);
-  background: rgba(255,255,255,0.08);
+  color: rgba(255, 255, 255, 0.76);
+  background: rgba(255, 255, 255, 0.08);
   font-weight: 800;
 }
 
 .admin-status.error {
   color: #ffd0ca;
-  background: rgba(255,80,80,0.16);
+  background: rgba(255, 80, 80, 0.16);
 }
 
 .post-list {
@@ -220,19 +220,19 @@
 
 .post-list button {
   width: 100%;
-  border: 1px solid rgba(255,255,255,0.1);
+  border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 8px;
   padding: 12px;
   color: #fff;
-  background: rgba(0,0,0,0.2);
+  background: rgba(0, 0, 0, 0.2);
   text-align: left;
   cursor: pointer;
 }
 
 .post-list button.active,
 .post-list button:hover {
-  border-color: rgba(255,255,255,0.28);
-  background: rgba(255,255,255,0.12);
+  border-color: rgba(255, 255, 255, 0.28);
+  background: rgba(255, 255, 255, 0.12);
 }
 
 .post-list strong,
@@ -244,7 +244,7 @@
 .post-list span,
 .empty-list {
   margin-top: 5px;
-  color: rgba(255,255,255,0.62);
+  color: rgba(255, 255, 255, 0.62);
   font-size: 0.88rem;
   font-weight: 800;
 }
@@ -258,7 +258,7 @@
 .admin-preview label {
   display: grid;
   gap: 8px;
-  color: rgba(255,255,255,0.76);
+  color: rgba(255, 255, 255, 0.76);
   font-weight: 800;
 }
 
@@ -267,11 +267,11 @@
 .admin-preview textarea,
 .login-form input {
   width: 100%;
-  border: 1px solid rgba(255,255,255,0.14);
+  border: 1px solid rgba(255, 255, 255, 0.14);
   border-radius: 8px;
   padding: 12px 14px;
   color: #fff;
-  background: rgba(0,0,0,0.24);
+  background: rgba(0, 0, 0, 0.24);
   font: inherit;
   resize: vertical;
 }
@@ -295,8 +295,8 @@
 
 .secondary-admin-button {
   color: #fff !important;
-  background: rgba(255,255,255,0.1) !important;
-  border: 1px solid rgba(255,255,255,0.14) !important;
+  background: rgba(255, 255, 255, 0.1) !important;
+  border: 1px solid rgba(255, 255, 255, 0.14) !important;
 }
 
 .login-page {
@@ -321,7 +321,7 @@
 .login-form label {
   display: grid;
   gap: 8px;
-  color: rgba(255,255,255,0.76);
+  color: rgba(255, 255, 255, 0.76);
   font-weight: 800;
 }
 
@@ -353,7 +353,7 @@
 
 .admin-buttons #deletePost {
   color: #ffd0ca;
-  background: rgba(255,80,80,0.18);
+  background: rgba(255, 80, 80, 0.18);
 }
 
 @media (max-width: 860px) {

@@ -6,10 +6,10 @@
 
 .legal-hero {
   padding: clamp(30px, 7vw, 64px);
-  border: 1px solid rgba(255,255,255,.14);
+  border: 1px solid rgba(255, 255, 255, .14);
   border-radius: 30px;
-  background: linear-gradient(135deg, rgba(255,183,165,.17), rgba(191,168,255,.1));
-  box-shadow: 0 24px 70px rgba(0,0,0,.32);
+  background: linear-gradient(135deg, rgba(255, 183, 165, .17), rgba(191, 168, 255, .1));
+  box-shadow: 0 24px 70px rgba(0, 0, 0, .32);
 }
 
 .legal-eyebrow {
@@ -27,9 +27,9 @@
   line-height: .92;
 }
 
-.legal-hero > p:not(.legal-eyebrow) {
+.legal-hero>p:not(.legal-eyebrow) {
   max-width: 680px;
-  color: rgba(255,255,255,.68);
+  color: rgba(255, 255, 255, .68);
   line-height: 1.65;
 }
 
@@ -39,7 +39,7 @@
   padding: 8px 11px;
   border-radius: 999px;
   color: #fff;
-  background: rgba(255,255,255,.09);
+  background: rgba(255, 255, 255, .09);
   font-size: .8rem;
   font-weight: 800;
 }
@@ -47,15 +47,15 @@
 .legal-content {
   margin-top: 26px;
   padding: clamp(26px, 6vw, 58px);
-  border: 1px solid rgba(255,255,255,.12);
+  border: 1px solid rgba(255, 255, 255, .12);
   border-radius: 26px;
-  background: rgba(255,255,255,.055);
+  background: rgba(255, 255, 255, .055);
 }
 
-.legal-content section + section {
+.legal-content section+section {
   margin-top: 38px;
   padding-top: 38px;
-  border-top: 1px solid rgba(255,255,255,.1);
+  border-top: 1px solid rgba(255, 255, 255, .1);
 }
 
 .legal-content h2 {
@@ -65,11 +65,11 @@
 
 .legal-content p,
 .legal-content li {
-  color: rgba(255,255,255,.7);
+  color: rgba(255, 255, 255, .7);
   line-height: 1.72;
 }
 
-.legal-content p + p {
+.legal-content p+p {
   margin-top: 13px;
 }
 
@@ -78,7 +78,7 @@
   padding-left: 1.25rem;
 }
 
-.legal-content li + li {
+.legal-content li+li {
   margin-top: 9px;
 }
 
@@ -95,5 +95,7 @@
 }
 
 @media (max-width: 560px) {
-  .legal-page { padding-top: 112px; }
+  .legal-page {
+    padding-top: 112px;
+  }
 }

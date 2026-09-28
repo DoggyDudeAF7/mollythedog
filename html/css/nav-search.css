@@ -10,7 +10,7 @@
     border-box;
 
   font-family:
-    'Inter',sans-serif;
+    'Inter', sans-serif;
 
 }
 
@@ -36,23 +36,17 @@ body {
     0;
 
   background:
-    radial-gradient(
-      circle at 20% 20%,
-      rgba(255,120,80,0.35),
-      transparent 50%
-    ),
+    radial-gradient(circle at 20% 20%,
+      rgba(255, 120, 80, 0.35),
+      transparent 50%),
 
-    radial-gradient(
-      circle at 80% 80%,
-      rgba(120,90,255,0.35),
-      transparent 50%
-    ),
+    radial-gradient(circle at 80% 80%,
+      rgba(120, 90, 255, 0.35),
+      transparent 50%),
 
-    linear-gradient(
-      180deg,
+    linear-gradient(180deg,
       #0b0b0f,
-      #06060a
-    );
+      #06060a);
 
   z-index:
     -1;
@@ -89,13 +83,13 @@ nav {
     center;
 
   background:
-    rgba(0,0,0,0.35);
+    rgba(0, 0, 0, 0.35);
 
   backdrop-filter:
     blur(14px);
 
   border:
-    1px solid rgba(255,255,255,0.12);
+    1px solid rgba(255, 255, 255, 0.12);
 
   border-radius:
     22px;
@@ -161,10 +155,10 @@ nav .nav-links a {
     white;
 
   background:
-    rgba(255,255,255,0.06);
+    rgba(255, 255, 255, 0.06);
 
   border:
-    1px solid rgba(255,255,255,0.08);
+    1px solid rgba(255, 255, 255, 0.08);
 
   transition:
     0.2s ease;
@@ -211,7 +205,7 @@ nav .nav-links a::after {
     0.15s ease;
 
   color:
-    rgba(255,255,255,0.8);
+    rgba(255, 255, 255, 0.8);
 
 }
 
@@ -224,7 +218,7 @@ nav .nav-links a:hover {
     10;
 
   background:
-    rgba(255,255,255,0.14);
+    rgba(255, 255, 255, 0.14);
 
 }
 
@@ -262,10 +256,10 @@ nav .nav-links a:hover::after {
     18px;
 
   background:
-    rgba(255,255,255,0.06);
+    rgba(255, 255, 255, 0.06);
 
   border:
-    1px solid rgba(255,255,255,0.08);
+    1px solid rgba(255, 255, 255, 0.08);
 
   font-size:
     24px;
@@ -284,7 +278,7 @@ nav .nav-links a:hover::after {
     scale(1.6);
 
   background:
-    rgba(255,255,255,0.14);
+    rgba(255, 255, 255, 0.14);
 
   z-index:
     10;
@@ -340,11 +334,9 @@ p {
 .card {
 
   background:
-    linear-gradient(
-      135deg,
-      rgba(255,255,255,0.12),
-      rgba(255,255,255,0.03)
-    );
+    linear-gradient(135deg,
+      rgba(255, 255, 255, 0.12),
+      rgba(255, 255, 255, 0.03));
 
   padding:
     60px 50px;
@@ -353,11 +345,11 @@ p {
     30px;
 
   border:
-    1px solid rgba(255,255,255,0.18);
+    1px solid rgba(255, 255, 255, 0.18);
 
   box-shadow:
-    0 20px 60px rgba(0,0,0,0.5),
-    inset 0 0 40px rgba(255,255,255,0.03);
+    0 20px 60px rgba(0, 0, 0, 0.5),
+    inset 0 0 40px rgba(255, 255, 255, 0.03);
 
   max-width:
     950px;
@@ -410,11 +402,9 @@ p {
     20px;
 
   background:
-    linear-gradient(
-      90deg,
+    linear-gradient(90deg,
       #ffb7a5,
-      #bfa8ff
-    );
+      #bfa8ff);
 
   -webkit-background-clip:
     text;
@@ -506,10 +496,10 @@ footer {
     12px;
 
   background:
-    rgba(255,255,255,0.08);
+    rgba(255, 255, 255, 0.08);
 
   border:
-    1px solid rgba(255,255,255,0.1);
+    1px solid rgba(255, 255, 255, 0.1);
 
   color:
     white;
@@ -553,7 +543,7 @@ footer {
     rgba(15, 15, 20, 0.92);
 
   border:
-    1px solid rgba(255,255,255,0.12);
+    1px solid rgba(255, 255, 255, 0.12);
 
   border-radius:
     18px;
@@ -565,7 +555,7 @@ footer {
     9999;
 
   box-shadow:
-    0 20px 60px rgba(0,0,0,0.6);
+    0 20px 60px rgba(0, 0, 0, 0.6);
 
   backdrop-filter:
     blur(14px);
@@ -612,7 +602,7 @@ footer {
     none;
 
   background:
-    rgba(255,255,255,0.08);
+    rgba(255, 255, 255, 0.08);
 
   color:
     white;
@@ -625,7 +615,7 @@ footer {
 #searchInput::placeholder {
 
   color:
-    rgba(255,255,255,0.5);
+    rgba(255, 255, 255, 0.5);
 
 }
 
@@ -663,7 +653,7 @@ footer {
     white;
 
   background:
-    rgba(255,255,255,0.05);
+    rgba(255, 255, 255, 0.05);
 
   transition:
     0.15s ease;
@@ -676,7 +666,7 @@ footer {
 .resultItem:hover {
 
   background:
-    rgba(255,255,255,0.12);
+    rgba(255, 255, 255, 0.12);
 
   transform:
     translateX(3px);
@@ -700,7 +690,7 @@ footer {
 #results::-webkit-scrollbar-thumb {
 
   background:
-    rgba(255,255,255,0.2);
+    rgba(255, 255, 255, 0.2);
 
   border-radius:
     10px;
@@ -735,10 +725,10 @@ footer {
     14px;
 
   background:
-    rgba(255,255,255,0.06);
+    rgba(255, 255, 255, 0.06);
 
   border:
-    1px solid rgba(255,255,255,0.08);
+    1px solid rgba(255, 255, 255, 0.08);
 
   color:
     white;
@@ -763,7 +753,7 @@ footer {
 #navToggle:hover {
 
   background:
-    rgba(255,255,255,0.14);
+    rgba(255, 255, 255, 0.14);
 
 }
 
@@ -839,13 +829,13 @@ footer {
       8px;
 
     background:
-      rgba(10,10,15,0.95);
+      rgba(10, 10, 15, 0.95);
 
     backdrop-filter:
       blur(16px);
 
     border:
-      1px solid rgba(255,255,255,0.12);
+      1px solid rgba(255, 255, 255, 0.12);
 
     border-radius:
       18px;
@@ -854,7 +844,7 @@ footer {
       0 12px;
 
     box-shadow:
-      0 20px 60px rgba(0,0,0,0.6);
+      0 20px 60px rgba(0, 0, 0, 0.6);
 
     max-height:
       0;
@@ -956,7 +946,7 @@ footer {
       none;
 
     background:
-      rgba(255,255,255,0.10);
+      rgba(255, 255, 255, 0.10);
 
   }
 

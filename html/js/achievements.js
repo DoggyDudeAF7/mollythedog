@@ -1,28 +1,132 @@
-(function () {
+(function() {
   "use strict";
 
   const STORAGE_KEY = "msAchievementsV1";
-  const definitions = [
-    { id: "dog-trio", icon: "🐾", title: "Dog Trio", description: "Visited Molly, Shaina, and Poppy.", target: 3, progress: "dogs" },
-    { id: "dog-scholar", icon: "🎓", title: "Dog Scholar", description: "Viewed 20 different dog breeds.", target: 20, progress: "breeds" },
-    { id: "breed-expert", icon: "🧠", title: "Breed Expert", description: "Viewed 50 different dog breeds.", target: 50, progress: "breeds" },
-    { id: "comic-reader", icon: "📚", title: "Comic Reader", description: "Read 5 different comics.", target: 5, progress: "comics" },
-    { id: "comic-addict", icon: "🤓", title: "Comic Addict", description: "Read every current Molly and Shaina comic.", target: 8, progress: "comics" },
-    { id: "explorer", icon: "🧭", title: "Explorer", description: "Visited 10 different major pages.", target: 10, progress: "pages" },
-    { id: "professional-snooper", icon: "🔎", title: "Professional Snooper", description: "Used site search 10 times.", target: 10, progress: "searches" },
-    { id: "collector", icon: "♥", title: "Collector", description: "Saved 5 favourites.", target: 5, progress: "favourites" },
-    { id: "ultimate-collector", icon: "💎", title: "Ultimate Collector", description: "Saved 20 favourites.", target: 20, progress: "favourites" },
-    { id: "shuffle-master", icon: "🔀", title: "Shuffle Master", description: "Shuffled the homepage photo 5 times.", target: 5, progress: "shuffles" },
-    { id: "gallery-hound", icon: "📷", title: "Gallery Hound", description: "Opened 10 different gallery photos.", target: 10, progress: "photos" },
-    { id: "regular-visitor", icon: "📅", title: "Regular Visitor", description: "Visited on 3 different days.", target: 3, progress: "days" },
-    { id: "blanket-inspector", icon: "🛏️", title: "Blanket Inspector", description: "Visited Molly's habits page.", secret: true },
-    { id: "you-found-it", icon: "🕵️", title: "You Found It", description: "Discovered a secret part of the site.", secret: true },
-    { id: "very-suspicious", icon: "👀", title: "Very Suspicious", description: "Asked one of the dogs an important question.", secret: true },
-    { id: "night-watch", icon: "🌙", title: "Night Watch", description: "Visited dog headquarters after midnight.", secret: true }
-  ];
+  const definitions = [{
+    id: "dog-trio",
+    icon: "🐾",
+    title: "Dog Trio",
+    description: "Visited Molly, Shaina, and Poppy.",
+    target: 3,
+    progress: "dogs"
+  }, {
+    id: "dog-scholar",
+    icon: "🎓",
+    title: "Dog Scholar",
+    description: "Viewed 20 different dog breeds.",
+    target: 20,
+    progress: "breeds"
+  }, {
+    id: "breed-expert",
+    icon: "🧠",
+    title: "Breed Expert",
+    description: "Viewed 50 different dog breeds.",
+    target: 50,
+    progress: "breeds"
+  }, {
+    id: "comic-reader",
+    icon: "📚",
+    title: "Comic Reader",
+    description: "Read 5 different comics.",
+    target: 5,
+    progress: "comics"
+  }, {
+    id: "comic-addict",
+    icon: "🤓",
+    title: "Comic Addict",
+    description: "Read every current Molly and Shaina comic.",
+    target: 8,
+    progress: "comics"
+  }, {
+    id: "explorer",
+    icon: "🧭",
+    title: "Explorer",
+    description: "Visited 10 different major pages.",
+    target: 10,
+    progress: "pages"
+  }, {
+    id: "professional-snooper",
+    icon: "🔎",
+    title: "Professional Snooper",
+    description: "Used site search 10 times.",
+    target: 10,
+    progress: "searches"
+  }, {
+    id: "collector",
+    icon: "♥",
+    title: "Collector",
+    description: "Saved 5 favourites.",
+    target: 5,
+    progress: "favourites"
+  }, {
+    id: "ultimate-collector",
+    icon: "💎",
+    title: "Ultimate Collector",
+    description: "Saved 20 favourites.",
+    target: 20,
+    progress: "favourites"
+  }, {
+    id: "shuffle-master",
+    icon: "🔀",
+    title: "Shuffle Master",
+    description: "Shuffled the homepage photo 5 times.",
+    target: 5,
+    progress: "shuffles"
+  }, {
+    id: "gallery-hound",
+    icon: "📷",
+    title: "Gallery Hound",
+    description: "Opened 10 different gallery photos.",
+    target: 10,
+    progress: "photos"
+  }, {
+    id: "regular-visitor",
+    icon: "📅",
+    title: "Regular Visitor",
+    description: "Visited on 3 different days.",
+    target: 3,
+    progress: "days"
+  }, {
+    id: "blanket-inspector",
+    icon: "🛏️",
+    title: "Blanket Inspector",
+    description: "Visited Molly's habits page.",
+    secret: true
+  }, {
+    id: "you-found-it",
+    icon: "🕵️",
+    title: "You Found It",
+    description: "Discovered a secret part of the site.",
+    secret: true
+  }, {
+    id: "very-suspicious",
+    icon: "👀",
+    title: "Very Suspicious",
+    description: "Asked one of the dogs an important question.",
+    secret: true
+  }, {
+    id: "night-watch",
+    icon: "🌙",
+    title: "Night Watch",
+    description: "Visited dog headquarters after midnight.",
+    secret: true
+  }];
 
   function emptyState() {
-    return { version: 1, unlocked: {}, progress: { dogs: [], breeds: [], comics: [], pages: [], photos: [], days: [], searches: 0, shuffles: 0 } };
+    return {
+      version: 1,
+      unlocked: {},
+      progress: {
+        dogs: [],
+        breeds: [],
+        comics: [],
+        pages: [],
+        photos: [],
+        days: [],
+        searches: 0,
+        shuffles: 0
+      }
+    };
   }
 
   function readState() {
@@ -33,7 +137,10 @@
       return {
         version: 1,
         unlocked: parsed.unlocked && typeof parsed.unlocked === "object" ? parsed.unlocked : {},
-        progress: { ...blank.progress, ...(parsed.progress || {}) }
+        progress: {
+          ...blank.progress,
+          ...(parsed.progress || {})
+        }
       };
     } catch {
       return emptyState();
@@ -72,13 +179,13 @@
     if (state.unlocked[id]) return false;
     const definition = definitions.find((item) => item.id === id);
     if (!definition) return false;
-    
+
     state.unlocked[id] = new Date().toISOString();
     saveStateToStorage();
-    
+
     // Announce changes downstream without looping back to validations
     window.dispatchEvent(new CustomEvent("ms:achievements-changed"));
-    
+
     if (!quiet) showToast(definition);
     return true;
   }
@@ -132,7 +239,10 @@
 
   function getProgress(definition) {
     const current = definition.target ? Math.min(progressValue(definition), definition.target) : (state.unlocked[definition.id] ? 1 : 0);
-    return { current, target: definition.target || 1 };
+    return {
+      current,
+      target: definition.target || 1
+    };
   }
 
   function init() {
@@ -159,6 +269,8 @@
     storageKey: STORAGE_KEY
   };
 
-  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", init, { once: true });
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", init, {
+    once: true
+  });
   else init();
 })();

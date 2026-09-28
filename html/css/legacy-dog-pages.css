@@ -14,8 +14,8 @@ nav .nav-links a {
 
   border-radius: 18px;
 
-  background: rgba(255,255,255,0.06);
-  border: 1px solid rgba(255,255,255,0.08);
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.08);
 
   transition: 0.2s ease;
 }
@@ -39,7 +39,7 @@ nav .nav-links a::after {
 
   transition: 0.15s ease;
 
-  color: rgba(255,255,255,0.8);
+  color: rgba(255, 255, 255, 0.8);
 }
 
 .split.right {
@@ -73,11 +73,9 @@ nav .nav-links a::after {
   margin-bottom: 20px;
 
   background:
-    linear-gradient(
-      90deg,
+    linear-gradient(90deg,
       #ffb7a5,
-      #bfa8ff
-    );
+      #bfa8ff);
 
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -131,26 +129,22 @@ nav .nav-links a::after {
 
 .fill.molly {
   background:
-    linear-gradient(
-      90deg,
+    linear-gradient(90deg,
       #ffb7a5,
-      #bfa8ff
-    );
+      #bfa8ff);
 }
 
 .fill.other {
   background:
-    linear-gradient(
-      90deg,
+    linear-gradient(90deg,
       #777,
-      #aaa
-    );
+      #aaa);
 }
 
-body{
-  background:#0b0b0f;
-  color:white;
-  overflow-x:hidden;
+body {
+  background: #0b0b0f;
+  color: white;
+  overflow-x: hidden;
 }
 
 #searchBtn {
@@ -164,10 +158,10 @@ body{
   border-radius: 18px;
 
   background:
-    rgba(255,255,255,0.06);
+    rgba(255, 255, 255, 0.06);
 
   border:
-    1px solid rgba(255,255,255,0.08);
+    1px solid rgba(255, 255, 255, 0.08);
 
   font-size: 24px;
 
@@ -182,16 +176,16 @@ body{
     scale(1.6);
 
   background:
-    rgba(255,255,255,0.14);
+    rgba(255, 255, 255, 0.14);
 }
 
 .section {
-  min-height:100vh;
+  min-height: 100vh;
 
-  display:flex;
+  display: flex;
 
-  align-items:center;
-  justify-content:center;
+  align-items: center;
+  justify-content: center;
 
   padding:
     120px 8% 100px;
@@ -199,11 +193,9 @@ body{
 
 .card {
   background:
-    linear-gradient(
-      135deg,
-      rgba(255,255,255,0.12),
-      rgba(255,255,255,0.03)
-    );
+    linear-gradient(135deg,
+      rgba(255, 255, 255, 0.12),
+      rgba(255, 255, 255, 0.03));
 
   padding:
     60px 50px;
@@ -212,11 +204,11 @@ body{
     30px;
 
   border:
-    1px solid rgba(255,255,255,0.18);
+    1px solid rgba(255, 255, 255, 0.18);
 
   box-shadow:
-    0 20px 60px rgba(0,0,0,0.5),
-    inset 0 0 40px rgba(255,255,255,0.03);
+    0 20px 60px rgba(0, 0, 0, 0.5),
+    inset 0 0 40px rgba(255, 255, 255, 0.03);
 
   max-width:
     900px;
@@ -233,11 +225,9 @@ h2 {
     20px;
 
   background:
-    linear-gradient(
-      90deg,
+    linear-gradient(90deg,
       #ffb7a5,
-      #bfa8ff
-    );
+      #bfa8ff);
 
   -webkit-background-clip:
     text;
@@ -247,17 +237,17 @@ h2 {
 }
 
 p {
-  color:#ccc;
-  line-height:1.7;
+  color: #ccc;
+  line-height: 1.7;
 }
 
 .split {
-  display:flex;
+  display: flex;
 
   gap:
     40px;
 
-  align-items:center;
+  align-items: center;
 }
 
 .emoji {
@@ -314,11 +304,9 @@ p {
     100%;
 
   background:
-    linear-gradient(
-      90deg,
+    linear-gradient(90deg,
       #ffb7a5,
-      #bfa8ff
-    );
+      #bfa8ff);
 
   width:
     0%;
@@ -452,7 +440,7 @@ p {
 
 #searchBtn:hover {
   background:
-    rgba(255,255,255,0.16);
+    rgba(255, 255, 255, 0.16);
 
   transform:
     scale(1.6);

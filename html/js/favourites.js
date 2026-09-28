@@ -1,4 +1,4 @@
-(function () {
+(function() {
   "use strict";
 
   const STORAGE_KEY = "msFavouritesV1";
@@ -20,9 +20,15 @@
       stored = safeParse(localStorage.getItem(STORAGE_KEY), null);
     } catch {}
 
-    const next = stored && stored.items && typeof stored.items === "object"
-      ? { version: 1, items: stored.items }
-      : { version: 1, items: {} };
+    const next = stored && stored.items && typeof stored.items === "object" ?
+      {
+        version: 1,
+        items: stored.items
+      } :
+      {
+        version: 1,
+        items: {}
+      };
 
     LEGACY_KEYS.forEach((key) => {
       let ids = [];
@@ -45,7 +51,9 @@
         };
       });
       if (ids.length) {
-        try { localStorage.removeItem(key); } catch {}
+        try {
+          localStorage.removeItem(key);
+        } catch {}
       }
     });
 
@@ -77,7 +85,11 @@
       localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
     } catch {}
     if (announce) {
-      window.dispatchEvent(new CustomEvent("ms:favourites-changed", { detail: { count: count() } }));
+      window.dispatchEvent(new CustomEvent("ms:favourites-changed", {
+        detail: {
+          count: count()
+        }
+      }));
     }
   }
 
@@ -114,7 +126,10 @@
   }
 
   function clear() {
-    state = { version: 1, items: {} };
+    state = {
+      version: 1,
+      items: {}
+    };
     writeState();
   }
 
@@ -252,7 +267,10 @@
         enhance();
       });
     });
-    observer.observe(document.body, { childList: true, subtree: true });
+    observer.observe(document.body, {
+      childList: true,
+      subtree: true
+    });
     window.addEventListener("ms:favourites-changed", () => enhance());
     window.addEventListener("storage", (event) => {
       if (event.key !== STORAGE_KEY) return;
@@ -261,7 +279,20 @@
     });
   }
 
-  window.MSFavourites = { add, remove, toggle, has, list, count, clear, makeButton, enhance, storageKey: STORAGE_KEY };
-  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", init, { once: true });
+  window.MSFavourites = {
+    add,
+    remove,
+    toggle,
+    has,
+    list,
+    count,
+    clear,
+    makeButton,
+    enhance,
+    storageKey: STORAGE_KEY
+  };
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", init, {
+    once: true
+  });
   else init();
 })();

@@ -1,4 +1,4 @@
-(function () {
+(function() {
   "use strict";
 
   const STORAGE_KEY = "msComicProgressV1";
@@ -13,7 +13,9 @@
   }
 
   function write(state) {
-    try { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); } catch {}
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+    } catch {}
     window.dispatchEvent(new CustomEvent("ms:comic-progress"));
   }
 
@@ -23,7 +25,12 @@
 
   function save(slug, panel, total, completed = false) {
     const state = read();
-    state[slug] = { panel, total, completed, updatedAt: new Date().toISOString() };
+    state[slug] = {
+      panel,
+      total,
+      completed,
+      updatedAt: new Date().toISOString()
+    };
     write(state);
     return state[slug];
   }
@@ -70,8 +77,17 @@
     shelf.before(banner);
   }
 
-  window.MSComicProgress = { storageKey: STORAGE_KEY, read, get, save, reset, latestUnfinished };
-  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", enhanceShelf, { once: true });
+  window.MSComicProgress = {
+    storageKey: STORAGE_KEY,
+    read,
+    get,
+    save,
+    reset,
+    latestUnfinished
+  };
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", enhanceShelf, {
+    once: true
+  });
   else enhanceShelf();
   window.addEventListener("ms:comic-progress", enhanceShelf);
 })();

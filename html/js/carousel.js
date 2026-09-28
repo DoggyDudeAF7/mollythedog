@@ -10,31 +10,58 @@ document.addEventListener("DOMContentLoaded", async () => {
   const pageTitle = document.querySelector("h1")?.textContent?.toLowerCase() || "";
   const isShaina = pageTitle.includes("shaina");
   const isPoppy = pageTitle.includes("poppy");
-  let images = isShaina
-    ? [
-        { candidates: ["../images/shaina/shaina.webp"], alt: "Portrait of Shaina" },
-        { candidates: ["../images/shaina/shaina1.webp"], alt: "Shaina lying on a patterned rug with a tennis ball" },
-        { candidates: ["../images/shaina/shaina2.webp"], alt: "Shaina relaxing in a patch of sunlight by the back door" },
-        { candidates: ["../images/shaina/shaina3.webp"], alt: "Shaina peeking out from beneath an orange towel" },
-        { candidates: ["../images/shaina/shaina4.webp"], alt: "Shaina carrying a plush toy across the rug" },
-        { candidates: ["../images/shaina/shaina.webp"], alt: "Portrait of Shaina" },
-      ]
-    : [
-        { candidates: ["../images/molly/molly0.webp"], alt: "Molly looking toward the camera" },
-        { candidates: ["../images/molly/molly1.webp"], alt: "Close-up of Molly's face and black nose" },
-        { candidates: ["../images/molly/molly2.webp"], alt: "Molly curled up on a stack of folded towels on the couch" },
-        { candidates: ["../images/molly/molly3.webp"], alt: "Molly resting on her side on a patterned rug" },
-        { candidates: ["../images/molly/molly4.webp"], alt: "Molly sitting beside a phone showing another dog" },
-        { candidates: ["../images/molly/molly.webp"], alt: "Portrait of Molly" },
-      ];
+  let images = isShaina ?
+    [{
+      candidates: ["../images/shaina/shaina.webp"],
+      alt: "Portrait of Shaina"
+    }, {
+      candidates: ["../images/shaina/shaina1.webp"],
+      alt: "Shaina lying on a patterned rug with a tennis ball"
+    }, {
+      candidates: ["../images/shaina/shaina2.webp"],
+      alt: "Shaina relaxing in a patch of sunlight by the back door"
+    }, {
+      candidates: ["../images/shaina/shaina3.webp"],
+      alt: "Shaina peeking out from beneath an orange towel"
+    }, {
+      candidates: ["../images/shaina/shaina4.webp"],
+      alt: "Shaina carrying a plush toy across the rug"
+    }, {
+      candidates: ["../images/shaina/shaina.webp"],
+      alt: "Portrait of Shaina"
+    }, ] :
+    [{
+      candidates: ["../images/molly/molly0.webp"],
+      alt: "Molly looking toward the camera"
+    }, {
+      candidates: ["../images/molly/molly1.webp"],
+      alt: "Close-up of Molly's face and black nose"
+    }, {
+      candidates: ["../images/molly/molly2.webp"],
+      alt: "Molly curled up on a stack of folded towels on the couch"
+    }, {
+      candidates: ["../images/molly/molly3.webp"],
+      alt: "Molly resting on her side on a patterned rug"
+    }, {
+      candidates: ["../images/molly/molly4.webp"],
+      alt: "Molly sitting beside a phone showing another dog"
+    }, {
+      candidates: ["../images/molly/molly.webp"],
+      alt: "Portrait of Molly"
+    }, ];
 
   if (isPoppy) {
     try {
-      const response = await fetch("/data/poppy-photos.json", { cache: "force-cache" });
+      const response = await fetch("/data/poppy-photos.json", {
+        cache: "force-cache"
+      });
       const realPhotos = response.ok ? await response.json() : [];
       images = Array.isArray(realPhotos) ? realPhotos
         .filter((photo) => photo && photo.src && photo.alt)
-        .map((photo) => ({ candidates: [photo.src], alt: photo.alt })) : [];
+        .map((photo) => ({
+          candidates: [photo.src],
+          alt: photo.alt
+        })) : [];
     } catch {
       images = [];
     }
@@ -99,7 +126,10 @@ document.addEventListener("DOMContentLoaded", async () => {
   const middleIndex = Math.floor(repeatCount / 2) * images.length;
 
   for (let r = 0; r < repeatCount; r++) {
-    images.forEach(({ candidates, alt }) => {
+    images.forEach(({
+      candidates,
+      alt
+    }) => {
       const div = document.createElement("div");
       div.className = "slide";
       const img = document.createElement("img");

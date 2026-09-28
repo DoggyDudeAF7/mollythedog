@@ -1,5 +1,5 @@
 /* Global search across blog posts, dog breeds, pages, and comics */
-(function () {
+(function() {
   "use strict";
   if (window.MSSearchBooted) return;
   if (document.body.classList.contains("cybersafety-page")) return;
@@ -33,12 +33,16 @@
   async function loadBlogItems() {
     let posts = null;
     try {
-      const response = await fetch("/api/posts", { cache: "no-store" });
+      const response = await fetch("/api/posts", {
+        cache: "no-store"
+      });
       if (response.ok) posts = await response.json();
     } catch {}
     if (!Array.isArray(posts)) {
       try {
-        const response = await fetch("/blog/posts.json", { cache: "no-store" });
+        const response = await fetch("/blog/posts.json", {
+          cache: "no-store"
+        });
         if (response.ok) posts = await response.json();
       } catch {}
     }
@@ -48,7 +52,9 @@
   /* Load dog breed data from JSON */
   async function loadBreedItems() {
     try {
-      const response = await fetch("/data/breeds.json", { cache: "force-cache" });
+      const response = await fetch("/data/breeds.json", {
+        cache: "force-cache"
+      });
       if (!response.ok) return [];
       const breeds = await response.json();
       return Array.isArray(breeds) ? breeds : [];
@@ -197,7 +203,9 @@
   /* Save search result ID to recent searches in localStorage */
   function remember(id) {
     const recent = [id, ...readRecent().filter((item) => item !== id)].slice(0, 6);
-    try { localStorage.setItem("msRecentSearches", JSON.stringify(recent)); } catch {}
+    try {
+      localStorage.setItem("msRecentSearches", JSON.stringify(recent));
+    } catch {}
   }
 
   /* Initialize search system and attach event listeners */
@@ -219,7 +227,10 @@
       renderMessage(results, "Loading the site index…");
       allItems = await buildIndex();
       if (searchInput.value.trim()) {
-        const matches = allItems.map((item) => ({ ...item, rank: score(item, searchInput.value) })).filter((item) => item.rank > 0).sort((a, b) => b.rank - a.rank);
+        const matches = allItems.map((item) => ({
+          ...item,
+          rank: score(item, searchInput.value)
+        })).filter((item) => item.rank > 0).sort((a, b) => b.rank - a.rank);
         renderResults(results, matches);
       } else {
         const recent = readRecent().map((id) => allItems.find((item) => item.id === id)).filter(Boolean);
@@ -238,34 +249,66 @@
     function updateSelection() {
       const links = [...results.querySelectorAll(".ms-search-result")];
       links.forEach((link, index) => link.classList.toggle("active", index === selectedIndex));
-      links[selectedIndex]?.scrollIntoView({ block: "nearest" });
+      links[selectedIndex]?.scrollIntoView({
+        block: "nearest"
+      });
     }
 
     searchButton.addEventListener("click", openSearch);
     searchInput.addEventListener("input", () => {
       const query = searchInput.value.trim();
-      if (!query) { renderMessage(results, "Start typing to search the whole site."); return; }
+      if (!query) {
+        renderMessage(results, "Start typing to search the whole site.");
+        return;
+      }
       const matches = allItems
-        .map((item) => ({ ...item, rank: score(item, query) }))
+        .map((item) => ({
+          ...item,
+          rank: score(item, query)
+        }))
         .filter((item) => item.rank > 0)
         .sort((a, b) => b.rank - a.rank || a.title.localeCompare(b.title));
       renderResults(results, matches);
     });
     searchInput.addEventListener("keydown", (event) => {
       const links = [...results.querySelectorAll(".ms-search-result")];
-      if (event.key === "ArrowDown") { event.preventDefault(); selectedIndex = Math.min(selectedIndex + 1, links.length - 1); updateSelection(); }
-      if (event.key === "ArrowUp") { event.preventDefault(); selectedIndex = Math.max(selectedIndex - 1, 0); updateSelection(); }
-      if (event.key === "Enter" && links[selectedIndex]) { event.preventDefault(); links[selectedIndex].click(); }
+      if (event.key === "ArrowDown") {
+        event.preventDefault();
+        selectedIndex = Math.min(selectedIndex + 1, links.length - 1);
+        updateSelection();
+      }
+      if (event.key === "ArrowUp") {
+        event.preventDefault();
+        selectedIndex = Math.max(selectedIndex - 1, 0);
+        updateSelection();
+      }
+      if (event.key === "Enter" && links[selectedIndex]) {
+        event.preventDefault();
+        links[selectedIndex].click();
+      }
     });
-    searchBox.addEventListener("click", (event) => { if (event.target === searchBox) closeSearch(); });
+    searchBox.addEventListener("click", (event) => {
+      if (event.target === searchBox) closeSearch();
+    });
     document.addEventListener("keydown", (event) => {
       const typing = /^(INPUT|TEXTAREA|SELECT)$/.test(document.activeElement?.tagName) || document.activeElement?.isContentEditable;
-      if (event.key === "/" && !typing) { event.preventDefault(); openSearch(); }
-      if ((event.ctrlKey || event.metaKey) && event.key.toLowerCase() === "k") { event.preventDefault(); openSearch(); }
-      if (event.key === "Escape" && !searchBox.classList.contains("hidden")) { event.preventDefault(); closeSearch(); }
+      if (event.key === "/" && !typing) {
+        event.preventDefault();
+        openSearch();
+      }
+      if ((event.ctrlKey || event.metaKey) && event.key.toLowerCase() === "k") {
+        event.preventDefault();
+        openSearch();
+      }
+      if (event.key === "Escape" && !searchBox.classList.contains("hidden")) {
+        event.preventDefault();
+        closeSearch();
+      }
     });
   }
 
-  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", boot, { once: true });
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", boot, {
+    once: true
+  });
   else boot();
 })();

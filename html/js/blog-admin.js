@@ -29,7 +29,7 @@ function escapeHtml(value) {
     ">": "&gt;",
     "\"": "&quot;",
     "'": "&#039;"
-  }[char]));
+  } [char]));
 }
 
 function slugify(value) {
@@ -77,12 +77,12 @@ function fillForm(post = {}) {
 
 function updatePreview() {
   const post = getPost();
-  const image = post.image
-    ? `<img class="blog-post-image" src="${escapeHtml(post.image)}" alt="${escapeHtml(post.imageAlt || post.title)}">`
-    : "";
-  const link = post.linkText && post.linkUrl
-    ? `<a href="${escapeHtml(post.linkUrl)}">${escapeHtml(post.linkText)}</a>`
-    : "";
+  const image = post.image ?
+    `<img class="blog-post-image" src="${escapeHtml(post.image)}" alt="${escapeHtml(post.imageAlt || post.title)}">` :
+    "";
+  const link = post.linkText && post.linkUrl ?
+    `<a href="${escapeHtml(post.linkUrl)}">${escapeHtml(post.linkText)}</a>` :
+    "";
 
   preview.innerHTML = `
     ${image}
@@ -154,7 +154,9 @@ async function loadPosts() {
   setStatus("Loading posts...");
 
   try {
-    const response = await fetch("/api/posts", { credentials: "same-origin" });
+    const response = await fetch("/api/posts", {
+      credentials: "same-origin"
+    });
     if (!response.ok) throw new Error("Could not load posts.");
 
     posts = await response.json();
@@ -183,7 +185,9 @@ async function savePosts(nextPosts) {
   const response = await fetch("/api/posts", {
     method: "PUT",
     credentials: "same-origin",
-    headers: { "content-type": "application/json" },
+    headers: {
+      "content-type": "application/json"
+    },
     body: JSON.stringify(nextPosts)
   });
 

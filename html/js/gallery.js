@@ -1,5 +1,5 @@
 /* Gallery: load photos, filter by dog and category, shuffle display */
-(async function () {
+(async function() {
   "use strict";
 
   /* Get all gallery grid elements */
@@ -8,7 +8,9 @@
 
   await Promise.all(grids.filter((grid) => grid.dataset.manifest).map(async (grid) => {
     try {
-      const response = await fetch(grid.dataset.manifest, { cache: "force-cache" });
+      const response = await fetch(grid.dataset.manifest, {
+        cache: "force-cache"
+      });
       const photos = response.ok ? await response.json() : [];
       if (!Array.isArray(photos)) return;
       photos.filter((photo) => photo?.src && photo?.alt).forEach((photo, index) => {
@@ -31,21 +33,27 @@
   /* Determine which dog and category a photo belongs to */
   function detailsFor(image) {
     const text = `${image.alt} ${image.src}`.toLowerCase();
-    const dog = text.includes("molly") && text.includes("shaina") || text.includes("both")
-      ? "Together"
-      : text.includes("shaina") ? "Shaina" : text.includes("poppy") ? "Poppy" : "Molly";
+    const dog = text.includes("molly") && text.includes("shaina") || text.includes("both") ?
+      "Together" :
+      text.includes("shaina") ? "Shaina" : text.includes("poppy") ? "Poppy" : "Molly";
     let category = image.dataset.category || "Portraits";
     if (/outside|outdoor|lead|meadow|garden/.test(text)) category = "Outdoors";
     else if (/rest|curled|towel|sunlight|sleep|couch/.test(text)) category = "Sleepy";
     else if (/toy|tennis|phone|play|carrying/.test(text)) category = "Playful";
     else if (dog === "Together") category = "Together";
-    return { dog, category };
+    return {
+      dog,
+      category
+    };
   }
 
   /* Wrap image in figure with metadata and caption */
   function prepareItem(image) {
     if (image.closest(".gallery-item")) return image.closest(".gallery-item");
-    const { dog, category } = detailsFor(image);
+    const {
+      dog,
+      category
+    } = detailsFor(image);
     const figure = document.createElement("figure");
     figure.className = "gallery-item";
     figure.dataset.dog = dog;
@@ -91,13 +99,15 @@
       toolbar.querySelectorAll("[data-filter-kind]").forEach((button) => button.classList.toggle("active", button === filter));
       const kind = filter.dataset.filterKind;
       const value = filter.dataset.filterValue;
-      items.forEach((item) => { item.hidden = kind !== "all" && item.dataset[kind] !== value; });
+      items.forEach((item) => {
+        item.hidden = kind !== "all" && item.dataset[kind] !== value;
+      });
       return;
     }
     if (!event.target.closest(".gallery-shuffle")) return;
     grids.forEach((grid) => {
       [...grid.querySelectorAll(":scope > .gallery-item")]
-        .sort(() => Math.random() - 0.5)
+      .sort(() => Math.random() - 0.5)
         .forEach((item) => grid.appendChild(item));
     });
     window.MSAchievements?.record("shuffles", 1);

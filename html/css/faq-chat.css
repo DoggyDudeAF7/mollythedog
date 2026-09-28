@@ -99,11 +99,11 @@
   white-space: normal;
 }
 
-.faq-ai-message.assistant > :first-child {
+.faq-ai-message.assistant> :first-child {
   margin-top: 0;
 }
 
-.faq-ai-message.assistant > :last-child {
+.faq-ai-message.assistant> :last-child {
   margin-bottom: 0;
 }
 

@@ -141,8 +141,8 @@
   margin: 0;
 }
 
-.dog-book-chapter p + p,
-.dog-book-ending p + p {
+.dog-book-chapter p+p,
+.dog-book-ending p+p {
   margin-top: 14px;
 }
 

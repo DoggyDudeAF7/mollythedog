@@ -16,8 +16,12 @@ loginForm.addEventListener("submit", async (event) => {
     const response = await fetch("/api/login", {
       method: "POST",
       credentials: "same-origin",
-      headers: { "content-type": "application/json" },
-      body: JSON.stringify({ password: passwordInput.value })
+      headers: {
+        "content-type": "application/json"
+      },
+      body: JSON.stringify({
+        password: passwordInput.value
+      })
     });
 
     if (!response.ok) {

@@ -34,10 +34,10 @@
     18px;
 
   background:
-    rgba(255,255,255,0.06);
+    rgba(255, 255, 255, 0.06);
 
   border:
-    1px solid rgba(255,255,255,0.08);
+    1px solid rgba(255, 255, 255, 0.08);
 
   color:
     white;
@@ -64,7 +64,7 @@
     scale(1.6);
 
   background:
-    rgba(255,255,255,0.14);
+    rgba(255, 255, 255, 0.14);
 
   z-index:
     10;
@@ -92,7 +92,7 @@
     12px;
 
   color:
-    rgba(255,255,255,0.8);
+    rgba(255, 255, 255, 0.8);
 
   opacity:
     0;
@@ -137,11 +137,9 @@
     20px;
 
   background:
-    linear-gradient(
-      90deg,
+    linear-gradient(90deg,
       #ffb7a5,
-      #bfa8ff
-    );
+      #bfa8ff);
 
   -webkit-background-clip:
     text;
@@ -168,7 +166,7 @@
     none;
 
   background:
-    rgba(255,255,255,0.08);
+    rgba(255, 255, 255, 0.08);
 
   color:
     white;
@@ -177,7 +175,7 @@
 .resultItem:hover {
 
   background:
-    rgba(255,255,255,0.12);
+    rgba(255, 255, 255, 0.12);
 
 }
 
@@ -193,7 +191,7 @@
     border-box;
 
   font-family:
-    'Inter',sans-serif;
+    'Inter', sans-serif;
 
 }
 
@@ -227,13 +225,13 @@ nav {
     center;
 
   background:
-    rgba(0,0,0,0.35);
+    rgba(0, 0, 0, 0.35);
 
   backdrop-filter:
     blur(14px);
 
   border:
-    1px solid rgba(255,255,255,0.12);
+    1px solid rgba(255, 255, 255, 0.12);
 
   border-radius:
     22px;
@@ -289,10 +287,10 @@ nav .nav-links a {
     white;
 
   background:
-    rgba(255,255,255,0.06);
+    rgba(255, 255, 255, 0.06);
 
   border:
-    1px solid rgba(255,255,255,0.08);
+    1px solid rgba(255, 255, 255, 0.08);
 
   transition:
     0.2s ease;
@@ -323,7 +321,7 @@ nav .nav-links a::after {
     12px;
 
   color:
-    rgba(255,255,255,0.85);
+    rgba(255, 255, 255, 0.85);
 
   opacity:
     0;
@@ -386,10 +384,10 @@ nav .nav-links a:hover {
     18px;
 
   background:
-    rgba(255,255,255,0.06);
+    rgba(255, 255, 255, 0.06);
 
   border:
-    1px solid rgba(255,255,255,0.08);
+    1px solid rgba(255, 255, 255, 0.08);
 
   color:
     white;
@@ -413,10 +411,10 @@ nav .nav-links a:hover {
     scale(1.6);
 
   background:
-    rgba(255,255,255,0.16);
+    rgba(255, 255, 255, 0.16);
 
   box-shadow:
-    0 10px 30px rgba(0,0,0,0.4);
+    0 10px 30px rgba(0, 0, 0, 0.4);
 
 }
 
@@ -435,13 +433,13 @@ nav .nav-links a:hover {
     translateX(-50%);
 
   width:
-    min(520px,90vw);
+    min(520px, 90vw);
 
   background:
-    rgba(15,15,20,0.92);
+    rgba(15, 15, 20, 0.92);
 
   border:
-    1px solid rgba(255,255,255,0.12);
+    1px solid rgba(255, 255, 255, 0.12);
 
   border-radius:
     18px;
@@ -491,7 +489,7 @@ nav .nav-links a:hover {
     12px;
 
   background:
-    rgba(255,255,255,0.08);
+    rgba(255, 255, 255, 0.08);
 
   color:
     white;
@@ -520,7 +518,7 @@ nav .nav-links a:hover {
     pointer;
 
   background:
-    rgba(255,255,255,0.05);
+    rgba(255, 255, 255, 0.05);
 
 }
 
@@ -570,11 +568,9 @@ p {
 .card {
 
   background:
-    linear-gradient(
-      135deg,
-      rgba(255,255,255,0.12),
-      rgba(255,255,255,0.03)
-    );
+    linear-gradient(135deg,
+      rgba(255, 255, 255, 0.12),
+      rgba(255, 255, 255, 0.03));
 
   padding:
     50px;
@@ -583,10 +579,10 @@ p {
     30px;
 
   border:
-    1px solid rgba(255,255,255,0.18);
+    1px solid rgba(255, 255, 255, 0.18);
 
   box-shadow:
-    0 20px 60px rgba(0,0,0,0.5);
+    0 20px 60px rgba(0, 0, 0, 0.5);
 
   max-width:
     900px;
@@ -633,7 +629,7 @@ p {
     grid;
 
   grid-template-columns:
-    repeat(2,1fr);
+    repeat(2, 1fr);
 
   gap:
     12px;
@@ -700,7 +696,7 @@ footer {
     0;
 
   background:
-    rgba(0,0,0,0.9);
+    rgba(0, 0, 0, 0.9);
 
   display:
     none;
@@ -750,13 +746,13 @@ footer {
     46px;
 
   border:
-    1px solid rgba(255,255,255,0.22);
+    1px solid rgba(255, 255, 255, 0.22);
 
   border-radius:
     50%;
 
   background:
-    rgba(0,0,0,0.58);
+    rgba(0, 0, 0, 0.58);
 
   color:
     white;
@@ -784,7 +780,7 @@ footer {
 #lightboxClose:hover {
 
   background:
-    rgba(255,255,255,0.16);
+    rgba(255, 255, 255, 0.16);
 
   transform:
     scale(1.05);
