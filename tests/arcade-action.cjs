@@ -35,7 +35,7 @@ async function setup(touch=false){
  await page.clock.install({time:new Date('2026-09-15T10:00:00Z')});await page.goto(base+'/games/',{waitUntil:'networkidle'});await page.locator('.arcade-card').first().waitFor();await page.clock.pauseAt(new Date('2026-09-15T10:10:00Z'));await advance(50);
 }
 async function start(id){
- await page.evaluate(id=>{location.hash=id;},id);await page.locator('#start-game').waitFor();
+ await page.evaluate(id=>{if(location.hash==='#'+id)history.pushState(null,'',location.pathname+location.search);location.hash=id;},id);await page.locator('#start-game').waitFor();
  await page.evaluate(()=>{let state=816;Math.random=()=>{state=(Math.imul(1664525,state)+1013904223)>>>0;return state/4294967296;};});
  await page.locator('#start-game').click();started=await page.evaluate(()=>performance.now());await advance(32);
  await page.evaluate(async()=>{const {assets}=await import('/js/arcade/data.js');await Promise.all(Object.values(assets).map(src=>new Promise(resolve=>{const i=new Image();i.onload=i.onerror=resolve;i.src=src;})));});
