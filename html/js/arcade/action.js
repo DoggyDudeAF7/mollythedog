@@ -823,13 +823,41 @@ function treatStacker(ctx) {
 }
 
 function reactionPaws(ctx) {
-  ctx.root.innerHTML = `<div class="reaction-board"><div class="reaction-rounds" aria-label="Five reaction rounds">${Array.from({ length: 5 }, (_, i) => ` < span > $ {
-    i + 1
-  } < /span>`).join('')}</div > < button class = "reaction-pad is-wait"
-  aria - label = "Reaction pad. Wait for green, then tap." > < span class = "reaction-orbit"
-  aria - hidden = "true" > < /span><img src="${assets.shaina}" alt="Shaina"><span class="reaction-cue">Get ready</span > < span class = "reaction-hint" > Wait
-  for the green cue… < /span></button > < div class = "reaction-times"
-  aria - label = "Your reaction times" > < /div><p class="control-note action-note">Tap the pad or press Space when it turns green. Three false starts or misses end the run. Enter also works when the pad is focused.</p > < /div>`;
+  const board = document.createElement('div');
+  board.className = 'reaction-board';
+  const roundList = document.createElement('div');
+  roundList.className = 'reaction-rounds';
+  roundList.setAttribute('aria-label', 'Five reaction rounds');
+  for (let i = 0; i < 5; i++) {
+    const round = document.createElement('span');
+    round.textContent = i + 1;
+    roundList.append(round);
+  }
+  const padButton = document.createElement('button');
+  padButton.className = 'reaction-pad is-wait';
+  padButton.type = 'button';
+  padButton.setAttribute('aria-label', 'Reaction pad. Wait for green, then tap.');
+  const orbit = document.createElement('span');
+  orbit.className = 'reaction-orbit';
+  orbit.setAttribute('aria-hidden', 'true');
+  const img = document.createElement('img');
+  img.src = assets.shaina;
+  img.alt = 'Shaina';
+  const cueText = document.createElement('span');
+  cueText.className = 'reaction-cue';
+  cueText.textContent = 'Get ready';
+  const hintText = document.createElement('span');
+  hintText.className = 'reaction-hint';
+  hintText.textContent = 'Wait for the green cue…';
+  padButton.append(orbit, img, cueText, hintText);
+  const timesList = document.createElement('div');
+  timesList.className = 'reaction-times';
+  timesList.setAttribute('aria-label', 'Your reaction times');
+  const note = document.createElement('p');
+  note.className = 'control-note action-note';
+  note.textContent = 'Tap the pad or press Space when it turns green. Three false starts or misses end the run. Enter also works when the pad is focused.';
+  board.append(roundList, padButton, timesList, note);
+  ctx.root.append(board);
   const pad = ctx.root.querySelector('.reaction-pad'),
     cue = ctx.root.querySelector('.reaction-cue'),
     hint = ctx.root.querySelector('.reaction-hint');
