@@ -696,21 +696,18 @@ document.addEventListener("DOMContentLoaded", async () => {
     dailyBreedCard = cards[getDailyBreedIndex()];
     const profile = profiles.get(dailyBreedCard.id);
     const image = dailyBreedCard.querySelector(".breed-portrait img");
-    breedOfDayImage.innerHTML = image ? ` < img src = "${image.getAttribute("
-    src ")}"
-    alt = "${image.getAttribute("
-    alt ") || profile.name}" > ` : "";
+    breedOfDayImage.innerHTML = "";
+    if (image) {
+      const dailyImage = document.createElement("img");
+      dailyImage.src = image.getAttribute("src");
+      dailyImage.alt = image.getAttribute("alt") || profile.name;
+      breedOfDayImage.append(dailyImage);
+    }
     breedOfDayName.textContent = profile.name;
     breedOfDayText.textContent = profile.description;
-    breedOfDayMeter.style.width = `
-    $ {
-      profile.energyNumber
-    } % `;
+    breedOfDayMeter.style.width = `${profile.energyNumber}%`;
     breedOfDayMatch.textContent = profile.match;
-    breedOfDayEnergy.textContent = `
-    $ {
-      profile.energyNumber
-    } % energy`;
+    breedOfDayEnergy.textContent = `${profile.energyNumber}% energy`;
     breedOfDay.dataset.target = dailyBreedCard.id;
   }
 
