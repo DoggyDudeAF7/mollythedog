@@ -506,18 +506,16 @@ document.addEventListener("DOMContentLoaded", async () => {
         ];
         const grid = compareDialog.querySelector(".breed-compare-grid");
         grid.dataset.count = String(selected.length);
-        grid.innerHTML = `
-      <div class="breed-compare-head" aria-hidden="true"><span>Compare</span>${selected.map(({ profile, card }) => {
-        const image = card ? card.querySelector(".breed-portrait img") : null;
-        return ` < article > $ {
-          image ? `<img src="${image.src}" alt="">` : ""
-        } < strong > $ {
-          profile.name
-        } < /strong></article > `;
-      }).join("")}</div>
-      ${fields.map(([label, value]) => `<div class="breed-compare-row"><strong>${label}</strong>${selected.map(({ profile }) => `<span>${value(profile)}</span>`).join("")
-    } < /div>`).join("")}
-    `;
+        const header = selected.map(({ profile, card }) => {
+          const image = card ? card.querySelector(".breed-portrait img") : null;
+          const photo = image ? `<img src="${image.src}" alt="">` : "";
+          return `<article>${photo}<strong>${profile.name}</strong></article>`;
+        }).join("");
+        const rows = fields.map(([label, value]) => {
+          const values = selected.map(({ profile }) => `<span>${value(profile)}</span>`).join("");
+          return `<div class="breed-compare-row"><strong>${label}</strong>${values}</div>`;
+        }).join("");
+        grid.innerHTML = `<div class="breed-compare-head" aria-hidden="true"><span>Compare</span>${header}</div>${rows}`;
   }
 
   /* Create and initialize breed comparison UI (tray and modal dialog) */
