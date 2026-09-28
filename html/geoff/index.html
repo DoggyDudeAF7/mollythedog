@@ -982,7 +982,7 @@
         function rawHTMLAttribute(tag, name) {
           const pattern = new RegExp(`(?:^|\\s)${name}\\s*=\\s*(?:"([^"]*)"|'([^']*)'|([^\\s>]+))`, 'i');
           const match = String(tag).replace(/^<\s*[^\s>]+/, '').match(pattern);
-          return match ? (match[1] ?? match[2] ?? match[3] ?? '') : '';
+          return match ? (match[1] !== undefined ? match[1] : match[2] !== undefined ? match[2] : match[3] !== undefined ? match[3] : '') : '';
         }
 
         function sanitizeRawHTMLTag(rawTag) {
@@ -1224,7 +1224,7 @@
 
         function pageTitle(doc, url) {
           const h1 = doc.querySelector('h1');
-          const title = h1?.textContent || doc.title || new URL(url).pathname;
+          const title = h1 ? h1.textContent : doc.title || new URL(url).pathname;
           return normalise(title).replace(/\s+[|—-]\s+Molly\s*&\s*Shaina.*$/i, '');
         }
 
@@ -1232,7 +1232,7 @@
           const doc = new DOMParser().parseFromString(html, 'text/html');
           doc.querySelectorAll('script,style,noscript,svg,nav,footer').forEach(el => el.remove());
           const main = doc.querySelector('main') || doc.body;
-          const text = normalise(main?.textContent || '');
+          const text = normalise(main ? main.textContent : '');
           const headings = [...doc.querySelectorAll('h1,h2,h3')].map(h => normalise(h.textContent)).filter(Boolean);
           return {
             url,

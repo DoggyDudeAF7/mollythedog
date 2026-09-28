@@ -1675,9 +1675,11 @@ function initMollyShainaAnimations() {
         .then(
           function() {
 
-            window.MSAchievements?.unlock(
-              "very-suspicious"
-            );
+            if (window.MSAchievements) {
+              window.MSAchievements.unlock(
+                "very-suspicious"
+              );
+            }
 
           }
         );

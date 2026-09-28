@@ -197,11 +197,11 @@ document.addEventListener("DOMContentLoaded", () => {
   const params = new URLSearchParams(location.search);
   const slug = comics[params.get("q")] ? params.get("q") : "kibble";
   const comic = comics[slug];
-  const savedProgress = window.MSComicProgress?.get(slug);
+  const savedProgress = window.MSComicProgress ? window.MSComicProgress.get(slug) : null;
   let current = savedProgress && !savedProgress.completed ? Number(savedProgress.panel) || 0 : 0;
 
   (window.MSSystemsReady || Promise.resolve()).then(() => {
-    window.MSAchievements?.record("comics", slug);
+    if (window.MSAchievements) window.MSAchievements.record("comics", slug);
   });
 
   const issue = document.getElementById("viewerIssue");
@@ -221,7 +221,7 @@ document.addEventListener("DOMContentLoaded", () => {
   resetProgress.type = "button";
   resetProgress.className = "viewer-reset-progress";
   resetProgress.textContent = "Start again";
-  controls?.append(progressLabel, progressTrack, resetProgress);
+  if (controls) controls.append(progressLabel, progressTrack, resetProgress);
 
   document.title = `Molly and Shaina - ${comic.title}`;
   issue.textContent = comic.issue;
@@ -248,11 +248,12 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     count.textContent = `Panels ${current + 1}-${end} of ${comic.captions.length}`;
-    const completed = Boolean(window.MSComicProgress?.get(slug)?.completed) || end >= comic.captions.length;
+    const saved = window.MSComicProgress ? window.MSComicProgress.get(slug) : null;
+    const completed = Boolean(saved && saved.completed) || end >= comic.captions.length;
     const percent = completed ? 100 : Math.round((end / comic.captions.length) * 100);
     progressLabel.textContent = completed ? "✓ Comic completed" : `${percent}% read`;
     progressTrack.querySelector("i").style.width = `${percent}%`;
-    window.MSComicProgress?.save(slug, current, comic.captions.length, completed);
+    if (window.MSComicProgress) window.MSComicProgress.save(slug, current, comic.captions.length, completed);
     prev.disabled = current === 0;
     next.disabled = end >= comic.captions.length;
   }
@@ -260,7 +261,7 @@ document.addEventListener("DOMContentLoaded", () => {
   prev.addEventListener("click", () => showPanel(current - 4));
   next.addEventListener("click", () => showPanel(current + 4));
   resetProgress.addEventListener("click", () => {
-    window.MSComicProgress?.reset(slug);
+    if (window.MSComicProgress) window.MSComicProgress.reset(slug);
     showPanel(0);
   });
   document.addEventListener("keydown", event => {
