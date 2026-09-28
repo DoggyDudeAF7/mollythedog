@@ -50,7 +50,7 @@ async function catchRun(win){
  const initial=(await visual()).images.find(i=>i.src.endsWith('molly-emoji.webp')).x;
  if(!mobile){await page.keyboard.down('ArrowLeft');await advance(160);await page.keyboard.up('ArrowLeft');assert.ok((await visual()).images.find(i=>i.src.endsWith('molly-emoji.webp')).x<initial-30);}
  else {const left=page.locator('.action-arrow').first();await left.dispatchEvent('pointerdown',{pointerId:9,clientX:0,clientY:0,pointerType:'touch'});await advance(160);await left.dispatchEvent('pointerup',{pointerId:9});assert.ok((await visual()).images.find(i=>i.src.endsWith('molly-emoji.webp')).x<initial-30);}
- for(let i=0;i<465;i++){
+ for(let i=0;i<(win?465:980);i++){
    if(await page.locator('#play-again').count())break;
    const v=await visual(),dog=v.images.find(s=>s.src.endsWith('molly-emoji.webp'));
    const rain=v.circles.filter(c=>c.fill==='#82374c').sort((a,b)=>b.y-a.y);
