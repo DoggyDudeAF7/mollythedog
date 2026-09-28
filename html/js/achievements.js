@@ -157,7 +157,7 @@
   }
 
   function progressValue(definition) {
-    if (definition.progress === "favourites") return window.MSFavourites?.count() || 0;
+    if (definition.progress === "favourites") return window.MSFavourites ? window.MSFavourites.count() : 0;
     const value = state.progress[definition.progress];
     return Array.isArray(value) ? value.length : Number(value || 0);
   }

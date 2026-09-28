@@ -92,7 +92,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
   }
 
-  exportButton?.addEventListener("click", () => {
+  if (exportButton) exportButton.addEventListener("click", () => {
     const backup = {
       app: "mollyandshaina.com",
       version: 1,
@@ -115,8 +115,8 @@ document.addEventListener("DOMContentLoaded", async () => {
     backupStatus.textContent = "Collection exported. Keep that JSON file somewhere safe.";
   });
 
-  importInput?.addEventListener("change", async () => {
-    const file = importInput.files?.[0];
+  if (importInput) importInput.addEventListener("change", async () => {
+    const file = importInput.files && importInput.files[0];
     if (!file) return;
     if (file.size > 1_000_000) {
       backupStatus.textContent = "That file is too large to be a collection backup.";
@@ -125,7 +125,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
     try {
       const backup = JSON.parse(await file.text());
-      if (backup?.app !== "mollyandshaina.com" || backup.version !== 1 || typeof backup.favourites !== "object") {
+      if (!backup || backup.app !== "mollyandshaina.com" || backup.version !== 1 || typeof backup.favourites !== "object") {
         throw new Error("invalid");
       }
       if (!confirm("Replace the favourites, achievements, and comic progress on this device with this backup?")) return;

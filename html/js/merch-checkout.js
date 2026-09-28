@@ -21,7 +21,7 @@
 
   function render() {
     const selected = getSelectedProducts();
-    items.replaceChildren();
+    while (items.firstChild) items.removeChild(items.firstChild);
     empty.hidden = selected.length > 0;
     submitButton.disabled = selected.length === 0;
 

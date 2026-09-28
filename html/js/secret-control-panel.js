@@ -90,7 +90,7 @@ function enableEditorActions() {
 }
 
 async function hasWritePermission(handle) {
-  if (!handle?.queryPermission || !handle?.requestPermission) return true;
+  if (!handle || !handle.queryPermission || !handle.requestPermission) return true;
 
   const options = {
     mode: "readwrite"
@@ -171,7 +171,7 @@ async function savePage() {
 }
 
 function downloadPageCopy() {
-  if (!pageEditor?.value) return;
+  if (!pageEditor || !pageEditor.value) return;
 
   const blob = new Blob([pageEditor.value], {
     type: "text/html"
@@ -184,11 +184,11 @@ function downloadPageCopy() {
   setEditorStatus(`Downloaded a copy of ${pageFileName}.`);
 }
 
-openPageFile?.addEventListener("click", openPageForEditing);
-savePageFile?.addEventListener("click", savePage);
-downloadPageFile?.addEventListener("click", downloadPageCopy);
-refreshPagePreview?.addEventListener("click", updatePreview);
-pageEditor?.addEventListener("input", () => {
+if (openPageFile) openPageFile.addEventListener("click", openPageForEditing);
+if (savePageFile) savePageFile.addEventListener("click", savePage);
+if (downloadPageFile) downloadPageFile.addEventListener("click", downloadPageCopy);
+if (refreshPagePreview) refreshPagePreview.addEventListener("click", updatePreview);
+if (pageEditor) pageEditor.addEventListener("input", () => {
   pageIsDirty = true;
   updatePreview();
   enableEditorActions();
