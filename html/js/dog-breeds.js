@@ -249,7 +249,8 @@ document.addEventListener("DOMContentLoaded", async () => {
 
       /* Extract numeric meter value from breed card */
       function numberFromMeter(card) {
-        return Number.parseInt(card.querySelector(".breed-meter span")?.style.width, 10) || 50;
+        const meterFill = card.querySelector(".breed-meter span");
+        return Number.parseInt(meterFill ? meterFill.style.width : "", 10) || 50;
       }
 
       /* Convert energy number to Low/Medium/High rating */
@@ -275,9 +276,11 @@ document.addEventListener("DOMContentLoaded", async () => {
 
       /* Extract and format all breed metadata from card HTML */
       function profileFor(card) {
-        const name = card.querySelector("h2")?.textContent.trim() || "This breed";
+        const heading = card.querySelector("h2");
+        const name = heading ? heading.textContent.trim() : "This breed";
         const slug = card.id;
-        const tags = (card.querySelector(".breed-kicker")?.textContent || "Companion • Medium • Medium").split("•").map((tag) => tag.trim());
+        const kicker = card.querySelector(".breed-kicker");
+        const tags = (kicker ? kicker.textContent : "Companion • Medium • Medium").split("•").map((tag) => tag.trim());
         const group = (card.dataset.group || tags[0] || "companion").toLowerCase();
         const size = titleCase(tags[1] || "Medium");
         const coat = titleCase(tags[2] || "Medium");
@@ -329,8 +332,8 @@ document.addEventListener("DOMContentLoaded", async () => {
           match,
           description,
           ratings: {
-            molly: similarityOverrides[slug]?.molly ?? (match.includes("molly") ? 94 : hashScore(slug, 1)),
-            shaina: similarityOverrides[slug]?.shaina ?? (match.includes("shaina") ? 94 : hashScore(slug, 2)),
+            molly: similarityOverrides[slug] && similarityOverrides[slug].molly !== undefined ? similarityOverrides[slug].molly : match.includes("molly") ? 94 : hashScore(slug, 1),
+            shaina: similarityOverrides[slug] && similarityOverrides[slug].shaina !== undefined ? similarityOverrides[slug].shaina : match.includes("shaina") ? 94 : hashScore(slug, 2),
             snack: hashScore(slug, 3),
             nap: Math.max(25, 110 - energyNumber),
             chaos: hashScore(slug, 4)
@@ -343,7 +346,8 @@ document.addEventListener("DOMContentLoaded", async () => {
       /* Convert breed card to favorite item format for save/recall */
       function favouriteItem(card) {
         const profile = profiles.get(card.id);
-        const image = card.querySelector("img")?.getAttribute("src") || "";
+        const img = card.querySelector("img");
+        const image = img ? img.getAttribute("src") : "";
         return {
           id: `breed:${card.id}`,
           title: profile.name,
@@ -389,7 +393,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         cards.forEach((card) => {
           const profile = profiles.get(card.id);
           const copy = card.querySelector(".breed-card-copy");
-          const summary = copy?.querySelector(":scope > p:not(.breed-kicker)");
+          const summary = copy ? copy.querySelector(":scope > p:not(.breed-kicker)") : null;
           if (!copy) return;
           if (summary) summary.textContent = profile.description;
           card.dataset.size = profile.size.toLowerCase();
@@ -467,7 +471,10 @@ document.addEventListener("DOMContentLoaded", async () => {
           button.textContent = active ? "✓ Comparing" : "+ Compare";
         });
         if (!compareTray) return;
-        const names = [...compared].map((slug) => profiles.get(slug)?.name).filter(Boolean);
+        const names = [...compared].map((slug) => {
+          const profile = profiles.get(slug);
+          return profile && profile.name;
+        }).filter(Boolean);
         compareTray.hidden = !names.length;
         compareTray.querySelector(".breed-compare-summary").textContent = message || `${names.length}/3 selected${names.length ? `: ${names.join(", ")}` : ""}`;
         compareTray.querySelector(".breed-compare-open").disabled = names.length < 2;
@@ -501,7 +508,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         grid.dataset.count = String(selected.length);
         grid.innerHTML = `
       <div class="breed-compare-head" aria-hidden="true"><span>Compare</span>${selected.map(({ profile, card }) => {
-        const image = card?.querySelector(".breed-portrait img");
+        const image = card ? card.querySelector(".breed-portrait img") : null;
         return ` < article > $ {
           image ? `<img src="${image.src}" alt="">` : ""
         } < strong > $ {
@@ -664,7 +671,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       cards.length
     }
     breeds• $ {
-      favouriteAPI?.list("Breed").length || 0
+      favouriteAPI ? favouriteAPI.list("Breed").length : 0
     }
     saved`;
     if (breedOfDay) {
@@ -676,7 +683,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   function toggleCard(card) {
     const expanded = card.classList.toggle("expanded");
     card.setAttribute("aria-expanded", String(expanded));
-    if (expanded) window.MSAchievements?.record("breeds", card.id);
+    if (expanded && window.MSAchievements) window.MSAchievements.record("breeds", card.id);
   }
 
   /* Calculate which breed should be featured today (changes daily) */
@@ -750,7 +757,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       if (target) {
         target.hidden = false;
         target.scrollIntoView({ behavior: "smooth", block: "start" });
-        window.MSAchievements?.record("breeds", target.id);
+        if (window.MSAchievements) window.MSAchievements.record("breeds", target.id);
       }
     });
   });
@@ -761,7 +768,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     favoriteToggle.textContent = favoritesOnly ? "← Show All Breeds" : "⭐ Show Favourites";
     applyFilters();
   });
-  breedOfDayJump?.addEventListener("click", () => {
+  if (breedOfDayJump) breedOfDayJump.addEventListener("click", () => {
     if (!dailyBreedCard) return;
     search.value = "";
     favoritesOnly = false;
@@ -771,7 +778,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     applyFilters();
     dailyBreedCard.hidden = false;
     dailyBreedCard.scrollIntoView({ behavior: "smooth", block: "start" });
-    window.MSAchievements?.record("breeds", dailyBreedCard.id);
+    if (window.MSAchievements) window.MSAchievements.record("breeds", dailyBreedCard.id);
   });
   window.addEventListener("ms:favourites-changed", () => { syncFavoriteButtons(); applyFilters(); });
 
@@ -784,7 +791,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   if (location.hash) {
     const initial = document.getElementById(location.hash.slice(1));
-    if (initial?.classList.contains("breed-card")) window.MSAchievements?.record("breeds", initial.id);
+    if (initial && initial.classList.contains("breed-card") && window.MSAchievements) window.MSAchievements.record("breeds", initial.id);
   }
 
   if (!("IntersectionObserver" in window)) {
