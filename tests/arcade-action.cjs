@@ -57,8 +57,11 @@ async function catchRun(win){
    const bones=v.images.filter(s=>s.src.endsWith('dog-bone.webp')).sort((a,b)=>b.y-a.y);
    let x=dog?.x||360;
    if(win){const danger=rain.filter(r=>r.y>255&&r.y<495);const bone=bones.find(b=>b.y>80&&b.y<420&&danger.every(r=>Math.abs(b.x-r.x)>100));if(bone)x=bone.x;if(danger.some(r=>Math.abs(r.x-x)<95)){const choices=[50,170,290,430,550,670];x=choices.sort((a,b)=>Math.min(...danger.map(r=>Math.abs(r.x-b)))-Math.min(...danger.map(r=>Math.abs(r.x-a))))[0];}}
-   else if(rain.length)x=rain[0].x;
-   await tapCanvas(x,440);await advance(100);
+   else{
+     const target=rain.find(r=>r.y>120&&r.y<485)||rain[0];
+     if(target)x=target.x;
+   }
+   await tapCanvas(x,440);await advance(win?100:50);
  }
  await finished('treat-catch',win);
 }
