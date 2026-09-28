@@ -14,6 +14,7 @@ import {
 import {
   createSession,
   image,
+  replaceChildren,
   setSoundMuted,
   sound
 } from './engine.js';
@@ -57,7 +58,7 @@ function refreshProgress() {
   $('win-count').textContent = format(Object.values(state.results).reduce((sum, r) => sum + r.wins, 0));
   $('badge-count').textContent = `${Object.keys(state.achievements).length} / ${badges.length}`;
   $('storage-warning').hidden = storageAvailable();
-  $('arcade-badges').replaceChildren(...badges.map(b => {
+  replaceChildren($('arcade-badges'), badges.map(b => {
     const item = el('div', undefined, 'badge' + (state.achievements[b.id] ? ' unlocked' : ''));
     item.append(el('span', b.icon));
     const copy = el('div');
@@ -72,7 +73,7 @@ function refreshProgress() {
 }
 
 function renderCards() {
-  $('game-cards').replaceChildren(...catalog.map(game => {
+  replaceChildren($('game-cards'), catalog.map(game => {
     const card = el('article', undefined, 'arcade-card' + (game.number === 16 ? ' finale' : ''));
     card.dataset.game = game.id;
     card.dataset.category = game.category;
@@ -101,7 +102,7 @@ function renderCards() {
 }
 
 function stop() {
-  session?.dispose();
+  if (session) session.dispose();
   session = null;
   stage.inert = false;
   $('pause-cover').hidden = true;
@@ -118,7 +119,7 @@ function instructions(game) {
   $('game-description').textContent = game.description;
   $('game-category').textContent = `${game.category} · ${game.difficulty}`;
   $('game-status').textContent = 'Ready when you are.';
-  $('game-hud').replaceChildren();
+  replaceChildren($('game-hud'));
   const intro = el('div', undefined, 'instruction-screen');
   const img = el('img');
   img.src = game.image;
@@ -137,7 +138,7 @@ function instructions(game) {
   start.addEventListener('click', startGame);
   copy.append(start);
   intro.append(copy);
-  stage.replaceChildren(intro);
+  replaceChildren(stage, [intro]);
   document.title = `${game.title} · Molly & Shaina Arcade`;
   $('game-title').focus({
     preventScroll: true
@@ -188,7 +189,7 @@ function resultScreen(result) {
     download.download = 'molly-and-shaina-masterpiece.png';
     view.append(art, download);
   }
-  stage.replaceChildren(view);
+  replaceChildren(stage, [view]);
   replay.focus({
     preventScroll: true
   });
@@ -199,7 +200,7 @@ function resultScreen(result) {
 function startGame() {
   if (!current) return;
   stop();
-  stage.replaceChildren();
+  replaceChildren(stage);
   $('game-status').textContent = '';
   $('pause-game').hidden = false;
   $('restart-game').hidden = false;
@@ -224,7 +225,7 @@ function startGame() {
 }
 
 function pause(value) {
-  if (!session?.alive) return;
+  if (!session || !session.alive) return;
   session.pause(value);
   $('pause-cover').hidden = !value;
   $('pause-game').textContent = value ? 'Resume' : 'Pause';
@@ -244,7 +245,7 @@ function toast(text) {
 }
 
 function toHub(event) {
-  event?.preventDefault();
+  if (event) event.preventDefault();
   if (location.hash) {
     history.pushState(null, '', location.pathname + location.search);
   }
@@ -267,7 +268,7 @@ function route() {
   }
 }
 $('back-to-arcade').addEventListener('click', toHub);
-$('pause-game').addEventListener('click', () => pause(!session?.paused));
+$('pause-game').addEventListener('click', () => pause(!(session && session.paused)));
 $('resume-game').addEventListener('click', () => pause(false));
 $('restart-game').addEventListener('click', startGame);
 $('mute-toggle').addEventListener('click', () => {
@@ -290,9 +291,13 @@ document.addEventListener('visibilitychange', () => {
   if (document.hidden) pause(true);
 });
 window.addEventListener('blur', () => pause(true));
-for (const id of ['navToggle', 'searchBtn']) $(id)?.addEventListener('click', () => pause(true));
+for (const id of ['navToggle', 'searchBtn']) {
+  const button = $(id);
+  if (button) button.addEventListener('click', () => pause(true));
+}
 document.addEventListener('keydown', event => {
-  if (event.code === 'Escape' && session?.alive && !document.querySelector('#searchBox:not(.hidden)') && !$('navLinks')?.classList.contains('open')) {
+  const navLinks = $('navLinks');
+  if (event.code === 'Escape' && session && session.alive && !document.querySelector('#searchBox:not(.hidden)') && !(navLinks && navLinks.classList.contains('open'))) {
     event.preventDefault();
     pause(!session.paused);
   }

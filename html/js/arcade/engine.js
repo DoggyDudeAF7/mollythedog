@@ -9,7 +9,7 @@ export function setSoundMuted(value) {
 export function sound(kind = 'tap') {
   if (muted) return;
   try {
-    audioContext ??= new(window.AudioContext || window.webkitAudioContext)();
+    if (!audioContext) audioContext = new(window.AudioContext || window.webkitAudioContext)();
     if (audioContext.state === 'suspended') audioContext.resume().catch(() => {});
     const oscillator = audioContext.createOscillator(),
       gain = audioContext.createGain();
@@ -68,8 +68,11 @@ export function createSession(root, onFinish) {
       hudSignature = signature;
       const hud = document.getElementById('game-hud'),
         entries = Object.entries(values);
-      if (hud.children.length !== entries.length || entries.some(([label], i) => hud.children[i]?.firstChild?.textContent !== label)) {
-        hud.replaceChildren(...entries.map(([label, value]) => {
+      if (hud.children.length !== entries.length || entries.some(([label], i) => {
+          const child = hud.children[i];
+          return !child || !child.firstChild || child.firstChild.textContent !== label;
+        })) {
+        replaceChildren(hud, entries.map(([label, value]) => {
           const d = document.createElement('div'),
             s = document.createElement('small'),
             b = document.createElement('strong');
@@ -90,7 +93,7 @@ export function createSession(root, onFinish) {
     on(target, event, fn, options) {
       const guarded = e => {
         if (!alive || paused) return;
-        if (target === document && event.startsWith('key') && e.target?.closest?.('input,textarea,select,[contenteditable="true"],nav,#searchBox,.session-controls,#mute-toggle')) return;
+        if (target === document && event.startsWith('key') && e.target.closest && e.target.closest('input,textarea,select,[contenteditable="true"],nav,#searchBox,.session-controls,#mute-toggle')) return;
         fn(e);
       };
       target.addEventListener(event, guarded, options);
@@ -168,7 +171,7 @@ export function createSession(root, onFinish) {
     timers.length = 0;
     frames.length = 0;
     root.inert = false;
-    cleanup?.();
+    if (cleanup) cleanup();
   }
   ctx.on(document, 'keydown', e => {
     if (!['INPUT', 'TEXTAREA', 'SELECT'].includes(e.target.tagName)) {
@@ -202,4 +205,9 @@ export function createSession(root, onFinish) {
   }
   request = requestAnimationFrame(tick);
   return ctx;
+}
+
+export function replaceChildren(parent, children) {
+  while (parent.firstChild) parent.removeChild(parent.firstChild);
+  for (const child of children || []) parent.append(child);
 }

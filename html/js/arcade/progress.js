@@ -15,6 +15,10 @@ let memory = blank();
 let available = true;
 let dirty = false;
 
+function cloneState(state) {
+  return JSON.parse(JSON.stringify(state));
+}
+
 function read() {
   if (dirty) return memory;
   try {
@@ -33,7 +37,7 @@ function read() {
         id
       }
       of catalog) {
-      const r = raw.results?.[id];
+      const r = raw.results && raw.results[id];
       if (r && typeof r === 'object') clean.results[id] = {
         best: number(r.best),
         plays: number(r.plays),
@@ -85,26 +89,26 @@ export const badges = [{
   icon: '🧠',
   title: 'Big Dog Brain',
   description: 'Win Memory, Trivia and Maze.',
-  test: s => ['memory-match', 'trivia', 'pawprint-maze'].every(id => s.results[id]?.wins > 0)
+  test: s => ['memory-match', 'trivia', 'pawprint-maze'].every(id => s.results[id] && s.results[id].wins > 0)
 }, {
   id: 'artist',
   icon: '🎨',
   title: 'Paw-casso',
   description: 'Finish a Doggy Drawing.',
-  test: s => s.results['doggy-drawing']?.wins > 0
+  test: s => s.results['doggy-drawing'] && s.results['doggy-drawing'].wins > 0
 }, {
   id: 'champion',
   icon: '🏆',
   title: 'Ultimate Good Dog',
   description: 'Win the Ultimate Dog Challenge.',
-  test: s => s.results['ultimate-dog-challenge']?.wins > 0
+  test: s => s.results['ultimate-dog-challenge'] && s.results['ultimate-dog-challenge'].wins > 0
 }];
 export function getProgress() {
   memory = read();
-  return structuredClone(memory);
+  return cloneState(memory);
 }
 export function saveProgress(state) {
-  memory = structuredClone(state);
+  memory = cloneState(state);
   dirty = true;
   try {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
@@ -130,9 +134,9 @@ export function recordResult(id, score, won) {
   const previous = state.results[id];
   const newBest = !previous || score > previous.best;
   state.results[id] = {
-    best: Math.max(previous?.best || 0, score),
-    plays: (previous?.plays || 0) + 1,
-    wins: (previous?.wins || 0) + (won ? 1 : 0)
+    best: Math.max(previous ? previous.best : 0, score),
+    plays: (previous ? previous.plays : 0) + 1,
+    wins: (previous ? previous.wins : 0) + (won ? 1 : 0)
   };
   let coins = Math.min(20, Math.floor(score / 50)) + (won ? 15 : 0);
   state.coins += coins;
