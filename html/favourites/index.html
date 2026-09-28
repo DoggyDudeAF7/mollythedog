@@ -24,52 +24,93 @@
     <link rel="stylesheet" href="../css/system-pages.css">
   </head>
   <body>
-    <div class="bg"></div>
+    <div class="bg">
+    </div>
     <nav>
       <div class="nav-inner">
         <button id="navToggle" type="button" aria-label="Toggle menu" aria-expanded="false">☰</button>
         <div class="nav-links" id="navLinks">
-          <a href="/molly/" title="Home"><span>:home:</span></a>
-          <a href="/molly-traits/" title="Traits"><span>:traits:</span></a>
-          <a href="/molly-habits/" title="Habits"><span>:habits:</span></a>
-          <a href="/molly-mind/" title="Mind"><span>:mind:</span></a>
-          <a href="/molly-gallery/" title="Gallery"><span>:gallery:</span></a>
-          <a href="/molly-faq/" title="FAQ"><span>:faq:</span></a>
-          <a href="/molly-dog-breeds/" title="Breeds"><span>:breeds:</span></a>
-          <a href="/comics/" title="Comics"><span>:comics:</span></a>
-          <a href="/blog/" title="Blog"><span>:blog:</span></a>
-          <a href="/games/" title="Arcade"><span>🎮</span></a>
-          <a href="/merch/" title="Merch"><span>🏷️</span></a>
-          <a href="/about-me/" title="About the Human"><span>:about:</span></a>
-          <a href="/shaina/" title="Shaina"><span>:shaina:</span></a>
-          <a href="/poppy/" title="Poppy"><span>:poppy:</span></a>
-          <a href="/geoff/" title="Geoff"><span>:geoff:</span></a>
+          <a href="/molly/" title="Home">
+            <span>:home:</span>
+          </a>
+          <a href="/molly-traits/" title="Traits">
+            <span>:traits:</span>
+          </a>
+          <a href="/molly-habits/" title="Habits">
+            <span>:habits:</span>
+          </a>
+          <a href="/molly-mind/" title="Mind">
+            <span>:mind:</span>
+          </a>
+          <a href="/molly-gallery/" title="Gallery">
+            <span>:gallery:</span>
+          </a>
+          <a href="/molly-faq/" title="FAQ">
+            <span>:faq:</span>
+          </a>
+          <a href="/molly-dog-breeds/" title="Breeds">
+            <span>:breeds:</span>
+          </a>
+          <a href="/comics/" title="Comics">
+            <span>:comics:</span>
+          </a>
+          <a href="/blog/" title="Blog">
+            <span>:blog:</span>
+          </a>
+          <a href="/games/" title="Arcade">
+            <span>🎮</span>
+          </a>
+          <a href="/merch/" title="Merch">
+            <span>🏷️</span>
+          </a>
+          <a href="/about-me/" title="About the Human">
+            <span>:about:</span>
+          </a>
+          <a href="/shaina/" title="Shaina">
+            <span>:shaina:</span>
+          </a>
+          <a href="/poppy/" title="Poppy">
+            <span>:poppy:</span>
+          </a>
+          <a href="/geoff/" title="Geoff">
+            <span>:geoff:</span>
+          </a>
         </div>
         <button id="searchBtn" type="button" aria-label="Open site search">:search:</button>
       </div>
     </nav>
-    <div id="searchBox" class="hidden"><input id="searchInput" placeholder="Search..."><div id="results"></div></div>
+    <div id="searchBox" class="hidden">
+      <input id="searchInput" placeholder="Search...">
+      <div id="results">
+      </div>
+    </div>
     <main class="system-page">
       <section class="system-hero">
         <p class="system-kicker">Your Collection</p>
         <h1>Favourites</h1>
         <p>Breeds, comics, photos, and posts you have saved stay here on this device.</p>
-        <div class="system-summary"><span><strong id="favouriteTotal">0</strong> saved</span></div>
-        <div class="system-backup-actions" aria-label="Collection backup">
-          <button id="exportCollection" type="button">Export collection</button>
-          <label for="importCollection">Restore collection</label>
-          <input id="importCollection" type="file" accept=".mollypack,.molly,application/json,.json">
-        </div>
-        <p class="system-backup-status" id="collectionBackupStatus" role="status"></p>
-        <button class="system-danger" id="clearFavourites" type="button">Clear all favourites</button>
-      </section>
-      <div id="favouritesContent"></div>
-    </main>
-    <footer>
-      <p>© 2026 Molly &amp; Shaina | <a href="/privacy-policy/">Privacy Policy</a> | <a href="/terms-of-use/">Terms of Use &amp; Request Policies</a></p>
-    </footer>
-    <script src="../js/animations.js"></script>
-    <script src="../js/search.js"></script>
-    <script src="../js/favourites-page.js"></script>
-  </body>
-</html>
+        <div class="system-summary">
+          <span>
+            <strong id="favouriteTotal">0</strong> saved</span>
+            </div>
+            <div class="system-backup-actions" aria-label="Collection backup">
+              <button id="exportCollection" type="button">Export collection</button>
+              <label for="importCollection">Restore collection</label>
+              <input id="importCollection" type="file" accept=".mollypack,.molly,application/json,.json">
+            </div>
+            <p class="system-backup-status" id="collectionBackupStatus" role="status">
+            </p>
+            <button class="system-danger" id="clearFavourites" type="button">Clear all favourites</button>
+          </section>
+          <div id="favouritesContent">
+          </div>
+        </main>
+        <footer>
+          <p>© 2026 Molly &amp; Shaina | <a href="/privacy-policy/">Privacy Policy</a> | <a href="/terms-of-use/">Terms of Use &amp; Request Policies</a>
+          </p>
+        </footer>
+        <script src="../js/animations.js"></script>
+        <script src="../js/search.js"></script>
+        <script src="../js/favourites-page.js"></script>
+      </body>
+    </html>

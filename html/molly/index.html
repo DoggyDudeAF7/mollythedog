@@ -5,11 +5,11 @@
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-FG9NLMSQLX"></script>
     <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    
-    gtag('config', 'G-FG9NLMSQLX');
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      
+      gtag('config', 'G-FG9NLMSQLX');
     </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -32,45 +32,72 @@
   </head>
   <body>
     <!-- Background styling element -->
-    <div class="bg"></div>
-    
+    <div class="bg">
+    </div>
     <!-- Main navigation bar with logo and site menu -->
     <nav>
       <div class="nav-inner">
         <!-- Mobile hamburger menu toggle button -->
         <button id="navToggle" type="button" aria-label="Toggle menu" aria-expanded="false">☰</button>
-        
         <!-- Navigation links to all main pages and characters -->
         <div class="nav-links" id="navLinks">
-          <a href="/molly/" title="Home"><span>:home:</span></a>
-          <a href="/molly-traits/" title="Traits"><span>:traits:</span></a>
-          <a href="/molly-habits/" title="Habits"><span>:habits:</span></a>
-          <a href="/molly-mind/" title="Mind"><span>:mind:</span></a>
-          <a href="/molly-gallery/" title="Gallery"><span>:gallery:</span></a>
-          <a href="/molly-faq/" title="FAQ"><span>:faq:</span></a>
-          <a href="/molly-dog-breeds/" title="Breeds"><span>:breeds:</span></a>
-          <a href="/comics/" title="Comics"><span>:comics:</span></a>
-          <a href="/blog/" title="Blog"><span>:blog:</span></a>
-          <a href="/games/" title="Arcade"><span>🎮</span></a>
-          <a href="/merch/" title="Merch"><span>🏷️</span></a>
-          <a href="/about-me/" title="About the Human"><span>:about:</span></a>
-          <a href="/shaina/" title="Shaina"><span>:shaina:</span></a>
-          <a href="/poppy/" title="Poppy"><span>:poppy:</span></a>
-          <a href="/geoff/" title="Geoff"><span>:geoff:</span></a>
+          <a href="/molly/" title="Home">
+            <span>:home:</span>
+          </a>
+          <a href="/molly-traits/" title="Traits">
+            <span>:traits:</span>
+          </a>
+          <a href="/molly-habits/" title="Habits">
+            <span>:habits:</span>
+          </a>
+          <a href="/molly-mind/" title="Mind">
+            <span>:mind:</span>
+          </a>
+          <a href="/molly-gallery/" title="Gallery">
+            <span>:gallery:</span>
+          </a>
+          <a href="/molly-faq/" title="FAQ">
+            <span>:faq:</span>
+          </a>
+          <a href="/molly-dog-breeds/" title="Breeds">
+            <span>:breeds:</span>
+          </a>
+          <a href="/comics/" title="Comics">
+            <span>:comics:</span>
+          </a>
+          <a href="/blog/" title="Blog">
+            <span>:blog:</span>
+          </a>
+          <a href="/games/" title="Arcade">
+            <span>🎮</span>
+          </a>
+          <a href="/merch/" title="Merch">
+            <span>🏷️</span>
+          </a>
+          <a href="/about-me/" title="About the Human">
+            <span>:about:</span>
+          </a>
+          <a href="/shaina/" title="Shaina">
+            <span>:shaina:</span>
+          </a>
+          <a href="/poppy/" title="Poppy">
+            <span>:poppy:</span>
+          </a>
+          <a href="/geoff/" title="Geoff">
+            <span>:geoff:</span>
+          </a>
         </div>
-        
         <!-- Search button that opens the search overlay -->
         <button id="searchBtn" type="button" aria-label="Open site search">:search:</button>
       </div>
     </nav>
-    
     <!-- Search overlay: hidden by default, shown when search button clicked -->
     <!-- Placed outside nav for z-index and modal layering -->
     <div id="searchBox" class="hidden">
       <input id="searchInput" placeholder="Search..." />
-      <div id="results"></div>
+      <div id="results">
+      </div>
     </div>
-    
     <!-- Hero section: main headline, tagline, and large portrait image -->
     <section class="section hero">
       <h1>Molly</h1>
@@ -83,7 +110,6 @@
       <!-- Scroll indicator prompting user to explore more content below -->
       <p class="scroll-down-prompt">↓Scroll Down↓</p>
     </section>
-    
     <!-- Personality trait card: Window Watcher habit -->
     <section class="section">
       <div class="card reveal left">
@@ -98,7 +124,6 @@
         </div>
       </div>
     </section>
-    
     <!-- Personality trait card: Blanket Architect habit -->
     <section class="section">
       <div class="card reveal right">
@@ -113,7 +138,6 @@
         </div>
       </div>
     </section>
-    
     <!-- Personality trait card: Midnight Sprint behavior -->
     <section class="section">
       <div class="card reveal left">
@@ -128,7 +152,6 @@
         </div>
       </div>
     </section>
-    
     <!-- Personality trait card: Snack Detection ability -->
     <section class="section">
       <div class="card reveal right">
@@ -143,7 +166,6 @@
         </div>
       </div>
     </section>
-    
     <!-- Personality trait card: Awareness and anxiety trait -->
     <section class="section">
       <div class="card reveal left">
@@ -205,13 +227,16 @@
     <section class="section">
       <div>
         <div class="carousel">
-          <div class="track" id="track"></div>
+          <div class="track" id="track">
+          </div>
         </div>
-        <div class="dots" id="dots"></div>
+        <div class="dots" id="dots">
+        </div>
       </div>
     </section>
     <footer>
-      <p>© 2026 Molly &amp; Shaina | <a href="/privacy-policy/">Privacy Policy</a> | <a href="/terms-of-use/">Terms of Use &amp; Request Policies</a></p>
+      <p>© 2026 Molly &amp; Shaina | <a href="/privacy-policy/">Privacy Policy</a> | <a href="/terms-of-use/">Terms of Use &amp; Request Policies</a>
+      </p>
     </footer>
     <div id="lightbox">
       <img id="lightboxImg" alt="Enlarged photo from the Molly gallery">

@@ -23,7 +23,6 @@
         <h1>Secret Control Panel</h1>
         <p>Private shortcuts, tiny generators, and site-control buttons for Molly and Shaina operations.</p>
       </section>
-
       <section class="quick-grid" aria-label="Secret shortcuts">
         <a class="quick-card" href="../certificate-editor/">
           <span>🏅</span>
@@ -46,7 +45,6 @@
           <small>Find the dog breed match.</small>
         </a>
       </section>
-
       <section class="tool-grid" aria-label="Generators">
         <article class="tool-card">
           <div>
@@ -56,7 +54,6 @@
           <output id="dogTitleOutput">Press the button.</output>
           <button type="button" data-generator="title">Generate Title</button>
         </article>
-
         <article class="tool-card">
           <div>
             <p class="eyebrow">Generator</p>
@@ -65,7 +62,6 @@
           <output id="captionOutput">Ready for a caption.</output>
           <button type="button" data-generator="caption">Generate Caption</button>
         </article>
-
         <article class="tool-card">
           <div>
             <p class="eyebrow">Generator</p>
@@ -74,7 +70,6 @@
           <output id="missionOutput">Awaiting orders.</output>
           <button type="button" data-generator="mission">Generate Mission</button>
         </article>
-
         <article class="tool-card">
           <div>
             <p class="eyebrow">Generator</p>
@@ -84,7 +79,6 @@
           <button type="button" data-generator="certificate">Generate Award</button>
         </article>
       </section>
-
       <section class="page-editor" aria-label="Page editor">
         <div class="editor-header">
           <div>
@@ -98,26 +92,24 @@
             <button type="button" id="downloadPageFile" disabled>Download Copy</button>
           </div>
         </div>
-
         <div class="editor-status" id="pageEditorStatus">No page opened yet.</div>
-
         <div class="editor-layout">
           <label class="editor-pane">
             HTML
-            <textarea id="pageEditor" spellcheck="false" placeholder="Open an HTML file to edit it here."></textarea>
-          </label>
-          <section class="preview-pane" aria-label="Page preview">
-            <div class="preview-title">
-              <span>Preview</span>
-              <button type="button" id="refreshPagePreview" disabled>Refresh</button>
-            </div>
-            <iframe id="pagePreview" title="Page preview"></iframe>
-          </section>
-        </div>
-      </section>
-    </main>
-
-    <script src="../js/secret-control-panel.js"></script>
-    <script src="../js/animations.js"></script>
-  </body>
-</html>
+              <textarea id="pageEditor" spellcheck="false" placeholder="Open an HTML file to edit it here."></textarea>
+            </label>
+            <section class="preview-pane" aria-label="Page preview">
+              <div class="preview-title">
+                <span>Preview</span>
+                <button type="button" id="refreshPagePreview" disabled>Refresh</button>
+              </div>
+              <iframe id="pagePreview" title="Page preview">
+              </iframe>
+            </section>
+          </div>
+        </section>
+      </main>
+      <script src="../js/secret-control-panel.js"></script>
+      <script src="../js/animations.js"></script>
+    </body>
+  </html>

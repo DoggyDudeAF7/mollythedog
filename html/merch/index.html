@@ -5,10 +5,10 @@
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-FG9NLMSQLX"></script>
     <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-FG9NLMSQLX');
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-FG9NLMSQLX');
     </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -32,43 +32,76 @@
     <link rel="stylesheet" href="../css/merch.css?v=20260822-2">
   </head>
   <body>
-    <div class="bg"></div>
+    <div class="bg">
+    </div>
     <nav>
       <div class="nav-inner">
         <button id="navToggle" type="button" aria-label="Toggle menu" aria-expanded="false">☰</button>
         <div class="nav-links" id="navLinks">
-          <a href="/molly/" title="Home"><span>:home:</span></a>
-          <a href="/molly-traits/" title="Traits"><span>:traits:</span></a>
-          <a href="/molly-habits/" title="Habits"><span>:habits:</span></a>
-          <a href="/molly-mind/" title="Mind"><span>:mind:</span></a>
-          <a href="/molly-gallery/" title="Gallery"><span>:gallery:</span></a>
-          <a href="/molly-faq/" title="FAQ"><span>:faq:</span></a>
-          <a href="/molly-dog-breeds/" title="Breeds"><span>:breeds:</span></a>
-          <a href="/comics/" title="Comics"><span>:comics:</span></a>
-          <a href="/blog/" title="Blog"><span>:blog:</span></a>
-          <a href="/games/" title="Arcade"><span>🎮</span></a>
-          <a href="/merch/" title="Merch"><span>🏷️</span></a>
-          <a href="/about-me/" title="About the Human"><span>:about:</span></a>
-          <a href="/shaina/" title="Shaina"><span>:shaina:</span></a>
-          <a href="/poppy/" title="Poppy"><span>:poppy:</span></a>
-          <a href="/geoff/" title="Geoff"><span>:geoff:</span></a>
+          <a href="/molly/" title="Home">
+            <span>:home:</span>
+          </a>
+          <a href="/molly-traits/" title="Traits">
+            <span>:traits:</span>
+          </a>
+          <a href="/molly-habits/" title="Habits">
+            <span>:habits:</span>
+          </a>
+          <a href="/molly-mind/" title="Mind">
+            <span>:mind:</span>
+          </a>
+          <a href="/molly-gallery/" title="Gallery">
+            <span>:gallery:</span>
+          </a>
+          <a href="/molly-faq/" title="FAQ">
+            <span>:faq:</span>
+          </a>
+          <a href="/molly-dog-breeds/" title="Breeds">
+            <span>:breeds:</span>
+          </a>
+          <a href="/comics/" title="Comics">
+            <span>:comics:</span>
+          </a>
+          <a href="/blog/" title="Blog">
+            <span>:blog:</span>
+          </a>
+          <a href="/games/" title="Arcade">
+            <span>🎮</span>
+          </a>
+          <a href="/merch/" title="Merch">
+            <span>🏷️</span>
+          </a>
+          <a href="/about-me/" title="About the Human">
+            <span>:about:</span>
+          </a>
+          <a href="/shaina/" title="Shaina">
+            <span>:shaina:</span>
+          </a>
+          <a href="/poppy/" title="Poppy">
+            <span>:poppy:</span>
+          </a>
+          <a href="/geoff/" title="Geoff">
+            <span>:geoff:</span>
+          </a>
         </div>
         <button id="searchBtn" type="button" aria-label="Open site search">:search:</button>
       </div>
     </nav>
     <div id="searchBox" class="hidden">
       <input id="searchInput" placeholder="Search...">
-      <div id="results"></div>
+      <div id="results">
+      </div>
     </div>
-
     <main class="merch-page">
       <section class="merch-hero reveal left">
         <p class="merch-eyebrow">Molly &amp; Shaina Merch</p>
         <h1>Merch</h1>
         <p>A small-run collection of handmade Molly &amp; Shaina stickers, available by request while supplies last.</p>
-        <div class="merch-price"><strong>Free</strong><span>maximum 5 stickers per request</span></div>
+        <div class="merch-price">
+          <strong>Free</strong>
+          <span>maximum 5 stickers per request</span>
+        </div>
       </section>
-
       <section class="merch-catalog" aria-labelledby="stickerHeading">
         <header class="merch-section-heading reveal right">
           <div>
@@ -77,16 +110,17 @@
           </div>
           <div class="merch-heading-actions">
             <span class="merch-category-price">Free by request</span>
-            <a class="merch-bag-link" href="./checkout/">Selection <span data-bag-count>0</span></a>
+            <a class="merch-bag-link" href="./checkout/">Selection <span data-bag-count>0</span>
+            </a>
           </div>
         </header>
-        <div class="merch-grid" id="merchGrid" aria-live="polite"></div>
+        <div class="merch-grid" id="merchGrid" aria-live="polite">
+        </div>
         <div class="merch-empty" id="merchEmpty">
           <strong>Sticker designs are being prepared.</strong>
           <p>The real sticker images will appear here as soon as they are added.</p>
         </div>
       </section>
-
       <section class="merch-details" aria-label="Merchandise details">
         <article class="merch-detail reveal left">
           <span>01</span>
@@ -105,7 +139,6 @@
         </article>
       </section>
     </main>
-
     <dialog class="merch-dialog" id="merchProductDialog" aria-labelledby="merchDialogTitle">
       <button class="merch-dialog-close" type="button" data-dialog-close aria-label="Close product view">×</button>
       <div class="merch-dialog-image-wrap">
@@ -113,17 +146,21 @@
       </div>
       <div class="merch-dialog-copy">
         <p class="merch-eyebrow">Handmade sticker</p>
-        <h2 id="merchDialogTitle" data-product-name></h2>
-        <p data-product-description></p>
-        <strong class="merch-dialog-price" data-product-price></strong>
+        <h2 id="merchDialogTitle" data-product-name>
+        </h2>
+        <p data-product-description>
+        </p>
+        <strong class="merch-dialog-price" data-product-price>
+        </strong>
         <button class="merch-add-button" type="button" data-add-to-bag>Add to selection</button>
-        <p class="merch-add-status" data-add-status aria-live="polite"></p>
+        <p class="merch-add-status" data-add-status aria-live="polite">
+        </p>
         <a class="merch-checkout-link" href="../merch/checkout/">Review selection (<span data-bag-count>0</span>)</a>
       </div>
     </dialog>
-
     <footer>
-      <p>© 2026 Molly &amp; Shaina | <a href="/privacy-policy/">Privacy Policy</a> | <a href="/terms-of-use/">Terms of Use &amp; Request Policies</a></p>
+      <p>© 2026 Molly &amp; Shaina | <a href="/privacy-policy/">Privacy Policy</a> | <a href="/terms-of-use/">Terms of Use &amp; Request Policies</a>
+      </p>
     </footer>
     <script src="../js/animations.js"></script>
     <script src="../js/search.js"></script>

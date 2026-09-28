@@ -1,14 +1,13 @@
 <!DOCTYPE html>
 <!-- Geoff the chatbot: AI character conversations -->
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#07070c">
-  <meta name="description" content="Geoff, the Molly & Shaina site assistant.">
-  <title>Geoff — Molly & Shaina AI</title>
-
-  <!-- Uses the shared Molly & Shaina stylesheet. -->
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#07070c">
+    <meta name="description" content="Geoff, the Molly & Shaina site assistant.">
+    <title>Geoff — Molly & Shaina AI</title>
+    <!-- Uses the shared Molly & Shaina stylesheet. -->
     <link rel="stylesheet" href="../css/base.css">
     <link rel="stylesheet" href="../css/legacy-dog-pages.css">
     <link rel="stylesheet" href="../css/gallery-shell.css">
@@ -17,346 +16,386 @@
     <link rel="stylesheet" href="../css/effects.css">
     <link rel="stylesheet" href="../css/dock.css">
     <link rel="stylesheet" href="../css/cybersafety.css">
-
-  <!-- Only Geoff-specific layout rules live here. The shared site theme comes from the CSS stack above. -->
-  <style>
-    :root { color-scheme: dark; }
-    body { min-height: 100vh; }
-    .geoff-shell { width:min(1180px,94vw); margin:0 auto; padding:110px 0 44px; }
-    .geoff-header { display:flex; align-items:center; justify-content:space-between; gap:18px; margin-bottom:22px; }
-    .geoff-title { display:flex; align-items:center; gap:14px; }
-    .geoff-logo { width:58px; height:58px; border-radius:18px; display:grid; place-items:center; font-size:29px; background:linear-gradient(135deg,#ffb7a5,#bfa8ff); box-shadow:0 14px 35px rgba(0,0,0,.28); }
-    .geoff-title h1 { margin:0; font-size:clamp(2rem,5vw,3.2rem); line-height:.95; background:linear-gradient(90deg,#ffb7a5,#bfa8ff); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
-    .geoff-title p { margin:7px 0 0; color:#aaa; }
-    .status-pill { border:1px solid rgba(255,255,255,.14); background:rgba(255,255,255,.07); padding:9px 12px; border-radius:999px; font-size:.82rem; color:#ddd; white-space:nowrap; }
-    .status-dot { width:8px; height:8px; border-radius:50%; display:inline-block; background:#72d57a; margin-right:7px; box-shadow:0 0 0 4px rgba(114,213,122,.12); }
-
-    .geoff-layout { display:grid; grid-template-columns:minmax(0,1fr) 300px; gap:22px; align-items:start; }
-    .geoff-card { border-radius:28px; border:1px solid rgba(255,255,255,.16); background:linear-gradient(135deg,rgba(255,255,255,.11),rgba(255,255,255,.035)); box-shadow:0 20px 60px rgba(0,0,0,.38); backdrop-filter:blur(18px); overflow:hidden; }
-    .chat-window { min-height:610px; display:flex; flex-direction:column; }
-    .chat-top { padding:18px 20px; border-bottom:1px solid rgba(255,255,255,.1); display:flex; align-items:center; justify-content:space-between; gap:12px; }
-    .chat-top strong { font-size:1rem; }
-    .chat-top small { color:#888; }
-    .new-chat { border:1px solid rgba(255,255,255,.12); background:rgba(255,255,255,.07); color:white; border-radius:12px; padding:9px 12px; cursor:pointer; }
-    .new-chat:hover { background:rgba(255,255,255,.13); }
-
-    #chat { flex:1; overflow:auto; min-height:420px; max-height:62vh; padding:24px 20px; scroll-behavior:smooth; }
-    .message { display:flex; gap:11px; margin:0 0 20px; align-items:flex-start; }
-    .message.me { justify-content:flex-end; }
-    .message-avatar { width:36px; height:36px; flex:0 0 36px; border-radius:12px; display:grid; place-items:center; font-weight:900; }
-    .message.geoff .message-avatar { background:linear-gradient(135deg,#ffb7a5,#bfa8ff); color:#100f16; }
-    .message.me .message-avatar { background:rgba(255,255,255,.11); }
-    .message-content { max-width:min(720px,82%); }
-    .message.me .message-content { order:-1; }
-    .message-meta { font-size:.74rem; color:#777; margin:0 0 6px 2px; }
-    .message.me .message-meta { text-align:right; margin-right:2px; }
-    .bubble { padding:13px 15px; border-radius:6px 17px 17px 17px; background:rgba(255,255,255,.085); color:#ddd; line-height:1.62; border:1px solid rgba(255,255,255,.08); white-space:pre-wrap; overflow-wrap:anywhere; }
-    .message.me .bubble { color:#15131b; background:linear-gradient(135deg,#ffb7a5,#bfa8ff); border:0; border-radius:17px 6px 17px 17px; font-weight:600; }
-    .bubble a { color:#ffcabd; text-decoration:underline; text-underline-offset:3px; }
-    .bubble strong { color:#fff; }
-    .message.geoff .bubble { white-space:normal; }
-    .markdown-body > :first-child { margin-top:0; }
-    .markdown-body > :last-child { margin-bottom:0; }
-    .markdown-body p { margin:.7em 0; }
-    .markdown-body h1,.markdown-body h2,.markdown-body h3,.markdown-body h4,.markdown-body h5,.markdown-body h6 { margin:1em 0 .45em; color:#fff; line-height:1.2; -webkit-text-fill-color:initial; background:none; }
-    .markdown-body h1 { font-size:1.6rem; }
-    .markdown-body h2 { font-size:1.35rem; }
-    .markdown-body h3 { font-size:1.15rem; }
-    .markdown-body h4,.markdown-body h5,.markdown-body h6 { font-size:1rem; }
-    .markdown-body ul,.markdown-body ol { margin:.7em 0; padding-left:1.5rem; }
-    .markdown-body li + li { margin-top:.3em; }
-    .markdown-body blockquote { margin:.8em 0; padding:.15em 0 .15em 1em; border-left:3px solid #bfa8ff; color:#bdb8ca; }
-    .markdown-body hr { margin:1.1em 0; border:0; border-top:1px solid rgba(255,255,255,.16); }
-    .markdown-body code { padding:.15em .38em; border:1px solid rgba(255,255,255,.12); border-radius:6px; background:rgba(0,0,0,.3); color:#ffd2c7; font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace; font-size:.9em; }
-    .markdown-body pre { margin:.8em 0; padding:13px 14px; overflow:auto; border:1px solid rgba(255,255,255,.12); border-radius:12px; background:rgba(0,0,0,.38); }
-    .markdown-body pre code { padding:0; border:0; background:none; color:#e7e1f3; white-space:pre; }
-    .markdown-body img { display:block; max-width:100%; height:auto; margin:.8em 0; border-radius:12px; }
-    .markdown-body input[type="checkbox"] { margin-right:.45em; accent-color:#bfa8ff; }
-    .markdown-body u { text-decoration-thickness:2px; text-underline-offset:3px; }
-    .markdown-body a::after { content:" ↗"; display:inline-block; font-size:.82em; font-weight:900; line-height:1; text-decoration:none; transform:translateY(-.08em); }
-    .markdown-body .table-wrap { max-width:100%; margin:.9em 0; overflow-x:auto; border:1px solid rgba(255,255,255,.14); border-radius:12px; }
-    .markdown-body table { width:100%; border-collapse:collapse; background:rgba(0,0,0,.16); font-size:.88rem; }
-    .markdown-body th,.markdown-body td { min-width:130px; padding:10px 12px; border-right:1px solid rgba(255,255,255,.1); border-bottom:1px solid rgba(255,255,255,.1); text-align:left; vertical-align:top; }
-    .markdown-body th { background:rgba(191,168,255,.12); color:#fff; font-weight:900; }
-    .markdown-body th:last-child,.markdown-body td:last-child { border-right:0; }
-    .markdown-body tbody tr:last-child td { border-bottom:0; }
-    .markdown-body mark { border-radius:4px; background:#ffe08a; color:#21180a; padding:.05em .25em; }
-    .markdown-body kbd { border:1px solid rgba(255,255,255,.2); border-bottom-width:3px; border-radius:6px; background:rgba(255,255,255,.1); padding:.08em .38em; font:inherit; font-size:.85em; }
-    .markdown-body details { margin:.8em 0; padding:.65em .8em; border:1px solid rgba(255,255,255,.13); border-radius:10px; background:rgba(0,0,0,.16); }
-    .markdown-body summary { color:#fff; cursor:pointer; font-weight:800; }
-    .source-row { display:flex; flex-wrap:wrap; gap:7px; margin-top:9px; }
-    .source-chip { display:inline-flex; max-width:100%; padding:6px 9px; border-radius:999px; border:1px solid rgba(255,255,255,.12); color:#bbb; background:rgba(255,255,255,.05); text-decoration:none; font-size:.72rem; }
-    .source-chip:hover { background:rgba(255,255,255,.11); color:white; }
-
-    .typing { display:flex; gap:5px; align-items:center; min-height:18px; }
-    .typing i { width:6px; height:6px; border-radius:50%; background:#aaa; animation:geoffBounce .8s ease-in-out infinite alternate; }
-    .typing i:nth-child(2){animation-delay:.14s}.typing i:nth-child(3){animation-delay:.28s}
-    @keyframes geoffBounce { to { transform:translateY(-4px); opacity:.42; } }
-
-    .suggestions { display:flex; flex-wrap:wrap; gap:8px; padding:0 20px 16px; }
-    .suggestions button { border:1px solid rgba(255,255,255,.12); background:rgba(255,255,255,.055); color:#d6d6d6; border-radius:999px; padding:8px 11px; cursor:pointer; font-size:.78rem; }
-    .suggestions button:hover { background:rgba(255,255,255,.12); transform:translateY(-1px); }
-
-    .composer { border-top:1px solid rgba(255,255,255,.1); padding:15px; display:grid; grid-template-columns:1fr auto; gap:10px; background:rgba(0,0,0,.12); }
-    .composer textarea,.composer input { width:100%; min-height:46px; border-radius:15px; border:1px solid rgba(255,255,255,.14); background:rgba(0,0,0,.23); color:white; outline:none; padding:13px 14px; line-height:1.45; }
-    .composer textarea { max-height:140px; resize:none; }
-    .composer textarea:focus,.composer input:focus { border-color:rgba(255,183,165,.65); box-shadow:0 0 0 3px rgba(255,183,165,.09); }
-    .composer button { width:48px; border:0; border-radius:15px; cursor:pointer; color:#16131b; font-size:1.1rem; font-weight:900; background:linear-gradient(135deg,#ffb7a5,#bfa8ff); }
-    .composer button:disabled { opacity:.45; cursor:not-allowed; }
-    .fineprint { padding:0 17px 14px; color:#666; font-size:.7rem; text-align:center; }
-
-    .side-card { padding:18px; margin-bottom:16px; }
-    .side-card h2 { font-size:1rem; margin:0 0 13px; color:white; -webkit-text-fill-color:initial; background:none; }
-    .sync-line { display:flex; gap:10px; align-items:center; }
-    .sync-icon { width:38px; height:38px; display:grid; place-items:center; border-radius:12px; background:rgba(255,255,255,.08); }
-    .sync-line strong { display:block; font-size:.88rem; }
-    .sync-line small { display:block; color:#888; margin-top:2px; }
-    .index-stats { display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-top:15px; }
-    .stat { padding:11px; border-radius:13px; background:rgba(255,255,255,.055); border:1px solid rgba(255,255,255,.08); }
-    .stat b { display:block; font-size:1.1rem; }
-    .stat span { font-size:.67rem; color:#858585; }
-    .context-list { list-style:none; padding:0; margin:0; display:grid; gap:8px; }
-    .context-list li { border-radius:12px; background:rgba(255,255,255,.045); padding:10px 11px; font-size:.77rem; color:#aaa; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
-    .context-list a { color:inherit; text-decoration:none; }
-    .context-list a:hover { color:white; }
-    .side-note { color:#888; font-size:.76rem; line-height:1.55; margin:0; }
-    .geoff-contact-link { display:inline-flex; margin-top:13px; padding:9px 12px; border:1px solid rgba(255,255,255,.13); border-radius:11px; background:rgba(255,255,255,.07); color:#fff; font-size:.8rem; font-weight:800; text-decoration:none; }
-    .geoff-contact-link:hover { background:rgba(255,255,255,.13); }
-    .fineprint a { color:#bfa8ff; }
-
-    @media(max-width:880px){
+    <!-- Only Geoff-specific layout rules live here. The shared site theme comes from the CSS stack above. -->
+    <style>
+      :root { color-scheme: dark; }
+      body { min-height: 100vh; }
+      .geoff-shell { width:min(1180px,94vw); margin:0 auto; padding:110px 0 44px; }
+      .geoff-header { display:flex; align-items:center; justify-content:space-between; gap:18px; margin-bottom:22px; }
+      .geoff-title { display:flex; align-items:center; gap:14px; }
+      .geoff-logo { width:58px; height:58px; border-radius:18px; display:grid; place-items:center; font-size:29px; background:linear-gradient(135deg,#ffb7a5,#bfa8ff); box-shadow:0 14px 35px rgba(0,0,0,.28); }
+      .geoff-title h1 { margin:0; font-size:clamp(2rem,5vw,3.2rem); line-height:.95; background:linear-gradient(90deg,#ffb7a5,#bfa8ff); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
+      .geoff-title p { margin:7px 0 0; color:#aaa; }
+      .status-pill { border:1px solid rgba(255,255,255,.14); background:rgba(255,255,255,.07); padding:9px 12px; border-radius:999px; font-size:.82rem; color:#ddd; white-space:nowrap; }
+      .status-dot { width:8px; height:8px; border-radius:50%; display:inline-block; background:#72d57a; margin-right:7px; box-shadow:0 0 0 4px rgba(114,213,122,.12); }
+      
+      .geoff-layout { display:grid; grid-template-columns:minmax(0,1fr) 300px; gap:22px; align-items:start; }
+      .geoff-card { border-radius:28px; border:1px solid rgba(255,255,255,.16); background:linear-gradient(135deg,rgba(255,255,255,.11),rgba(255,255,255,.035)); box-shadow:0 20px 60px rgba(0,0,0,.38); backdrop-filter:blur(18px); overflow:hidden; }
+      .chat-window { min-height:610px; display:flex; flex-direction:column; }
+      .chat-top { padding:18px 20px; border-bottom:1px solid rgba(255,255,255,.1); display:flex; align-items:center; justify-content:space-between; gap:12px; }
+      .chat-top strong { font-size:1rem; }
+      .chat-top small { color:#888; }
+      .new-chat { border:1px solid rgba(255,255,255,.12); background:rgba(255,255,255,.07); color:white; border-radius:12px; padding:9px 12px; cursor:pointer; }
+      .new-chat:hover { background:rgba(255,255,255,.13); }
+      
+      #chat { flex:1; overflow:auto; min-height:420px; max-height:62vh; padding:24px 20px; scroll-behavior:smooth; }
+      .message { display:flex; gap:11px; margin:0 0 20px; align-items:flex-start; }
+      .message.me { justify-content:flex-end; }
+      .message-avatar { width:36px; height:36px; flex:0 0 36px; border-radius:12px; display:grid; place-items:center; font-weight:900; }
+      .message.geoff .message-avatar { background:linear-gradient(135deg,#ffb7a5,#bfa8ff); color:#100f16; }
+      .message.me .message-avatar { background:rgba(255,255,255,.11); }
+      .message-content { max-width:min(720px,82%); }
+      .message.me .message-content { order:-1; }
+      .message-meta { font-size:.74rem; color:#777; margin:0 0 6px 2px; }
+      .message.me .message-meta { text-align:right; margin-right:2px; }
+      .bubble { padding:13px 15px; border-radius:6px 17px 17px 17px; background:rgba(255,255,255,.085); color:#ddd; line-height:1.62; border:1px solid rgba(255,255,255,.08); white-space:pre-wrap; overflow-wrap:anywhere; }
+      .message.me .bubble { color:#15131b; background:linear-gradient(135deg,#ffb7a5,#bfa8ff); border:0; border-radius:17px 6px 17px 17px; font-weight:600; }
+      .bubble a { color:#ffcabd; text-decoration:underline; text-underline-offset:3px; }
+      .bubble strong { color:#fff; }
+      .message.geoff .bubble { white-space:normal; }
+      .markdown-body > :first-child { margin-top:0; }
+      .markdown-body > :last-child { margin-bottom:0; }
+      .markdown-body p { margin:.7em 0; }
+      .markdown-body h1,.markdown-body h2,.markdown-body h3,.markdown-body h4,.markdown-body h5,.markdown-body h6 { margin:1em 0 .45em; color:#fff; line-height:1.2; -webkit-text-fill-color:initial; background:none; }
+      .markdown-body h1 { font-size:1.6rem; }
+      .markdown-body h2 { font-size:1.35rem; }
+      .markdown-body h3 { font-size:1.15rem; }
+      .markdown-body h4,.markdown-body h5,.markdown-body h6 { font-size:1rem; }
+      .markdown-body ul,.markdown-body ol { margin:.7em 0; padding-left:1.5rem; }
+      .markdown-body li + li { margin-top:.3em; }
+      .markdown-body blockquote { margin:.8em 0; padding:.15em 0 .15em 1em; border-left:3px solid #bfa8ff; color:#bdb8ca; }
+      .markdown-body hr { margin:1.1em 0; border:0; border-top:1px solid rgba(255,255,255,.16); }
+      .markdown-body code { padding:.15em .38em; border:1px solid rgba(255,255,255,.12); border-radius:6px; background:rgba(0,0,0,.3); color:#ffd2c7; font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace; font-size:.9em; }
+      .markdown-body pre { margin:.8em 0; padding:13px 14px; overflow:auto; border:1px solid rgba(255,255,255,.12); border-radius:12px; background:rgba(0,0,0,.38); }
+      .markdown-body pre code { padding:0; border:0; background:none; color:#e7e1f3; white-space:pre; }
+      .markdown-body img { display:block; max-width:100%; height:auto; margin:.8em 0; border-radius:12px; }
+      .markdown-body input[type="checkbox"] { margin-right:.45em; accent-color:#bfa8ff; }
+      .markdown-body u { text-decoration-thickness:2px; text-underline-offset:3px; }
+      .markdown-body a::after { content:" ↗"; display:inline-block; font-size:.82em; font-weight:900; line-height:1; text-decoration:none; transform:translateY(-.08em); }
+      .markdown-body .table-wrap { max-width:100%; margin:.9em 0; overflow-x:auto; border:1px solid rgba(255,255,255,.14); border-radius:12px; }
+      .markdown-body table { width:100%; border-collapse:collapse; background:rgba(0,0,0,.16); font-size:.88rem; }
+      .markdown-body th,.markdown-body td { min-width:130px; padding:10px 12px; border-right:1px solid rgba(255,255,255,.1); border-bottom:1px solid rgba(255,255,255,.1); text-align:left; vertical-align:top; }
+      .markdown-body th { background:rgba(191,168,255,.12); color:#fff; font-weight:900; }
+      .markdown-body th:last-child,.markdown-body td:last-child { border-right:0; }
+      .markdown-body tbody tr:last-child td { border-bottom:0; }
+      .markdown-body mark { border-radius:4px; background:#ffe08a; color:#21180a; padding:.05em .25em; }
+      .markdown-body kbd { border:1px solid rgba(255,255,255,.2); border-bottom-width:3px; border-radius:6px; background:rgba(255,255,255,.1); padding:.08em .38em; font:inherit; font-size:.85em; }
+      .markdown-body details { margin:.8em 0; padding:.65em .8em; border:1px solid rgba(255,255,255,.13); border-radius:10px; background:rgba(0,0,0,.16); }
+      .markdown-body summary { color:#fff; cursor:pointer; font-weight:800; }
+      .source-row { display:flex; flex-wrap:wrap; gap:7px; margin-top:9px; }
+      .source-chip { display:inline-flex; max-width:100%; padding:6px 9px; border-radius:999px; border:1px solid rgba(255,255,255,.12); color:#bbb; background:rgba(255,255,255,.05); text-decoration:none; font-size:.72rem; }
+      .source-chip:hover { background:rgba(255,255,255,.11); color:white; }
+      
+      .typing { display:flex; gap:5px; align-items:center; min-height:18px; }
+      .typing i { width:6px; height:6px; border-radius:50%; background:#aaa; animation:geoffBounce .8s ease-in-out infinite alternate; }
+      .typing i:nth-child(2){animation-delay:.14s}.typing i:nth-child(3){animation-delay:.28s}
+      @keyframes geoffBounce { to { transform:translateY(-4px); opacity:.42; } }
+      
+      .suggestions { display:flex; flex-wrap:wrap; gap:8px; padding:0 20px 16px; }
+      .suggestions button { border:1px solid rgba(255,255,255,.12); background:rgba(255,255,255,.055); color:#d6d6d6; border-radius:999px; padding:8px 11px; cursor:pointer; font-size:.78rem; }
+      .suggestions button:hover { background:rgba(255,255,255,.12); transform:translateY(-1px); }
+      
+      .composer { border-top:1px solid rgba(255,255,255,.1); padding:15px; display:grid; grid-template-columns:1fr auto; gap:10px; background:rgba(0,0,0,.12); }
+      .composer textarea,.composer input { width:100%; min-height:46px; border-radius:15px; border:1px solid rgba(255,255,255,.14); background:rgba(0,0,0,.23); color:white; outline:none; padding:13px 14px; line-height:1.45; }
+      .composer textarea { max-height:140px; resize:none; }
+      .composer textarea:focus,.composer input:focus { border-color:rgba(255,183,165,.65); box-shadow:0 0 0 3px rgba(255,183,165,.09); }
+      .composer button { width:48px; border:0; border-radius:15px; cursor:pointer; color:#16131b; font-size:1.1rem; font-weight:900; background:linear-gradient(135deg,#ffb7a5,#bfa8ff); }
+      .composer button:disabled { opacity:.45; cursor:not-allowed; }
+      .fineprint { padding:0 17px 14px; color:#666; font-size:.7rem; text-align:center; }
+      
+      .side-card { padding:18px; margin-bottom:16px; }
+      .side-card h2 { font-size:1rem; margin:0 0 13px; color:white; -webkit-text-fill-color:initial; background:none; }
+      .sync-line { display:flex; gap:10px; align-items:center; }
+      .sync-icon { width:38px; height:38px; display:grid; place-items:center; border-radius:12px; background:rgba(255,255,255,.08); }
+      .sync-line strong { display:block; font-size:.88rem; }
+      .sync-line small { display:block; color:#888; margin-top:2px; }
+      .index-stats { display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-top:15px; }
+      .stat { padding:11px; border-radius:13px; background:rgba(255,255,255,.055); border:1px solid rgba(255,255,255,.08); }
+      .stat b { display:block; font-size:1.1rem; }
+      .stat span { font-size:.67rem; color:#858585; }
+      .context-list { list-style:none; padding:0; margin:0; display:grid; gap:8px; }
+      .context-list li { border-radius:12px; background:rgba(255,255,255,.045); padding:10px 11px; font-size:.77rem; color:#aaa; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+      .context-list a { color:inherit; text-decoration:none; }
+      .context-list a:hover { color:white; }
+      .side-note { color:#888; font-size:.76rem; line-height:1.55; margin:0; }
+      .geoff-contact-link { display:inline-flex; margin-top:13px; padding:9px 12px; border:1px solid rgba(255,255,255,.13); border-radius:11px; background:rgba(255,255,255,.07); color:#fff; font-size:.8rem; font-weight:800; text-decoration:none; }
+      .geoff-contact-link:hover { background:rgba(255,255,255,.13); }
+      .fineprint a { color:#bfa8ff; }
+      
+      @media(max-width:880px){
       .geoff-shell{padding-top:86px}.geoff-layout{grid-template-columns:1fr}.geoff-sidebar{display:grid;grid-template-columns:1fr 1fr;gap:14px}.side-card{margin:0}.chat-window{min-height:70vh}
-    }
-    @media(max-width:600px){
+      }
+      @media(max-width:600px){
       .geoff-shell{width:min(100% - 18px,1180px);padding-top:78px}.geoff-header{align-items:flex-start}.status-pill{display:none}.geoff-title p{font-size:.82rem}.geoff-layout{gap:12px}.geoff-card{border-radius:20px}.message-content{max-width:88%}.geoff-sidebar{grid-template-columns:1fr}.composer{padding:10px}.suggestions{padding:0 12px 12px}#chat{padding:18px 12px;max-height:none}.chat-top{padding:14px}
-    }
-  </style>
-</head>
-<body>
-  <div class="bg"></div>
-
-  <nav aria-label="Main navigation">
-    <div class="nav-inner">
-      <button id="navToggle" type="button" aria-label="Toggle menu" aria-expanded="false">☰</button>
-      <div class="nav-links" id="navLinks">
-        <a href="/molly/" title="Home"><span>:home:</span></a>
-        <a href="/molly-traits/" title="Traits"><span>:traits:</span></a>
-        <a href="/molly-habits/" title="Habits"><span>:habits:</span></a>
-        <a href="/molly-mind/" title="Mind"><span>:mind:</span></a>
-        <a href="/molly-gallery/" title="Gallery"><span>:gallery:</span></a>
-        <a href="/molly-faq/" title="FAQ"><span>:faq:</span></a>
-        <a href="/molly-dog-breeds/" title="Breeds"><span>:breeds:</span></a>
-        <a href="/comics/" title="Comics"><span>:comics:</span></a>
-        <a href="/blog/" title="Blog"><span>:blog:</span></a>
-        <a href="/games/" title="Arcade"><span>🎮</span></a>
-          <a href="/merch/" title="Merch"><span>🏷️</span></a>
-        <a href="/about-me/" title="About the Human"><span>:about:</span></a>
-        <a href="/shaina/" title="Shaina"><span>:shaina:</span></a>
-        <a href="/poppy/" title="Poppy"><span>:poppy:</span></a>
-        <a href="/geoff/" title="Geoff" aria-current="page"><span>:geoff:</span></a>
-      </div>
-      <button id="searchBtn" type="button" aria-label="Open site search">:search:</button>
+      }
+    </style>
+  </head>
+  <body>
+    <div class="bg">
     </div>
-  </nav>
-  <div id="searchBox" class="hidden">
-    <input id="searchInput" type="search" placeholder="Search...">
-    <div id="results"></div>
-  </div>
-
-  <main class="geoff-shell">
-    <header class="geoff-header">
-      <div class="geoff-title">
-        <div class="geoff-logo" aria-hidden="true">🐾</div>
-        <div>
-          <h1>Geoff</h1>
-          <p>The Molly &amp; Shaina site assistant</p>
+    <nav aria-label="Main navigation">
+      <div class="nav-inner">
+        <button id="navToggle" type="button" aria-label="Toggle menu" aria-expanded="false">☰</button>
+        <div class="nav-links" id="navLinks">
+          <a href="/molly/" title="Home">
+            <span>:home:</span>
+          </a>
+          <a href="/molly-traits/" title="Traits">
+            <span>:traits:</span>
+          </a>
+          <a href="/molly-habits/" title="Habits">
+            <span>:habits:</span>
+          </a>
+          <a href="/molly-mind/" title="Mind">
+            <span>:mind:</span>
+          </a>
+          <a href="/molly-gallery/" title="Gallery">
+            <span>:gallery:</span>
+          </a>
+          <a href="/molly-faq/" title="FAQ">
+            <span>:faq:</span>
+          </a>
+          <a href="/molly-dog-breeds/" title="Breeds">
+            <span>:breeds:</span>
+          </a>
+          <a href="/comics/" title="Comics">
+            <span>:comics:</span>
+          </a>
+          <a href="/blog/" title="Blog">
+            <span>:blog:</span>
+          </a>
+          <a href="/games/" title="Arcade">
+            <span>🎮</span>
+          </a>
+          <a href="/merch/" title="Merch">
+            <span>🏷️</span>
+          </a>
+          <a href="/about-me/" title="About the Human">
+            <span>:about:</span>
+          </a>
+          <a href="/shaina/" title="Shaina">
+            <span>:shaina:</span>
+          </a>
+          <a href="/poppy/" title="Poppy">
+            <span>:poppy:</span>
+          </a>
+          <a href="/geoff/" title="Geoff" aria-current="page">
+            <span>:geoff:</span>
+          </a>
         </div>
+        <button id="searchBtn" type="button" aria-label="Open site search">:search:</button>
       </div>
-      <div class="status-pill"><span class="status-dot"></span><span id="statusText">Connecting to mollyandshaina.com…</span></div>
-    </header>
-
-    <div class="geoff-layout">
-      <section class="geoff-card chat-window" aria-label="Chat with Geoff">
-        <div class="chat-top">
-          <div><strong>Ask Geoff</strong><br><small id="chatSubtitle">Learning the site…</small></div>
-          <button class="new-chat" id="newChat" type="button">New chat</button>
-        </div>
-
-        <div id="chat" aria-live="polite"></div>
-
-        <div class="suggestions" id="suggestions">
-          <button type="button" data-prompt="Who are Molly and Shaina?">Who are Molly &amp; Shaina?</button>
-          <button type="button" data-prompt="What can I do on this website?">What’s on the site?</button>
-          <button type="button" data-prompt="Tell me about the comics.">Comics</button>
-          <button type="button" data-prompt="What dog breed pages are there?">Dog breeds</button>
-        </div>
-
-        <form class="composer" id="composer">
-          <textarea id="prompt" rows="1" placeholder="Ask Geoff about mollyandshaina.com…" autocomplete="off"></textarea>
-          <input id="trainingPassword" type="password" placeholder="Enter the admin password…" autocomplete="current-password" aria-label="Admin password" hidden>
-          <button id="sendButton" type="submit" aria-label="Send">➜</button>
-        </form>
-        <div class="fineprint">Geoff searches Molly &amp; Shaina pages for context, then uses AI to answer naturally. He can still make mistakes, so use the linked source pages to check. If he cannot help, <a href="/contact/" data-contact-link>ask the human</a>.</div>
-      </section>
-
-      <aside class="geoff-sidebar">
-        <section class="geoff-card side-card">
-          <h2>Site connection</h2>
-          <div class="sync-line">
-            <div class="sync-icon">🌐</div>
-            <div><strong>mollyandshaina.com</strong><small id="syncState">Connecting…</small></div>
-          </div>
-          <div class="index-stats">
-            <div class="stat"><b id="pageCount">0</b><span>pages indexed</span></div>
-            <div class="stat"><b id="wordCount">0</b><span>words searchable</span></div>
-          </div>
-        </section>
-
-        <section class="geoff-card side-card">
-          <h2>Best matching pages</h2>
-          <ul class="context-list" id="contextList"><li>Ask something to see sources here.</li></ul>
-        </section>
-
-        <section class="geoff-card side-card">
-          <h2>How Geoff works</h2>
-          <p class="side-note">Geoff searches the public Molly &amp; Shaina site for relevant context, then sends that context to his AI brain to write a natural answer.</p>
-        </section>
-
-        <section class="geoff-card side-card">
-          <h2>Geoff is stumped?</h2>
-          <p class="side-note">Send your unanswered question privately to the person behind the site.</p>
-          <a class="geoff-contact-link" href="/contact/" data-contact-link>Ask the human</a>
-        </section>
-      </aside>
+    </nav>
+    <div id="searchBox" class="hidden">
+      <input id="searchInput" type="search" placeholder="Search...">
+      <div id="results">
+      </div>
     </div>
-  </main>
-
-<script src="../js/animations.js"></script>
-<script src="../js/search.js"></script>
-<script>
-(() => {
-  const SITE = 'https://mollyandshaina.com';
-  const MAX_PAGES = 40;
-  const FALLBACK_ROUTES = [
-    '/',
-    '/molly/',
-    '/molly-traits/',
-    '/molly-habits/',
-    '/molly-mind/',
-    '/molly-gallery/',
-    '/molly-faq/',
-    '/molly-dog-breeds/',
-    '/shaina/',
-    '/poppy/',
-    '/comics/',
-    '/blog/',
-    '/dog-diaries/',
-    '/images/',
-    '/merch/',
-    '/contact/',
-    '/about-me/'
-  ];
-
-  const state = { pages: [], ready: false, indexing: false };
-  const trainingState = { active: false, awaitingPassword: false, entries: [] };
-  const defaultPromptPlaceholder = 'Ask Geoff about mollyandshaina.com…';
-  const $ = id => document.getElementById(id);
-  const chat = $('chat');
-  const form = $('composer');
-  const prompt = $('prompt');
-  const trainingPassword = $('trainingPassword');
-  const sendButton = $('sendButton');
-
-  function showPasswordComposer(show) {
-    prompt.hidden = show;
-    trainingPassword.hidden = !show;
-    if (!show) trainingPassword.value = '';
-  }
-
-  function focusComposer() {
-    (trainingState.awaitingPassword ? trainingPassword : prompt).focus();
-  }
-
-  function composerValue() {
-    return trainingState.awaitingPassword ? trainingPassword.value : prompt.value;
-  }
-
-  const time = () => new Intl.DateTimeFormat('en-AU', { hour:'numeric', minute:'2-digit' }).format(new Date());
-  const escapeHTML = value => String(value).replace(/[&<>'"]/g, ch => ({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[ch]));
-  const normalise = text => text.replace(/\s+/g, ' ').trim();
-  const words = text => normalise(text.toLowerCase()).match(/[a-z0-9]+/g) || [];
-
-  function safeMarkdownURL(value) {
-    const url = String(value || '').trim();
-    return /^(?:https?:\/\/|mailto:|\/(?!\/)|\.\.?\/|#)/i.test(url) ? escapeHTML(url) : '#';
-  }
-
-  const safeRawHTMLTags = new Set([
-    'a', 'abbr', 'b', 'blockquote', 'br', 'code', 'del', 'details', 'div', 'em',
-    'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'hr', 'i', 'img', 'kbd', 'li', 'mark',
-    'ol', 'p', 'pre', 's', 'small', 'span', 'strong', 'sub', 'summary', 'sup',
-    'table', 'tbody', 'td', 'tfoot', 'th', 'thead', 'tr', 'u', 'ul'
-  ]);
-  const voidRawHTMLTags = new Set(['br', 'hr', 'img']);
-
-  function rawHTMLAttribute(tag, name) {
-    const pattern = new RegExp(`(?:^|\\s)${name}\\s*=\\s*(?:"([^"]*)"|'([^']*)'|([^\\s>]+))`, 'i');
-    const match = String(tag).replace(/^<\s*[^\s>]+/, '').match(pattern);
-    return match ? (match[1] ?? match[2] ?? match[3] ?? '') : '';
-  }
-
-  function sanitizeRawHTMLTag(rawTag) {
-    const match = String(rawTag).match(/^<\s*(\/?)\s*([a-z0-9]+)\b/i);
-    if (!match) return escapeHTML(rawTag);
-
-    const closing = Boolean(match[1]);
-    const tag = match[2].toLowerCase();
-    if (!safeRawHTMLTags.has(tag)) return escapeHTML(rawTag);
-    if (closing) return voidRawHTMLTags.has(tag) ? '' : `</${tag}>`;
-
-    if (tag === 'a') {
+    <main class="geoff-shell">
+      <header class="geoff-header">
+        <div class="geoff-title">
+          <div class="geoff-logo" aria-hidden="true">🐾</div>
+          <div>
+            <h1>Geoff</h1>
+            <p>The Molly &amp; Shaina site assistant</p>
+          </div>
+        </div>
+        <div class="status-pill">
+          <span class="status-dot">
+          </span>
+          <span id="statusText">Connecting to mollyandshaina.com…</span>
+        </div>
+      </header>
+      <div class="geoff-layout">
+        <section class="geoff-card chat-window" aria-label="Chat with Geoff">
+          <div class="chat-top">
+            <div>
+              <strong>Ask Geoff</strong>
+              <br>
+              <small id="chatSubtitle">Learning the site…</small>
+            </div>
+            <button class="new-chat" id="newChat" type="button">New chat</button>
+          </div>
+          <div id="chat" aria-live="polite">
+          </div>
+          <div class="suggestions" id="suggestions">
+            <button type="button" data-prompt="Who are Molly and Shaina?">Who are Molly &amp; Shaina?</button>
+            <button type="button" data-prompt="What can I do on this website?">What’s on the site?</button>
+            <button type="button" data-prompt="Tell me about the comics.">Comics</button>
+            <button type="button" data-prompt="What dog breed pages are there?">Dog breeds</button>
+          </div>
+          <form class="composer" id="composer">
+            <textarea id="prompt" rows="1" placeholder="Ask Geoff about mollyandshaina.com…" autocomplete="off"></textarea>
+            <input id="trainingPassword" type="password" placeholder="Enter the admin password…" autocomplete="current-password" aria-label="Admin password" hidden>
+            <button id="sendButton" type="submit" aria-label="Send">➜</button>
+          </form>
+          <div class="fineprint">Geoff searches Molly &amp; Shaina pages for context, then uses AI to answer naturally. He can still make mistakes, so use the linked source pages to check. If he cannot help, <a href="/contact/" data-contact-link>ask the human</a>.</div>
+        </section>
+        <aside class="geoff-sidebar">
+          <section class="geoff-card side-card">
+            <h2>Site connection</h2>
+            <div class="sync-line">
+              <div class="sync-icon">🌐</div>
+              <div>
+                <strong>mollyandshaina.com</strong>
+                <small id="syncState">Connecting…</small>
+              </div>
+            </div>
+            <div class="index-stats">
+              <div class="stat">
+                <b id="pageCount">0</b>
+                <span>pages indexed</span>
+              </div>
+              <div class="stat">
+                <b id="wordCount">0</b>
+                <span>words searchable</span>
+              </div>
+            </div>
+          </section>
+          <section class="geoff-card side-card">
+            <h2>Best matching pages</h2>
+            <ul class="context-list" id="contextList">
+              <li>Ask something to see sources here.</li>
+            </ul>
+          </section>
+          <section class="geoff-card side-card">
+            <h2>How Geoff works</h2>
+            <p class="side-note">Geoff searches the public Molly &amp; Shaina site for relevant context, then sends that context to his AI brain to write a natural answer.</p>
+          </section>
+          <section class="geoff-card side-card">
+            <h2>Geoff is stumped?</h2>
+            <p class="side-note">Send your unanswered question privately to the person behind the site.</p>
+            <a class="geoff-contact-link" href="/contact/" data-contact-link>Ask the human</a>
+          </section>
+        </aside>
+      </div>
+    </main>
+    <script src="../js/animations.js"></script>
+    <script src="../js/search.js"></script>
+    <script>
+      (() => {
+      const SITE = 'https://mollyandshaina.com';
+      const MAX_PAGES = 40;
+      const FALLBACK_ROUTES = [
+      '/',
+      '/molly/',
+      '/molly-traits/',
+      '/molly-habits/',
+      '/molly-mind/',
+      '/molly-gallery/',
+      '/molly-faq/',
+      '/molly-dog-breeds/',
+      '/shaina/',
+      '/poppy/',
+      '/comics/',
+      '/blog/',
+      '/dog-diaries/',
+      '/images/',
+      '/merch/',
+      '/contact/',
+      '/about-me/'
+      ];
+      
+      const state = { pages: [], ready: false, indexing: false };
+      const trainingState = { active: false, awaitingPassword: false, entries: [] };
+      const defaultPromptPlaceholder = 'Ask Geoff about mollyandshaina.com…';
+      const $ = id => document.getElementById(id);
+      const chat = $('chat');
+      const form = $('composer');
+      const prompt = $('prompt');
+      const trainingPassword = $('trainingPassword');
+      const sendButton = $('sendButton');
+      
+      function showPasswordComposer(show) {
+      prompt.hidden = show;
+      trainingPassword.hidden = !show;
+      if (!show) trainingPassword.value = '';
+      }
+      
+      function focusComposer() {
+      (trainingState.awaitingPassword ? trainingPassword : prompt).focus();
+      }
+      
+      function composerValue() {
+      return trainingState.awaitingPassword ? trainingPassword.value : prompt.value;
+      }
+      
+      const time = () => new Intl.DateTimeFormat('en-AU', { hour:'numeric', minute:'2-digit' }).format(new Date());
+      const escapeHTML = value => String(value).replace(/[&<>'"]/g, ch => ({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[ch]));
+      const normalise = text => text.replace(/\s+/g, ' ').trim();
+      const words = text => normalise(text.toLowerCase()).match(/[a-z0-9]+/g) || [];
+      
+      function safeMarkdownURL(value) {
+      const url = String(value || '').trim();
+      return /^(?:https?:\/\/|mailto:|\/(?!\/)|\.\.?\/|#)/i.test(url) ? escapeHTML(url) : '#';
+      }
+      
+      const safeRawHTMLTags = new Set([
+      'a', 'abbr', 'b', 'blockquote', 'br', 'code', 'del', 'details', 'div', 'em',
+      'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'hr', 'i', 'img', 'kbd', 'li', 'mark',
+      'ol', 'p', 'pre', 's', 'small', 'span', 'strong', 'sub', 'summary', 'sup',
+      'table', 'tbody', 'td', 'tfoot', 'th', 'thead', 'tr', 'u', 'ul'
+      ]);
+      const voidRawHTMLTags = new Set(['br', 'hr', 'img']);
+      
+      function rawHTMLAttribute(tag, name) {
+      const pattern = new RegExp(`(?:^|\\s)${name}\\s*=\\s*(?:"([^"]*)"|'([^']*)'|([^\\s>]+))`, 'i');
+      const match = String(tag).replace(/^<\s*[^\s>]+/, '').match(pattern);
+      return match ? (match[1] ?? match[2] ?? match[3] ?? '') : '';
+      }
+      
+      function sanitizeRawHTMLTag(rawTag) {
+      const match = String(rawTag).match(/^<\s*(\/?)\s*([a-z0-9]+)\b/i);
+      if (!match) return escapeHTML(rawTag);
+      
+      const closing = Boolean(match[1]);
+      const tag = match[2].toLowerCase();
+      if (!safeRawHTMLTags.has(tag)) return escapeHTML(rawTag);
+      if (closing) return voidRawHTMLTags.has(tag) ? '' : `</${tag}>`;
+      
+      if (tag === 'a') {
       const rawHref = rawHTMLAttribute(rawTag, 'href');
       const href = safeMarkdownURL(rawHref);
       const external = /^https?:\/\//i.test(rawHref);
       return `<a href="${href}"${external ? ' target="_blank" rel="noopener noreferrer"' : ''}>`;
-    }
-
-    if (tag === 'img') {
+      }
+      
+      if (tag === 'img') {
       const src = safeMarkdownURL(rawHTMLAttribute(rawTag, 'src'));
       const alt = escapeHTML(rawHTMLAttribute(rawTag, 'alt'));
       return src === '#' ? '' : `<img src="${src}" alt="${alt}" loading="lazy">`;
-    }
-
-    if (tag === 'td' || tag === 'th') {
+      }
+      
+      if (tag === 'td' || tag === 'th') {
       const colspan = Math.min(12, Math.max(1, Number(rawHTMLAttribute(rawTag, 'colspan')) || 1));
       const rowspan = Math.min(50, Math.max(1, Number(rawHTMLAttribute(rawTag, 'rowspan')) || 1));
       return `<${tag} colspan="${colspan}" rowspan="${rowspan}">`;
-    }
-
-    return `<${tag}>`;
-  }
-
-  function renderInlineMarkdown(value) {
-    const tokens = [];
-    const stash = html => `\u0000${tokens.push(html) - 1}\u0000`;
-    let text = String(value || '');
-
-    text = text
+      }
+      
+      return `<${tag}>`;
+      }
+      
+      function renderInlineMarkdown(value) {
+      const tokens = [];
+      const stash = html => `\u0000${tokens.push(html) - 1}\u0000`;
+      let text = String(value || '');
+      
+      text = text
       .replace(/`\[([^\]]+)\]`\(\[[^\]]*\]\((https?:\/\/[^)\s]+)\)\)/gi, '[$1]($2)')
       .replace(/\[([^\]]+)\]\(\[[^\]]*\]\((https?:\/\/[^)\s]+)\)\)/gi, '[$1]($2)');
-    text = text.replace(/`([^`\n]+)`/g, (_, code) => stash(`<code>${escapeHTML(code)}</code>`));
-    text = text.replace(/<(https?:\/\/[^\s<>]+)>/gi, (_, url) => stash(`<a href="${escapeHTML(url)}" target="_blank" rel="noopener noreferrer">${escapeHTML(url)}</a>`));
-    text = text.replace(/<\/?[a-z][^<>]*>/gi, rawTag => stash(sanitizeRawHTMLTag(rawTag)));
-    text = text.replace(/!\[([^\]]*)\]\(([^)\s]+)(?:\s+"[^"]*")?\)/g, (_, alt, url) => {
+      text = text.replace(/`([^`\n]+)`/g, (_, code) => stash(`<code>${escapeHTML(code)}</code>`));
+      text = text.replace(/<(https?:\/\/[^\s<>]+)>/gi, (_, url) => stash(`<a href="${escapeHTML(url)}" target="_blank" rel="noopener noreferrer">${escapeHTML(url)}</a>`));
+      text = text.replace(/<\/?[a-z][^<>]*>/gi, rawTag => stash(sanitizeRawHTMLTag(rawTag)));
+      text = text.replace(/!\[([^\]]*)\]\(([^)\s]+)(?:\s+"[^"]*")?\)/g, (_, alt, url) => {
       const src = safeMarkdownURL(url);
       return src === '#' ? escapeHTML(alt) : stash(`<img src="${src}" alt="${escapeHTML(alt)}" loading="lazy">`);
-    });
-    text = text.replace(/\[([^\]]+)\]\(([^)\s]+)(?:\s+"[^"]*")?\)/g, (_, label, url) => {
+      });
+      text = text.replace(/\[([^\]]+)\]\(([^)\s]+)(?:\s+"[^"]*")?\)/g, (_, label, url) => {
       const href = safeMarkdownURL(url);
       return stash(`<a href="${href}"${/^https?:\/\//i.test(url) ? ' target="_blank" rel="noopener noreferrer"' : ''}>${renderInlineMarkdown(label)}</a>`);
-    });
-
-    text = escapeHTML(text)
+      });
+      
+      text = escapeHTML(text)
       .replace(/\*\*\*([^*\n]+)\*\*\*/g, '<strong><em>$1</em></strong>')
       .replace(/___([^_\n]+)___/g, '<strong><em>$1</em></strong>')
       .replace(/\*\*([^*\n]+)\*\*/g, '<strong>$1</strong>')
@@ -364,633 +403,633 @@
       .replace(/~~([^~\n]+)~~/g, '<del>$1</del>')
       .replace(/(^|[^\w])\*([^*\n]+)\*(?!\*)/g, '$1<em>$2</em>')
       .replace(/(^|[^\w])_([^_\n]+)_(?!\w)/g, '$1<em>$2</em>');
-
-    return text.replace(/\u0000(\d+)\u0000/g, (_, index) => tokens[Number(index)]);
-  }
-
-  function splitMarkdownTableRow(value) {
-    let row = String(value || '').trim().replace(/^\\(?=\|)/, '').replace(/\\\s*$/, '');
-    if (row.startsWith('|')) row = row.slice(1);
-    if (row.endsWith('|')) row = row.slice(0, -1);
-
-    const cells = [];
-    let cell = '';
-    let escaped = false;
-
-    for (const character of row) {
-      if (escaped) {
-        cell += character === '|' ? '|' : `\\${character}`;
-        escaped = false;
-      } else if (character === '\\') {
-        escaped = true;
-      } else if (character === '|') {
-        cells.push(cell.trim());
-        cell = '';
-      } else {
-        cell += character;
+      
+      return text.replace(/\u0000(\d+)\u0000/g, (_, index) => tokens[Number(index)]);
       }
-    }
-
-    if (escaped) cell += '\\';
-    cells.push(cell.trim());
-    return cells;
-  }
-
-  function isMarkdownTableSeparator(cells) {
-    return cells.length > 0 && cells.every(cell => /^:?-{3,}:?$/.test(cell.replace(/\s/g, '')));
-  }
-
-  function renderMarkdown(value) {
-    const lines = String(value || '').replace(/\r\n?/g, '\n').split('\n');
-    const output = [];
-    let paragraph = [];
-
-    const flushParagraph = () => {
+      
+      function splitMarkdownTableRow(value) {
+      let row = String(value || '').trim().replace(/^\\(?=\|)/, '').replace(/\\\s*$/, '');
+      if (row.startsWith('|')) row = row.slice(1);
+      if (row.endsWith('|')) row = row.slice(0, -1);
+      
+      const cells = [];
+      let cell = '';
+      let escaped = false;
+      
+      for (const character of row) {
+      if (escaped) {
+      cell += character === '|' ? '|' : `\\${character}`;
+      escaped = false;
+      } else if (character === '\\') {
+      escaped = true;
+      } else if (character === '|') {
+      cells.push(cell.trim());
+      cell = '';
+      } else {
+      cell += character;
+      }
+      }
+      
+      if (escaped) cell += '\\';
+      cells.push(cell.trim());
+      return cells;
+      }
+      
+      function isMarkdownTableSeparator(cells) {
+      return cells.length > 0 && cells.every(cell => /^:?-{3,}:?$/.test(cell.replace(/\s/g, '')));
+      }
+      
+      function renderMarkdown(value) {
+      const lines = String(value || '').replace(/\r\n?/g, '\n').split('\n');
+      const output = [];
+      let paragraph = [];
+      
+      const flushParagraph = () => {
       if (!paragraph.length) return;
       output.push(`<p>${renderInlineMarkdown(paragraph.join('\n')).replace(/\n/g, '<br>')}</p>`);
       paragraph = [];
-    };
-
-    for (let index = 0; index < lines.length;) {
+      };
+      
+      for (let index = 0; index < lines.length;) {
       const line = lines[index];
-
+      
       if (!line.trim()) {
-        flushParagraph();
-        index += 1;
-        continue;
+      flushParagraph();
+      index += 1;
+      continue;
       }
-
+      
       const fence = line.match(/^\s*```([a-z0-9_-]*)\s*$/i);
       if (fence) {
-        flushParagraph();
-        const code = [];
-        index += 1;
-        while (index < lines.length && !/^\s*```\s*$/.test(lines[index])) code.push(lines[index++]);
-        if (index < lines.length) index += 1;
-        const language = fence[1] ? ` class="language-${escapeHTML(fence[1])}"` : '';
-        output.push(`<pre><code${language}>${escapeHTML(code.join('\n'))}</code></pre>`);
-        continue;
+      flushParagraph();
+      const code = [];
+      index += 1;
+      while (index < lines.length && !/^\s*```\s*$/.test(lines[index])) code.push(lines[index++]);
+      if (index < lines.length) index += 1;
+      const language = fence[1] ? ` class="language-${escapeHTML(fence[1])}"` : '';
+      output.push(`<pre><code${language}>${escapeHTML(code.join('\n'))}</code></pre>`);
+      continue;
       }
-
+      
       if (index + 1 < lines.length && line.includes('|')) {
-        const headers = splitMarkdownTableRow(line);
-        const separators = splitMarkdownTableRow(lines[index + 1]);
-
-        if (headers.length === separators.length && isMarkdownTableSeparator(separators)) {
-          flushParagraph();
-          const alignments = separators.map(separator => {
-            const clean = separator.replace(/\s/g, '');
-            if (clean.startsWith(':') && clean.endsWith(':')) return 'center';
-            if (clean.endsWith(':')) return 'right';
-            return 'left';
-          });
-          const rows = [];
-          index += 2;
-
-          while (index < lines.length && lines[index].trim() && lines[index].includes('|')) {
-            const cells = splitMarkdownTableRow(lines[index]);
-            while (cells.length < headers.length) cells.push('');
-            rows.push(cells.slice(0, headers.length));
-            index += 1;
-          }
-
-          const headingHTML = headers.map((cell, cellIndex) => `<th style="text-align:${alignments[cellIndex]}">${renderInlineMarkdown(cell)}</th>`).join('');
-          const bodyHTML = rows.map(row => `<tr>${row.map((cell, cellIndex) => `<td style="text-align:${alignments[cellIndex]}">${renderInlineMarkdown(cell)}</td>`).join('')}</tr>`).join('');
-          output.push(`<div class="table-wrap"><table><thead><tr>${headingHTML}</tr></thead><tbody>${bodyHTML}</tbody></table></div>`);
-          continue;
-        }
+      const headers = splitMarkdownTableRow(line);
+      const separators = splitMarkdownTableRow(lines[index + 1]);
+      
+      if (headers.length === separators.length && isMarkdownTableSeparator(separators)) {
+      flushParagraph();
+      const alignments = separators.map(separator => {
+      const clean = separator.replace(/\s/g, '');
+      if (clean.startsWith(':') && clean.endsWith(':')) return 'center';
+      if (clean.endsWith(':')) return 'right';
+      return 'left';
+      });
+      const rows = [];
+      index += 2;
+      
+      while (index < lines.length && lines[index].trim() && lines[index].includes('|')) {
+      const cells = splitMarkdownTableRow(lines[index]);
+      while (cells.length < headers.length) cells.push('');
+      rows.push(cells.slice(0, headers.length));
+      index += 1;
       }
-
+      
+      const headingHTML = headers.map((cell, cellIndex) => `<th style="text-align:${alignments[cellIndex]}">${renderInlineMarkdown(cell)}</th>`).join('');
+      const bodyHTML = rows.map(row => `<tr>${row.map((cell, cellIndex) => `<td style="text-align:${alignments[cellIndex]}">${renderInlineMarkdown(cell)}</td>`).join('')}</tr>`).join('');
+      output.push(`<div class="table-wrap"><table><thead><tr>${headingHTML}</tr></thead><tbody>${bodyHTML}</tbody></table></div>`);
+      continue;
+      }
+      }
+      
       const heading = line.match(/^\s{0,3}(#{1,6})\s+(.+?)\s*$/);
       if (heading) {
-        flushParagraph();
-        const level = heading[1].length;
-        const content = heading[2].replace(/\s+#+\s*$/, '');
-        output.push(`<h${level}>${renderInlineMarkdown(content)}</h${level}>`);
-        index += 1;
-        continue;
+      flushParagraph();
+      const level = heading[1].length;
+      const content = heading[2].replace(/\s+#+\s*$/, '');
+      output.push(`<h${level}>${renderInlineMarkdown(content)}</h${level}>`);
+      index += 1;
+      continue;
       }
-
+      
       if (/^\s{0,3}(?:-{3,}|\*{3,}|_{3,})\s*$/.test(line)) {
-        flushParagraph();
-        output.push('<hr>');
-        index += 1;
-        continue;
+      flushParagraph();
+      output.push('<hr>');
+      index += 1;
+      continue;
       }
-
+      
       if (/^\s{0,3}>/.test(line)) {
-        flushParagraph();
-        const quote = [];
-        while (index < lines.length && /^\s{0,3}>/.test(lines[index])) {
-          quote.push(lines[index].replace(/^\s{0,3}>\s?/, ''));
-          index += 1;
-        }
-        output.push(`<blockquote>${renderMarkdown(quote.join('\n'))}</blockquote>`);
-        continue;
+      flushParagraph();
+      const quote = [];
+      while (index < lines.length && /^\s{0,3}>/.test(lines[index])) {
+      quote.push(lines[index].replace(/^\s{0,3}>\s?/, ''));
+      index += 1;
       }
-
+      output.push(`<blockquote>${renderMarkdown(quote.join('\n'))}</blockquote>`);
+      continue;
+      }
+      
       const unordered = line.match(/^\s*[-+*]\s+(.+)$/);
       const ordered = line.match(/^\s*\d+[.)]\s+(.+)$/);
       if (unordered || ordered) {
-        flushParagraph();
-        const tag = ordered ? 'ol' : 'ul';
-        const items = [];
-        const pattern = ordered ? /^\s*\d+[.)]\s+(.+)$/ : /^\s*[-+*]\s+(.+)$/;
-        while (index < lines.length) {
-          const item = lines[index].match(pattern);
-          if (!item) break;
-          const task = item[1].match(/^\[([ xX])\]\s+(.+)$/);
-          items.push(task
-            ? `<li><input type="checkbox" disabled${task[1].toLowerCase() === 'x' ? ' checked' : ''}>${renderInlineMarkdown(task[2])}</li>`
-            : `<li>${renderInlineMarkdown(item[1])}</li>`);
-          index += 1;
-        }
-        output.push(`<${tag}>${items.join('')}</${tag}>`);
-        continue;
+      flushParagraph();
+      const tag = ordered ? 'ol' : 'ul';
+      const items = [];
+      const pattern = ordered ? /^\s*\d+[.)]\s+(.+)$/ : /^\s*[-+*]\s+(.+)$/;
+      while (index < lines.length) {
+      const item = lines[index].match(pattern);
+      if (!item) break;
+      const task = item[1].match(/^\[([ xX])\]\s+(.+)$/);
+      items.push(task
+      ? `<li><input type="checkbox" disabled${task[1].toLowerCase() === 'x' ? ' checked' : ''}>${renderInlineMarkdown(task[2])}</li>`
+      : `<li>${renderInlineMarkdown(item[1])}</li>`);
+      index += 1;
       }
-
+      output.push(`<${tag}>${items.join('')}</${tag}>`);
+      continue;
+      }
+      
       paragraph.push(line);
       index += 1;
-    }
-
-    flushParagraph();
-    return output.join('');
-  }
-
-  function addMessage(role, text, sources = []) {
-    const wrap = document.createElement('div');
-    wrap.className = `message ${role === 'me' ? 'me' : 'geoff'}`;
-    const avatar = `<div class="message-avatar">${role === 'me' ? 'A' : 'G'}</div>`;
-    const sourceHTML = sources.length ? `<div class="source-row">${sources.slice(0,4).map(s => `<a class="source-chip" href="${escapeHTML(s.url)}" target="_blank" rel="noopener">${escapeHTML(s.title || s.path)}</a>`).join('')}</div>` : '';
-    const content = `<div class="message-content"><div class="message-meta">${role === 'me' ? 'You' : 'Geoff'} · ${time()}</div><div class="bubble">${role === 'me' ? escapeHTML(text) : renderGeoffText(text)}</div>${sourceHTML}</div>`;
-    wrap.innerHTML = role === 'me' ? content + avatar : avatar + content;
-    chat.appendChild(wrap);
-    chat.scrollTop = chat.scrollHeight;
-    return wrap;
-  }
-
-  function renderGeoffText(text) {
-    return `<div class="markdown-body">${renderMarkdown(text)}</div>`;
-  }
-
-  function addTyping() {
-    const wrap = document.createElement('div');
-    wrap.className = 'message geoff';
-    wrap.innerHTML = `<div class="message-avatar">G</div><div class="message-content"><div class="message-meta">Geoff · ${time()}</div><div class="bubble"><span class="typing"><i></i><i></i><i></i></span></div></div>`;
-    chat.appendChild(wrap);
-    chat.scrollTop = chat.scrollHeight;
-    return wrap;
-  }
-
-  function pageTitle(doc, url) {
-    const h1 = doc.querySelector('h1');
-    const title = h1?.textContent || doc.title || new URL(url).pathname;
-    return normalise(title).replace(/\s+[|—-]\s+Molly\s*&\s*Shaina.*$/i, '');
-  }
-
-  function extractPage(html, url) {
-    const doc = new DOMParser().parseFromString(html, 'text/html');
-    doc.querySelectorAll('script,style,noscript,svg,nav,footer').forEach(el => el.remove());
-    const main = doc.querySelector('main') || doc.body;
-    const text = normalise(main?.textContent || '');
-    const headings = [...doc.querySelectorAll('h1,h2,h3')].map(h => normalise(h.textContent)).filter(Boolean);
-    return {
+      }
+      
+      flushParagraph();
+      return output.join('');
+      }
+      
+      function addMessage(role, text, sources = []) {
+      const wrap = document.createElement('div');
+      wrap.className = `message ${role === 'me' ? 'me' : 'geoff'}`;
+      const avatar = `<div class="message-avatar">${role === 'me' ? 'A' : 'G'}</div>`;
+      const sourceHTML = sources.length ? `<div class="source-row">${sources.slice(0,4).map(s => `<a class="source-chip" href="${escapeHTML(s.url)}" target="_blank" rel="noopener">${escapeHTML(s.title || s.path)}</a>`).join('')}</div>` : '';
+      const content = `<div class="message-content"><div class="message-meta">${role === 'me' ? 'You' : 'Geoff'} · ${time()}</div><div class="bubble">${role === 'me' ? escapeHTML(text) : renderGeoffText(text)}</div>${sourceHTML}</div>`;
+      wrap.innerHTML = role === 'me' ? content + avatar : avatar + content;
+      chat.appendChild(wrap);
+      chat.scrollTop = chat.scrollHeight;
+      return wrap;
+      }
+      
+      function renderGeoffText(text) {
+      return `<div class="markdown-body">${renderMarkdown(text)}</div>`;
+      }
+      
+      function addTyping() {
+      const wrap = document.createElement('div');
+      wrap.className = 'message geoff';
+      wrap.innerHTML = `<div class="message-avatar">G</div><div class="message-content"><div class="message-meta">Geoff · ${time()}</div><div class="bubble"><span class="typing"><i></i><i></i><i></i></span></div></div>`;
+      chat.appendChild(wrap);
+      chat.scrollTop = chat.scrollHeight;
+      return wrap;
+      }
+      
+      function pageTitle(doc, url) {
+      const h1 = doc.querySelector('h1');
+      const title = h1?.textContent || doc.title || new URL(url).pathname;
+      return normalise(title).replace(/\s+[|—-]\s+Molly\s*&\s*Shaina.*$/i, '');
+      }
+      
+      function extractPage(html, url) {
+      const doc = new DOMParser().parseFromString(html, 'text/html');
+      doc.querySelectorAll('script,style,noscript,svg,nav,footer').forEach(el => el.remove());
+      const main = doc.querySelector('main') || doc.body;
+      const text = normalise(main?.textContent || '');
+      const headings = [...doc.querySelectorAll('h1,h2,h3')].map(h => normalise(h.textContent)).filter(Boolean);
+      return {
       url,
       path: new URL(url).pathname,
       title: pageTitle(doc, url),
       text,
       headings,
       tokens: words(`${pageTitle(doc,url)} ${headings.join(' ')} ${text}`)
-    };
-  }
-
-  async function getSitemapUrls() {
-    try {
+      };
+      }
+      
+      async function getSitemapUrls() {
+      try {
       const res = await fetch(`${SITE}/sitemap.xml`, { cache:'no-store' });
       if (!res.ok) throw new Error('No sitemap');
       const xml = await res.text();
       const doc = new DOMParser().parseFromString(xml, 'application/xml');
       const urls = [...doc.querySelectorAll('loc')].map(n => n.textContent.trim()).filter(u => u.startsWith(SITE));
       return [...new Set(urls)].slice(0, MAX_PAGES);
-    } catch {
+      } catch {
       return FALLBACK_ROUTES.map(route => new URL(route, SITE).href);
-    }
-  }
-
-  async function indexSite() {
-    if (state.indexing) return;
-    state.indexing = true;
-    $('syncState').textContent = 'Reading public pages…';
-    $('statusText').textContent = 'Indexing site…';
-
-    const urls = await getSitemapUrls();
-    const pages = [];
-
-    // Small batches keep the browser responsive and avoid hammering the site.
-    for (let i = 0; i < urls.length; i += 5) {
+      }
+      }
+      
+      async function indexSite() {
+      if (state.indexing) return;
+      state.indexing = true;
+      $('syncState').textContent = 'Reading public pages…';
+      $('statusText').textContent = 'Indexing site…';
+      
+      const urls = await getSitemapUrls();
+      const pages = [];
+      
+      // Small batches keep the browser responsive and avoid hammering the site.
+      for (let i = 0; i < urls.length; i += 5) {
       const batch = urls.slice(i, i + 5);
       const results = await Promise.allSettled(batch.map(async url => {
-        const res = await fetch(url, { cache:'no-store' });
-        if (!res.ok) throw new Error(String(res.status));
-        const type = res.headers.get('content-type') || '';
-        if (!type.includes('text/html')) throw new Error('Not HTML');
-        return extractPage(await res.text(), url);
+      const res = await fetch(url, { cache:'no-store' });
+      if (!res.ok) throw new Error(String(res.status));
+      const type = res.headers.get('content-type') || '';
+      if (!type.includes('text/html')) throw new Error('Not HTML');
+      return extractPage(await res.text(), url);
       }));
       results.forEach(r => { if (r.status === 'fulfilled' && r.value.text.length > 40) pages.push(r.value); });
       $('pageCount').textContent = pages.length;
-    }
-
-    state.pages = pages;
-    state.ready = pages.length > 0;
-    state.indexing = false;
-    const totalWords = pages.reduce((sum,p) => sum + p.tokens.length, 0);
-    $('wordCount').textContent = totalWords > 999 ? `${(totalWords/1000).toFixed(1)}k` : totalWords;
-
-    if (state.ready) {
+      }
+      
+      state.pages = pages;
+      state.ready = pages.length > 0;
+      state.indexing = false;
+      const totalWords = pages.reduce((sum,p) => sum + p.tokens.length, 0);
+      $('wordCount').textContent = totalWords > 999 ? `${(totalWords/1000).toFixed(1)}k` : totalWords;
+      
+      if (state.ready) {
       $('syncState').textContent = `Synced just now`;
       $('statusText').textContent = 'Geoff is online';
       $('chatSubtitle').textContent = `${pages.length} site pages searchable`;
-    } else {
+      } else {
       $('syncState').textContent = 'Browser could not read site pages';
       $('statusText').textContent = 'Limited mode';
       $('chatSubtitle').textContent = 'Using built-in site knowledge';
-    }
-  }
-
-  function scorePage(page, query) {
-    const q = [...new Set(words(query).filter(w => w.length > 2))];
-    if (!q.length) return 0;
-    const title = page.title.toLowerCase();
-    const path = page.path.toLowerCase();
-    const headingText = page.headings.join(' ').toLowerCase();
-    const text = page.text.toLowerCase();
-    let score = 0;
-    for (const term of q) {
+      }
+      }
+      
+      function scorePage(page, query) {
+      const q = [...new Set(words(query).filter(w => w.length > 2))];
+      if (!q.length) return 0;
+      const title = page.title.toLowerCase();
+      const path = page.path.toLowerCase();
+      const headingText = page.headings.join(' ').toLowerCase();
+      const text = page.text.toLowerCase();
+      let score = 0;
+      for (const term of q) {
       if (title.includes(term)) score += 18;
       if (path.includes(term)) score += 12;
       if (headingText.includes(term)) score += 8;
       const occurrences = text.split(term).length - 1;
       score += Math.min(occurrences, 8) * 2;
-    }
-    const phrase = normalise(query.toLowerCase());
-    if (phrase.length > 5 && text.includes(phrase)) score += 30;
-    return score;
-  }
-
-  function searchPages(query, limit = 5) {
-    return state.pages
+      }
+      const phrase = normalise(query.toLowerCase());
+      if (phrase.length > 5 && text.includes(phrase)) score += 30;
+      return score;
+      }
+      
+      function searchPages(query, limit = 5) {
+      return state.pages
       .map(page => ({ page, score: scorePage(page, query) }))
       .filter(x => x.score > 0)
       .sort((a,b) => b.score - a.score)
       .slice(0, limit)
       .map(x => x.page);
-  }
-
-  function relevantSentences(page, query, limit = 2) {
-    const terms = [...new Set(words(query).filter(w => w.length > 2))];
-    const sentences = page.text.match(/[^.!?]+[.!?]+|[^.!?]+$/g) || [];
-    return sentences
+      }
+      
+      function relevantSentences(page, query, limit = 2) {
+      const terms = [...new Set(words(query).filter(w => w.length > 2))];
+      const sentences = page.text.match(/[^.!?]+[.!?]+|[^.!?]+$/g) || [];
+      return sentences
       .map(sentence => ({
-        sentence: normalise(sentence),
-        score: terms.reduce((n,t) => n + (sentence.toLowerCase().includes(t) ? 1 : 0), 0)
+      sentence: normalise(sentence),
+      score: terms.reduce((n,t) => n + (sentence.toLowerCase().includes(t) ? 1 : 0), 0)
       }))
       .filter(x => x.sentence.length > 35 && x.sentence.length < 320)
       .sort((a,b) => b.score - a.score)
       .slice(0, limit)
       .map(x => x.sentence);
-  }
-
-  function updateContext(matches) {
-    const list = $('contextList');
-    if (!matches.length) {
+      }
+      
+      function updateContext(matches) {
+      const list = $('contextList');
+      if (!matches.length) {
       list.innerHTML = '<li>No matching pages yet.</li>';
       return;
-    }
-    list.innerHTML = matches.slice(0,6).map(p => `<li><a href="${escapeHTML(p.url)}" target="_blank" rel="noopener">${escapeHTML(p.title || p.path)}</a></li>`).join('');
-  }
-
-  async function answer(query) {
-    if (!state.ready && !state.indexing) {
+      }
+      list.innerHTML = matches.slice(0,6).map(p => `<li><a href="${escapeHTML(p.url)}" target="_blank" rel="noopener">${escapeHTML(p.title || p.path)}</a></li>`).join('');
+      }
+      
+      async function answer(query) {
+      if (!state.ready && !state.indexing) {
       await indexSite();
-    }
-
-    const matches = searchPages(query, 6);
-    updateContext(matches);
-
-    const contextText = matches.slice(0, 4).map(page => {
+      }
+      
+      const matches = searchPages(query, 6);
+      updateContext(matches);
+      
+      const contextText = matches.slice(0, 4).map(page => {
       const useful = relevantSentences(page, query, 5);
-
+      
       return `
-PAGE: ${page.title}
-URL: ${page.url}
-
-${useful.join('\n')}
+      PAGE: ${page.title}
+      URL: ${page.url}
+      
+      ${useful.join('\n')}
       `.trim();
-    }).join('\n\n---\n\n');
-
-    const response = await fetch('/api/geoff', {
+      }).join('\n\n---\n\n');
+      
+      const response = await fetch('/api/geoff', {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json'
+      'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        messages: [
-          {
-            role: 'user',
-            content: `
-My question:
-${query}
-
-Relevant information retrieved from mollyandshaina.com:
-
-${contextText || 'No relevant website information was found.'}
-
-Answer my question naturally using the website information when relevant.
-Use Markdown whenever it improves clarity, but do not over-format. Keep simple answers as short paragraphs; use headings, bold, italics, bold italics, links, GitHub-style tables, lists, blockquotes, inline code, fenced code blocks, strikethrough, horizontal rules, or safe HTML only when they genuinely help. Safe HTML such as <br>, <u>, <mark>, <kbd>, <details>, headings, lists, tables, links, and images can be rendered. Always write Markdown links in the standard form [label](URL), with no backticks or nested link syntax.
-If the website information cannot answer the question, say so honestly and offer this link: [Ask the human](/contact/).
-            `.trim()
-          }
-        ]
+      messages: [
+      {
+      role: 'user',
+      content: `
+      My question:
+      ${query}
+      
+      Relevant information retrieved from mollyandshaina.com:
+      
+      ${contextText || 'No relevant website information was found.'}
+      
+      Answer my question naturally using the website information when relevant.
+      Use Markdown whenever it improves clarity, but do not over-format. Keep simple answers as short paragraphs; use headings, bold, italics, bold italics, links, GitHub-style tables, lists, blockquotes, inline code, fenced code blocks, strikethrough, horizontal rules, or safe HTML only when they genuinely help. Safe HTML such as <br>, <u>, <mark>, <kbd>, <details>, headings, lists, tables, links, and images can be rendered. Always write Markdown links in the standard form [label](URL), with no backticks or nested link syntax.
+      If the website information cannot answer the question, say so honestly and offer this link: [Ask the human](/contact/).
+      `.trim()
+      }
+      ]
       })
-    });
-
-    const data = await response.json();
-
-    if (!response.ok) {
+      });
+      
+      const data = await response.json();
+      
+      if (!response.ok) {
       throw new Error(data.error || 'Geoff failed to answer.');
-    }
-
-    return {
+      }
+      
+      return {
       text: data.answer,
       sources: matches.slice(0, 4)
-    };
-  }
-
-  async function send(text) {
-    text = text.trim();
-    if (!text) return;
-
-    prompt.value = '';
-    trainingPassword.value = '';
-    prompt.style.height = 'auto';
-
-    if (text.toLowerCase() === '/retrain') {
+      };
+      }
+      
+      async function send(text) {
+      text = text.trim();
+      if (!text) return;
+      
+      prompt.value = '';
+      trainingPassword.value = '';
+      prompt.style.height = 'auto';
+      
+      if (text.toLowerCase() === '/retrain') {
       addMessage('me', text);
       await enterTrainingMode();
       return;
-    }
-
-    if (trainingState.active) {
+      }
+      
+      if (trainingState.active) {
       await handleTrainingInput(text);
       return;
-    }
-
-    document.querySelectorAll('[data-contact-link]').forEach(link => {
+      }
+      
+      document.querySelectorAll('[data-contact-link]').forEach(link => {
       link.href = `/contact/?question=${encodeURIComponent(text)}`;
-    });
-
-    addMessage('me', text);
-    sendButton.disabled = true;
-
-    const typing = addTyping();
-    const started = performance.now();
-
-    try {
+      });
+      
+      addMessage('me', text);
+      sendButton.disabled = true;
+      
+      const typing = addTyping();
+      const started = performance.now();
+      
+      try {
       const result = await answer(text);
-
+      
       const minimumTyping = 320;
       const delay = Math.max(
-        0,
-        minimumTyping - (performance.now() - started)
+      0,
+      minimumTyping - (performance.now() - started)
       );
-
+      
       setTimeout(() => {
-        typing.remove();
-        addMessage('geoff', result.text, result.sources);
-        sendButton.disabled = false;
-        focusComposer();
-      }, delay);
-
-    } catch (error) {
-      console.error(error);
-
       typing.remove();
-      addMessage(
-        'geoff',
-        `Sorry — I couldn't reach my AI brain right now. Try again in a moment.`
-      );
-
+      addMessage('geoff', result.text, result.sources);
       sendButton.disabled = false;
       focusComposer();
-    }
-  }
-
-  async function readApiResponse(response) {
-    const data = await response.json().catch(() => ({}));
-    if (!response.ok) throw new Error(data.error || `Request failed (${response.status}).`);
-    return data;
-  }
-
-  async function fetchTrainingEntries() {
-    const response = await fetch('/api/geoff-training', {
+      }, delay);
+      
+      } catch (error) {
+      console.error(error);
+      
+      typing.remove();
+      addMessage(
+      'geoff',
+      `Sorry — I couldn't reach my AI brain right now. Try again in a moment.`
+      );
+      
+      sendButton.disabled = false;
+      focusComposer();
+      }
+      }
+      
+      async function readApiResponse(response) {
+      const data = await response.json().catch(() => ({}));
+      if (!response.ok) throw new Error(data.error || `Request failed (${response.status}).`);
+      return data;
+      }
+      
+      async function fetchTrainingEntries() {
+      const response = await fetch('/api/geoff-training', {
       method: 'GET',
       credentials: 'same-origin'
-    });
-    const data = await readApiResponse(response);
-    trainingState.entries = Array.isArray(data.entries) ? data.entries : [];
-    return trainingState.entries;
-  }
-
-  async function updateTraining(action, extra = {}) {
-    const response = await fetch('/api/geoff-training', {
+      });
+      const data = await readApiResponse(response);
+      trainingState.entries = Array.isArray(data.entries) ? data.entries : [];
+      return trainingState.entries;
+      }
+      
+      async function updateTraining(action, extra = {}) {
+      const response = await fetch('/api/geoff-training', {
       method: 'POST',
       credentials: 'same-origin',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ action, ...extra })
-    });
-    const data = await readApiResponse(response);
-    trainingState.entries = Array.isArray(data.entries) ? data.entries : [];
-    return trainingState.entries;
-  }
-
-  function trainingHelp() {
-    const count = trainingState.entries.length;
-    return `### Retraining mode active
-
-Geoff currently has **${count} saved training note${count === 1 ? '' : 's'}**. Send one fact or instruction per message to teach him.
-
-- \`/list\` — show saved notes
-- \`Test: your question\` — test Geoff without saving it
-- \`/remove 2\` — remove note number 2
-- \`/clear confirm\` — erase every saved note
-- \`/done\` — leave retraining mode`;
-  }
-
-  function formatTrainingEntries() {
-    if (!trainingState.entries.length) return '**No training notes have been saved yet.**';
-    return `### Saved training notes\n\n${trainingState.entries.map((entry, index) => `${index + 1}. ${entry.text}`).join('\n')}`;
-  }
-
-  function leaveTrainingMode(message = 'Retraining mode closed. Geoff is ready to chat normally again.') {
-    trainingState.active = false;
-    trainingState.awaitingPassword = false;
-    trainingState.entries = [];
-    prompt.placeholder = defaultPromptPlaceholder;
-    showPasswordComposer(false);
-    addMessage('geoff', message);
-  }
-
-  async function enterTrainingMode() {
-    trainingState.active = true;
-    trainingState.awaitingPassword = false;
-    sendButton.disabled = true;
-
-    try {
-      const response = await fetch('/api/geoff-training', {
-        method: 'GET',
-        credentials: 'same-origin'
       });
-
-      if (response.status === 401) {
-        trainingState.awaitingPassword = true;
-        showPasswordComposer(true);
-        addMessage('geoff', '### Admin authentication required\n\nEnter the site admin password to unlock retraining mode. Your password will be hidden in the conversation. Type `/done` to cancel.');
-        return;
+      const data = await readApiResponse(response);
+      trainingState.entries = Array.isArray(data.entries) ? data.entries : [];
+      return trainingState.entries;
       }
-
+      
+      function trainingHelp() {
+      const count = trainingState.entries.length;
+      return `### Retraining mode active
+      
+      Geoff currently has **${count} saved training note${count === 1 ? '' : 's'}**. Send one fact or instruction per message to teach him.
+      
+      - \`/list\` — show saved notes
+      - \`Test: your question\` — test Geoff without saving it
+      - \`/remove 2\` — remove note number 2
+      - \`/clear confirm\` — erase every saved note
+      - \`/done\` — leave retraining mode`;
+      }
+      
+      function formatTrainingEntries() {
+      if (!trainingState.entries.length) return '**No training notes have been saved yet.**';
+      return `### Saved training notes\n\n${trainingState.entries.map((entry, index) => `${index + 1}. ${entry.text}`).join('\n')}`;
+      }
+      
+      function leaveTrainingMode(message = 'Retraining mode closed. Geoff is ready to chat normally again.') {
+      trainingState.active = false;
+      trainingState.awaitingPassword = false;
+      trainingState.entries = [];
+      prompt.placeholder = defaultPromptPlaceholder;
+      showPasswordComposer(false);
+      addMessage('geoff', message);
+      }
+      
+      async function enterTrainingMode() {
+      trainingState.active = true;
+      trainingState.awaitingPassword = false;
+      sendButton.disabled = true;
+      
+      try {
+      const response = await fetch('/api/geoff-training', {
+      method: 'GET',
+      credentials: 'same-origin'
+      });
+      
+      if (response.status === 401) {
+      trainingState.awaitingPassword = true;
+      showPasswordComposer(true);
+      addMessage('geoff', '### Admin authentication required\n\nEnter the site admin password to unlock retraining mode. Your password will be hidden in the conversation. Type `/done` to cancel.');
+      return;
+      }
+      
       const data = await readApiResponse(response);
       trainingState.entries = Array.isArray(data.entries) ? data.entries : [];
       prompt.placeholder = 'Teach Geoff, or type Test: your question…';
       showPasswordComposer(false);
       addMessage('geoff', trainingHelp());
-    } catch (error) {
+      } catch (error) {
       leaveTrainingMode(`**Retraining mode could not start:** ${error.message}`);
-    } finally {
+      } finally {
       sendButton.disabled = false;
       focusComposer();
-    }
-  }
-
-  async function handleTrainingInput(text) {
-    const command = text.toLowerCase();
-
-    if (command === '/done') {
+      }
+      }
+      
+      async function handleTrainingInput(text) {
+      const command = text.toLowerCase();
+      
+      if (command === '/done') {
       addMessage('me', text);
       leaveTrainingMode();
       return;
-    }
-
-    sendButton.disabled = true;
-
-    try {
+      }
+      
+      sendButton.disabled = true;
+      
+      try {
       if (trainingState.awaitingPassword) {
-        addMessage('me', '••••••••');
-        const response = await fetch('/api/login', {
-          method: 'POST',
-          credentials: 'same-origin',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ password: text })
-        });
-        await readApiResponse(response);
-        trainingState.awaitingPassword = false;
-        prompt.placeholder = 'Teach Geoff, or type Test: your question…';
-        showPasswordComposer(false);
-        await fetchTrainingEntries();
-        addMessage('geoff', `**Authentication successful.**\n\n${trainingHelp()}`);
-        return;
+      addMessage('me', '••••••••');
+      const response = await fetch('/api/login', {
+      method: 'POST',
+      credentials: 'same-origin',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ password: text })
+      });
+      await readApiResponse(response);
+      trainingState.awaitingPassword = false;
+      prompt.placeholder = 'Teach Geoff, or type Test: your question…';
+      showPasswordComposer(false);
+      await fetchTrainingEntries();
+      addMessage('geoff', `**Authentication successful.**\n\n${trainingHelp()}`);
+      return;
       }
-
+      
       addMessage('me', text);
-
+      
       if (command === '/list') {
-        await fetchTrainingEntries();
-        addMessage('geoff', formatTrainingEntries());
-        return;
+      await fetchTrainingEntries();
+      addMessage('geoff', formatTrainingEntries());
+      return;
       }
-
+      
       if (command === '/clear') {
-        addMessage('geoff', 'That would erase every saved training note. Type `/clear confirm` to continue.');
-        return;
+      addMessage('geoff', 'That would erase every saved training note. Type `/clear confirm` to continue.');
+      return;
       }
-
+      
       if (command === '/clear confirm') {
-        await updateTraining('clear');
-        addMessage('geoff', '**All saved training notes were erased.** Retraining mode is still active.');
-        return;
+      await updateTraining('clear');
+      addMessage('geoff', '**All saved training notes were erased.** Retraining mode is still active.');
+      return;
       }
-
+      
       const testMatch = text.match(/^test:\s*([\s\S]+)$/i);
       if (testMatch) {
-        const testContent = testMatch[1].trim();
-        if (!testContent) throw new Error('Put something after `Test:` for Geoff to answer.');
-
-        const typing = addTyping();
-        try {
-          const result = await answer(testContent);
-          typing.remove();
-          addMessage('geoff', `### Test response\n\n${result.text}\n\n---\n*This test was not saved as a training note. Retraining mode is still active.*`, result.sources);
-        } catch (error) {
-          typing.remove();
-          throw error;
-        }
-        return;
+      const testContent = testMatch[1].trim();
+      if (!testContent) throw new Error('Put something after `Test:` for Geoff to answer.');
+      
+      const typing = addTyping();
+      try {
+      const result = await answer(testContent);
+      typing.remove();
+      addMessage('geoff', `### Test response\n\n${result.text}\n\n---\n*This test was not saved as a training note. Retraining mode is still active.*`, result.sources);
+      } catch (error) {
+      typing.remove();
+      throw error;
       }
-
+      return;
+      }
+      
       const remove = command.match(/^\/remove\s+(\d+)$/);
       if (remove) {
-        await fetchTrainingEntries();
-        const index = Number(remove[1]) - 1;
-        const entry = trainingState.entries[index];
-        if (!entry) throw new Error('That training-note number does not exist. Use `/list` to see the current numbers.');
-        await updateTraining('remove', { id: entry.id });
-        addMessage('geoff', `Removed training note **${index + 1}**. Geoff now has **${trainingState.entries.length}** saved note${trainingState.entries.length === 1 ? '' : 's'}.`);
-        return;
+      await fetchTrainingEntries();
+      const index = Number(remove[1]) - 1;
+      const entry = trainingState.entries[index];
+      if (!entry) throw new Error('That training-note number does not exist. Use `/list` to see the current numbers.');
+      await updateTraining('remove', { id: entry.id });
+      addMessage('geoff', `Removed training note **${index + 1}**. Geoff now has **${trainingState.entries.length}** saved note${trainingState.entries.length === 1 ? '' : 's'}.`);
+      return;
       }
-
+      
       await updateTraining('add', { text });
       addMessage('geoff', `**Learned.** Geoff now has **${trainingState.entries.length}** saved training note${trainingState.entries.length === 1 ? '' : 's'}. Send another note or type \`/done\`.`);
-    } catch (error) {
+      } catch (error) {
       addMessage('geoff', `**Training error:** ${error.message}`);
-    } finally {
+      } finally {
       sendButton.disabled = false;
       focusComposer();
-    }
-  }
-
-  function resetChat() {
-    trainingState.active = false;
-    trainingState.awaitingPassword = false;
-    trainingState.entries = [];
-    prompt.placeholder = defaultPromptPlaceholder;
-    showPasswordComposer(false);
-    sendButton.disabled = false;
-    chat.innerHTML = '';
-    updateContext([]);
-    addMessage('geoff', `Hi! I’m Geoff 🐾\n\nI’m connected to **mollyandshaina.com** and I’ll search the site before answering questions about Molly, Shaina, their pages, comics, galleries, dog breeds and more. What do you want to know?`);
-    focusComposer();
-  }
-
-  form.addEventListener('submit', e => { e.preventDefault(); send(composerValue()); });
-  prompt.addEventListener('keydown', e => {
-    if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); send(prompt.value); }
-  });
-  trainingPassword.addEventListener('keydown', e => {
-    if (e.key === 'Enter') { e.preventDefault(); send(trainingPassword.value); }
-  });
-  prompt.addEventListener('input', () => {
-    prompt.style.height = 'auto';
-    prompt.style.height = `${Math.min(prompt.scrollHeight, 140)}px`;
-  });
-  $('suggestions').addEventListener('click', e => {
-    if (trainingState.active) return;
-    const b = e.target.closest('[data-prompt]');
-    if (b) send(b.dataset.prompt);
-  });
-  $('newChat').addEventListener('click', resetChat);
-
-  resetChat();
-  indexSite();
-})();
-</script>
-</body>
+      }
+      }
+      
+      function resetChat() {
+      trainingState.active = false;
+      trainingState.awaitingPassword = false;
+      trainingState.entries = [];
+      prompt.placeholder = defaultPromptPlaceholder;
+      showPasswordComposer(false);
+      sendButton.disabled = false;
+      chat.innerHTML = '';
+      updateContext([]);
+      addMessage('geoff', `Hi! I’m Geoff 🐾\n\nI’m connected to **mollyandshaina.com** and I’ll search the site before answering questions about Molly, Shaina, their pages, comics, galleries, dog breeds and more. What do you want to know?`);
+      focusComposer();
+      }
+      
+      form.addEventListener('submit', e => { e.preventDefault(); send(composerValue()); });
+      prompt.addEventListener('keydown', e => {
+      if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); send(prompt.value); }
+      });
+      trainingPassword.addEventListener('keydown', e => {
+      if (e.key === 'Enter') { e.preventDefault(); send(trainingPassword.value); }
+      });
+      prompt.addEventListener('input', () => {
+      prompt.style.height = 'auto';
+      prompt.style.height = `${Math.min(prompt.scrollHeight, 140)}px`;
+      });
+      $('suggestions').addEventListener('click', e => {
+      if (trainingState.active) return;
+      const b = e.target.closest('[data-prompt]');
+      if (b) send(b.dataset.prompt);
+      });
+      $('newChat').addEventListener('click', resetChat);
+      
+      resetChat();
+      indexSite();
+      })();
+    </script>
+  </body>
 </html>

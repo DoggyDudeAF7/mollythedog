@@ -21,118 +21,118 @@
         <h1>Certificate Editor</h1>
         <label>
           Certificate Title
-          <input id="certTitle" type="text" value="Certificate of Excellence">
-        </label>
-        <label>
-          Awarded To
-          <input id="certName" type="text" value="Name">
-        </label>
-        <label>
-          Certificate Text
-          <textarea id="certText" rows="5">
-            Description
-          </textarea>
-        </label>
-        <div class="field-grid">
-          <label>
-            Date
-            <input id="certDate" type="text" value="Date">
+            <input id="certTitle" type="text" value="Certificate of Excellence">
           </label>
           <label>
-            Signed By
-            <input id="certSigned" type="text" value="Name">
-          </label>
-        </div>
-        <label>
-          Badge Text
-          <input id="certBadge" type="text" value="Official">
-        </label>
-        <label>
-          Logo Upload
-          <input id="certLogo" type="file" accept="image/*">
-        </label>
-        <div class="field-grid">
-          <label>
-            Theme
-            <select id="certTheme">
-              <option value="gold">Gold</option>
-              <option value="silver">Silver</option>
-              <option value="blue">Blue</option>
-              <option value="funny">Funny</option>
-              <option value="christmas">Christmas</option>
-            </select>
-          </label>
-          <label>
-            Border
-            <select id="certBorder">
-              <option value="double">Double</option>
-              <option value="classic">Classic</option>
-              <option value="bold">Bold</option>
-              <option value="dotted">Dotted</option>
-            </select>
-          </label>
-        </div>
-        <div class="field-grid">
-          <label>
-            Seal Style
-            <select id="certSeal">
-              <option value="pill">Pill</option>
-              <option value="ribbon">Ribbon</option>
-              <option value="medal">Medal</option>
-              <option value="stamp">Stamp</option>
-            </select>
-          </label>
-          <label>
-            Layout
-            <select id="certOrientation">
-              <option value="landscape">Landscape</option>
-              <option value="portrait">Portrait</option>
-            </select>
-          </label>
-        </div>
-        <div class="field-grid">
-          <label>
-            Paper Size
-            <select id="certPaper">
-              <option value="letter">Letter</option>
-              <option value="a4">A4</option>
-            </select>
-          </label>
-          <label class="checkbox-label">
-            <input id="showSignature" type="checkbox">
-            Draggable signature
-          </label>
-        </div>
-        <div class="button-row">
-          <button type="button" id="printCertificate">Print</button>
-          <button type="button" id="downloadCertificate">Download PDF</button>
-          <button type="button" id="resetCertificate">Reset</button>
-        </div>
-      </section>
-      <section class="paper-wrap" aria-label="Certificate preview">
-        <article class="certificate theme-gold border-double seal-pill landscape paper-letter" id="certificate">
-          <div class="certificate-border">
-            <img class="certificate-logo" id="previewLogo" alt="Uploaded certificate logo">
-            <p class="certificate-kicker" id="previewBadge">Official</p>
-            <h2 id="previewTitle">Certificate of Excellence</h2>
-            <p class="awarded">Awarded To</p>
-            <h3 id="previewName">Name</h3>
-            <p class="certificate-text" id="previewText">Description</p>
-            <div class="certificate-footer">
-              <div>
-                <span id="previewDate">Date</span>
-                <strong>Date</strong>
-              </div>
-              <div>
-                <span id="previewSigned">Name</span>
-                <strong>Signed By</strong>
-              </div>
-            </div>
-            <span class="signature-stamp" id="signatureStamp">Name</span>
-          </div>
-        </article>
-      </section>
-    </main>
-    <script src="../js/certificate-editor.js"></script>
-  </body>
-</html>
+            Awarded To
+              <input id="certName" type="text" value="Name">
+            </label>
+            <label>
+              Certificate Text
+                <textarea id="certText" rows="5">
+                  Description
+                </textarea>
+              </label>
+              <div class="field-grid">
+                <label>
+                  Date
+                    <input id="certDate" type="text" value="Date">
+                  </label>
+                  <label>
+                    Signed By
+                      <input id="certSigned" type="text" value="Name">
+                    </label>
+                  </div>
+                  <label>
+                    Badge Text
+                      <input id="certBadge" type="text" value="Official">
+                    </label>
+                    <label>
+                      Logo Upload
+                        <input id="certLogo" type="file" accept="image/*">
+                      </label>
+                      <div class="field-grid">
+                        <label>
+                          Theme
+                            <select id="certTheme">
+                              <option value="gold">Gold</option>
+                              <option value="silver">Silver</option>
+                              <option value="blue">Blue</option>
+                              <option value="funny">Funny</option>
+                              <option value="christmas">Christmas</option>
+                            </select>
+                          </label>
+                          <label>
+                            Border
+                              <select id="certBorder">
+                                <option value="double">Double</option>
+                                <option value="classic">Classic</option>
+                                <option value="bold">Bold</option>
+                                <option value="dotted">Dotted</option>
+                              </select>
+                            </label>
+                          </div>
+                          <div class="field-grid">
+                            <label>
+                              Seal Style
+                                <select id="certSeal">
+                                  <option value="pill">Pill</option>
+                                  <option value="ribbon">Ribbon</option>
+                                  <option value="medal">Medal</option>
+                                  <option value="stamp">Stamp</option>
+                                </select>
+                              </label>
+                              <label>
+                                Layout
+                                  <select id="certOrientation">
+                                    <option value="landscape">Landscape</option>
+                                    <option value="portrait">Portrait</option>
+                                  </select>
+                                </label>
+                              </div>
+                              <div class="field-grid">
+                                <label>
+                                  Paper Size
+                                    <select id="certPaper">
+                                      <option value="letter">Letter</option>
+                                      <option value="a4">A4</option>
+                                    </select>
+                                  </label>
+                                  <label class="checkbox-label">
+                                    <input id="showSignature" type="checkbox">
+                                    Draggable signature
+                                    </label>
+                                  </div>
+                                  <div class="button-row">
+                                    <button type="button" id="printCertificate">Print</button>
+                                    <button type="button" id="downloadCertificate">Download PDF</button>
+                                    <button type="button" id="resetCertificate">Reset</button>
+                                  </div>
+                                </section>
+                                <section class="paper-wrap" aria-label="Certificate preview">
+                                  <article class="certificate theme-gold border-double seal-pill landscape paper-letter" id="certificate">
+                                    <div class="certificate-border">
+                                      <img class="certificate-logo" id="previewLogo" alt="Uploaded certificate logo">
+                                      <p class="certificate-kicker" id="previewBadge">Official</p>
+                                      <h2 id="previewTitle">Certificate of Excellence</h2>
+                                      <p class="awarded">Awarded To</p>
+                                      <h3 id="previewName">Name</h3>
+                                      <p class="certificate-text" id="previewText">Description</p>
+                                      <div class="certificate-footer">
+                                        <div>
+                                          <span id="previewDate">Date</span>
+                                          <strong>Date</strong>
+                                        </div>
+                                        <div>
+                                          <span id="previewSigned">Name</span>
+                                          <strong>Signed By</strong>
+                                        </div>
+                                      </div>
+                                      <span class="signature-stamp" id="signatureStamp">Name</span>
+                                    </div>
+                                  </article>
+                                </section>
+                              </main>
+                              <script src="../js/certificate-editor.js"></script>
+                            </body>
+                          </html>
