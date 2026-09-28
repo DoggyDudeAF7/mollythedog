@@ -561,6 +561,34 @@ function initMollyShainaAnimations() {
     toggle &&
     links
   ) {
+    const navAnchors =
+      Array.from(links.querySelectorAll("a"));
+
+    function setMenuOpen(open) {
+      links.classList.toggle("open", open);
+      toggle.setAttribute(
+        "aria-expanded",
+        open ?
+        "true" :
+        "false"
+      );
+      navAnchors.forEach(anchor => {
+        if (open) anchor.removeAttribute("tabindex");
+        else anchor.setAttribute("tabindex", "-1");
+      });
+    }
+
+    if (window.matchMedia("(max-width: 820px)").matches) {
+      setMenuOpen(false);
+    }
+
+    window.addEventListener(
+      "resize",
+      () => {
+        if (window.matchMedia("(max-width: 820px)").matches) setMenuOpen(links.classList.contains("open"));
+        else navAnchors.forEach(anchor => anchor.removeAttribute("tabindex"));
+      }
+    );
 
     toggle.addEventListener(
       "click",
@@ -569,32 +597,21 @@ function initMollyShainaAnimations() {
         event.stopPropagation();
 
         const open =
-          links.classList.toggle("open");
+          !links.classList.contains("open");
 
-        toggle.setAttribute(
-          "aria-expanded",
-          open ?
-          "true" :
-          "false"
-        );
+        setMenuOpen(open);
 
       }
     );
 
-    links
-      .querySelectorAll("a")
+    navAnchors
       .forEach(anchor => {
 
         anchor.addEventListener(
           "click",
           () => {
 
-            links.classList.remove("open");
-
-            toggle.setAttribute(
-              "aria-expanded",
-              "false"
-            );
+            setMenuOpen(false);
 
           }
         );
@@ -610,12 +627,7 @@ function initMollyShainaAnimations() {
           event.target !== toggle
         ) {
 
-          links.classList.remove("open");
-
-          toggle.setAttribute(
-            "aria-expanded",
-            "false"
-          );
+          setMenuOpen(false);
 
         }
 

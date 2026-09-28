@@ -7,7 +7,10 @@ const clamp = (n, min, max) => Math.max(min, Math.min(max, n));
 const isTyping = e => ['INPUT', 'TEXTAREA', 'SELECT'].includes(e.target.tagName);
 
 function setPointerCapture(element, pointerId) {
-  if (element.setPointerCapture) element.setPointerCapture(pointerId);
+  if (!element.setPointerCapture) return;
+  try {
+    element.setPointerCapture(pointerId);
+  } catch {}
 }
 
 function hasPointerCapture(element, pointerId) {

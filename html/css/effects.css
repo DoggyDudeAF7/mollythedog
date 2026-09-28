@@ -45,6 +45,18 @@
 
 }
 
+@media (max-width: 960px) {
+
+  .reveal.left,
+  .reveal.right {
+
+    transform:
+      translateY(50px);
+
+  }
+
+}
+
 .reveal.delay-1 {
 
   transition-delay:

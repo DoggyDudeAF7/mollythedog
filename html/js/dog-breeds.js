@@ -524,13 +524,12 @@ document.addEventListener("DOMContentLoaded", async () => {
     compareTray.className = "breed-compare-tray";
     compareTray.hidden = true;
     compareTray.setAttribute("aria-label", "Selected breeds to compare");
-    compareTray.innerHTML = ` < span class = "breed-compare-summary" > < /span><div><button type="button" class="breed-compare-clear">Clear</button > < button type = "button"
-    class = "breed-compare-open" > Compare breeds < /button></div > `;
+    compareTray.innerHTML = '<span class="breed-compare-summary"></span><div><button type="button" class="breed-compare-clear">Clear</button><button type="button" class="breed-compare-open">Compare breeds</button></div>';
     document.body.appendChild(compareTray);
 
     compareDialog = document.createElement("dialog");
     compareDialog.className = "breed-compare-dialog";
-    compareDialog.innerHTML = ` < div class = "breed-compare-title" > < div > < p class = "breed-kicker" > Side by side < /p><h2>Breed comparison</h2 > < /div><button type="button" class="breed-compare-close" aria-label="Close comparison">×</button > < /div><div class="breed-compare-grid"></div > `;
+    compareDialog.innerHTML = '<div class="breed-compare-title"><div><p class="breed-kicker">Side by side</p><h2>Breed comparison</h2></div><button type="button" class="breed-compare-close" aria-label="Close comparison">×</button></div><div class="breed-compare-grid"></div>';
     document.body.appendChild(compareDialog);
 
     compareTray.querySelector(".breed-compare-clear").addEventListener("click", () => {
