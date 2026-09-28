@@ -1,12 +1,9 @@
-/* ===== index.html ===== */
-
 body{
   background:#07070c;
   color:white;
   overflow-x:hidden;
 }
 
-/* Inline custom dog emoji */
 .dog-emoji-picture {
   display: inline;
 }
@@ -20,7 +17,6 @@ body{
   vertical-align: -0.2em;
 }
 
-/* BACKGROUND */
 .bg{
   position:fixed;
   inset:0;
@@ -30,34 +26,6 @@ body{
     linear-gradient(180deg,#07070c,#040406);
   z-index:-1;
 }
-
-/* NAV */
-
-/* =========================
-   NAV DOCK SYSTEM
-   ========================= */
-
-
-/* ICON BUTTONS */
-
-
-/* EMOJIS */
-
-
-/* LABEL */
-
-
-/* MAGNIFY EFFECT */
-
-
-/* SHOW LABEL */
-
-
-/* SEARCH BUTTON */
-
-
-/* SECTIONS */
-
 
 .scroll-down-prompt {
   display: block;
@@ -101,19 +69,6 @@ body{
   }
 }
 
-/* CARD */
-
-
-/* SPLIT */
-
-
-/* TITLES */
-
-
-/* REVEAL */
-
-
-/* CAROUSEL */
 .carousel{
   position:relative;
   width:100vw;
@@ -176,7 +131,6 @@ body{
   background:white;
 }
 
-/* FOOTER */
 footer{
   padding:60px;
   text-align:center;
@@ -201,29 +155,6 @@ footer a:focus-visible {
   text-decoration-color: #ffb7a5;
 }
 
-.searchBox{
-  position:fixed;
-  top:90px;
-  left:50%;
-  transform:translateX(-50%);
-  width:500px;
-  background:rgba(0,0,0,0.7);
-  backdrop-filter:blur(15px);
-  border:1px solid rgba(255,255,255,0.1);
-  border-radius:20px;
-  padding:15px;
-  z-index:2000;
-}
-
-.searchBox input{
-  width:100%;
-  padding:12px;
-  border-radius:12px;
-  border:none;
-  outline:none;
-  font-size:1rem;
-}
-
 .resultItem{
   padding:10px;
   border-radius:10px;
@@ -239,43 +170,6 @@ footer a:focus-visible {
   display: none;
 }
 
-
-/* =========================
-   NAV SEARCH BUTTON
-   ========================= */
-
-
-/* =========================
-   SEARCH OVERLAY BOX
-   ========================= */
-
-
-/* visible state */
-
-
-/* =========================
-   SEARCH INPUT
-   ========================= */
-
-
-/* =========================
-   RESULTS CONTAINER
-   ========================= */
-
-
-/* =========================
-   RESULT ITEMS
-   ========================= */
-
-
-/* empty state */
-
-
-/* =========================
-   SCROLLBAR STYLING
-   ========================= */
-
-
 .hero-img {
   max-width: 320px;
   width: 100%;
@@ -284,256 +178,6 @@ footer a:focus-visible {
   margin-top: 20px;
   box-shadow: 0 20px 50px rgba(0,0,0,0.5);
 }
-
-
-/* =========================
-   DOG BREEDS PAGE
-   ========================= */
-
-.breed-page {
-  width: min(1220px, 94vw);
-  margin: 0 auto;
-  padding: 130px 0 80px;
-  display: grid;
-  grid-template-columns: 320px minmax(0, 1fr);
-  gap: 30px;
-}
-
-.breed-sidebar {
-  align-self: start;
-  position: sticky;
-  top: 112px;
-}
-
-.breed-sidebar-inner {
-  padding: 22px;
-  border-radius: 22px;
-  background: rgba(255,255,255,0.08);
-  border: 1px solid rgba(255,255,255,0.12);
-  box-shadow: 0 20px 60px rgba(0,0,0,0.35);
-  backdrop-filter: blur(14px);
-}
-
-.breed-sidebar h1 {
-  font-size: 2.25rem;
-  line-height: 1;
-  margin-bottom: 12px;
-}
-
-.breed-sidebar p {
-  font-size: 0.95rem;
-  line-height: 1.6;
-  margin-bottom: 18px;
-}
-
-.breed-search-label {
-  display: block;
-  margin-bottom: 8px;
-  color: rgba(255,255,255,0.7);
-  font-size: 0.85rem;
-}
-
-.breed-search {
-  width: 100%;
-  padding: 12px 14px;
-  border: 1px solid rgba(255,255,255,0.12);
-  border-radius: 12px;
-  outline: none;
-  background: rgba(255,255,255,0.08);
-  color: white;
-  font: inherit;
-}
-
-.breed-counter {
-  margin: 12px 0;
-  color: rgba(255,255,255,0.55);
-  font-size: 0.86rem;
-}
-
-.breed-menu {
-  display: grid;
-  gap: 7px;
-  max-height: 45vh;
-  overflow: auto;
-  padding-right: 4px;
-}
-
-.breed-menu a {
-  padding: 10px 11px;
-  border-radius: 10px;
-  color: white;
-  text-decoration: none;
-  background: rgba(255,255,255,0.05);
-  border: 1px solid transparent;
-  font-size: 0.92rem;
-}
-
-.breed-menu a:hover,
-.breed-menu a.active {
-  background: rgba(255,255,255,0.16);
-  border-color: rgba(255,255,255,0.14);
-}
-
-.breed-action {
-  width: 100%;
-  margin-top: 14px;
-  padding: 12px 14px;
-  border: 0;
-  border-radius: 12px;
-  color: #08080d;
-  background: #fff;
-  font: inherit;
-  font-weight: 800;
-  cursor: pointer;
-}
-
-.breed-results {
-  display: grid;
-  gap: 24px;
-}
-
-.breed-card {
-  min-height: 340px;
-  position: relative;
-  display: grid;
-  grid-template-columns: 180px minmax(0, 1fr);
-  gap: 30px;
-  align-items: center;
-  padding: 34px;
-  border-radius: 24px;
-  background:
-    linear-gradient(
-      135deg,
-      rgba(255,255,255,0.13),
-      rgba(255,255,255,0.04)
-    );
-  border: 1px solid rgba(255,255,255,0.16);
-  box-shadow: 0 20px 60px rgba(0,0,0,0.35);
-  scroll-margin-top: 126px;
-}
-
-.breed-card[hidden] {
-  display: none;
-}
-
-.breed-favorite {
-  position: absolute;
-  top: 18px;
-  right: 18px;
-  width: 44px;
-  height: 44px;
-  border: 0;
-  border-radius: 14px;
-  background: rgba(255,255,255,0.08);
-  opacity: 0.48;
-  cursor: pointer;
-  font-size: 1.15rem;
-  transition: 0.18s ease;
-}
-
-.breed-favorite.active,
-.breed-favorite:hover {
-  opacity: 1;
-  transform: scale(1.08);
-  background: rgba(255,255,255,0.18);
-}
-
-.breed-portrait {
-  width: 160px;
-  aspect-ratio: 1;
-  display: grid;
-  place-items: center;
-  border-radius: 50%;
-  background:
-    radial-gradient(
-      circle at 35% 28%,
-      rgba(255,255,255,0.35),
-      transparent 35%
-    ),
-    linear-gradient(
-      135deg,
-      #ffb7a5,
-      #bfa8ff
-    );
-  font-size: 4.5rem;
-  box-shadow:
-    inset 0 0 40px rgba(255,255,255,0.15),
-    0 18px 45px rgba(0,0,0,0.28);
-}
-
-.breed-kicker {
-  margin-bottom: 10px;
-  color: rgba(255,255,255,0.62);
-  text-transform: uppercase;
-  letter-spacing: 0;
-  font-size: 0.78rem;
-  font-weight: 800;
-}
-
-.breed-card h2 {
-  font-size: 2.7rem;
-  margin-bottom: 12px;
-  background:
-    linear-gradient(
-      90deg,
-      #ffb7a5,
-      #bfa8ff
-    );
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-.breed-card p {
-  max-width: 620px;
-}
-
-.breed-meter {
-  height: 10px;
-  margin: 22px 0 12px;
-  border-radius: 999px;
-  background: rgba(255,255,255,0.1);
-  overflow: hidden;
-}
-
-.breed-meter span {
-  display: block;
-  height: 100%;
-  border-radius: inherit;
-  background:
-    linear-gradient(
-      90deg,
-      #ffb7a5,
-      #bfa8ff
-    );
-}
-
-.breed-meta {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-}
-
-.breed-meta span {
-  padding: 7px 10px;
-  border-radius: 999px;
-  background: rgba(255,255,255,0.08);
-  color: rgba(255,255,255,0.75);
-  font-size: 0.82rem;
-}
-
-
-/* =========================
-   MOBILE / RESPONSIVE FIXES
-   ========================= */
-
-@media (max-width: 820px) {
-
-}
-
-@media (max-width: 420px) {
-
-}
-
 
 .feature-link {
   display: inline-flex;
@@ -553,72 +197,6 @@ footer a:focus-visible {
   background: rgba(255,255,255,0.18);
   transform: translateY(-2px);
 }
-
-@media (max-width: 820px) {
-
-  .breed-page {
-    width: min(100vw - 20px, 720px);
-    grid-template-columns: 1fr;
-    padding-top: 105px;
-  }
-
-  .breed-sidebar {
-    position: relative;
-    top: auto;
-  }
-
-  .breed-menu {
-    max-height: 260px;
-  }
-
-  .breed-card {
-    min-height: 0;
-    grid-template-columns: 1fr;
-    padding: 28px 22px;
-    text-align: center;
-  }
-
-  .breed-portrait {
-    width: min(150px, 55vw);
-    justify-self: center;
-  }
-
-  .breed-card h2 {
-    font-size: clamp(2rem, 10vw, 2.7rem);
-  }
-
-  .breed-card p {
-    margin: 0 auto;
-  }
-
-  .breed-meta {
-    justify-content: center;
-  }
-}
-
-
-
-/* ===== traits.html ===== */
-
-
-/* =========================
-   GLOBAL RESET + BASE
-   ========================= */
-
-
-/* =========================
-   BACKGROUND
-   ========================= */
-
-
-/* =========================
-   NAV (DOCK STYLE)
-   ========================= */
-
-
-/* =========================
-   DOCK ITEMS
-   ========================= */
 
 nav .nav-links a {
   position: relative;
@@ -642,15 +220,11 @@ nav .nav-links a {
   transition: 0.2s ease;
 }
 
-
-/* emojis */
 nav .nav-links a span {
   font-size: 28px;
   line-height: 1;
 }
 
-
-/* labels */
 nav .nav-links a::after {
   content: attr(title);
 
@@ -668,38 +242,9 @@ nav .nav-links a::after {
   color: rgba(255,255,255,0.8);
 }
 
-
-/* hover magnify */
-
-
-/* =========================
-   SEARCH BUTTON (FIXED)
-   ========================= */
-
-
-/* =========================
-   SECTIONS
-   ========================= */
-
-
-/* =========================
-   CARD
-   ========================= */
-
-
-/* =========================
-   SPLIT LAYOUT
-   ========================= */
-
-
 .split.right {
   flex-direction: row-reverse;
 }
-
-
-/* =========================
-   EMOJI ANIMATION
-   ========================= */
 
 .emoji {
   font-size: 4rem;
@@ -723,11 +268,6 @@ nav .nav-links a::after {
 
 }
 
-
-/* =========================
-   HEADINGS
-   ========================= */
-
 .card h2 {
   font-size: 3rem;
   margin-bottom: 20px;
@@ -742,21 +282,6 @@ nav .nav-links a::after {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
-
-
-/* =========================
-   REVEAL ANIMATION
-   ========================= */
-
-
-/* =========================
-   FOOTER
-   ========================= */
-
-
-/* =========================
-   COMPARISON BARS
-   ========================= */
 
 .compare {
   margin-top: 30px;
@@ -822,65 +347,11 @@ nav .nav-links a::after {
     );
 }
 
-
-/* =========================
-   SEARCH BOX
-   ========================= */
-
-
-/* input */
-
-
-/* results */
-
-
-/* scrollbar */
-
-
-/* =========================
-   MOBILE / RESPONSIVE FIXES
-   ========================= */
-
-@media (max-width: 820px) {
-
-}
-
-@media (max-width: 420px) {
-
-}
-
-
-
-/* ===== habits.html ===== */
-
 body{
   background:#0b0b0f;
   color:white;
   overflow-x:hidden;
 }
-
-
-/* =========================
-   NAV DOCK SYSTEM
-   ========================= */
-
-
-/* ICON BUTTONS */
-
-
-/* EMOJIS */
-
-
-/* LABEL */
-
-
-/* MAGNIFY EFFECT */
-
-
-/* SHOW LABEL */
-
-
-/* SEARCH BUTTON */
 
 #searchBtn {
   width: 60px;
@@ -1078,9 +549,6 @@ p {
     #777;
 }
 
-
-/* WEEKLY */
-
 .habit-chart {
   display:
     flex;
@@ -1182,11 +650,6 @@ p {
     center;
 }
 
-
-/* =========================
-   NAV SEARCH BUTTON
-   ========================= */
-
 #searchBtn:hover {
   background:
     rgba(255,255,255,0.16);
@@ -1194,60 +657,6 @@ p {
   transform:
     scale(1.6);
 }
-
-
-/* =========================
-   SEARCH OVERLAY BOX
-   ========================= */
-
-
-/* visible state */
-
-
-/* =========================
-   SEARCH INPUT
-   ========================= */
-
-
-/* =========================
-   RESULTS CONTAINER
-   ========================= */
-
-
-/* =========================
-   RESULT ITEMS
-   ========================= */
-
-
-/* empty state */
-
-
-/* =========================
-   SCROLLBAR STYLING
-   ========================= */
-
-
-/* =========================
-   MOBILE / RESPONSIVE FIXES
-   ========================= */
-
-@media (max-width: 820px) {
-
-}
-
-@media (max-width: 420px) {
-
-}
-
-
-
-/* ===== mind.html ===== */
-
-
-/* BACKGROUND */
-
-
-/* ================= NAV ================= */
 
 .nav-links {
   display:
@@ -1259,9 +668,6 @@ p {
   align-items:
     flex-end;
 }
-
-
-/* ICONS (IMPORTANT: UNIFIED RULE) */
 
 .nav-links a,
 #searchBtn {
@@ -1303,9 +709,6 @@ p {
     0.2s ease;
 }
 
-
-/* ICON TEXT */
-
 .nav-links a span,
 #searchBtn {
 
@@ -1313,9 +716,6 @@ p {
     24px;
 
 }
-
-
-/* HOVER SCALE (FIXED) */
 
 .nav-links a:hover,
 #searchBtn:hover {
@@ -1329,9 +729,6 @@ p {
   z-index:
     10;
 }
-
-
-/* LABEL UNDER ICON (FIXED) */
 
 .nav-links a::after,
 #searchBtn::after {
@@ -1378,15 +775,6 @@ p {
 
 }
 
-
-/* ================= SECTIONS ================= */
-
-
-/* ================= CARD STYLE (GLOBAL MATCH) ================= */
-
-
-/* SPLIT */
-
 .split {
 
   display:
@@ -1399,9 +787,6 @@ p {
     center;
 
 }
-
-
-/* TITLES */
 
 .card h2 {
 
@@ -1424,12 +809,6 @@ p {
   -webkit-text-fill-color:
     transparent;
 }
-
-
-/* REVEAL ANIMATION */
-
-
-/* ================= SEARCH ================= */
 
 #searchInput {
 
@@ -1462,26 +841,6 @@ p {
 
 }
 
-
-/* FOOTER */
-
-
-/* =========================
-   MOBILE / RESPONSIVE FIXES
-   ========================= */
-
-@media (max-width: 820px) {
-
-}
-
-@media (max-width: 420px) {
-
-}
-
-
-
-/* ===== gallery.html ===== */
-
 * {
 
   margin:
@@ -1497,9 +856,6 @@ p {
     'Inter',sans-serif;
 
 }
-
-
-/* NAV */
 
 nav {
 
@@ -1550,7 +906,6 @@ nav {
 
 }
 
-
 nav .nav-links {
 
   display:
@@ -1563,7 +918,6 @@ nav .nav-links {
     center;
 
 }
-
 
 nav .nav-links a {
 
@@ -1608,9 +962,6 @@ nav .nav-links a {
 
 }
 
-
-/* ⭐ FIXED LABEL */
-
 nav .nav-links a::after {
 
   content:
@@ -1654,7 +1005,6 @@ nav .nav-links a::after {
 
 }
 
-
 nav .nav-links a:hover::after {
 
   opacity:
@@ -1665,7 +1015,6 @@ nav .nav-links a:hover::after {
 
 }
 
-
 nav .nav-links a:hover {
 
   transform:
@@ -1675,9 +1024,6 @@ nav .nav-links a:hover {
     999;
 
 }
-
-
-/* SEARCH */
 
 #searchBtn {
 
@@ -1721,7 +1067,6 @@ nav .nav-links a:hover {
 
 }
 
-
 #searchBtn:hover {
 
   transform:
@@ -1734,9 +1079,6 @@ nav .nav-links a:hover {
     0 10px 30px rgba(0,0,0,0.4);
 
 }
-
-
-/* SEARCH BOX */
 
 #searchBox {
 
@@ -1781,7 +1123,6 @@ nav .nav-links a:hover {
 
 }
 
-
 #searchBox:not(.hidden) {
 
   opacity:
@@ -1791,7 +1132,6 @@ nav .nav-links a:hover {
     auto;
 
 }
-
 
 #searchInput {
 
@@ -1818,14 +1158,12 @@ nav .nav-links a:hover {
 
 }
 
-
 #results {
 
   margin-top:
     10px;
 
 }
-
 
 .resultItem {
 
@@ -1846,9 +1184,6 @@ nav .nav-links a:hover {
 
 }
 
-
-/* SECTIONS */
-
 .section {
 
   min-height:
@@ -1868,7 +1203,6 @@ nav .nav-links a:hover {
 
 }
 
-
 h1 {
 
   font-size:
@@ -1876,14 +1210,12 @@ h1 {
 
 }
 
-
 h2 {
 
   font-size:
     2.5rem;
 
 }
-
 
 p {
 
@@ -1894,9 +1226,6 @@ p {
     1.8;
 
 }
-
-
-/* CARD */
 
 .card {
 
@@ -1924,9 +1253,6 @@ p {
 
 }
 
-
-/* ANIMATION */
-
 .reveal {
 
   opacity:
@@ -1937,7 +1263,6 @@ p {
 
 }
 
-
 .reveal.left {
 
   transform:
@@ -1945,14 +1270,12 @@ p {
 
 }
 
-
 .reveal.right {
 
   transform:
     translateX(120px);
 
 }
-
 
 .reveal.visible {
 
@@ -1963,9 +1286,6 @@ p {
     none;
 
 }
-
-
-/* GRID (FIXED 2x2) */
 
 .grid {
 
@@ -1982,7 +1302,6 @@ p {
     20px;
 
 }
-
 
 .grid img {
 
@@ -2009,16 +1328,12 @@ p {
 
 }
 
-
 .grid img:hover {
 
   transform:
     scale(1.03);
 
 }
-
-
-/* FOOTER */
 
 footer {
 
@@ -2035,9 +1350,6 @@ footer {
     #07070b;
 
 }
-
-
-/* FULLSCREEN IMAGE */
 
 #lightbox {
 
@@ -2064,7 +1376,6 @@ footer {
 
 }
 
-
 #lightbox img {
 
   max-width:
@@ -2077,7 +1388,6 @@ footer {
     12px;
 
 }
-
 
 #lightboxClose {
 
@@ -2131,7 +1441,6 @@ footer {
 
 }
 
-
 #lightboxClose:hover {
 
   background:
@@ -2141,23 +1450,6 @@ footer {
     scale(1.05);
 
 }
-
-
-/* =========================
-   MOBILE / RESPONSIVE FIXES
-   ========================= */
-
-@media (max-width: 820px) {
-
-}
-
-@media (max-width: 420px) {
-
-}
-
-
-
-/* ===== faq.html ===== */
 
 * {
 
@@ -2175,7 +1467,6 @@ footer {
 
 }
 
-
 body {
 
   background:
@@ -2188,7 +1479,6 @@ body {
     hidden;
 
 }
-
 
 .bg {
 
@@ -2221,14 +1511,6 @@ body {
     -1;
 
 }
-
-
-/* NAV */
-
-
-/* =========================
-   NAV DOCK SYSTEM
-   ========================= */
 
 nav {
 
@@ -2276,7 +1558,6 @@ nav {
 
 }
 
-
 nav .nav-inner {
 
   display:
@@ -2290,7 +1571,6 @@ nav .nav-inner {
 
 }
 
-
 nav .nav-links {
 
   display:
@@ -2303,9 +1583,6 @@ nav .nav-links {
     14px;
 
 }
-
-
-/* ICON BUTTONS */
 
 nav .nav-links a {
 
@@ -2347,9 +1624,6 @@ nav .nav-links a {
 
 }
 
-
-/* EMOJIS */
-
 nav .nav-links a span {
 
   font-size:
@@ -2365,9 +1639,6 @@ nav .nav-links a span {
     1;
 
 }
-
-
-/* LABEL */
 
 nav .nav-links a::after {
 
@@ -2397,9 +1668,6 @@ nav .nav-links a::after {
 
 }
 
-
-/* MAGNIFY EFFECT */
-
 nav .nav-links a:hover {
 
   transform:
@@ -2413,9 +1681,6 @@ nav .nav-links a:hover {
 
 }
 
-
-/* SHOW LABEL */
-
 nav .nav-links a:hover::after {
 
   opacity:
@@ -2425,9 +1690,6 @@ nav .nav-links a:hover::after {
     translateY(0);
 
 }
-
-
-/* SEARCH BUTTON */
 
 #searchBtn {
 
@@ -2469,7 +1731,6 @@ nav .nav-links a:hover::after {
 
 }
 
-
 #searchBtn:hover {
 
   transform:
@@ -2482,9 +1743,6 @@ nav .nav-links a:hover::after {
     10;
 
 }
-
-
-/* SECTIONS */
 
 .section {
 
@@ -2505,7 +1763,6 @@ nav .nav-links a:hover::after {
 
 }
 
-
 .hero {
 
   flex-direction:
@@ -2516,14 +1773,12 @@ nav .nav-links a:hover::after {
 
 }
 
-
 h1 {
 
   font-size:
     4.5rem;
 
 }
-
 
 p {
 
@@ -2534,9 +1789,6 @@ p {
     1.8;
 
 }
-
-
-/* CARD */
 
 .card {
 
@@ -2565,9 +1817,6 @@ p {
 
 }
 
-
-/* SPLIT */
-
 .split {
 
   display:
@@ -2581,7 +1830,6 @@ p {
 
 }
 
-
 .split.left {
 
   flex-direction:
@@ -2589,14 +1837,12 @@ p {
 
 }
 
-
 .split.right {
 
   flex-direction:
     row-reverse;
 
 }
-
 
 .emoji {
 
@@ -2607,9 +1853,6 @@ p {
     0.85;
 
 }
-
-
-/* TITLES */
 
 .card h2 {
 
@@ -2634,9 +1877,6 @@ p {
 
 }
 
-
-/* REVEAL */
-
 .reveal {
 
   opacity:
@@ -2647,7 +1887,6 @@ p {
 
 }
 
-
 .reveal.left {
 
   transform:
@@ -2655,14 +1894,12 @@ p {
 
 }
 
-
 .reveal.right {
 
   transform:
     translateX(120px);
 
 }
-
 
 .reveal.visible {
 
@@ -2674,9 +1911,6 @@ p {
 
 }
 
-
-/* INPUT UI */
-
 input,
 button {
 
@@ -2684,9 +1918,6 @@ button {
     inherit;
 
 }
-
-
-/* FOOTER */
 
 footer {
 
@@ -2703,11 +1934,6 @@ footer {
     #07070b;
 
 }
-
-
-/* =========================
-   NAV SEARCH BUTTON
-   ========================= */
 
 #searchBtn {
 
@@ -2752,18 +1978,12 @@ footer {
 
 }
 
-
 #searchBtn:active {
 
   transform:
     scale(0.95);
 
 }
-
-
-/* =========================
-   SEARCH OVERLAY BOX
-   ========================= */
 
 #searchBox {
 
@@ -2814,9 +2034,6 @@ footer {
 
 }
 
-
-/* visible state */
-
 #searchBox:not(.hidden) {
 
   opacity:
@@ -2829,11 +2046,6 @@ footer {
     auto;
 
 }
-
-
-/* =========================
-   SEARCH INPUT
-   ========================= */
 
 #searchInput {
 
@@ -2863,18 +2075,12 @@ footer {
 
 }
 
-
 #searchInput::placeholder {
 
   color:
     rgba(255,255,255,0.5);
 
 }
-
-
-/* =========================
-   RESULTS CONTAINER
-   ========================= */
 
 #results {
 
@@ -2891,11 +2097,6 @@ footer {
     4px;
 
 }
-
-
-/* =========================
-   RESULT ITEMS
-   ========================= */
 
 .resultItem {
 
@@ -2925,7 +2126,6 @@ footer {
 
 }
 
-
 .resultItem:hover {
 
   background:
@@ -2936,9 +2136,6 @@ footer {
 
 }
 
-
-/* empty state */
-
 .resultItem:only-child {
 
   opacity:
@@ -2946,18 +2143,12 @@ footer {
 
 }
 
-
-/* =========================
-   SCROLLBAR STYLING
-   ========================= */
-
 #results::-webkit-scrollbar {
 
   width:
     6px;
 
 }
-
 
 #results::-webkit-scrollbar-thumb {
 
@@ -2969,18 +2160,12 @@ footer {
 
 }
 
-
 #results::-webkit-scrollbar-track {
 
   background:
     transparent;
 
 }
-
-
-/* =========================
-   MOBILE / RESPONSIVE FIXES
-   ========================= */
 
 #navToggle {
 
@@ -3028,7 +2213,6 @@ footer {
 
 }
 
-
 #navToggle:hover {
 
   background:
@@ -3036,14 +2220,12 @@ footer {
 
 }
 
-
 #navToggle:active {
 
   transform:
     scale(0.95);
 
 }
-
 
 @media (max-width: 820px) {
 
@@ -3063,7 +2245,6 @@ footer {
 
   }
 
-
   nav .nav-inner {
 
     width:
@@ -3077,14 +2258,12 @@ footer {
 
   }
 
-
   #navToggle {
 
     display:
       flex;
 
   }
-
 
   nav .nav-links {
 
@@ -3149,7 +2328,6 @@ footer {
 
   }
 
-
   nav .nav-links.open {
 
     max-height:
@@ -3168,7 +2346,6 @@ footer {
       12px;
 
   }
-
 
   nav .nav-links a {
 
@@ -3194,14 +2371,12 @@ footer {
 
   }
 
-
   nav .nav-links a span {
 
     font-size:
       24px;
 
   }
-
 
   nav .nav-links a::after {
 
@@ -3228,7 +2403,6 @@ footer {
 
   }
 
-
   nav .nav-links a:hover {
 
     transform:
@@ -3239,14 +2413,12 @@ footer {
 
   }
 
-
   #searchBtn:hover {
 
     transform:
       none;
 
   }
-
 
   #searchBtn {
 
@@ -3264,7 +2436,6 @@ footer {
 
   }
 
-
   .section {
 
     min-height:
@@ -3275,14 +2446,12 @@ footer {
 
   }
 
-
   .hero {
 
     padding-top:
       110px;
 
   }
-
 
   h1 {
 
@@ -3294,7 +2463,6 @@ footer {
 
   }
 
-
   .card h2 {
 
     font-size:
@@ -3305,7 +2473,6 @@ footer {
 
   }
 
-
   p {
 
     font-size:
@@ -3315,7 +2482,6 @@ footer {
       1.65;
 
   }
-
 
   .card {
 
@@ -3332,7 +2498,6 @@ footer {
       100%;
 
   }
-
 
   .split,
   .split.left,
@@ -3352,14 +2517,12 @@ footer {
 
   }
 
-
   .emoji {
 
     font-size:
       3rem;
 
   }
-
 
   .reveal.left,
   .reveal.right {
@@ -3369,7 +2532,6 @@ footer {
 
   }
 
-
   .reveal.visible {
 
     transform:
@@ -3377,14 +2539,12 @@ footer {
 
   }
 
-
   .carousel {
 
     height:
       220px;
 
   }
-
 
   .slide {
 
@@ -3399,7 +2559,6 @@ footer {
 
   }
 
-
   #searchBox {
 
     top:
@@ -3412,7 +2571,6 @@ footer {
 
 }
 
-
 @media (max-width: 420px) {
 
   h1 {
@@ -3422,14 +2580,12 @@ footer {
 
   }
 
-
   .card h2 {
 
     font-size:
       1.45rem;
 
   }
-
 
   .card {
 
@@ -3439,10 +2595,6 @@ footer {
   }
 
 }
-
-
-
-/* ===== Final Overrides ===== */
 
 nav .nav-links a::after {
 
@@ -3460,14 +2612,12 @@ nav .nav-links a::after {
 
 }
 
-
 nav .nav-links a:hover::after {
 
   transform:
     translate(-50%, 0);
 
 }
-
 
 @media (max-width: 820px) {
 
@@ -3487,7 +2637,6 @@ nav .nav-links a:hover::after {
 
 }
 
-
 @media (max-width: 600px) {
 
   .carousel {
@@ -3506,14 +2655,12 @@ nav .nav-links a:hover::after {
 
   }
 
-
   .track {
 
     align-items:
       center;
 
   }
-
 
   .slide {
 
@@ -3528,14 +2675,12 @@ nav .nav-links a:hover::after {
 
   }
 
-
   .slide.active {
 
     transform:
       scale(1.05);
 
   }
-
 
   .dots {
 
@@ -3545,13 +2690,6 @@ nav .nav-links a:hover::after {
   }
 
 }
-
-
-
-/* =========================================================
-   GLOBAL REVEAL ANIMATION SYSTEM
-   THIS MUST STAY AT THE VERY BOTTOM
-   ========================================================= */
 
 .reveal {
 
@@ -3576,7 +2714,6 @@ nav .nav-links a:hover::after {
 
 }
 
-
 .reveal.left {
 
   transform:
@@ -3584,14 +2721,12 @@ nav .nav-links a:hover::after {
 
 }
 
-
 .reveal.right {
 
   transform:
     translateX(100px);
 
 }
-
 
 .reveal.visible {
 
@@ -3607,14 +2742,12 @@ nav .nav-links a:hover::after {
 
 }
 
-
 .reveal.delay-1 {
 
   transition-delay:
     0.1s;
 
 }
-
 
 .reveal.delay-2 {
 
@@ -3623,14 +2756,12 @@ nav .nav-links a:hover::after {
 
 }
 
-
 .reveal.delay-3 {
 
   transition-delay:
     0.3s;
 
 }
-
 
 @media (max-width: 820px) {
 
@@ -3642,7 +2773,6 @@ nav .nav-links a:hover::after {
       translateY(35px);
 
   }
-
 
   .reveal.visible {
 
@@ -3657,7 +2787,6 @@ nav .nav-links a:hover::after {
 
 }
 
-/* Shared dock: accommodate every destination, including the Arcade. */
 @media (min-width: 821px) {
   nav .nav-inner { width: 100%; gap: 10px; }
   nav .nav-links { flex: 1; min-width: 0; gap: clamp(4px, .75vw, 10px); }
@@ -3666,10 +2795,6 @@ nav .nav-links a:hover::after {
   nav .nav-inner > #searchBtn { flex-shrink: 0; margin-left: 0; }
 }
 nav .nav-links a[aria-current="page"] { border-color: #ffb7a5; background: rgba(255, 183, 165, .14); }
-
-/* =========================
-   CYBER SAFETY PAGES
-   ========================= */
 
 .cybersafety-page nav .nav-inner {
   width: 100%;
