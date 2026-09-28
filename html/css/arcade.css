@@ -1,4 +1,4 @@
-/* Arcade surfaces only. Navigation comes entirely from style.css. */
+/* Arcade surfaces only. Navigation comes from the shared CSS stack. */
 .arcade-page { font-family: Inter, system-ui, sans-serif; color:#fff; }
 .arcade-page [hidden] { display:none !important; }
 .arcade-shell { width:min(1120px,calc(100% - 36px)); margin:auto; padding:126px 0 70px; }
