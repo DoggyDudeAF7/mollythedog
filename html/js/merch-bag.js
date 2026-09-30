@@ -10,11 +10,10 @@
       if (!saved || typeof saved !== "object" || Array.isArray(saved)) return {
         ...memoryBag
       };
-      memoryBag = Object.fromEntries(
-        Object.entries(saved)
-        .map(([id, quantity]) => [id, Math.max(1, Math.min(5, Number(quantity) || 1))])
-        .filter(([id]) => typeof id === "string" && id)
-      );
+      memoryBag = Object.entries(saved).reduce((bag, [id, quantity]) => {
+        if (typeof id === "string" && id) bag[id] = Math.max(1, Math.min(5, Number(quantity) || 1));
+        return bag;
+      }, {});
       return {
         ...memoryBag
       };

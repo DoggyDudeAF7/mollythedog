@@ -53,7 +53,7 @@ function maze(ctx) {
     ];
   map[1][1] = 0;
   while (stack.length) {
-    const [x, y] = stack.at(-1), options = shuffle([
+    const [x, y] = stack[stack.length - 1], options = shuffle([
       [2, 0],
       [-2, 0],
       [0, 2],

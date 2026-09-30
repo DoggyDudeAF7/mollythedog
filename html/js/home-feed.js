@@ -124,7 +124,7 @@ async function loadLatestComic() {
     const documentText = await response.text();
     const comicDocument = new DOMParser().parseFromString(documentText, "text/html");
     const comicCards = [...comicDocument.querySelectorAll(".comic-cover-card")];
-    const newest = comicCards.at(-1);
+    const newest = comicCards[comicCards.length - 1];
     if (!newest) throw new Error("No comics");
     const image = newest.querySelector("img");
     const newestLabel = newest.querySelector("span");

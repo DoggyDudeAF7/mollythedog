@@ -89,6 +89,23 @@ const elements = {
 
 let savedSettings = loadSettings();
 
+function replaceChildren(element, children) {
+  while (element.firstChild) element.removeChild(element.firstChild);
+  children.forEach((child) => element.appendChild(child));
+}
+
+function openDialog(dialog) {
+  if (!dialog) return;
+  if (dialog.showModal) dialog.showModal();
+  else dialog.setAttribute("open", "");
+}
+
+function closeDialog(dialog) {
+  if (!dialog) return;
+  if (dialog.close) dialog.close();
+  else dialog.removeAttribute("open");
+}
+
 function loadSettings() {
   try {
     return {
@@ -225,7 +242,7 @@ async function geocodeLocation(locationName) {
   }
 
   const data = await response.json();
-  const place = data.results?.[0];
+  const place = data.results && data.results[0];
 
   if (!place) {
     throw new Error("Location not found");
@@ -258,27 +275,27 @@ async function loadWeather() {
     const temp = Math.round(data.current.temperature_2m);
     const high = Math.round(data.daily.temperature_2m_max[0]);
     const low = Math.round(data.daily.temperature_2m_min[0]);
-    const rain = data.daily.precipitation_probability_max[0] ?? 0;
+    const rain = data.daily.precipitation_probability_max[0] !== undefined ? data.daily.precipitation_probability_max[0] : 0;
     const description = weatherCodes[data.current.weather_code] || "Current weather";
 
     elements.weatherTemp.innerHTML = `${temp}&deg;`;
     elements.weatherDescription.textContent = description;
     elements.weatherLocation.textContent = `${place.name}${place.admin1 ? `, ${place.admin1}` : ""}`;
-    elements.forecast.replaceChildren(
+    replaceChildren(elements.forecast, [
       createForecastItem("Now", `${temp}&deg;`, description),
       createForecastItem("High", `${high}&deg;`, "Today"),
       createForecastItem("Low", `${low}&deg;`, "Tonight"),
       createForecastItem("Rain", `${rain}%`, "Chance"),
-    );
+    ]);
   } catch {
     elements.weatherTemp.innerHTML = "--&deg;";
     elements.weatherDescription.textContent = "Weather could not load";
-    elements.forecast.replaceChildren(
+    replaceChildren(elements.forecast, [
       createForecastItem("Now", "--&deg;", "Unavailable"),
       createForecastItem("High", "--&deg;", "Unavailable"),
       createForecastItem("Low", "--&deg;", "Unavailable"),
       createForecastItem("Rain", "--%", "Unavailable"),
-    );
+    ]);
   }
 }
 
@@ -375,8 +392,9 @@ function parseCompassEvents(calendarText) {
 }
 
 function renderEvents(events) {
-  elements.eventList.replaceChildren(
-    ...events.map((event) => {
+  replaceChildren(
+    elements.eventList,
+    events.map((event) => {
       const item = document.createElement("li");
       const eventTime = document.createElement("time");
       const eventTitle = document.createElement("span");
@@ -386,7 +404,7 @@ function renderEvents(events) {
       item.append(eventTime, eventTitle);
 
       return item;
-    }),
+    })
   );
 }
 
@@ -426,18 +444,18 @@ async function loadCompassEvents() {
   }
 }
 
-elements.settingsButton?.addEventListener("click", () => {
-  elements.settings.showModal();
+if (elements.settingsButton) elements.settingsButton.addEventListener("click", () => {
+  openDialog(elements.settings);
 });
 
-elements.addAppButton?.addEventListener("click", () => {
+if (elements.addAppButton) elements.addAppButton.addEventListener("click", () => {
   elements.addAppForm.reset();
   elements.addAppUrl.setCustomValidity("");
-  elements.addAppDialog.showModal();
+  openDialog(elements.addAppDialog);
   elements.addAppName.focus();
 });
 
-elements.addAppForm?.addEventListener("submit", (event) => {
+if (elements.addAppForm) elements.addAppForm.addEventListener("submit", (event) => {
   event.preventDefault();
 
   let url;
@@ -460,17 +478,17 @@ elements.addAppForm?.addEventListener("submit", (event) => {
   customApps.push(app);
   localStorage.setItem(CUSTOM_APPS_KEY, JSON.stringify(customApps));
   addAppToDock(app);
-  elements.addAppDialog.close();
+  closeDialog(elements.addAppDialog);
 });
 
 document.querySelectorAll("[data-close]").forEach((button) => {
   button.addEventListener("click", () => {
-    document.querySelector(`#${button.dataset.close}`)?.close();
+    closeDialog(document.querySelector(`#${button.dataset.close}`));
   });
 });
 
-elements.backgroundFile?.addEventListener("change", () => {
-  const file = elements.backgroundFile.files?.[0];
+if (elements.backgroundFile) elements.backgroundFile.addEventListener("change", () => {
+  const file = elements.backgroundFile.files && elements.backgroundFile.files[0];
 
   if (!file) {
     return;
@@ -486,13 +504,13 @@ elements.backgroundFile?.addEventListener("change", () => {
   reader.readAsDataURL(file);
 });
 
-elements.removeBackground?.addEventListener("click", () => {
+if (elements.removeBackground) elements.removeBackground.addEventListener("click", () => {
   savedSettings.background = "";
   saveSettings();
   applyBackground();
 });
 
-elements.settingsForm?.addEventListener("submit", (event) => {
+if (elements.settingsForm) elements.settingsForm.addEventListener("submit", (event) => {
   event.preventDefault();
 
   savedSettings.name = elements.settingName.value.trim() || defaults.name;
@@ -505,7 +523,7 @@ elements.settingsForm?.addEventListener("submit", (event) => {
   applySettings();
   loadWeather();
   loadCompassEvents();
-  elements.settings.close();
+  closeDialog(elements.settings);
 });
 
 updateTime();
@@ -513,4 +531,4 @@ setInterval(updateTime, 1000);
 applySettings();
 loadWeather();
 loadCompassEvents();
-elements.search?.focus();
+if (elements.search) elements.search.focus();

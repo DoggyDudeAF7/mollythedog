@@ -333,7 +333,11 @@ select {
 }
 
 dialog {
+  position: fixed;
+  inset: 0;
+  z-index: 3000;
   width: min(410px, calc(100% - 30px));
+  margin: auto;
   padding: 0;
   border: 1px solid rgba(255, 255, 255, 0.45);
   border-radius: 24px;
@@ -344,6 +348,7 @@ dialog {
 
 dialog::backdrop {
   background: rgba(48, 37, 29, 0.42);
+  -webkit-backdrop-filter: blur(7px);
   backdrop-filter: blur(7px);
 }
 

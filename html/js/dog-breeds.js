@@ -236,15 +236,32 @@ document.addEventListener("DOMContentLoaded", async () => {
         "yorkshire-terrier": "a tiny blue-and-tan terrier whose silky coat and portable size disguise an alert ratting-dog heritage"
       };
 
-      const energyOverrides = Object.fromEntries([
-        ...["basset-hound", "bulldog", "chow-chow", "french-bulldog", "great-dane", "greyhound", "mastiff", "newfoundland", "pekingese", "pug", "shih-tzu", "st-bernard"].map((slug) => [slug, 38]),
-        ...["airedale-terrier", "alaskan-malamute", "australian-cattle-dog", "australian-kelpie", "australian-shepherd", "border-collie", "boxer", "brittany-spaniel", "catahoula-leopard-dog", "dalmatian", "doberman-pinscher", "dutch-shepherd", "english-springer-spaniel", "flat-coated-retriever", "fox-terrier", "german-shepherd", "irish-setter", "jack-russell-terrier", "kelpie", "labrador-retriever", "pointer", "poodle", "siberian-husky", "vizsla", "weimaraner"].map((slug) => [slug, 86]),
-        ...["beagle", "chesapeake-bay-retriever", "curly-coated-retriever", "english-setter", "golden-retriever", "rhodesian-ridgeback", "samoyed", "soft-coated-wheaten-terrier", "staffordshire-bull-terrier", "whippet"].map((slug) => [slug, 76])
-      ]);
+      const energyOverrides = {};
+      ["basset-hound", "bulldog", "chow-chow", "french-bulldog", "great-dane", "greyhound", "mastiff", "newfoundland", "pekingese", "pug", "shih-tzu", "st-bernard"].forEach((slug) => {
+        energyOverrides[slug] = 38;
+      });
+      ["airedale-terrier", "alaskan-malamute", "australian-cattle-dog", "australian-kelpie", "australian-shepherd", "border-collie", "boxer", "brittany-spaniel", "catahoula-leopard-dog", "dalmatian", "doberman-pinscher", "dutch-shepherd", "english-springer-spaniel", "flat-coated-retriever", "fox-terrier", "german-shepherd", "irish-setter", "jack-russell-terrier", "kelpie", "labrador-retriever", "pointer", "poodle", "siberian-husky", "vizsla", "weimaraner"].forEach((slug) => {
+        energyOverrides[slug] = 86;
+      });
+      ["beagle", "chesapeake-bay-retriever", "curly-coated-retriever", "english-setter", "golden-retriever", "rhodesian-ridgeback", "samoyed", "soft-coated-wheaten-terrier", "staffordshire-bull-terrier", "whippet"].forEach((slug) => {
+        energyOverrides[slug] = 76;
+      });
 
       /* Convert string to Title Case */
       function titleCase(value) {
         return String(value || "").replace(/\b\w/g, (letter) => letter.toUpperCase());
+      }
+
+      function openDialog(dialog) {
+        if (!dialog) return;
+        if (dialog.showModal) dialog.showModal();
+        else dialog.setAttribute("open", "");
+      }
+
+      function closeDialog(dialog) {
+        if (!dialog) return;
+        if (dialog.close) dialog.close();
+        else dialog.removeAttribute("open");
       }
 
       /* Extract numeric meter value from breed card */
@@ -538,11 +555,11 @@ document.addEventListener("DOMContentLoaded", async () => {
     });
     compareTray.querySelector(".breed-compare-open").addEventListener("click", () => {
       renderComparison();
-      compareDialog.showModal();
+      openDialog(compareDialog);
     });
-    compareDialog.querySelector(".breed-compare-close").addEventListener("click", () => compareDialog.close());
+    compareDialog.querySelector(".breed-compare-close").addEventListener("click", () => closeDialog(compareDialog));
     compareDialog.addEventListener("click", (event) => {
-      if (event.target === compareDialog) compareDialog.close();
+      if (event.target === compareDialog) closeDialog(compareDialog);
     });
   }
 
@@ -551,32 +568,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     const panel = document.createElement("section");
     panel.className = "breed-filter-panel";
     panel.setAttribute("aria-label", "Breed filters and sorting");
-    panel.innerHTML = ` <
-    details >
-    <
-    summary > Filters < span id = "activeFilterCount" > 0 active < /span></summary >
-    <
-    div class = "breed-filter-groups" >
-    <
-    fieldset > < legend > Size < /legend><label><input type="checkbox" value="size:small">Small</label > < label > < input type = "checkbox"
-    value = "size:medium" > Medium < /label><label><input type="checkbox" value="size:large">Large</label > < /fieldset> <
-    fieldset > < legend > Energy < /legend><label><input type="checkbox" value="energy:low">Low</label > < label > < input type = "checkbox"
-    value = "energy:medium" > Medium < /label><label><input type="checkbox" value="energy:high">High</label > < /fieldset> <
-    fieldset > < legend > Grooming < /legend><label><input type="checkbox" value="grooming:low">Low</label > < label > < input type = "checkbox"
-    value = "grooming:medium" > Medium < /label><label><input type="checkbox" value="grooming:high">High</label > < /fieldset> <
-    fieldset > < legend > Good fit < /legend><label><input type="checkbox" value="apartment:true">Apartment-friendly</label > < label > < input type = "checkbox"
-    value = "family:true" > Family - friendly < /label><label><input type="checkbox" value="lowShedding:true">Low shedding</label > < label > < input type = "checkbox"
-    value = "beginner:true" > Beginner - friendly < /label></fieldset >
-    <
-    /div> <
-    button type = "button"
-    class = "breed-clear-filters"
-    id = "clearBreedFilters" > Clear filters < /button> <
-    /details> <
-    label class = "breed-sort-label" > Sort <
-    select id = "breedSort" > < option value = "alphabetical" > Alphabetical < /option><option value="energy-high">Energy: high to low</option > < option value = "energy-low" > Energy: low to high < /option><option value="size">Size</option > < option value = "grooming" > Grooming < /option><option value="lifespan">Lifespan</option > < /select> <
-    /label>
-    `;
+    panel.innerHTML = '<details><summary>Filters <span id="activeFilterCount">0 active</span></summary><div class="breed-filter-groups"><fieldset><legend>Size</legend><label><input type="checkbox" value="size:small">Small</label><label><input type="checkbox" value="size:medium">Medium</label><label><input type="checkbox" value="size:large">Large</label></fieldset><fieldset><legend>Energy</legend><label><input type="checkbox" value="energy:low">Low</label><label><input type="checkbox" value="energy:medium">Medium</label><label><input type="checkbox" value="energy:high">High</label></fieldset><fieldset><legend>Grooming</legend><label><input type="checkbox" value="grooming:low">Low</label><label><input type="checkbox" value="grooming:medium">Medium</label><label><input type="checkbox" value="grooming:high">High</label></fieldset><fieldset><legend>Good fit</legend><label><input type="checkbox" value="apartment:true">Apartment-friendly</label><label><input type="checkbox" value="family:true">Family-friendly</label><label><input type="checkbox" value="lowShedding:true">Low shedding</label><label><input type="checkbox" value="beginner:true">Beginner-friendly</label></fieldset></div><button type="button" class="breed-clear-filters" id="clearBreedFilters">Clear filters</button></details><label class="breed-sort-label">Sort <select id="breedSort"><option value="alphabetical">Alphabetical</option><option value="energy-high">Energy: high to low</option><option value="energy-low">Energy: low to high</option><option value="size">Size</option><option value="grooming">Grooming</option><option value="lifespan">Lifespan</option></select></label>';
     search.after(panel);
     panel.addEventListener("change", (event) => {
       if (event.target.matches("input[type=checkbox]")) {
@@ -597,7 +589,8 @@ document.addEventListener("DOMContentLoaded", async () => {
     const grouped = {};
     activeFilters.forEach((filter) => {
       const [key, value] = filter.split(":");
-      (grouped[key] ||= []).push(value);
+      if (!grouped[key]) grouped[key] = [];
+      grouped[key].push(value);
     });
     return Object.entries(grouped).every(([key, values]) => values.includes(card.dataset[key]));
   }

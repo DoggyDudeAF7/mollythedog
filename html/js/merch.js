@@ -23,6 +23,16 @@
   const closeButton = dialog.querySelector("[data-dialog-close]");
   let selectedProduct = null;
 
+  function openDialog() {
+    if (dialog.showModal) dialog.showModal();
+    else dialog.setAttribute("open", "");
+  }
+
+  function closeDialog() {
+    if (dialog.close) dialog.close();
+    else dialog.removeAttribute("open");
+  }
+
   /* Update product count display across the page */
   function updateBagCounts(bag = bagApi.load()) {
     const amount = bagApi.count(bag);
@@ -42,7 +52,7 @@
     addButton.disabled = product.available === false;
     addButton.textContent = product.available === false ? "Unavailable" : "Add to selection";
     addStatus.textContent = "";
-    dialog.showModal();
+    openDialog();
   }
 
   addButton.addEventListener("click", () => {
@@ -99,8 +109,8 @@
   empty.hidden = true;
   updateBagCounts();
 
-  closeButton.addEventListener("click", () => dialog.close());
+  closeButton.addEventListener("click", closeDialog);
   dialog.addEventListener("click", (event) => {
-    if (event.target === dialog) dialog.close();
+    if (event.target === dialog) closeDialog();
   });
 })();

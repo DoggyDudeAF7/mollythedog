@@ -140,7 +140,8 @@
       documentCopy.querySelectorAll("nav, footer, script, style, form, button, #searchBox").forEach(element => element.remove());
       const root = documentCopy.querySelector("main") || documentCopy.body;
       const text = root.textContent.replace(/\s+/g, " ").trim();
-      const title = (documentCopy.querySelector("h1")?.textContent || documentCopy.title || path).trim();
+      const heading = documentCopy.querySelector("h1");
+      const title = (heading ? heading.textContent : documentCopy.title || path).trim();
       return {
         path,
         title,

@@ -75,7 +75,12 @@
     return figure;
   }
 
-  const items = grids.flatMap((grid) => [...grid.querySelectorAll(":scope > img")].map(prepareItem));
+  const items = [];
+  grids.forEach((grid) => {
+    [...grid.querySelectorAll(":scope > img")].forEach((image) => {
+      items.push(prepareItem(image));
+    });
+  });
   if (!items.length) return;
 
   const availableDogs = ["Molly", "Shaina", "Together", "Poppy"].filter((name) => items.some((item) => item.dataset.dog === name));

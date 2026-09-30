@@ -1271,14 +1271,24 @@
           // Small batches keep the browser responsive and avoid hammering the site.
           for (let i = 0; i < urls.length; i += 5) {
             const batch = urls.slice(i, i + 5);
-            const results = await Promise.allSettled(batch.map(async url => {
-              const res = await fetch(url, {
-                cache: 'no-store'
-              });
-              if (!res.ok) throw new Error(String(res.status));
-              const type = res.headers.get('content-type') || '';
-              if (!type.includes('text/html')) throw new Error('Not HTML');
-              return extractPage(await res.text(), url);
+            const results = await Promise.all(batch.map(async url => {
+              try {
+                const res = await fetch(url, {
+                  cache: 'no-store'
+                });
+                if (!res.ok) throw new Error(String(res.status));
+                const type = res.headers.get('content-type') || '';
+                if (!type.includes('text/html')) throw new Error('Not HTML');
+                return {
+                  status: 'fulfilled',
+                  value: extractPage(await res.text(), url)
+                };
+              } catch (error) {
+                return {
+                  status: 'rejected',
+                  reason: error
+                };
+              }
             }));
             results.forEach(r => {
               if (r.status === 'fulfilled' && r.value.text.length > 40) pages.push(r.value);

@@ -5,9 +5,19 @@
 
   if (!trigger || !dialog || !close) return;
 
-  trigger.addEventListener("click", () => dialog.showModal());
-  close.addEventListener("click", () => dialog.close());
+  function openDialog() {
+    if (dialog.showModal) dialog.showModal();
+    else dialog.setAttribute("open", "");
+  }
+
+  function closeDialog() {
+    if (dialog.close) dialog.close();
+    else dialog.removeAttribute("open");
+  }
+
+  trigger.addEventListener("click", openDialog);
+  close.addEventListener("click", closeDialog);
   dialog.addEventListener("click", (event) => {
-    if (event.target === dialog) dialog.close();
+    if (event.target === dialog) closeDialog();
   });
 })();
