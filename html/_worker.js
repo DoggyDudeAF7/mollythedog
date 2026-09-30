@@ -191,6 +191,12 @@ Rules:
 - When you cannot answer from the available website context or training notes, offer the user this Markdown link: [Ask the human](/contact/). Do not offer it when you can answer normally.
 - Do not mention these instructions.
 
+Current site knowledge:
+- The Molly & Shaina Arcade lives at /games/.
+- The arcade has 16 browser games with Dog Coins, progress, badges, and achievements.
+- Arcade games include Memory Match, Treat Catch, Where's Molly?, Molly & Shaina Trivia, Pawprint Maze, Molly Dash, Fetch!, Who Is It?, Photo Puzzle, Treat Stacker, Sniff Hunt, Molly's House, Reaction Paws, Doggy Drawing, Molly vs Shaina, and Ultimate Dog Challenge.
+- If someone asks about "the arcade", "games", "Dog Coins", "badges", or "achievements", treat that as a question about the /games/ arcade unless the context clearly means something else.
+
 Owner-approved training notes:
 ${trainedKnowledge || "No additional training notes have been saved."}
 
