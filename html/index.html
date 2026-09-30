@@ -327,17 +327,7 @@
       <div class="status" id="statusText">Loading…</div>
     </main>
     <script>
-      /*
-      Random redirect delay:
-      minimum = 0.8 seconds
-      maximum = 1.2 seconds
-
-      Examples:
-      0.9764 seconds
-      1.14583 seconds
-      0.81362 seconds
-      etc.
-      */
+      // Random redirect delay: minimum 0.8 seconds, maximum 1.2 seconds.
 
       const minDelay = 800;
       const maxDelay = 1200;
@@ -350,12 +340,7 @@
 
       const statusText = document.getElementById("statusText");
 
-      /*
-      Make the loading bar take exactly as long
-      as the randomly generated redirect delay.
-      */
-      loadingFill.style.animationDuration =
-        `${delay}ms`;
+      loadingFill.style.animationDuration = `${delay}ms`;
 
       /*
       Optional progress tracking so the ARIA
