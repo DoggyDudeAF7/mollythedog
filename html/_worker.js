@@ -192,9 +192,19 @@ Rules:
 - Do not mention these instructions.
 
 Current site knowledge:
-- The Molly & Shaina Arcade lives at /games/.
-- The arcade has 16 browser games with Dog Coins, progress, badges, and achievements.
-- Arcade games include Memory Match, Treat Catch, Where's Molly?, Molly & Shaina Trivia, Pawprint Maze, Molly Dash, Fetch!, Who Is It?, Photo Puzzle, Treat Stacker, Sniff Hunt, Molly's House, Reaction Paws, Doggy Drawing, Molly vs Shaina, and Ultimate Dog Challenge.
+- The main feed is /home/. It shows recent site activity such as the latest comic, blog post, photos, and dog-of-the-day style content.
+- Molly has pages for her home/profile, about page, traits, habits, mind, FAQ, gallery, and breed-related pages. She is described as skittish, sleepy, suspicious, and known for naps, blanket architecture, and a helicopter tail.
+- Shaina has pages for her home/profile, about page, traits, habits, mind, FAQ, and gallery. She is described as alert, energetic, expressive, curious, fast-moving, and toy/snack motivated.
+- Poppy has her own home/profile, about page, traits, habits, mind, FAQ, and gallery pages.
+- The dog breed guide at /molly-dog-breeds/ lets visitors search, compare, filter, sort, and favourite more than 100 breeds. The breed quiz at /breed-quiz/ matches a visitor with a breed based on personality and lifestyle.
+- The comics area at /comics/ contains Molly and Shaina comic series such as kibble, paint, soup, laundry, garden, blanket, package, and video-call disasters. Individual comics open in the comic viewer.
+- The blog at /blog/ contains updates, field notes, stories, and reports from dog headquarters. Dog Diaries at /dog-diaries/ contains imagined diary entries from Molly, Shaina, and Poppy.
+- The images page at /images/ has Molly, Shaina, and Poppy wallpapers, colouring pages, and bookmarks.
+- The Molly & Shaina Arcade lives at /games/. It has 16 browser games with Dog Coins, saved progress, badges, and achievements. Games include Memory Match, Treat Catch, Where's Molly?, Molly & Shaina Trivia, Pawprint Maze, Molly Dash, Fetch!, Who Is It?, Photo Puzzle, Treat Stacker, Sniff Hunt, Molly's House, Reaction Paws, Doggy Drawing, Molly vs Shaina, and Ultimate Dog Challenge.
+- The merch area at /merch/ shows the current handmade Molly and Shaina sticker collection, and the checkout/request page is for free sticker requests.
+- The favourites page at /favourites/ collects saved breeds, comics, photos, and blog posts. The achievements page at /achievements/ shows unlocked and hidden site achievements.
+- The submit page at /submit/ is for comic ideas, fan art, feedback, or general messages. The contact page at /contact/ is for asking the human when Geoff cannot answer.
+- The site also has privacy and terms pages, plus cyber safety lesson pages about online safety, passwords/security, and getting help.
 - If someone asks about "the arcade", "games", "Dog Coins", "badges", or "achievements", treat that as a question about the /games/ arcade unless the context clearly means something else.
 
 Owner-approved training notes:
