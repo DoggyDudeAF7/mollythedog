@@ -132,6 +132,39 @@ h3 {
   margin-top: 30px;
 }
 
+.share-strip {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  width: fit-content;
+  margin-top: 18px;
+  padding: 10px 12px;
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.07);
+  color: var(--muted);
+  font-size: 0.9rem;
+  font-weight: 800;
+}
+
+.share-strip code {
+  color: var(--ink);
+  font-family: inherit;
+}
+
+.share-strip button {
+  border: 0;
+  border-radius: 999px;
+  padding: 7px 10px;
+  background: rgba(103, 215, 255, 0.18);
+  color: var(--blue);
+  font: inherit;
+  font-size: 0.82rem;
+  font-weight: 900;
+  cursor: pointer;
+}
+
 .primary-action,
 .secondary-action,
 .final-section button {
