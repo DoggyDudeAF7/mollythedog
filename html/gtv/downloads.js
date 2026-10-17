@@ -1,12 +1,4 @@
 'use strict';
-// Direct download links and native disclosures work without JavaScript.
-// Keeping only one guide open helps on small screens without hiding any download.
-const guides = [...document.querySelectorAll('.help-list details')];
-for (const guide of guides) {
-  guide.addEventListener('toggle', () => {
-    if (guide.open) for (const other of guides) if (other !== guide) other.open = false;
-  });
-}
 
 // Detection stays in the browser; no device details are sent to a server.
 // Mac UA strings can say "Intel" on Apple Silicon; Windows UA strings can hide ARM.
@@ -16,7 +8,7 @@ for (const guide of guides) {
   if (!grid) return;
   const panel = document.createElement('div');
   panel.className = 'device-panel';
-  panel.innerHTML = `<div class="device-copy"><p class="device-eyebrow">YOUR DEVICE</p><p id="device-status" role="status" aria-live="polite">Checking your device…</p><a id="device-download" class="device-download" hidden></a></div><label class="device-picker" for="device-choice">Choose another device<select id="device-choice"><option value="auto">Detect automatically</option><option value="windows-x64">Windows · Intel / AMD (x64)</option><option value="windows-arm64">Windows · ARM64</option><option value="mac-intel">Mac · Intel</option><option value="mac-silicon">Mac · Apple Silicon</option><option value="linux-x64">Linux · Intel / AMD (64-bit)</option></select></label>`;
+  panel.innerHTML = `<div class="device-copy"><p id="device-status" role="status" aria-live="polite">Detecting…</p><a id="device-download" class="device-download" hidden></a></div><label class="device-picker" for="device-choice">Platform<select id="device-choice"><option value="auto">Auto detect</option><option value="windows-x64">Windows · Intel / AMD (x64)</option><option value="windows-arm64">Windows · ARM64</option><option value="mac-intel">Mac · Intel</option><option value="mac-silicon">Mac · Apple Silicon</option><option value="linux-x64">Linux · Intel / AMD (64-bit)</option></select></label>`;
   grid.before(panel);
   const status = panel.querySelector('#device-status');
   const quick = panel.querySelector('#device-download');
@@ -32,32 +24,31 @@ for (const guide of guides) {
   let automatic = { os: 'Unknown', arch: '' };
   function render(device, manual = false) {
     const { os, arch } = device;
-    const prefix = manual ? 'Selected' : 'Detected';
     let ids = [], message = '';
     if (os === 'Windows' || os === 'macOS') {
       if (arch === 'x64' || arch === 'arm64') {
         const id = os === 'Windows' ? `windows-${arch}` : arch === 'arm64' ? 'mac-silicon' : 'mac-intel';
         ids = [id];
         const label = os === 'macOS' ? (arch === 'arm64' ? 'Apple Silicon' : 'Intel') : arch;
-        message = `${prefix}: ${os} · ${label}. Your matching installer is highlighted below.`;
+        message = `${os} · ${label}`;
       } else if (arch === 'unsupported') {
-        message = `${prefix}: ${os}. There is no matching installer for the processor reported by your browser.`;
+        message = `${os} · Unsupported processor`;
       } else {
-        message = `${prefix}: ${os}. Your browser doesn’t identify the processor. Choose ${os === 'macOS' ? 'Intel or Apple Silicon' : 'x64 or ARM64'} below, or select your device here.`;
+        message = `${os} · Select ${os === 'macOS' ? 'Intel or Apple Silicon' : 'x64 or ARM64'}`;
       }
     } else if (os === 'Linux') {
       if (arch === 'x64') {
         ids = ['linux-appimage', 'linux-deb'];
-        message = `${prefix}: Linux · x86_64. Choose AppImage or DEB below.`;
+        message = 'Linux · x86_64';
       } else if (arch === 'arm64' || arch === 'unsupported') {
-        message = 'Linux detected. These Linux installers require an Intel / AMD 64-bit processor; there is no matching build for the processor reported by your browser.';
+        message = 'Linux · Unsupported processor';
       } else {
-        message = 'Linux detected. Choose AppImage or DEB if your computer has an Intel / AMD 64-bit processor.';
+        message = 'Linux · x86_64 downloads';
       }
     } else if (['Android', 'iPhone / iPad', 'ChromeOS'].includes(os)) {
-      message = `${os} detected. GTV is available for Windows, macOS and Linux desktop computers. You can still download for another device below.`;
+      message = `${os} · Desktop only`;
     } else {
-      message = 'Your browser doesn’t identify this device. Choose your computer below, or use the device selector.';
+      message = 'Select your platform';
     }
     status.textContent = message;
     quick.hidden = true;
@@ -65,7 +56,7 @@ for (const guide of guides) {
     for (const card of grid.querySelectorAll('.platform-card')) {
       const matches = !!card.querySelector(`[data-platform="${os}"]`);
       card.classList.toggle('device-platform', matches);
-      card.querySelector('.platform-label').textContent = matches ? (manual ? 'YOUR CHOICE' : 'YOUR DEVICE') : 'DESKTOP';
+      card.querySelector('.platform-label').textContent = matches ? (manual ? 'SELECTED' : 'DETECTED') : '';
     }
     for (const link of links) {
       link.classList.toggle('device-recommended', ids.includes(link.dataset.download));
@@ -73,7 +64,7 @@ for (const guide of guides) {
       if (ids.includes(link.dataset.download)) {
         const badge = document.createElement('span');
         badge.className = 'device-match';
-        badge.textContent = manual ? 'Your selection' : 'Matches your device';
+        badge.textContent = manual ? 'Selected' : 'Recommended';
         link.querySelector('.download-copy').append(badge);
       }
     }
