@@ -67,6 +67,17 @@
       "bytes": 376384994,
       "sha256": "25f3b37d43aca2961f03b26d2d3ef0034f289d95ac1b5bc12de3497024c475d6",
       "url": "https://github.com/DoggyDudeAF7/mollythedog/releases/download/gtv-v0.2.2/gtv_0.2.2_amd64.deb"
+    },
+    {
+      "id": "android-arm64",
+      "platform": "Android",
+      "variant": "ARM64",
+      "description": "Android APK · ARM64",
+      "format": "APK",
+      "file": "GTV-0.2.2-android-arm64.apk",
+      "bytes": 123870455,
+      "sha256": "370e41179cecb8393fe249f800c98d01e3e08723009a15f3a86760e035757a92",
+      "url": "https://github.com/DoggyDudeAF7/mollythedog/releases/download/gtv-v0.2.2/GTV-0.2.2-android-arm64.apk"
     }
   ]
 }
