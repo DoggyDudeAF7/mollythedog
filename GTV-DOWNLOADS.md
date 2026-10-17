@@ -15,3 +15,5 @@ For the next release, regenerate the page from the GTV project's `scripts/create
 Device detection deliberately treats the “Intel” text in a Mac user-agent and Windows x64 user-agent text as insufficient proof of the actual processor. Browsers may withhold architecture hints; see [Chrome’s Client Hints documentation](https://developer.chrome.com/docs/privacy-security/user-agent-client-hints). The page then highlights the OS family and asks the visitor to choose the processor.
 
 Run `node tests/gtv-device-detection.cjs` to check the simulated desktop/mobile, privacy, timeout and manual-selection cases. It uses Playwright Chromium, an installed Mac Chrome, or `CHROME_BIN` if provided. The page uses concise platform labels and download links, with no marketing sections or installation guides. Screenshots and results are saved under `.tools/gtv-device-tests/`.
+
+The Screenshots section contains three actual captures from GTV 0.2.2: third-person Tesla driving view, Tesla interior, and on-foot view. Images are JPEGs linked to their full size and lazy loaded below the downloads. They were captured with a temporary game profile; no player save was modified.
