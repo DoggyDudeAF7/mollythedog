@@ -4,7 +4,7 @@
 // Detection stays in the browser; no device details are sent to a server.
 // Mac UA strings can say "Intel" on Apple Silicon; Windows UA strings can hide ARM.
 // Only recommend a processor-specific installer when architecture is explicit.
-// Android ARM64 is supported through the APK release.
+// Android ARM64 and x86_64 are supported through APK releases.
 
 (async function recommendDownload() {
   const grid = document.querySelector('.platform-grid');
@@ -31,6 +31,7 @@
         <option value="mac-silicon">Mac · Apple Silicon</option>
         <option value="linux-x64">Linux · Intel / AMD (64-bit)</option>
         <option value="android-arm64">Android · ARM64</option>
+        <option value="android-x86_64">Android · x86_64</option>
       </select>
     </label>
   `;
@@ -49,7 +50,8 @@
     'mac-intel': { os: 'macOS', arch: 'x64' },
     'mac-silicon': { os: 'macOS', arch: 'arm64' },
     'linux-x64': { os: 'Linux', arch: 'x64' },
-    'android-arm64': { os: 'Android', arch: 'arm64' }
+    'android-arm64': { os: 'Android', arch: 'arm64' },
+    'android-x86_64': { os: 'Android', arch: 'x64' }
   };
 
   let automatic = { os: 'Unknown', arch: '' };
@@ -101,10 +103,13 @@
       if (arch === 'arm64') {
         ids = ['android-arm64'];
         message = 'Android · ARM64';
-      } else if (arch === 'unsupported' || arch === 'x64') {
+      } else if (arch === 'x64') {
+        ids = ['android-x86_64'];
+        message = 'Android · x86_64';
+      } else if (arch === 'unsupported') {
         message = 'Android · Unsupported processor';
       } else {
-        message = 'Android · ARM64 APK available';
+        message = 'Android · Select ARM64 or x86_64';
       }
     }
 
@@ -301,6 +306,14 @@
       /armv8|aarch64|arm64/i.test(ua)
     ) {
       arch = 'arm64';
+    }
+
+    else if (
+      os === 'Android' &&
+      !arch &&
+      /x86_64|amd64/i.test(ua + ' ' + legacyPlatform)
+    ) {
+      arch = 'x64';
     }
   }
 

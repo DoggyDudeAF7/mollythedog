@@ -1,6 +1,6 @@
 {
-  "version": "0.3.0",
-  "release": "https://github.com/DoggyDudeAF7/mollythedog/releases/tag/gtv-v0.3.0",
+  "version": "0.5.3",
+  "release": "https://github.com/DoggyDudeAF7/mollythedog/releases/tag/gtv-v0.5.3",
   "downloads": [
     {
       "id": "windows-x64",
@@ -8,10 +8,10 @@
       "variant": "x64",
       "description": "Intel / AMD",
       "format": "EXE",
-      "file": "GTV-0.3.0-x64-Setup.exe",
-      "bytes": 260550287,
-      "sha256": "03d725e061118e4288c92ada5c44f186789cc6118ceae9f6dd39459d08482ccb",
-      "url": "https://github.com/DoggyDudeAF7/mollythedog/releases/download/gtv-v0.3.0/GTV-0.3.0-x64-Setup.exe"
+      "file": "GTV-0.5.3-x64-Setup.exe",
+      "bytes": 479684150,
+      "sha256": "f7905a3e0664f2e83a94265aca93f5fd11746e93e77a47dd7ca04a61e612932f",
+      "url": "https://github.com/DoggyDudeAF7/mollythedog/releases/download/gtv-v0.5.3/GTV-0.5.3-x64-Setup.exe"
     },
     {
       "id": "windows-arm64",
@@ -19,10 +19,10 @@
       "variant": "ARM64",
       "description": "Windows on ARM",
       "format": "EXE",
-      "file": "GTV-0.3.0-arm64-Setup.exe",
-      "bytes": 255224005,
-      "sha256": "c064805d193bfcba768c0c11715f27ee9bfb56c25c3b099a7b0e7c9336e4bfcc",
-      "url": "https://github.com/DoggyDudeAF7/mollythedog/releases/download/gtv-v0.3.0/GTV-0.3.0-arm64-Setup.exe"
+      "file": "GTV-0.5.3-arm64-Setup.exe",
+      "bytes": 474357867,
+      "sha256": "6b30731de68d4d7488f4f5559be3178a8915df1281d513633d102cfd7bf09dd3",
+      "url": "https://github.com/DoggyDudeAF7/mollythedog/releases/download/gtv-v0.5.3/GTV-0.5.3-arm64-Setup.exe"
     },
     {
       "id": "mac-intel",
@@ -30,10 +30,10 @@
       "variant": "Intel",
       "description": "Intel",
       "format": "DMG",
-      "file": "GTV-0.3.0-x64.dmg",
-      "bytes": 402957302,
-      "sha256": "e89f9ad702f44ad588e7833bc1b75770df2c7f5db0b9c198eab10b8c40eaf6cd",
-      "url": "https://github.com/DoggyDudeAF7/mollythedog/releases/download/gtv-v0.3.0/GTV-0.3.0-x64.dmg"
+      "file": "GTV-0.5.3-x64.dmg",
+      "bytes": 674036685,
+      "sha256": "62d2ebd29dae4f86b413d07a77a67ebb3b8b994a0ac11c3c7231399840384106",
+      "url": "https://github.com/DoggyDudeAF7/mollythedog/releases/download/gtv-v0.5.3/GTV-0.5.3-x64.dmg"
     },
     {
       "id": "mac-silicon",
@@ -41,10 +41,10 @@
       "variant": "Apple Silicon",
       "description": "Apple M-series",
       "format": "DMG",
-      "file": "GTV-0.3.0-arm64.dmg",
-      "bytes": 397381584,
-      "sha256": "60e1fcb624a8f101493bdd01e96110d2f2141b2da62020c0dd57f4d6e57bd27c",
-      "url": "https://github.com/DoggyDudeAF7/mollythedog/releases/download/gtv-v0.3.0/GTV-0.3.0-arm64.dmg"
+      "file": "GTV-0.5.3-arm64.dmg",
+      "bytes": 668520682,
+      "sha256": "e3f96419ceac9e7b34b836ebf6eb2dc4e9e8192148e3a6a286c9095a40d71c5c",
+      "url": "https://github.com/DoggyDudeAF7/mollythedog/releases/download/gtv-v0.5.3/GTV-0.5.3-arm64.dmg"
     },
     {
       "id": "linux-appimage",
@@ -52,32 +52,43 @@
       "variant": "AppImage",
       "description": "x86_64",
       "format": "APPIMAGE",
-      "file": "GTV-0.3.0-x86_64.AppImage",
-      "bytes": 406527781,
-      "sha256": "3f4a59fd97caa3868c51e965ead43460aeb5fd2295fc6572b627d9902b86d0f5",
-      "url": "https://github.com/DoggyDudeAF7/mollythedog/releases/download/gtv-v0.3.0/GTV-0.3.0-x86_64.AppImage"
+      "file": "GTV-0.5.3-x86_64.AppImage",
+      "bytes": 678613687,
+      "sha256": "443432826281c72c482b6c8157f56cd4b553bc586b6146fa5e47dca9fb2dd81d",
+      "url": "https://github.com/DoggyDudeAF7/mollythedog/releases/download/gtv-v0.5.3/GTV-0.5.3-x86_64.AppImage"
     },
     {
       "id": "linux-deb",
       "platform": "Linux",
       "variant": "DEB",
-      "description": "Debian / Ubuntu \u00b7 amd64",
+      "description": "Debian / Ubuntu · amd64",
       "format": "DEB",
-      "file": "gtv_0.3.0_amd64.deb",
-      "bytes": 408417012,
-      "sha256": "a2fd3b7bb6b31810ef0f872990cccc8dad26c66298eb698a109d1677088880d3",
-      "url": "https://github.com/DoggyDudeAF7/mollythedog/releases/download/gtv-v0.3.0/gtv_0.3.0_amd64.deb"
+      "file": "gtv_0.5.3_amd64.deb",
+      "bytes": 681242146,
+      "sha256": "82e822f9a048e46dcb97be45e864d064c71d8c7f21277a1903f726b0e66da67b",
+      "url": "https://github.com/DoggyDudeAF7/mollythedog/releases/download/gtv-v0.5.3/gtv_0.5.3_amd64.deb"
     },
     {
       "id": "android-arm64",
       "platform": "Android",
       "variant": "ARM64",
-      "description": "Android 8.0+ \u00b7 Debug build",
+      "description": "Android phones / tablets · Debug build",
       "format": "APK",
-      "file": "GTV-0.3.0-android-arm64.apk",
-      "bytes": 161335400,
-      "sha256": "1bef7216a058ecbad5bf7d218a05ddae9dbaaa7b5278307c93df2d01240830e8",
-      "url": "https://github.com/DoggyDudeAF7/mollythedog/releases/download/gtv-v0.3.0/GTV-0.3.0-android-arm64.apk"
+      "file": "GTV-0.5.3-android-arm64.apk",
+      "bytes": 332797117,
+      "sha256": "52898b421a62cf36e4b1487f41d9b5c58226848b617095d8863b93b72bdbb924",
+      "url": "https://github.com/DoggyDudeAF7/mollythedog/releases/download/gtv-v0.5.3/GTV-0.5.3-android-arm64.apk"
+    },
+    {
+      "id": "android-x86_64",
+      "platform": "Android",
+      "variant": "x86_64",
+      "description": "Android x86_64 devices / emulators · Debug build",
+      "format": "APK",
+      "file": "GTV-0.5.3-android-x86_64.apk",
+      "bytes": 332797117,
+      "sha256": "52898b421a62cf36e4b1487f41d9b5c58226848b617095d8863b93b72bdbb924",
+      "url": "https://github.com/DoggyDudeAF7/mollythedog/releases/download/gtv-v0.5.3/GTV-0.5.3-android-x86_64.apk"
     }
   ]
 }
